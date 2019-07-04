@@ -1,4 +1,4 @@
 library(testthat)
-library(pkgtemplate)
+library(batchr)
 
-test_check("pkgtemplate")
+test_check("batchr")
