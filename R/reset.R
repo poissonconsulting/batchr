@@ -14,7 +14,7 @@ batch_reset <- function(path, recursive = NA) {
   if(is.na(recursive)) recursive <- args$recursive
   
   args <- arg_files(path, recursive = recursive)
-  unlink(args)
+  file.remove(args)
   
   save_args(path, pattern = args$pattern, recursive = recursive, 
             FUN = args$FUN, dots = args$dots)
