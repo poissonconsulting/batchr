@@ -1,11 +1,9 @@
 Package: batchr
-Title: What the Package Does (One Line, Title Case)
+Title: Batch Process Files
 Version: 0.0.0.9000
 Authors@R: 
-  c(person("Joe", "Thorley", role = c("aut", "cre"), email = "joe@poissonconsulting.ca", comment = c(ORCID = "0000-0002-7683-4592")),
-    person("Sebastian", "Dalgarno", role = "ctb", email = "seb@poissonconsulting.ca"),
-    person("Evan", "Amies-Galonski", role = "ctb", email = "evan@poissonconsulting.ca", comment = c(ORCID = 0000-0003-1096-2089)))
-Description: What the package does (one paragraph).
+  person("Joe", "Thorley", role = c("aut", "cre"), email = "joe@poissonconsulting.ca", comment = c(ORCID = "0000-0002-7683-4592"))
+Description: Batch processes files with a user-supplied R function.
 License: MIT + file LICENSE
 Depends: R (>= 3.5)
 Imports: 
@@ -17,8 +15,8 @@ Suggests:
 Remotes:
   poissonconsulting/err,
   poissonconsulting/checkr
-URL: https://github.com/poissonconsulting/mcmcr
-BugReports: https://github.com/poissonconsulting/mcmcr/issues
+URL: https://poissonconsulting.github.io/batchr/
+BugReports: https://github.com/poissonconsulting/batchr/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

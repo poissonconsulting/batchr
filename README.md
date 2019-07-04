@@ -17,30 +17,8 @@ coverage](https://codecov.io/gh/poissonconsulting/batchr/branch/master/graph/bad
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
-batchr provides a template for a new R package.
-
-## Instructions
-
-In order to create a new package the user should
-
-1)  Go to the batchr [GitHub
-    repository](https://github.com/poissonconsulting/batchr) and choose
-    ‘Use this template’.
-2)  Clone the new repository and replace ‘batchr’ whereever it occurs
-    with the new name of the package (including in this README.Rmd
-    file).
-3)  `devtools::check()` the package and fix any Errors, Warnings or
-    Notes.
-4)  Knit the README.Rmd file and `pkgdown::build_site()`.
-5)  Add the project to
-    [Travis](https://www.travis-ci.com/poissonconsulting/batchr) and in
-    the
-    [Settings](https://www.travis-ci.com/poissonconsulting/batchr/settings)
-    add a Cron Job to run the master branch daily if there hasn’t been a
-    build in the last 24h.
-6)  Add the project to
-    [Appveyor](https://ci.appveyor.com/project/poissonconsulting/batchr).
-7)  Push the changes to the new repository.
+batchr is an R package to batch process files with a user-supplied R
+function.
 
 ## Installation
 
