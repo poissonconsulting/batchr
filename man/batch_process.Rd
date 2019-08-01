@@ -20,7 +20,7 @@ which match the regular expression will be batch processed.}
 
 \item{...}{Additional arguments passed to FUN.}
 
-\item{parallel}{A flag specifying whether to process the files in parallel.}
+\item{parallel}{A flag specifying whether to process the files in parallel (not yet used).}
 }
 \value{
 A flag specifying whether it was able to process.

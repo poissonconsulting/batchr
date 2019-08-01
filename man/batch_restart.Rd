@@ -2,14 +2,14 @@
 % Please edit documentation in R/restart.R
 \name{batch_restart}
 \alias{batch_restart}
-\title{Restart Batch Processing of Remaining Files}
+\title{(Re)Start Batch Processing}
 \usage{
 batch_restart(path, parallel = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{parallel}{A flag specifying whether to process the files in parallel.}
+\item{parallel}{A flag specifying whether to process the files in parallel (not yet used).}
 }
 \value{
 An invisible character vector of the files processed by the function call.

@@ -10,7 +10,7 @@ Depends: R (>= 3.5)
 Imports:
   chk,
   err,
-  dttr2
+  filelock
 Suggests: 
     covr,
     testthat

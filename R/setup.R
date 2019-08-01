@@ -27,9 +27,9 @@ batch_setup <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...)
 
   narg_files <- length(arg_files(path, recursive))
   if(narg_files) {
-    err("there are existing '", .argsbatchr, "' files")
+    err("there are existing '.batchr_setup.rds' files")
   }
   dots <- list(...)
-  save_args(path, pattern, recursive, FUN = FUN, dots = dots)
+  save_batchr_setup.rds(path, pattern, recursive, FUN = FUN, dots = dots)
   invisible(files)
 }

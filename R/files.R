@@ -7,10 +7,9 @@
 #' @return A character vector of the paths to the files.
 #' @export
 batch_files <- function(path = ".", processed = NA) {
-  batch_check(path)
   chk_lgl(processed)
   
-  args <- read_args(path)
+  args <- read_batchr_setup.rds(path)
   files <- .batch_files(path, args$pattern, args$recursive)
   if(is.na(processed)) return(files)
   times <- vapply(files, file.mtime, sys_time())

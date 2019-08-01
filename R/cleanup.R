@@ -7,6 +7,6 @@ batch_cleanup <- function(path = ".") {
   unprocessed <- batch_files(path, processed = FALSE)
   if(length(unprocessed))
     err(co_and(unprocessed, "the following %n file%s %r yet to be processed: %c"))
-  file.remove(file.path(path, .argsbatchr))
+  file.remove(file.path(path, ".batchr_setup.rds"))
   invisible(batch_files(path))
 }
