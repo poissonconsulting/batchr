@@ -8,7 +8,7 @@
 #' @return An invisible character vector of the files processed by the function call.
 #' @export
 batch_restart <- function(path, parallel = FALSE) {
-  check_flag(parallel)
+  chk_flag(parallel)
   if(!isFALSE(parallel)) .NotYetUsed("parallel", error = FALSE) 
     
   files <- batch_files(path, processed = FALSE)

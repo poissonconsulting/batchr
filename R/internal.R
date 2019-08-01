@@ -1,5 +1,5 @@
 check_directory <- function(path) {
-  check_string(path)
+  chk_string(path)
   if(!dir.exists(path)) err("directory '", path, "' does not exist")
   path
 }

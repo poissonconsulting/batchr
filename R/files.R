@@ -8,7 +8,7 @@
 #' @export
 batch_files <- function(path = ".", processed = NA) {
   batch_check(path)
-  check_scalar(processed, c(TRUE, NA))
+  chk_lgl(processed)
   
   args <- read_args(path)
   files <- .batch_files(path, args$pattern, args$recursive)

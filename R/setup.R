@@ -10,10 +10,10 @@
 #' be processed.
 #' @export
 batch_setup <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...) {
-  check_function(FUN)
+  chk_function(FUN)
   check_directory(path)
-  check_string(pattern)
-  check_flag(recursive)
+  chk_string(pattern)
+  chk_flag(recursive)
   
   files <- .batch_files(path, pattern, recursive)
   if(!length(files)) err("no files match '", pattern, "'")

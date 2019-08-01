@@ -10,6 +10,6 @@
 #' function_template()
 #' function_template(FALSE)
 function_template <- function(x = TRUE) {
-  check_flag(x)
+  chk_flag(x)
   x
 }
