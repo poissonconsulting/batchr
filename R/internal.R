@@ -15,10 +15,8 @@ check_directory <- function(path) {
              full.names = full.names)
 }
 
-arg_files <- function(path, recursive, full.names = FALSE) {
-  list.files(path = path, pattern = "^[.]batchr_setup[.]rds$", 
-             recursive = recursive, full.names = full.names, all.files = TRUE)
-}
+file.exists_batchr_setup.rds <- function(path) 
+  file.exists(file.path(path, ".batchr_setup.rds"))
 
 save_batchr_setup.rds <- function(path, pattern, recursive, FUN, dots) {
   args <- list(time = sys_time(), pattern = pattern, 
@@ -28,7 +26,7 @@ save_batchr_setup.rds <- function(path, pattern, recursive, FUN, dots) {
 }
 
 read_batchr_setup.rds <- function(path) {
-  path <- file.path(path, ".batchr_setup.rds")
-  if(!file.exists(path)) err("there is no '.batchr_setup.rds' file")
-  readRDS(file = path)
+  if(!file.exists_batchr_setup.rds(path))
+    err("directory '", path, "' does not contain a '.batchr_setup.rds' file")
+  readRDS(file = file.path(path, ".batchr_setup.rds"))
 }

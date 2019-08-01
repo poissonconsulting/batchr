@@ -15,19 +15,22 @@
 #'
 #' @return An invisible character vector of the paths to the files to
 #' be processed.
+#' @seealso \code{\link{batch_read_setup}()}
 #' @export
 batch_setup <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...) {
   chk_function(FUN)
   check_directory(path)
   chk_string(pattern)
   chk_flag(recursive)
-  
-  files <- .batch_files(path, pattern, recursive)
-  if(!length(files)) err("no files match '", pattern, "'")
 
-  narg_files <- length(arg_files(path, recursive))
-  if(narg_files) {
-    err("there are existing '.batchr_setup.rds' files")
+  if(file.exists_batchr_setup.rds(path))
+    err("directory '", path, "' already contains a '.batchr_setup.rds' file")
+
+  files <- list.files(path = path, pattern = pattern, recursive = recursive)
+    
+  if(!length(files)) { 
+    err("directory '", path, "' does not contain any files matching '", 
+        pattern, "'")
   }
   dots <- list(...)
   save_batchr_setup.rds(path, pattern, recursive, FUN = FUN, dots = dots)

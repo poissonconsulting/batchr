@@ -30,3 +30,6 @@ Sets up files for batch processing.
 Hidden files are not included in those for batch processing to
 prevent accidental modification of system files.
 }
+\seealso{
+\code{\link{batch_read_setup}()}
+}

@@ -41,10 +41,9 @@ dir.create(path)
 
 write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
-
-list.files(path)
-#> [1] "file1.csv" "file2.csv"
 ```
+
+### Set Up
 
 The first task is for the user to setup a project by specify the files
 to process and the function to process them with.
@@ -61,13 +60,13 @@ fun <- function(file) {
 batch_setup(fun, path = path, pattern = "^file\\d[.]csv$")
 ```
 
-Setting up a project creates a hidden file (`.argsbatchr.rds`) which can
-be read using `batch_read_args()`
+Setting up a project creates a hidden file (`.batchr_setup.rds`) which
+can be read using `batch_read_setup()`
 
 ``` r
-batch_read_args(path)
+batch_read_setup(path)
 #> $time
-#> [1] "2019-08-01 21:25:33 UTC"
+#> [1] "2019-08-01 22:28:15 UTC"
 #> 
 #> $pattern
 #> [1] "^file\\d[.]csv$"
@@ -92,8 +91,19 @@ modified is *before* this `time` value. Whenever an attempt is made to
 process a file its modification time is set to the current time (marking
 it as processed) and it’s file name is logged in a hidden text file
 (`.batchr_log.txt`) together with a flag (0 or 1) indicating whether
-processing occurred without an error. This approach prevents newly
-created files from being accidentally processed.
+processing was successfuly (occurred without an error). This approach
+prevents newly created files from being accidentally processed.
+
+### Start
+
+The next task is to start (or restart) processing the files using
+`batch_start()`.
+
+``` r
+batch_start(path)
+#> Warning: argument 'parallel' is not used (yet)
+#> NULL
+```
 
 ## Contribution
 
