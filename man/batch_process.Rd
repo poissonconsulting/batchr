@@ -8,11 +8,13 @@ batch_process(FUN, path = ".", pattern = ".*", recursive = FALSE,
   ..., parallel = TRUE)
 }
 \arguments{
-\item{FUN}{A function to process the files. The first argument should be a string of the absolute path to a single file.}
+\item{FUN}{A function to process the files. 
+The first argument should be a string of the absolute path to a single file.}
 
 \item{path}{A string of the path to the directory with the files.}
 
-\item{pattern}{A string of the regular expression to match to file names.}
+\item{pattern}{A string of a regular expression. Only non-hidden file names 
+which match the regular expression will be batch processed.}
 
 \item{recursive}{A flag specifying whether to recurse into sub directories.}
 
@@ -21,9 +23,8 @@ batch_process(FUN, path = ".", pattern = ".*", recursive = FALSE,
 \item{parallel}{A flag specifying whether to process the files in parallel.}
 }
 \value{
-An invisible character vector of the processed files.
+A flag specifying whether it was able to process.
 }
 \description{
 Performs set up, processing and clean up.
-It can be halted during processing and restarted using \code{\link{batch_restart}()}
 }

@@ -5,10 +5,9 @@
 #' @return An invisible copy of the values of .argsbatchr.rds.
 #' @export
 batch_check <- function(path = ".") {
-  check_directory(path)
   
-  args <- read_args(path)
-  
+  args <- batch_read_args(path)
+
   files <- .batch_files(path, args$pattern, args$recursive)
   if(!length(files)) err("no files match '", args$pattern, "'")
   

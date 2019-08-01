@@ -11,7 +11,7 @@ check_directory <- function(path) {
 
 arg_files <- function(path, recursive, full.names = FALSE) {
   list.files(path = path, pattern = .argsbatchr_pattern, recursive = recursive,
-             full.names = full.names)
+             full.names = full.names, all.files = TRUE)
 }
 
 sys_time <- function() {

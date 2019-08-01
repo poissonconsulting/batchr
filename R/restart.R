@@ -9,7 +9,7 @@
 #' @export
 batch_restart <- function(path, parallel = FALSE) {
   chk_flag(parallel)
-  if(!isFALSE(parallel)) .NotYetUsed("parallel", error = FALSE) 
+  if(!parallel) .NotYetUsed("parallel", error = FALSE) 
     
   files <- batch_files(path, processed = FALSE)
   if(!length(files)) {

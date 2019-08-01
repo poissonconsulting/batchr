@@ -2,16 +2,18 @@
 % Please edit documentation in R/setup.R
 \name{batch_setup}
 \alias{batch_setup}
-\title{Setup Batch Processing of Files}
+\title{Set Up Batch Processing of Files}
 \usage{
 batch_setup(FUN, path = ".", pattern = ".*", recursive = FALSE, ...)
 }
 \arguments{
-\item{FUN}{A function to process the files. The first argument should be a string of the absolute path to a single file.}
+\item{FUN}{A function to process the files. 
+The first argument should be a string of the absolute path to a single file.}
 
 \item{path}{A string of the path to the directory with the files.}
 
-\item{pattern}{A string of the regular expression to match to file names.}
+\item{pattern}{A string of a regular expression. Only non-hidden file names 
+which match the regular expression will be batch processed.}
 
 \item{recursive}{A flag specifying whether to recurse into sub directories.}
 
@@ -22,5 +24,9 @@ An invisible character vector of the paths to the files to
 be processed.
 }
 \description{
-Setup Batch Processing of Files
+Sets up files for batch processing.
+}
+\details{
+Hidden files are not included in those for batch processing to
+prevent accidental modification of system files.
 }
