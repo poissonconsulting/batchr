@@ -36,6 +36,6 @@ batch_setup <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...)
         pattern, "'")
   }
   dots <- list(...)
-  save_batchr_setup.rds(path, pattern, recursive, FUN = FUN, dots = dots)
+  save_batchr_setup(path, pattern, recursive, FUN = FUN, dots = dots)
   invisible(files)
 }

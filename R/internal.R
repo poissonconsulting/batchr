@@ -11,7 +11,7 @@ sys_time <- function() {
 list_batchr_setup_rds_files <- function(path, recursive) {
 }
 
-save_batchr_setup.rds <- function(path, pattern, recursive, FUN, dots) {
+save_batchr_setup <- function(path, pattern, recursive, FUN, dots) {
   args <- list(time = sys_time(), pattern = pattern, 
                recursive = recursive, FUN = FUN, 
                dots = dots)
