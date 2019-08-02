@@ -1,3 +1,4 @@
-#' @import chk filelock
-#' @importFrom log4r create.logger error
+#' @import chk 
+#' @importFrom filelock lock
+#' @importFrom log4r create.logger info error fatal
 NULL

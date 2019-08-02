@@ -4,26 +4,27 @@
 \alias{batch_start}
 \title{Start Batch Processing}
 \usage{
-batch_start(path = ".", failed = FALSE, parallel = FALSE)
+batch_start(path = ".", failed = FALSE, parallel = FALSE,
+  logger = NULL)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
 \item{failed}{A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that failed to process.}
+include (NA), or only include (TRUE) files that have thus far failed to process.}
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
+
+\item{logger}{A \code{\link[log4r]{logger}} object that is passed to 
+the file processing function to allow the user to log their own messages.}
 }
 \value{
 An invisible character vector of the files successfully 
 processed by the current call.
 }
 \description{
-Starts (or restarts if previously stopped) batch processing
-files of files as specified in configuration file.
-}
-\details{
-It locks the configuration file during processing to prevent
-concurrent calls to batch_start().
+Starts (or restarts if previously stopped) processing the files
+as specified in the configuration file.
+For more information see \code{\link{batch_config}()}
 }

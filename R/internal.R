@@ -1,19 +1,3 @@
-sys_time <- function() {
-  time <- Sys.time()
-  attr(time, "tzone") <- "UTC" 
-  time
-}
-
-file_time <- function(file) {
-  time <- file.mtime(file)
-  attr(time, "tzone") <- "UTC"
-  time
-}
-
-is_try_error <- function(x) {
-  inherits(x, "try-error")
-}
-
 save_config <- function(path, pattern, recursive, FUN, dots) {
   args <- list(time = sys_time(), pattern = pattern, 
                recursive = recursive, FUN = FUN, 
@@ -27,13 +11,57 @@ lock_config <- function(path) {
   !is_try_error(lock)
 }
 
-process_file <- function(file, .fun, .dots, path, logger) {
-  .dots <- c(file, .dots)
-  output <- try(do.call(".fun", .dots), silent = TRUE)
-  if(!is_try_error(output)) {
-    Sys.setFileTime(file.path(path, file), Sys.time())
+read_log <- function(path) {
+  file <- file.path(path, ".batchr.log")
+  if(!file.exists(file)) return(character(0))
+  readLines(file.path(path, ".batchr.log"))
+}
+
+logged_data <- function(lines) {
+  if(!length(lines)) {
+    levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
+    level <- ordered(character(0), levels = levels)
+    return(tibble(level = level, time = sys_time()[-1], file = character(0)))
+  }
+  # need to process here
+  levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
+  level <- ordered(character(0), levels = levels)
+  return(tibble(level = level, time = sys_time()[-1], file = character(0)))
+}
+
+failed_files <- function(path) {
+  log <- read_log(path)
+  logged_data(log)$file
+}
+
+file_time <- function(path, file) {
+  time <- file.mtime(file.path(path, file))
+  attr(time, "tzone") <- "UTC"
+  time
+}
+
+touch_file <- function(path, file) {
+  Sys.setFileTime(file.path(path, file), Sys.time())
+}
+
+process_file <- function(file, fun, dots, path, logger) {
+  dots <- c(file, dots, logger)
+  output <- try(do.call("fun", dots), silent = TRUE)
+  
+  if(isTRUE(output)) {
+    touch_file(path, file)
     return(TRUE)
   }
-  error(logger, output)
+  
+  logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
+  
+  if(isFALSE(output)) {
+    info(logger, file)
+  } else if(is_try_error(output)) {
+    error(logger, file)
+  } else {
+    fatal(logger, file)
+    err("processing file '", file, "' returned an object of class '", class(output), "'")
+  }
   FALSE
 }

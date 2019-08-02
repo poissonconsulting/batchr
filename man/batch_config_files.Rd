@@ -18,5 +18,5 @@ A character vector of the names of the configuration file(s).
 Configuration Files
 }
 \seealso{
-\code{\link{batch_config}()}
+\code{\link{batch_config}()}.
 }

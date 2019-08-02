@@ -10,7 +10,7 @@ batch_remaining_files(path = ".", failed = FALSE)
 \item{path}{A string of the path to the directory with the files.}
 
 \item{failed}{A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that failed to process.}
+include (NA), or only include (TRUE) files that have thus far failed to process.}
 }
 \value{
 A character vector of the names of the remaining files.
@@ -22,5 +22,5 @@ Gets the names of the files that are remaining to be processed.
 By default, files that were not successfully processed are excluded.
 }
 \seealso{
-\code{\link{batch_start}()}
+\code{\link{batch_config}()}.
 }
