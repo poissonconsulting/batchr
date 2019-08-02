@@ -9,7 +9,8 @@ batch_process(FUN, path = ".", pattern = ".*", recursive = FALSE,
 }
 \arguments{
 \item{FUN}{A function to process the files. 
-The first argument should be a string of the absolute path to a single file.}
+The function's first argument must be a string of the path 
+to a single file.}
 
 \item{path}{A string of the path to the directory with the files.}
 

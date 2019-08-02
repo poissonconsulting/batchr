@@ -43,10 +43,10 @@ write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
 ```
 
-### Set Up
+### Configuration
 
-The first task is for the user to setup a project by specify the files
-to process and the function to process them with.
+The first task is for the user to configure a directory by specify the
+files to process and the function to process them with.
 
 ``` r
 library(batchr)
@@ -57,18 +57,18 @@ fun <- function(file) {
   write.csv(data, file)
 }
 
-batch_setup(fun, path = path, pattern = "^file\\d[.]csv$")
+batch_config(fun, path = path, pattern = "^file\\d[.]csv$")
 ```
 
-Setting up a project creates a hidden file (`.batchr.rds`) which can be
-read using `batch_read_setup()`
+Configuring a directory creates a hidden file (`.batchr.rds`) which can
+be read using `batch_read_config()`
 
 ``` r
-batch_setup_files(path) # hidden file
+batch_config_files(path) # hidden file
 #> [1] ".batchr.rds"
-batch_read_setup(path)
+batch_read_config(path)
 #> $time
-#> [1] "2019-08-02 15:16:14 UTC"
+#> [1] "2019-08-02 15:39:01 UTC"
 #> 
 #> $pattern
 #> [1] "^file\\d[.]csv$"
@@ -90,9 +90,8 @@ batch_read_setup(path)
 The `time` value specifies the system time (in UTC) that the project was
 set up. A file is only treated as unprocessed if the time it was last
 modified is *before* this `time` value. If a file is successfully
-processed its modification time is set to the current time. Otherwise if
-processing failed the name of the file is logged in the `.batchr.log`
-file.
+processed its modification time is set to the current time; otherwise
+the name of the file is logged in the `.batchr.log` file.
 
 ### Start
 

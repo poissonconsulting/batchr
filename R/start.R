@@ -3,7 +3,7 @@
 #' Starts (or restarts if stopped during processing) batch processing
 #' files identified during batch set up.
 #'
-#' @inheritParams batch_setup
+#' @inheritParams batch_config
 #' @param parallel A flag specifying whether to process the files in 
 #' parallel (not yet used).
 #'
@@ -16,7 +16,7 @@ batch_start <- function(path, parallel = FALSE) {
   
   if(parallel) .NotYetUsed("parallel", error = FALSE) 
   
-  setup <- batch_read_setup(path)
+  setup <- batch_read_config(path)
   NULL
   # need to lock file (if not already locked)
     

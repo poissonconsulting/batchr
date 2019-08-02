@@ -1,10 +1,10 @@
-#' List Set Up File Names
+#' Configuration Files
 #'
-#' @inheritParams batch_setup
-#'
-#' @return A character vector of the file names.
+#' @inheritParams batch_config
+#' @return A character vector of the names of the configuration file(s).
+#' @seealso \code{\link{batch_config}()}
 #' @export
-batch_setup_files <- function(path = ".", recursive = FALSE) {
+batch_config_files <- function(path = ".", recursive = FALSE) {
   chk_dir(path)
   chk_flag(recursive)
 

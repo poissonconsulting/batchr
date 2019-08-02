@@ -1,6 +1,6 @@
 context("read")
 
-test_that("batch_read_setup", {
+test_that("batch_read_config", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -9,9 +9,9 @@ test_that("batch_read_setup", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  expect_identical(batch_setup(identity, path = path, pattern = "^file\\d[.]csv$"),
+  expect_identical(batch_config(identity, path = path, pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  setup <- batch_read_setup(path)
+  setup <- batch_read_config(path)
   
   expect_is(setup$time, "POSIXct")
   expect_identical(attr(setup$time, "tzone"), "UTC")
@@ -23,7 +23,7 @@ test_that("batch_read_setup", {
                           x, dots = list()))
 })
 
-test_that("read_setup with no setup", {
+test_that("batch_read_config with no setup", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -32,15 +32,15 @@ test_that("read_setup with no setup", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
-  expect_error(batch_read_setup(path), 
+  expect_error(batch_read_config(path), 
                "^file '.*[.]batchr[.]rds' not found$")
 })
 
-test_that("read_setup with no directory", {
+test_that("batch_read_config with no directory", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
   unlink(path, recursive = TRUE)
 
-  expect_error(batch_read_setup(path), "^directory '.*batchr' not found$")
+  expect_error(batch_read_config(path), "^directory '.*batchr' not found$")
 })

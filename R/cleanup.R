@@ -1,6 +1,6 @@
 #' Cleanup Batch Processing
 #'
-#' @inheritParams batch_setup
+#' @inheritParams batch_config
 #' @return An invisible character vector of the files that have been processed.
 batch_cleanup <- function(path = ".") {
   unprocessed <- batch_files(path, processed = FALSE)
