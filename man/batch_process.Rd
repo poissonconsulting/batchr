@@ -5,7 +5,7 @@
 \title{Batch File Processing}
 \usage{
 batch_process(FUN, path = ".", pattern = ".*", recursive = FALSE,
-  ..., parallel = FALSE, logger = NULL)
+  parallel = FALSE, logger = NULL, ...)
 }
 \arguments{
 \item{FUN}{A function to process each of the files.}
@@ -17,13 +17,13 @@ which match the regular expression will be batch processed.}
 
 \item{recursive}{A flag specifying whether to recurse into sub directories.}
 
-\item{...}{Additional arguments passed to FUN.}
-
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
 \item{logger}{A \code{\link[log4r]{logger}} object that is passed to 
 the file processing function to allow the user to log their own messages.}
+
+\item{...}{Additional arguments passed to FUN.}
 }
 \value{
 A flag specifying whether all files were processed successfully.

@@ -86,3 +86,66 @@ test_that("batch_start locks", {
   # )
   # expect_null(res)
 })
+
+test_that("batch_start parallel", {
+  teardown(unlink(file.path(tempdir(), "batchr_start")))
+  
+  path <- file.path(tempdir(), "batchr_start")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  
+  expect_identical(batch_config(function(x) TRUE, path = path, 
+                                pattern = "^file\\d[.]csv$"),
+                   "file1.csv")
+  
+  expect_warning(batch_start(path, parallel = TRUE), 
+               "'parallel' is not used [(]yet[)]")
+})
+
+test_that("batch_start non-logger", {
+  teardown(unlink(file.path(tempdir(), "batchr_start")))
+  
+  path <- file.path(tempdir(), "batchr_start")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  
+  expect_identical(batch_config(function(x) TRUE, path = path, 
+                                pattern = "^file\\d[.]csv$"),
+                   "file1.csv")
+  
+  expect_error(batch_start(path, logger = 1), 
+               "logger must inherit from class 'logger'")
+})
+
+test_that("batch_start subdirectories with config", {
+  teardown(unlink(file.path(tempdir(), "batchr_start", "batch_sub")))
+  
+  path <- file.path(tempdir(), "batchr_start")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  
+  expect_identical(batch_config(function(x) TRUE, path = path, 
+                                pattern = "^file\\d[.]csv$", recursive = TRUE),
+                   "file1.csv")
+  
+  path <- file.path(tempdir(), "batchr_start", "batch_sub")
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  
+  expect_identical(batch_config(function(x) TRUE, path = path, 
+                                pattern = "^file\\d[.]csv$"),
+                   "file1.csv")
+  
+  path <- file.path(tempdir(), "batchr_start")
+ 
+  expect_error(batch_start(path), 
+               "subdirectories of '.*batchr_start' contain '.batchr.rds' files")
+})
+

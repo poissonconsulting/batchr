@@ -54,10 +54,10 @@
 #' @return A flag specifying whether all files were processed successfully.
 #' @export
 batch_process <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, 
-                          ..., parallel = FALSE, logger = NULL) {
+                          parallel = FALSE, logger = NULL, ...) {
   batch_config(FUN, path = path, pattern = pattern, recursive = recursive, ...)
-  files <- batch_start(path, parallel = parallel, logger = logger)
-  if(length(batch_remaining_files(failed = NA))) return(FALSE)
+  batch_start(path = path, parallel = parallel, logger = logger)
+ # if(length(batch_remaining_files(failed = NA))) return(FALSE)
 #    batch_cleanup(path)
   TRUE
 }
