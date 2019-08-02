@@ -66,8 +66,8 @@ Configuring a directory creates a hidden file (``r batch_config_files(path)``) w
 batch_config_files(path) # hidden file
 batch_read_config(path)
 ```
-The `time` value specifies the system time (in UTC) that the project was set up.
-A file is only treated as unprocessed if the time it was last modified is *before* this `time` value. 
+The `time` value specifies the system time (in UTC) that the project was configured.
+A file is only treated as unprocessed if the time it was last modified is *before* the time of configuration 
 If a file is successfully processed its modification time is set to the current time; otherwise the name of the file is logged in the `.batchr.log` file.
 
 ### Start

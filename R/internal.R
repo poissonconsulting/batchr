@@ -34,7 +34,7 @@ logged_data <- function(lines) {
 
 failed_files <- function(path) {
   log <- read_log(path)
-  logged_data(log)$file
+  sort(unique(logged_data(log)$file))
 }
 
 file_time <- function(path, file) {

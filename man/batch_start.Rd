@@ -25,6 +25,8 @@ processed by the current call.
 }
 \description{
 Starts (or restarts if previously stopped) processing the files
-as specified in the configuration file.
-For more information see \code{\link{batch_config}()}
+specified in the configuration file.
+}
+\seealso{
+\code{\link{batch_process}()}
 }

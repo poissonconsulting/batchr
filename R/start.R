@@ -1,8 +1,7 @@
 #' Start Batch Processing
 #' 
 #' Starts (or restarts if previously stopped) processing the files
-#' as specified in the configuration file.
-#' For more information see \code{\link{batch_config}()}
+#' specified in the configuration file.
 #'
 #' @inheritParams batch_config
 #' @param parallel A flag specifying whether to process the files in 
@@ -11,9 +10,9 @@
 #' include (NA), or only include (TRUE) files that have thus far failed to process.
 #' @param logger A \code{\link[log4r]{logger}} object that is passed to 
 #' the file processing function to allow the user to log their own messages.
-#'
 #' @return An invisible character vector of the files successfully 
 #' processed by the current call.
+#' @seealso \code{\link{batch_process}()}
 #' @export
 batch_start <- function(path = ".", failed = FALSE, parallel = FALSE, logger = NULL) {
   chk_dir(path)

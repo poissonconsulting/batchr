@@ -2,6 +2,8 @@
 #'
 #' @inheritParams batch_config
 #' @return An invisible character vector of the files that have been processed.
+#' @seealso \code{\link{batch_process}()}
+#' @export
 batch_cleanup <- function(path = ".") {
 #  unprocessed <- batch_files(path, processed = FALSE)
 #  if(length(unprocessed))

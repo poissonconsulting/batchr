@@ -68,7 +68,7 @@ batch_config_files(path) # hidden file
 #> [1] ".batchr.rds"
 batch_read_config(path)
 #> $time
-#> [1] "2019-08-02 17:27:41 UTC"
+#> [1] "2019-08-02 22:38:58 UTC"
 #> 
 #> $pattern
 #> [1] "^file\\d[.]csv$"
@@ -88,10 +88,10 @@ batch_read_config(path)
 ```
 
 The `time` value specifies the system time (in UTC) that the project was
-set up. A file is only treated as unprocessed if the time it was last
-modified is *before* this `time` value. If a file is successfully
-processed its modification time is set to the current time; otherwise
-the name of the file is logged in the `.batchr.log` file.
+configured. A file is only treated as unprocessed if the time it was
+last modified is *before* the time of configuration If a file is
+successfully processed its modification time is set to the current time;
+otherwise the name of the file is logged in the `.batchr.log` file.
 
 ### Start
 
@@ -100,6 +100,11 @@ The next task is to start (or restart) processing the files using
 
 ``` r
 batch_start(path)
+#> Warning in file(file, "rt"): cannot open file 'file1.csv': No such file or
+#> directory
+#> Warning in file(file, "rt"): cannot open file 'file2.csv': No such file or
+#> directory
+#> character(0)
 ```
 
 ## Contribution

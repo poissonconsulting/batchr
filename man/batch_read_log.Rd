@@ -17,5 +17,5 @@ a POSIXct of the time of failure in UTC and a character vector of the file name.
 Reads the values in the .batchr.log processing failure file.
 }
 \seealso{
-\code{\link{batch_config}()}.
+\code{\link{batch_process}()}
 }

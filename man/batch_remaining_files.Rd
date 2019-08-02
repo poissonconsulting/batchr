@@ -22,5 +22,5 @@ Gets the names of the files that are remaining to be processed.
 By default, files that were not successfully processed are excluded.
 }
 \seealso{
-\code{\link{batch_config}()}.
+\code{\link{batch_process}()}
 }

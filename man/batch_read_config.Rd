@@ -17,5 +17,5 @@ Reads the values in the .batchr.rds configuration file which was created
 when the project was set up.
 }
 \seealso{
-\code{\link{batch_config}()}.
+\code{\link{batch_process}()}
 }

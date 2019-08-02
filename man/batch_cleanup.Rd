@@ -15,3 +15,6 @@ An invisible character vector of the files that have been processed.
 \description{
 Cleanup Batch Processing
 }
+\seealso{
+\code{\link{batch_process}()}
+}

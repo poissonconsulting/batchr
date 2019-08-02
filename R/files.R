@@ -2,7 +2,7 @@
 #'
 #' @inheritParams batch_config
 #' @return A character vector of the names of the configuration file(s).
-#' @seealso \code{\link{batch_config}()}.
+#' @seealso \code{\link{batch_process}()}
 #' @export
 batch_config_files <- function(path = ".", recursive = FALSE) {
   chk_dir(path)
@@ -21,7 +21,7 @@ batch_config_files <- function(path = ".", recursive = FALSE) {
 #' @inheritParams batch_config
 #' @inheritParams batch_start
 #' @return A character vector of the names of the remaining files.
-#' @seealso \code{\link{batch_config}()}.
+#' @seealso \code{\link{batch_process}()}
 #' @export
 batch_remaining_files <- function(path = ".", failed = FALSE) {
   chk_lgl(failed)
@@ -30,8 +30,8 @@ batch_remaining_files <- function(path = ".", failed = FALSE) {
   files <- files[file_time(path, files) < config$time]
   if(!length(files) || is.na(failed)) return(files)
   failed <- failed_files(path)
-  # need to get failed files...
+  failed <- intersect(failed, files)
+  if(isTRUE(failed)) return(failed)
+  files <- setdiff(files, failed)
   files
 }
-
-
