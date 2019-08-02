@@ -23,7 +23,7 @@ batch_read_config <- function(path) {
 #' a POSIXct of the time of failure in UTC and a character vector of the file name.
 #' @seealso \code{\link{batch_config}()}.
 #' @export
-batch_read_log <- function(path) {
+batch_read_log <- function(path = ".") {
   batch_read_config(path) # checks configuration file exists
   file <- file.path(path, ".batchr.log")
   if(!file.exists(file)) return(logged_data(character(0)))

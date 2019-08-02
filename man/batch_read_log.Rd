@@ -4,7 +4,7 @@
 \alias{batch_read_log}
 \title{Read Log File}
 \usage{
-batch_read_log(path)
+batch_read_log(path = ".")
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}

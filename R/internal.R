@@ -23,10 +23,13 @@ logged_data <- function(lines) {
     level <- ordered(character(0), levels = levels)
     return(tibble(level = level, time = sys_time()[-1], file = character(0)))
   }
-  # need to process here
   levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
-  level <- ordered(character(0), levels = levels)
-  return(tibble(level = level, time = sys_time()[-1], file = character(0)))
+  level <- str_extract(lines, "^\\w+")
+  level <- ordered(level, levels = levels)
+  time <- str_extract(lines, "\\[\\d{4,4}(-\\d{2,2}){2,2} \\d{2,2}(:\\d{2,2}){2,2}\\]")
+  time <- as.POSIXct(substr(time, 2, 20), tz = "UTC")
+  file <- str_extract(lines, "[^ ]+$")
+  return(tibble(level = level, time = time, file = file))
 }
 
 failed_files <- function(path) {
