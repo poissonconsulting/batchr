@@ -43,9 +43,9 @@ batch_remaining_files <- function(path = ".", failed = FALSE) {
   files <- list.files(path, pattern = config$pattern, recursive = config$recursive)
   files <- files[file_time(path, files) < config$time]
   if(!length(files) || is.na(failed)) return(files)
-  failed <- failed_files(path)
-  failed <- intersect(failed, files)
-  if(isTRUE(failed)) return(failed)
-  files <- setdiff(files, failed)
+  failed_files <- failed_files(path)
+  failed_files <- intersect(failed_files, files)
+  if(isTRUE(failed)) return(failed_files)
+  files <- setdiff(files, failed_files)
   files
 }
