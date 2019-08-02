@@ -9,7 +9,7 @@
 batch_process <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, 
                       ..., parallel = TRUE) {
   batch_config(FUN, path = path, pattern = pattern, recursive = recursive, ...)
-  batch_start(path, parallel = parallel)  
+#  batch_start(path, parallel = parallel)  
   batch_cleanup(path)
   TRUE
 }

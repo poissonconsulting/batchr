@@ -4,19 +4,26 @@
 \alias{batch_start}
 \title{Start Batch Processing}
 \usage{
-batch_start(path, parallel = FALSE)
+batch_start(path = ".", failed = FALSE, parallel = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
+
+\item{failed}{A logical scalar specifying whether to exclude (FALSE),
+include (NA), or only include (TRUE) files that failed to process.}
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 }
 \value{
-An invisible character vector of the 
-files processed by the current function call.
+An invisible character vector of the files successfully 
+processed by the current call.
 }
 \description{
-Starts (or restarts if stopped during processing) batch processing
-files identified during batch set up.
+Starts (or restarts if previously stopped) batch processing
+files of files as specified in configuration file.
+}
+\details{
+It locks the configuration file during processing to prevent
+concurrent calls to batch_start().
 }

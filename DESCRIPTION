@@ -13,7 +13,8 @@ Imports:
   filelock
 Suggests: 
     covr,
-    testthat
+    testthat,
+    callr
 Remotes:
     poissonconsulting/chk
 URL: https://poissonconsulting.github.io/batchr/

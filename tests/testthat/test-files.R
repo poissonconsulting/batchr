@@ -15,3 +15,26 @@ test_that("batch_config_files", {
   expect_identical(batch_config_files(path), ".batchr.rds")
 })
 
+test_that("batch_remaining_files", {
+  teardown(unlink(file.path(tempdir(), "batchr")))
+  
+  path <- file.path(tempdir(), "batchr")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
+  write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
+  
+  expect_error(batch_remaining_files(path), 
+               "file '.*.batchr.rds' not found")
+  
+  expect_identical(batch_config(identity, path = path, 
+                                pattern = "^file\\d[.]csv$"),
+                   c("file1.csv", "file2.csv", "file3.csv"))
+  
+  Sys.setFileTime(file.path(path, "file2.csv"), Sys.time())
+  
+  expect_identical(batch_remaining_files(path), 
+                   c("file1.csv", "file3.csv"))
+})
