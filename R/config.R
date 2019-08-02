@@ -32,7 +32,7 @@ batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...
   if(length(batch_config_files(path, recursive = FALSE)))
     err("directory '", path, "' already contains a '.batchr.rds' file")
 
-  if(recursive && length(batch_config_files(path, recursive = FALSE)))
+  if(recursive && length(batch_config_files(path, recursive = TRUE)))
     err("subdirectories of '", path, "' contain '.batchr.rds' files")
 
   files <- list.files(path = path, pattern = pattern, recursive = recursive)

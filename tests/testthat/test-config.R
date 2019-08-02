@@ -106,14 +106,19 @@ test_that("batch_config with existing recursive .batchr.rds files", {
   
   write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
   
+  expect_identical(batch_config(identity, path = path,
+                               pattern = "^file\\d[.]csv$"),
+                   "file3.csv")
+  
   path <- file.path(tempdir(), "batchr")
   
-  expect_identical(batch_config(identity, path = path, recursive = TRUE,
+  write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
+  
+  expect_error(batch_config(identity, path = path, recursive = TRUE,
                                pattern = "^file\\d[.]csv$"),
-                   "batchr_sub/file3.csv")
-  expect_error(batch_config(identity, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' already contains a '[.]batchr[.]rds' file")
-  expect_error(batch_config(identity, path = path, pattern = "^file\\d[.]csv$",
-                           recursive = TRUE),
-               "directory '.*batchr' already contains a '[.]batchr[.]rds' file")
+               "^subdirectories of '.*batchr' contain '.batchr.rds' files$")
+
+  expect_identical(batch_config(identity, path = path,
+                               pattern = "^file\\d[.]csv$"),
+                   "file2.csv")
 })

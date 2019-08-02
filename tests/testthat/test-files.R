@@ -9,8 +9,9 @@ test_that("batch_config_files", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  batch_config_files()
+  expect_identical(batch_config_files(path), character(0))
   expect_identical(batch_config(identity, path = path, pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  batch_config_files()
+  expect_identical(batch_config_files(path), ".batchr.rds")
 })
+
