@@ -68,7 +68,7 @@ batch_config_files(path) # hidden file
 #> [1] ".batchr.rds"
 batch_read_config(path)
 #> $time
-#> [1] "2019-08-02 22:38:58 UTC"
+#> [1] "2019-08-02 23:46:51 UTC"
 #> 
 #> $pattern
 #> [1] "^file\\d[.]csv$"

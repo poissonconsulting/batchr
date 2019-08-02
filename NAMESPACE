@@ -3,6 +3,7 @@
 export(batch_cleanup)
 export(batch_config)
 export(batch_config_files)
+export(batch_log_files)
 export(batch_process)
 export(batch_read_config)
 export(batch_read_log)

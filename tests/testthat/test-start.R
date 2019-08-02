@@ -148,4 +148,3 @@ test_that("batch_start subdirectories with config", {
   expect_error(batch_start(path), 
                "subdirectories of '.*batchr_start' contain '.batchr.rds' files")
 })
-

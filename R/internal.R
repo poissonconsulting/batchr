@@ -68,3 +68,19 @@ process_file <- function(file, fun, dots, path, logger) {
   }
   FALSE
 }
+
+cleanup_log_file <- function(path) {
+  file <- file.path(path, ".batchr.log")
+  if(file.exists(file)) unlink(file)
+}
+
+cleanup_config <- function(path, force, remaining, failed) {
+  remaining_files <- batch_remaining_files(path, failed = failed)
+  if(length(remaining_files)) {
+    if(!force) return(FALSE)
+    if(remaining) unlink(remaining_files)
+  }
+  unlink(file.path(path, ".batchr.rds"))
+  cleanup_log_file(path)
+  TRUE
+}

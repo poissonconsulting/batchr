@@ -12,6 +12,20 @@ batch_config_files <- function(path = ".", recursive = FALSE) {
              all.files = TRUE)
 }
 
+#' Log Files
+#'
+#' @inheritParams batch_config
+#' @return A character vector of the names of the log file(s).
+#' @seealso \code{\link{batch_process}()}
+#' @export
+batch_log_files <- function(path = ".", recursive = FALSE) {
+  chk_dir(path)
+  chk_flag(recursive)
+
+  list.files(path, pattern = "^[.]batchr[.]log$", recursive = recursive,
+             all.files = TRUE)
+}
+
 #' Remaining Files
 #' 
 #' Gets the names of the files that are remaining to be processed.
