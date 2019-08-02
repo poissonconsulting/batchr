@@ -24,9 +24,13 @@ An invisible character vector of the paths to the files to
 be processed.
 }
 \description{
-Sets up files for batch processing.
+Sets up files for batch processing by specifying the
+files to process and the function to use.
 }
 \details{
+Set up requires that path does not already include a .batchr_setup.rds 
+file (and if recursive = FALSE nor do any of its subdirectories).
+
 Hidden files are not included in those for batch processing to
 prevent accidental modification of system files.
 }

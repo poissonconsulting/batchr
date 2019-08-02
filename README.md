@@ -64,9 +64,11 @@ Setting up a project creates a hidden file (`.batchr_setup.rds`) which
 can be read using `batch_read_setup()`
 
 ``` r
+batch_setup_files(path) # hidden file
+#> [1] ".batchr_setup.rds"
 batch_read_setup(path)
 #> $time
-#> [1] "2019-08-01 22:28:15 UTC"
+#> [1] "2019-08-02 15:09:34 UTC"
 #> 
 #> $pattern
 #> [1] "^file\\d[.]csv$"
@@ -87,12 +89,10 @@ batch_read_setup(path)
 
 The `time` value specifies the system time (in UTC) that the project was
 set up. A file is only treated as unprocessed if the time it was last
-modified is *before* this `time` value. Whenever an attempt is made to
-process a file its modification time is set to the current time (marking
-it as processed) and it’s file name is logged in a hidden text file
-(`.batchr_log.txt`) together with a flag (0 or 1) indicating whether
-processing was successfuly (occurred without an error). This approach
-prevents newly created files from being accidentally processed.
+modified is *before* this `time` value. If a file is successfully
+processed its modification time is set to the current time. Otherwise if
+processing failed the name of the file is logged in the `.batchr.log`
+file.
 
 ### Start
 
@@ -101,7 +101,6 @@ The next task is to start (or restart) processing the files using
 
 ``` r
 batch_start(path)
-#> Warning: argument 'parallel' is not used (yet)
 #> NULL
 ```
 
