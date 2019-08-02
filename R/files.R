@@ -1,18 +1,13 @@
-#' Batch File Names
+#' List Set Up File Names
 #'
 #' @inheritParams batch_setup
-#' @param processed A logical scalar specifying whether to return the names of 
-#' all the file (default), the number processed (TRUE) or the number remaining (FALSE).
 #'
-#' @return A character vector of the paths to the files.
+#' @return A character vector of the file names.
 #' @export
-batch_files <- function(path = ".", processed = NA) {
-  chk_lgl(processed)
-  
-  args <- read_batchr_setup.rds(path)
-  files <- .batch_files(path, args$pattern, args$recursive)
-  if(is.na(processed)) return(files)
-  times <- vapply(files, file.mtime, sys_time())
-  if(isFALSE(processed)) return(files[times <= args$time])
-  files[times > args$time]
+batch_setup_files <- function(path = ".", recursive = FALSE) {
+  chk_dir(path)
+  chk_flag(recursive)
+
+  list.files(path, pattern = .batchr_setup_pat, recursive = recursive,
+             all.files = TRUE)
 }

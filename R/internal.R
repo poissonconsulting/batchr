@@ -4,19 +4,12 @@ sys_time <- function() {
   time
 }
 
-check_directory <- function(path) {
-  chk_string(path)
-  if(!dir.exists(path)) err("directory '", path, "' does not exist")
-  path
+.batch_files <- function(path, pattern, recursive) {
+  list.files(path = path, pattern = pattern, recursive = recursive)
 }
 
-.batch_files <- function(path, pattern, recursive, full.names = FALSE) {
-  list.files(path = path, pattern = pattern, recursive = recursive,
-             full.names = full.names)
+list_batchr_setup_rds_files <- function(path, recursive) {
 }
-
-file.exists_batchr_setup.rds <- function(path) 
-  file.exists(file.path(path, ".batchr_setup.rds"))
 
 save_batchr_setup.rds <- function(path, pattern, recursive, FUN, dots) {
   args <- list(time = sys_time(), pattern = pattern, 
@@ -25,8 +18,22 @@ save_batchr_setup.rds <- function(path, pattern, recursive, FUN, dots) {
   saveRDS(args, file = file.path(path, ".batchr_setup.rds"))
 }
 
-read_batchr_setup.rds <- function(path) {
-  if(!file.exists_batchr_setup.rds(path))
-    err("directory '", path, "' does not contain a '.batchr_setup.rds' file")
-  readRDS(file = file.path(path, ".batchr_setup.rds"))
+#' Batch File Names
+#'
+#' @inheritParams batch_setup
+#' @param processed A logical scalar specifying whether to return the names of 
+#' all the file (default), the number processed (TRUE) or the number remaining (FALSE).
+#'
+#' @return A character vector of the paths to the files.
+#' @export
+batch_files <- function(path = ".", processed = NA) {
+  chk_lgl(processed)
+  
+#  args <- read_batchr_setup.rds(path)
+  # files <- .batch_files(path, args$pattern, args$recursive)
+  # if(is.na(processed)) return(files)
+  # times <- vapply(files, file.mtime, sys_time())
+  # if(isFALSE(processed)) return(files[times <= args$time])
+  # files[times > args$time]
 }
+

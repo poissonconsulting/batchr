@@ -1,6 +1,6 @@
-context("read-setup")
+context("read")
 
-test_that("read-setup", {
+test_that("batch_read_setup", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -33,7 +33,7 @@ test_that("read_setup with no setup", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_error(batch_read_setup(path), 
-               "^directory '.*batchr' does not contain a '.batchr_setup.rds' file$")
+               "^file '.*[.]batchr_setup[.]rds' not found$")
 })
 
 test_that("read_setup with no directory", {
@@ -42,7 +42,5 @@ test_that("read_setup with no directory", {
   path <- file.path(tempdir(), "batchr")
   unlink(path, recursive = TRUE)
 
-  expect_error(batch_read_setup(path), 
-               "^directory '.*batchr' does not exist$")
+  expect_error(batch_read_setup(path), "^directory '.*batchr' not found$")
 })
-

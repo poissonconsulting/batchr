@@ -19,15 +19,18 @@
 #' @export
 batch_setup <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...) {
   chk_function(FUN)
-  check_directory(path)
+  chk_dir(path)
   chk_string(pattern)
   chk_flag(recursive)
-
-  if(file.exists_batchr_setup.rds(path))
+  
+  if(length(batch_setup_files(path, recursive = FALSE)))
     err("directory '", path, "' already contains a '.batchr_setup.rds' file")
 
+  if(recursive && length(batch_setup_files(path, recursive = FALSE)))
+    err("subdirectories of '", path, "' contain '.batchr_setup.rds' files")
+
   files <- list.files(path = path, pattern = pattern, recursive = recursive)
-    
+  
   if(!length(files)) { 
     err("directory '", path, "' does not contain any files matching '", 
         pattern, "'")

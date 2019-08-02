@@ -46,7 +46,7 @@ test_that("batch_setup with no path", {
   unlink(path, recursive = TRUE)
   
   expect_error(batch_setup(identity, path = path, pattern = "^file\\d[.]csv$"),
-               "batchr' does not exist")
+               "directory '.*batchr' not found")
 })
 
 test_that("batch_setup with non-function", {

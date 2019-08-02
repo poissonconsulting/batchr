@@ -11,7 +11,7 @@
 #' files processed by the current function call.
 #' @export
 batch_start <- function(path, parallel = FALSE) {
-  check_directory(path)
+  chk_dir(path)
   chk_flag(parallel)
   
   if(parallel) .NotYetUsed("parallel", error = FALSE) 
