@@ -10,7 +10,7 @@ test_that("batch_config_files", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config_files(path), character(0))
-  expect_identical(batch_config(identity, path = path, pattern = "^file\\d[.]csv$"),
+  expect_identical(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_config_files(path), ".batchr.rds")
 })
@@ -44,7 +44,7 @@ test_that("batch_remaining_files ignores later ones", {
   expect_error(batch_remaining_files(path), 
                "file '.*.batchr.rds' not found")
   
-  expect_identical(batch_config(identity, path = path, 
+  expect_identical(batch_config(function(x) TRUE, path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv", "file3.csv"))
 
@@ -72,7 +72,7 @@ test_that("batch_remaining_files ignores non-matching ones", {
   expect_error(batch_remaining_files(path), 
                "file '.*.batchr.rds' not found")
   
-  expect_identical(batch_config(identity, path = path, 
+  expect_identical(batch_config(function(x) TRUE, path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    c("file2.csv", "file3.csv"))
   
