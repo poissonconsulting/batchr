@@ -8,7 +8,11 @@ after_success:
   - Rscript -e 'covr::codecov()'
 
 notifications:
-  email: false
+  email:
+    recipients:
+      - audrey.beliveau@uwaterloo.ca
+    on_success: change
+    on_failure: always
   slack:
     rooms:
       - poissonconsulting:BKjfn7jsVh8zXTu2rq7BEQEb
