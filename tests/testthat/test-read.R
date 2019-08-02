@@ -33,7 +33,7 @@ test_that("read_setup with no setup", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_error(batch_read_setup(path), 
-               "^file '.*[.]batchr_setup[.]rds' not found$")
+               "^file '.*[.]batchr[.]rds' not found$")
 })
 
 test_that("read_setup with no directory", {

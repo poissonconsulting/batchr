@@ -8,6 +8,6 @@ batch_setup_files <- function(path = ".", recursive = FALSE) {
   chk_dir(path)
   chk_flag(recursive)
 
-  list.files(path, pattern = .batchr_setup_pat, recursive = recursive,
+  list.files(path, pattern = "^[.]batchr[.]rds$", recursive = recursive,
              all.files = TRUE)
 }

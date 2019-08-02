@@ -13,6 +13,6 @@ batch_read_setup(path)
 A named list of the argument values.
 }
 \description{
-Reads the values in the .batchr_setup.rds file which was created 
+Reads the values in the .batchr.rds file which was created 
 when the project was setup.
 }

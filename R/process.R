@@ -6,7 +6,6 @@
 #' @inheritParams batch_start
 #'
 #' @return A flag specifying whether it was able to process.
-#' @export
 batch_process <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, 
                       ..., parallel = TRUE) {
   batch_setup(FUN, path = path, pattern = pattern, recursive = recursive, ...)

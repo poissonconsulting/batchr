@@ -3,7 +3,7 @@
 #' Sets up files for batch processing by specifying the
 #' files to process and the function to use.
 #' 
-#' Set up requires that path does not already include a .batchr_setup.rds 
+#' Set up requires that path does not already include a .batchr.rds 
 #' file (and if recursive = FALSE nor do any of its subdirectories).
 #' 
 #' Hidden files are not included in those for batch processing to
@@ -28,10 +28,10 @@ batch_setup <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...)
   chk_flag(recursive)
   
   if(length(batch_setup_files(path, recursive = FALSE)))
-    err("directory '", path, "' already contains a '", .batchr_setup, "' file")
+    err("directory '", path, "' already contains a '.batchr.rds' file")
 
   if(recursive && length(batch_setup_files(path, recursive = FALSE)))
-    err("subdirectories of '", path, "' contain '", .batchr_setup, "' files")
+    err("subdirectories of '", path, "' contain '.batchr.rds' files")
 
   files <- list.files(path = path, pattern = pattern, recursive = recursive)
   

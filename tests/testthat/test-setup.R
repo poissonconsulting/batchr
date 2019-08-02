@@ -80,7 +80,7 @@ test_that("batch_setup recursive", {
                    "batchr_sub/file3.csv")
 })
 
-test_that("batch_setup with existing .batchr_setup.rds files", {
+test_that("batch_setup with existing .batchr.rds files", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -92,10 +92,10 @@ test_that("batch_setup with existing .batchr_setup.rds files", {
   expect_identical(batch_setup(identity, path = path, pattern = "^file\\d[.]csv$"),
                    "file3.csv")
   expect_error(batch_setup(identity, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' already contains a '[.]batchr_setup[.]rds' file")
+               "directory '.*batchr' already contains a '[.]batchr[.]rds' file")
 })
 
-test_that("batch_setup with existing recursive .batchr_setup.rds files", {
+test_that("batch_setup with existing recursive .batchr.rds files", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -112,8 +112,8 @@ test_that("batch_setup with existing recursive .batchr_setup.rds files", {
                                pattern = "^file\\d[.]csv$"),
                    "batchr_sub/file3.csv")
   expect_error(batch_setup(identity, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' already contains a '[.]batchr_setup[.]rds' file")
+               "directory '.*batchr' already contains a '[.]batchr[.]rds' file")
   expect_error(batch_setup(identity, path = path, pattern = "^file\\d[.]csv$",
                            recursive = TRUE),
-               "directory '.*batchr' already contains a '[.]batchr_setup[.]rds' file")
+               "directory '.*batchr' already contains a '[.]batchr[.]rds' file")
 })

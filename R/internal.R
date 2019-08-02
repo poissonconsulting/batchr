@@ -15,7 +15,7 @@ save_batchr_setup <- function(path, pattern, recursive, FUN, dots) {
   args <- list(time = sys_time(), pattern = pattern, 
                recursive = recursive, FUN = FUN, 
                dots = dots)
-  saveRDS(args, file = file.path(path, .batchr_setup))
+  saveRDS(args, file = file.path(path, ".batchr.rds"))
 }
 
 #' Batch File Names
@@ -25,7 +25,6 @@ save_batchr_setup <- function(path, pattern, recursive, FUN, dots) {
 #' all the file (default), the number processed (TRUE) or the number remaining (FALSE).
 #'
 #' @return A character vector of the paths to the files.
-#' @export
 batch_files <- function(path = ".", processed = NA) {
   chk_lgl(processed)
   

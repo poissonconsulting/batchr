@@ -60,15 +60,15 @@ fun <- function(file) {
 batch_setup(fun, path = path, pattern = "^file\\d[.]csv$")
 ```
 
-Setting up a project creates a hidden file (`.batchr_setup.rds`) which
-can be read using `batch_read_setup()`
+Setting up a project creates a hidden file (`.batchr.rds`) which can be
+read using `batch_read_setup()`
 
 ``` r
 batch_setup_files(path) # hidden file
-#> [1] ".batchr_setup.rds"
+#> [1] ".batchr.rds"
 batch_read_setup(path)
 #> $time
-#> [1] "2019-08-02 15:09:34 UTC"
+#> [1] "2019-08-02 15:16:14 UTC"
 #> 
 #> $pattern
 #> [1] "^file\\d[.]csv$"
