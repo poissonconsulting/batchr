@@ -24,10 +24,10 @@ batch_setup <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...)
   chk_flag(recursive)
   
   if(length(batch_setup_files(path, recursive = FALSE)))
-    err("directory '", path, "' already contains a '.batchr_setup.rds' file")
+    err("directory '", path, "' already contains a '", .batchr_setup, "' file")
 
   if(recursive && length(batch_setup_files(path, recursive = FALSE)))
-    err("subdirectories of '", path, "' contain '.batchr_setup.rds' files")
+    err("subdirectories of '", path, "' contain '", .batchr_setup, "' files")
 
   files <- list.files(path = path, pattern = pattern, recursive = recursive)
   

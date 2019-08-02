@@ -15,7 +15,7 @@ save_batchr_setup <- function(path, pattern, recursive, FUN, dots) {
   args <- list(time = sys_time(), pattern = pattern, 
                recursive = recursive, FUN = FUN, 
                dots = dots)
-  saveRDS(args, file = file.path(path, ".batchr_setup.rds"))
+  saveRDS(args, file = file.path(path, .batchr_setup))
 }
 
 #' Batch File Names
