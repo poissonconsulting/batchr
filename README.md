@@ -68,7 +68,7 @@ batch_config_files(path) # hidden file
 #> [1] ".batchr.rds"
 batch_read_config(path)
 #> $time
-#> [1] "2019-08-02 15:39:01 UTC"
+#> [1] "2019-08-02 17:27:41 UTC"
 #> 
 #> $pattern
 #> [1] "^file\\d[.]csv$"
@@ -100,7 +100,6 @@ The next task is to start (or restart) processing the files using
 
 ``` r
 batch_start(path)
-#> NULL
 ```
 
 ## Contribution

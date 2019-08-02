@@ -24,15 +24,19 @@ batch_start <- function(path = ".", failed = FALSE, parallel = FALSE) {
   
   config <- batch_read_config(path)
   
+  recursive <- config$recursive
+  fun <- config$FUN
+  dots <- config$dots
+  
   if(!lock_config(path))
     err("file '", file.path(path, ".batchr.rds"), "' is already locked")
   
-  recursive <- config$recursive
-  if(recursive && length(batch_config_files(path = path, recursive)))
+  if(recursive && length(batch_config_files(path = path, recursive)) > 1)
     err("subdirectories of '", path, "' contain '.batchr.rds' files")
   
   remaining <- batch_remaining_files(path, failed = failed)
   if(!length(remaining)) return(character(0))
   
-  # need to do magic
+  success <- lapply(remaining, process_file, .fun = fun, .dots = dots)
+  remaining[unlist(success)]
 }
