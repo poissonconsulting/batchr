@@ -59,3 +59,9 @@ notifications:
     on_build_failure: true
     on_build_success: false
     on_build_status_changed: true
+  - provider: Email
+    to:
+      - audrey.beliveau@uwaterloo.ca
+    on_build_failure: false
+    on_build_success: false
+    on_build_status_changed: true
