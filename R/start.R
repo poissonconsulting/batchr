@@ -37,6 +37,8 @@ batch_start <- function(path = ".", failed = FALSE, parallel = FALSE) {
   remaining <- batch_remaining_files(path, failed = failed)
   if(!length(remaining)) return(character(0))
   
-  success <- lapply(remaining, process_file, .fun = fun, .dots = dots)
+  logger <- create.logger(file.path(path, ".batchr.log"), level = "ERROR")
+  success <- lapply(remaining, process_file, .fun = fun, .dots = dots, 
+                    path = path, logger = logger)
   remaining[unlist(success)]
 }

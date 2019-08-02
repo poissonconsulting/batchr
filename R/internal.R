@@ -4,6 +4,12 @@ sys_time <- function() {
   time
 }
 
+file_time <- function(file) {
+  time <- file.mtime(file)
+  attr(time, "tzone") <- "UTC"
+  time
+}
+
 is_try_error <- function(x) {
   inherits(x, "try-error")
 }
@@ -21,10 +27,13 @@ lock_config <- function(path) {
   !is_try_error(lock)
 }
 
-process_file <- function(file, .fun, .dots) {
+process_file <- function(file, .fun, .dots, path, logger) {
   .dots <- c(file, .dots)
   output <- try(do.call(".fun", .dots), silent = TRUE)
-  if(!is_try_error(output)) return(TRUE)
-  # need to log name and output....
+  if(!is_try_error(output)) {
+    Sys.setFileTime(file.path(path, file), Sys.time())
+    return(TRUE)
+  }
+  error(logger, output)
   FALSE
 }

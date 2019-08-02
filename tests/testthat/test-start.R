@@ -13,7 +13,7 @@ test_that("batch_start", {
                                 pattern = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_start(path), "file1.csv")
-#  expect_identical(batch_start(path), "file1.csv")
+  expect_identical(batch_start(path), character(0))
 })
 
 test_that("batch_start locks", {

@@ -1,3 +1,3 @@
 #' @import chk filelock
-#' @importFrom err cn co_and
+#' @importFrom log4r create.logger error
 NULL

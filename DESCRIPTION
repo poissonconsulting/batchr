@@ -9,8 +9,8 @@ License: MIT + file LICENSE
 Depends: R (>= 3.5)
 Imports:
   chk,
-  err,
-  filelock
+  filelock,
+  log4r
 Suggests: 
     covr,
     testthat,
