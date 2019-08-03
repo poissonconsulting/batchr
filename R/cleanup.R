@@ -23,11 +23,11 @@ batch_cleanup <- function(path = ".", recursive = FALSE, force = FALSE,
   chk_flag(force)
   chk_lgl(failed)
   
-  configs <- batch_config_files(path, recursive = recursive)
-  if(!length(configs)) return(character(0))
-  configs <- lapply(configs, dirname)
-  clean <- lapply(configs, cleanup_config, force = force, 
+  paths <- batch_config_files(path, recursive = recursive)
+  if(!length(paths)) return(character(0))
+  paths <- dirname(file.path(path, paths))
+  clean <- lapply(paths, cleanup_config, force = force, 
                       remaining = remaining, failed = failed)
   clean <- unlist(clean)
-  configs[clean]
+  invisible(paths[clean])
 }
