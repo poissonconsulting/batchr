@@ -1,6 +1,6 @@
 Package: batchr
 Title: Batch Process Files
-Version: 0.0.0.9000
+Version: 0.0.0.900
 Authors@R: 
   c(person("Audrey", "Beliveau", email = "audrey.beliveau@uwaterloo.ca", role = "aut"),
     person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("cre", "aut"), comment = c(ORCID = "0000-0002-7683-4592")))
@@ -8,9 +8,9 @@ Description: Batch processes files with a user-supplied R function.
 License: MIT + file LICENSE
 Depends: R (>= 3.5)
 Imports:
-  chk,
-  filelock,
-  log4r
+    chk,
+    filelock,
+    log4r
 Suggests: 
     covr,
     testthat,

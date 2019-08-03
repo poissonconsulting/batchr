@@ -48,7 +48,7 @@ touch_file <- function(path, file) {
 }
 
 process_file <- function(file, fun, dots, path, logger) {
-  dots <- c(file, dots, logger)
+  dots <- c(file = file.path(path, file), dots, logger)
   output <- try(do.call("fun", dots), silent = TRUE)
   
   if(isTRUE(output)) {
