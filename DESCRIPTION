@@ -14,7 +14,9 @@ Imports:
 Suggests: 
     covr,
     testthat,
-    callr
+    callr,
+    knitr,
+    rmarkdown
 Remotes:
     poissonconsulting/chk
 URL: https://poissonconsulting.github.io/batchr/
@@ -23,3 +25,4 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Language: en-US
+VignetteBuilder: knitr
