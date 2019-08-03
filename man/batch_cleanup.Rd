@@ -27,7 +27,7 @@ or only untested files (FALSE).}
 directories that could not be cleaned.}
 }
 \value{
-An invisible character vector of the directories 
+A character vector of the directories 
 that were successfully cleaned up.
 }
 \description{

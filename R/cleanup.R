@@ -13,7 +13,7 @@
 #' or only untested files (FALSE).
 #' @param silent A flag specifying whether to suppress warnings about
 #' directories that could not be cleaned.
-#' @return An invisible character vector of the directories 
+#' @return A character vector of the directories 
 #' that were successfully cleaned up.
 #' @seealso \code{\link{batch_process}()}
 #' @export
@@ -23,11 +23,12 @@ batch_cleanup <- function(path = ".", recursive = FALSE, force = FALSE,
   chk_flag(force)
   chk_lgl(failed)
   
-  paths <- batch_config_files(path, recursive = recursive)
-  if(!length(paths)) return(character(0))
-  paths <- dirname(file.path(path, paths))
+  files <- batch_config_files(path, recursive = recursive)
+  if(!length(files)) return(character(0))
+  files <- dirname(files)
+  paths <- file.path(path, files)
   clean <- lapply(paths, cleanup_config, force = force, 
                       remaining = remaining, failed = failed)
   clean <- unlist(clean)
-  invisible(paths[clean])
+  invisible(files[clean])
 }
