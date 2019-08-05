@@ -20,8 +20,8 @@ parallel (not yet used).}
 the file processing function to allow the user to log their own messages.}
 }
 \value{
-An invisible character vector of the files successfully 
-processed by the current call.
+An invisible named logical vector indicating for each file
+whether it was successfully processed.
 }
 \description{
 Starts (or restarts if previously stopped) processing the files

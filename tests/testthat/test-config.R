@@ -23,7 +23,7 @@ test_that("batch_config with no files", {
   dir.create(path)
   
   expect_error(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' does not contain any files matching '.*'$")
+               "^Directory '.*batchr' does not contain any files matching '.*'[.]$")
 })
 
 test_that("batch_config with no matching files", {
@@ -36,7 +36,7 @@ test_that("batch_config with no matching files", {
   write.csv(data.frame(x = 3), file.path(path, "file.csv"))
   
   expect_error(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' does not contain any files matching '.*'$")
+               "^Directory '.*batchr' does not contain any files matching '.*'[.]$")
 })
 
 test_that("batch_config with no path", {
@@ -46,7 +46,7 @@ test_that("batch_config with no path", {
   unlink(path, recursive = TRUE)
   
   expect_error(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' not found")
+               "^Can't find directory '.*batchr'[.]$")
 })
 
 test_that("batch_config with non-function", {
@@ -59,7 +59,7 @@ test_that("batch_config with non-function", {
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
   
   expect_error(batch_config(1, path = path, pattern = "^file\\d[.]csv$"),
-               "FUN must be a function")
+               "^`FUN` must be a function[.]$")
 })
 
 test_that("batch_config recursive", {
@@ -74,7 +74,7 @@ test_that("batch_config recursive", {
   
   path <- file.path(tempdir(), "batchr")
   expect_error(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' does not contain any files matching '.*'$")
+               "^Directory '.*batchr' does not contain any files matching '.*'[.]$")
   expect_identical(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$",
                                recursive = TRUE),
                    "batchr_sub/file3.csv")
@@ -92,7 +92,7 @@ test_that("batch_config with existing .batchr.rds files", {
   expect_identical(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
                    "file3.csv")
   expect_error(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
-               "directory '.*batchr' already contains a '[.]batchr[.]rds' file")
+               "^Directory '.*batchr' already contains a '[.]batchr[.]rds' file[.]$")
 })
 
 test_that("batch_config with existing recursive .batchr.rds files", {
@@ -116,7 +116,7 @@ test_that("batch_config with existing recursive .batchr.rds files", {
   
   expect_error(batch_config(function(x) TRUE, path = path, recursive = TRUE,
                                pattern = "^file\\d[.]csv$"),
-               "^subdirectories of '.*batchr' contain '.batchr.rds' files$")
+               "^Subdirectories of '.*batchr' contain '.batchr.rds' files[.]$")
 
   expect_identical(batch_config(function(x) TRUE, path = path,
                                pattern = "^file\\d[.]csv$"),

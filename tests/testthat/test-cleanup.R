@@ -12,9 +12,12 @@ test_that("batch_cleanup", {
   expect_identical(batch_config(function(x) TRUE, path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_start(path), "file1.csv")
-  expect_identical(batch_cleanup(path), ".")
-  expect_identical(batch_cleanup(path), character(0))
+  expect_identical(batch_start(path), c(file1.csv = TRUE))
+  expect_identical(batch_remaining_files(path, FALSE), character(0))
+  expect_identical(batch_remaining_files(path, NA), character(0))
+  expect_identical(batch_remaining_files(path, TRUE), character(0))
+  expect_identical(batch_cleanup(path), c(. = TRUE))
+  expect_identical(batch_cleanup(path), structure(logical(0), .Names = character(0)))
 })
 
 test_that("batch_cleanup with all failed", {
@@ -29,8 +32,13 @@ test_that("batch_cleanup with all failed", {
   expect_identical(batch_config(function(x) FALSE, path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_start(path), character(0))
-  expect_identical(batch_cleanup(path), character(0))
-  expect_identical(batch_cleanup(path, force = TRUE), ".")
-  expect_identical(batch_cleanup(path, force = TRUE), character(0))
+  expect_identical(batch_start(path), c(file1.csv = FALSE))
+  expect_identical(batch_cleanup(path), c(. = FALSE))
+  expect_identical(batch_cleanup(path, force = TRUE), c(. = TRUE))
+  expect_identical(batch_cleanup(path, force = TRUE), 
+                   structure(logical(0), .Names = character(0)))
+  expect_identical(batch_cleanup(path, force = TRUE), 
+                   structure(logical(0), .Names = character(0)))
+  expect_identical(batch_cleanup(path), 
+                   structure(logical(0), .Names = character(0)))
 })

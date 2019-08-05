@@ -33,8 +33,10 @@ logged_data <- function(lines) {
 }
 
 failed_files <- function(path) {
-  log <- read_log(path)
-  sort(unique(logged_data(log)$file))
+  log <- logged_data(read_log(path))
+  log <- log[!duplicated(log$file, fromLast = TRUE),]
+  log <- log[log$level != "INFO",]
+  sort(log$file)
 }
 
 file_time <- function(path, file) {
@@ -48,25 +50,23 @@ touch_file <- function(path, file) {
 }
 
 process_file <- function(file, fun, dots, path, logger) {
-  dots <- c(file = file.path(path, file), dots, logger)
-  output <- try(do.call("fun", dots), silent = TRUE)
-  
-  if(isTRUE(output)) {
-    touch_file(path, file)
-    return(TRUE)
-  }
-  
+  dots <- c(file.path(path, file), dots)
+  if(!is.null(logger)) dots <- c(dots, logger = logger)
   logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
   
-  if(isFALSE(output)) {
-    info(logger, file)
-  } else if(is_try_error(output)) {
+  output <- try(do.call("fun", dots), silent = TRUE)
+  
+  if(is_try_error(output)) {
     error(logger, file)
-  } else {
-    fatal(logger, file)
-    err("processing file '", file, "' returned an object of class '", class(output), "'")
+    return(FALSE)
   }
-  FALSE
+  if(isFALSE(output)) {
+    warn(logger, file)
+    return(FALSE)
+  }
+  touch_file(path, file)
+  info(logger, file)
+  TRUE
 }
 
 cleanup_log_file <- function(path) {

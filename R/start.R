@@ -4,21 +4,21 @@
 #' specified in the configuration file.
 #'
 #' @inheritParams batch_config
-#' @param parallel A flag specifying whether to process the files in 
-#' parallel (not yet used).
 #' @param failed A logical scalar specifying whether to exclude (FALSE),
 #' include (NA), or only include (TRUE) files that have thus far failed to process.
+#' @param parallel A flag specifying whether to process the files in 
+#' parallel (not yet used).
 #' @param logger A \code{\link[log4r]{logger}} object that is passed to 
 #' the file processing function to allow the user to log their own messages.
-#' @return An invisible character vector of the files successfully 
-#' processed by the current call.
+#' @return An invisible named logical vector indicating for each file
+#' whether it was successfully processed.
 #' @seealso \code{\link{batch_process}()}
 #' @export
 batch_start <- function(path = ".", failed = FALSE, parallel = FALSE, logger = NULL) {
   chk_dir(path)
   chk_flag(failed)
   chk_flag(parallel)
-  if(!is.null(logger)) chk_is(logger, "logger")
+  if(!is.null(logger)) chk_inherits(logger, "logger")
   
   if(parallel) .NotYetUsed("parallel", error = FALSE) 
   
@@ -29,15 +29,18 @@ batch_start <- function(path = ".", failed = FALSE, parallel = FALSE, logger = N
   dots <- config$dots
   
   if(!lock_config(path))
-    err("file '", file.path(path, ".batchr.rds"), "' is already locked")
+    err("File '", file.path(path, ".batchr.rds"), "' is already locked.")
   
   if(recursive && length(batch_config_files(path = path, recursive)) > 1)
-    err("subdirectories of '", path, "' contain '.batchr.rds' files")
+    err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
   remaining <- batch_remaining_files(path, failed = failed)
-  if(!length(remaining)) return(character(0))
+  if(!length(remaining)) return(structure(logical(0), .Names = character(0)))
+  # to ensure modified file dates after config
+  if(config$time == sys_time()) Sys.sleep(1) 
   success <- lapply(remaining, process_file, fun = fun, dots = dots, 
                     path = path, logger = logger)
   success <- unlist(success)
-  remaining[success]
+  names(success) <- remaining
+  invisible(success)
 }

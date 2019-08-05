@@ -20,16 +20,16 @@ batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...
   chk_flag(recursive)
   
   if(length(batch_config_files(path, recursive = FALSE)))
-    err("directory '", path, "' already contains a '.batchr.rds' file")
+    err("Directory '", path, "' already contains a '.batchr.rds' file.")
 
   if(recursive && length(batch_config_files(path, recursive = TRUE)))
-    err("subdirectories of '", path, "' contain '.batchr.rds' files")
+    err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
 
   files <- list.files(path = path, pattern = pattern, recursive = recursive)
   
   if(!length(files)) { 
-    err("directory '", path, "' does not contain any files matching '", 
-        pattern, "'")
+    err("Directory '", path, "' does not contain any files matching '", 
+        pattern, "'.")
   }
   dots <- list(...)
   cleanup_log_file(path)

@@ -12,8 +12,9 @@ test_that("batch_start", {
   expect_identical(batch_config(function(x) TRUE, path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_start(path), "file1.csv")
-  expect_identical(batch_start(path), character(0))
+  expect_identical(batch_start(path), c(file1.csv = TRUE))
+  expect_identical(batch_start(path), 
+                   structure(logical(0), .Names = character(0)))
 })
 
 test_that("batch_start fails all", {
@@ -28,8 +29,8 @@ test_that("batch_start fails all", {
   expect_identical(batch_config(function(x) FALSE, path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_start(path), character(0))
-  expect_identical(batch_start(path), character(0))
+  expect_identical(batch_start(path), c(file1.csv = FALSE))
+  expect_identical(batch_start(path), structure(logical(0), .Names = character(0)))
 })
 
 test_that("batch_start returns non-flag", {
@@ -44,11 +45,11 @@ test_that("batch_start returns non-flag", {
   expect_identical(batch_config(function(x) 1, path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_error(batch_start(path), 
-               "processing file 'file1.csv' returned an object of class 'numeric'")
+  expect_identical(batch_start(path), c(file1.csv = TRUE))
+  expect_identical(batch_start(path), structure(logical(0), .Names = character(0)))
 })
 
-test_that("batch_start errors non-flag", {
+test_that("batch_start errors", {
   teardown(unlink(file.path(tempdir(), "batchr_start")))
   
   path <- file.path(tempdir(), "batchr_start")
@@ -60,8 +61,8 @@ test_that("batch_start errors non-flag", {
   expect_identical(batch_config(function(x) stop("a problem"), path = path, 
                                 pattern = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_start(path), character(0))
-  expect_identical(batch_start(path), character(0))
+  expect_identical(batch_start(path), c(file1.csv = FALSE))
+  expect_identical(batch_start(path), structure(logical(0), .Names = character(0)))
 })
 
 test_that("batch_start locks", {
@@ -118,7 +119,7 @@ test_that("batch_start non-logger", {
                    "file1.csv")
   
   expect_error(batch_start(path, logger = 1), 
-               "logger must inherit from class 'logger'")
+               "^`logger` must inherit from class 'logger'[.]$")
 })
 
 test_that("batch_start subdirectories with config", {
@@ -146,5 +147,5 @@ test_that("batch_start subdirectories with config", {
   path <- file.path(tempdir(), "batchr_start")
  
   expect_error(batch_start(path), 
-               "subdirectories of '.*batchr_start' contain '.batchr.rds' files")
+               "^Subdirectories of '.*batchr_start' contain '.batchr.rds' files[.]$")
 })

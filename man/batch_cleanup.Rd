@@ -27,8 +27,8 @@ or only untested files (FALSE).}
 directories that could not be cleaned.}
 }
 \value{
-A character vector of the directories 
-that were successfully cleaned up.
+A named logical vector indicating which directories 
+were successfully cleaned up.
 }
 \description{
 Removes configuration and log files and optionally unprocessed files.

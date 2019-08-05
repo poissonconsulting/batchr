@@ -41,7 +41,7 @@ batch_remaining_files <- function(path = ".", failed = FALSE) {
   chk_lgl(failed)
   config <- batch_read_config(path)
   files <- list.files(path, pattern = config$pattern, recursive = config$recursive)
-  files <- files[file_time(path, files) < config$time]
+  files <- files[file_time(path, files) <= config$time]
   if(!length(files) || is.na(failed)) return(files)
   failed_files <- failed_files(path)
   failed_files <- intersect(failed_files, files)
