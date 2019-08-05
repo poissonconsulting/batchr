@@ -30,13 +30,13 @@ A flag specifying whether all files were processed successfully.
 }
 \description{
 Performs batch processing of files in a directory using the 
-\code{\link{batch_config}()}, \code{\link{batch_start}()}
+\code{\link{batch_config}()}, \code{\link{batch_run}()}
 and \code{\link{batch_cleanup}()} functions.
 }
 \details{
 As well as the directory and a regular expression to identify files the
 user must provide the function that will be used to process each file.
-Processing is started (and can be manually restarted) using \code{\link{batch_start}()}
+Processing is started (and can be manually restarted) using \code{\link{batch_run}()}
 which locks the configuration file with \code{\link[filelock]{lock}} 
 to prevent concurrent calls. 
 The files that have not yet been processed can be got 
@@ -77,6 +77,6 @@ object which is passed to the FUN function.
 In this case the FUN function must accept an argument called logger.
 }
 \seealso{
-\code{\link{batch_config}()}, \code{\link{batch_start}()}
+\code{\link{batch_config}()}, \code{\link{batch_run}()}
 and \code{\link{batch_cleanup}()}
 }

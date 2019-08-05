@@ -115,7 +115,7 @@ test_that("batch_remaining_files gets failed ones", {
   expect_identical(batch_remaining_files(path), "file2.csv")
   expect_identical(batch_remaining_files(path, failed = NA), "file2.csv")
   expect_identical(batch_remaining_files(path, failed = TRUE), character(0))
-  expect_identical(batch_start(path), c(file2.csv = FALSE))
+  expect_identical(batch_run(path), c(file2.csv = FALSE))
   expect_identical(batch_remaining_files(path), character(0))
   expect_identical(batch_remaining_files(path, failed = NA), "file2.csv")
   expect_identical(batch_remaining_files(path, failed = TRUE),
@@ -143,7 +143,7 @@ test_that("batch_remaining_files gets mix", {
   expect_identical(batch_remaining_files(path, failed = NA), 
                    c("file1.csv", "file2.csv"))
   expect_identical(batch_remaining_files(path, failed = TRUE), character(0))
-  expect_identical(batch_start(path), c(file1.csv = TRUE, file2.csv = FALSE))
+  expect_identical(batch_run(path), c(file1.csv = TRUE, file2.csv = FALSE))
   expect_identical(batch_remaining_files(path), character(0))
   expect_identical(batch_remaining_files(path, failed = NA), 
                    "file2.csv")
@@ -164,6 +164,6 @@ test_that("batch_log_files", {
   expect_identical(batch_config(function(x) FALSE, path = path, pattern = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_log_files(path), character(0))
-  expect_identical(batch_start(path), c(file1.csv = FALSE))
+  expect_identical(batch_run(path), c(file1.csv = FALSE))
   expect_identical(batch_log_files(path), ".batchr.log")
 })

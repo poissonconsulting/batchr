@@ -1,4 +1,4 @@
-#' Start Batch Processing
+#' Runs Batch Processing
 #' 
 #' Starts (or restarts if previously stopped) processing the files
 #' specified in the configuration file.
@@ -14,7 +14,7 @@
 #' whether it was successfully processed.
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_start <- function(path = ".", failed = FALSE, parallel = FALSE, logger = NULL) {
+batch_run <- function(path = ".", failed = FALSE, parallel = FALSE, logger = NULL) {
   chk_dir(path)
   chk_flag(failed)
   chk_flag(parallel)

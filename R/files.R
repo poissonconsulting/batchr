@@ -33,7 +33,7 @@ batch_log_files <- function(path = ".", recursive = FALSE) {
 #' By default, files that were not successfully processed are excluded.
 #'
 #' @inheritParams batch_config
-#' @inheritParams batch_start
+#' @inheritParams batch_run
 #' @return A character vector of the names of the remaining files.
 #' @seealso \code{\link{batch_process}()}
 #' @export
