@@ -4,8 +4,7 @@
 \alias{batch_run}
 \title{Runs Batch Processing}
 \usage{
-batch_run(path = ".", failed = FALSE, parallel = FALSE,
-  logger = NULL)
+batch_run(path = ".", failed = FALSE, parallel = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
@@ -15,9 +14,6 @@ include (NA), or only include (TRUE) files that have thus far failed to process.
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
-
-\item{logger}{A \code{\link[log4r]{logger}} object that is passed to 
-the file processing function to allow the user to log their own messages.}
 }
 \value{
 An invisible named logical vector indicating for each file

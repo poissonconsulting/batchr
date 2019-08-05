@@ -5,7 +5,7 @@
 \title{Batch File Processing}
 \usage{
 batch_process(FUN, path = ".", pattern = ".*", recursive = FALSE,
-  parallel = FALSE, logger = NULL, ...)
+  parallel = FALSE, ...)
 }
 \arguments{
 \item{FUN}{A function to process each of the files.}
@@ -19,9 +19,6 @@ which match the regular expression will be batch processed.}
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
-
-\item{logger}{A \code{\link[log4r]{logger}} object that is passed to 
-the file processing function to allow the user to log their own messages.}
 
 \item{...}{Additional arguments passed to FUN.}
 }
@@ -72,9 +69,9 @@ system time in UTC and file name using a \code{\link[log4r]{logger}} object.
 This information parsed as a tibble 
 with level, time and file columns using \code{\link{batch_read_log}()}.
 
-The user can log custom messages by providing a \code{\link[log4r]{logger}} 
-object which is passed to the FUN function.
-In this case the FUN function must accept an argument called logger.
+If using \code{\link{batch_run}()}, the user can log custom messages 
+by providing a \code{\link[log4r]{logger}} 
+object which is passed to the FUN function as the \code{logger} argument.
 }
 \seealso{
 \code{\link{batch_config}()}, \code{\link{batch_run}()}

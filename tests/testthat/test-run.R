@@ -105,23 +105,6 @@ test_that("batch_run parallel", {
                "'parallel' is not used [(]yet[)]")
 })
 
-test_that("batch_run non-logger", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-  
-  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
-  
-  expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
-                   "file1.csv")
-  
-  expect_error(batch_run(path, logger = 1), 
-               "^`logger` must inherit from class 'logger'[.]$")
-})
-
 test_that("batch_run subdirectories with config", {
   teardown(unlink(file.path(tempdir(), "batchr_run", "batch_sub")))
   

@@ -49,13 +49,11 @@ touch_file <- function(path, file) {
   Sys.setFileTime(file.path(path, file), Sys.time())
 }
 
-process_file <- function(file, fun, dots, path, logger) {
+process_file <- function(file, fun, dots, path) {
   dots <- c(file.path(path, file), dots)
-  if(!is.null(logger)) dots <- c(dots, logger = logger)
   logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
-  
   output <- try(do.call("fun", dots), silent = TRUE)
-  
+
   if(is_try_error(output)) {
     error(logger, file)
     return(FALSE)

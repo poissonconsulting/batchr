@@ -42,9 +42,9 @@
 #' This information parsed as a tibble 
 #' with level, time and file columns using \code{\link{batch_read_log}()}.
 #' 
-#' The user can log custom messages by providing a \code{\link[log4r]{logger}} 
-#' object which is passed to the FUN function.
-#' In this case the FUN function must accept an argument called logger.
+#' If using \code{\link{batch_run}()}, the user can log custom messages 
+#' by providing a \code{\link[log4r]{logger}} 
+#' object which is passed to the FUN function as the \code{logger} argument.
 #'
 #' @inheritParams batch_config
 #' @inheritParams batch_run
@@ -54,9 +54,9 @@
 #' @return A flag specifying whether all files were processed successfully.
 #' @export
 batch_process <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, 
-                          parallel = FALSE, logger = NULL, ...) {
+                          parallel = FALSE, ...) {
   batch_config(FUN, path = path, pattern = pattern, recursive = recursive, ...)
-  batch_run(path = path, parallel = parallel, logger = logger)
+  batch_run(path = path, parallel = parallel)
  # if(length(batch_remaining_files(failed = NA))) return(FALSE)
 #    batch_cleanup(path)
   TRUE
