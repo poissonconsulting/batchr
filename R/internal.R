@@ -27,17 +27,19 @@ logged_data <- function(path) {
   lines <- read_lines_log(path)
   if(!length(lines)) return(no_log_data())
   
-  pattern <- p0("^((SUCCESS)|(FAILURE))( \\[)",
-                "(\\d{4,4}(-\\d{2,2}){2,2} \\d{2,2}(:\\d{2,2}){2,2})",
-                "(\\] ')([^']+)('.*)$")
-  
+  pattern <- p0("^([SUCESFAILUR]{7,7})( \\[)",
+                "(\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d)",
+                "(\\] ')([^']+)('\\s*)(.*)$")
+
   type <- gsub(pattern, "\\1", lines)
-  time <- gsub(pattern, "\\5", lines)
-  file <- gsub(pattern, "\\9", lines)
+  time <- gsub(pattern, "\\3", lines)
+  file <- gsub(pattern, "\\5", lines)
+  error <- gsub(pattern, "\\7", lines)
   
   time <- as.POSIXct(time, tz = "UTC")
-  
-  tibble(type = type, time = time, file = file)
+  is.na(error[error == ""]) <- TRUE
+
+  tibble(type = type, time = time, file = file, error = error)
 }
 
 failed_files <- function(path) {

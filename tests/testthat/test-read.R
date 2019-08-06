@@ -83,7 +83,7 @@ test_that("batch_read_log all processed successfully", {
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
   
   log <- batch_read_log(path)
-  expect_identical(colnames(log), c("type", "time", "file"))
+  expect_identical(colnames(log), c("type", "time", "file", "error"))
   expect_is(log$time, "POSIXct")
   expect_identical(attr(log$time, "tzone"), "UTC")
   
@@ -106,10 +106,10 @@ test_that("batch_read_log all failed processing", {
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
   
   log <- batch_read_log(path)
-  expect_identical(colnames(log), c("type", "time", "file"))
+  expect_identical(colnames(log), c("type", "time", "file", "error"))
   expect_is(log$time, "POSIXct")
   expect_identical(attr(log$time, "tzone"), "UTC")
-  expect_identical(log[c("type", "file")], structure(list(type = "FAILURE", file = "file1.csv"), class = c("tbl_df", 
+  expect_identical(log[c("type", "file", "error")], structure(list(type = "FAILURE", file = "file1.csv", error = NA_character_), class = c("tbl_df", 
 "tbl", "data.frame"), row.names = c(NA, -1L)))
 })
 
@@ -128,11 +128,12 @@ test_that("batch_read_log all error processing", {
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
   
   log <- batch_read_log(path)
-  expect_identical(colnames(log), c("type", "time", "file"))
+  expect_identical(colnames(log), c("type", "time", "file", "error"))
   expect_is(log$time, "POSIXct")
   expect_identical(attr(log$time, "tzone"), "UTC")
   expect_identical(log[c("type", "file")], structure(list(type = "FAILURE", file = "file1.csv"), class = c("tbl_df", 
 "tbl", "data.frame"), row.names = c(NA, -1L)))
+  expect_match(log$error, "Error in fun[(].*file1.csv\"[)] :    a problem $")
 })
 
 test_that("batch_read_log with no configuration", {
