@@ -32,7 +32,7 @@ batch_config <- function(fun, path = ".", pattern = ".*", recursive = FALSE, ...
         pattern, "'.")
   }
   dots <- list(...)
-  cleanup_log_file(path)
+  cleanup_log_files(path)
   save_config(path, pattern, recursive, fun = fun, dots = dots)
   invisible(files)
 }

@@ -17,6 +17,12 @@ read_log <- function(path) {
   readLines(file.path(path, ".batchr.log"))
 }
 
+read_log_error <- function(path) {
+  file <- file.path(path, ".batchr_error.log")
+  if(!file.exists(file)) return(character(0))
+  readLines(file.path(path, ".batchr_error.log"))
+}
+
 logged_data <- function(lines) {
   levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
   if(!length(lines)) {
@@ -55,7 +61,10 @@ process_file <- function(file, fun, dots, path) {
   output <- try(do.call("fun", dots), silent = TRUE)
   
   if(is_try_error(output)) {
+    logger_error <- create.logger(file.path(path, ".batchr_error.log"), 
+                                  level = "ERROR")
     error(logger, file)
+    error(logger_error, p(file, as.character(output)))
     return(FALSE)
   }
   if(isFALSE(output)) {
@@ -67,9 +76,11 @@ process_file <- function(file, fun, dots, path) {
   TRUE
 }
 
-cleanup_log_file <- function(path) {
+cleanup_log_files <- function(path) {
   file <- file.path(path, ".batchr.log")
   if(file.exists(file)) unlink(file)
+  file2 <- file.path(path, ".batchr_error.log")
+  if(file.exists(file2)) unlink(file2)
 }
 
 cleanup_config <- function(path, force, remaining, failed) {
@@ -79,6 +90,6 @@ cleanup_config <- function(path, force, remaining, failed) {
     if(remaining) unlink(remaining_files)
   }
   unlink(file.path(path, ".batchr.rds"))
-  cleanup_log_file(path)
+  cleanup_log_files(path)
   TRUE
 }

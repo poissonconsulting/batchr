@@ -40,7 +40,8 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
   if(ask && !yesno(question))
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
 
-  # to ensure modified file dates after config
+  # to ensure modified file dates after config 
+  # and same file from separate runs different sys time.
   if(config$time == sys_time()) Sys.sleep(1) 
   success <- lapply(remaining, process_file, fun = fun, dots = dots, 
                     path = path)

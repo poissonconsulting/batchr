@@ -78,7 +78,10 @@ Any errors are caught and batch processing resumes at the next file.
 
 All attempts to process a file are logged in the '.batchr.log' file 
 with the level (INFO (success), WARN (returned FALSE), or ERROR (threw an error)),
-system time in UTC and file name using a \code{\link[log4r]{logger}} object.
+system time and file name using a \code{\link[log4r]{logger}} object.
+All failed attempts which result in an error are also logged in the
+'.batchr_error.log' file with the level (ERROR), system time, file name
+and error message.
 This information can be read as a tibble
 using \code{\link{batch_read_log}()}.
 }
