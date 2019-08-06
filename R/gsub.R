@@ -20,7 +20,7 @@ gsub_file <- function(file, pattern_gsub, replacement_gsub) {
 #' Batch File Text Replacement
 #' 
 #' Uses \code{\link{batch_process}()} and \code{\link{gsub_file}()} to
-#' replace text in by default .txt files in the working directory.
+#' replace text in by default .R and .r files in the working directory.
 #' 
 #' @inheritParams batch_config
 #' @inheritParams batch_run
@@ -32,19 +32,9 @@ gsub_file <- function(file, pattern_gsub, replacement_gsub) {
 #' successfully processed.
 #' @export
 batch_gsub <- function(pattern_gsub, replacement_gsub, 
-                       path = ".", pattern = "[.]txt$", recursive = FALSE, 
+                       path = ".", pattern = "[.](R|r)$", recursive = FALSE, 
                        parallel = FALSE) {
   batch_process(gsub_file, path = path, pattern = pattern, recursive = recursive,
                 parallel = parallel, pattern_gsub = pattern_gsub, 
                 replacement_gsub = replacement_gsub)
-}
-
-#' @describeIn batch_gsub Batch R File Text Replacement
-#' 
-batch_gsub_r <- function(pattern_gsub, replacement_gsub, 
-                         path = ".", pattern = "[.](R|r)$", recursive = FALSE, 
-                         parallel = FALSE) {
-  batch_gsub(pattern_gsub = pattern_gsub, replacement_gsub = replacement_gsub, 
-             path = path, pattern = pattern, recursive = recursive,
-             parallel = parallel)
 }

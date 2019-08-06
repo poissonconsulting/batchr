@@ -2,13 +2,9 @@
 % Please edit documentation in R/gsub.R
 \name{batch_gsub}
 \alias{batch_gsub}
-\alias{batch_gsub_r}
 \title{Batch File Text Replacement}
 \usage{
 batch_gsub(pattern_gsub, replacement_gsub, path = ".",
-  pattern = "[.]txt$", recursive = FALSE, parallel = FALSE)
-
-batch_gsub_r(pattern_gsub, replacement_gsub, path = ".",
   pattern = "[.](R|r)$", recursive = FALSE, parallel = FALSE)
 }
 \arguments{
@@ -32,13 +28,8 @@ successfully processed.
 }
 \description{
 Uses \code{\link{batch_process}()} and \code{\link{gsub_file}()} to
-replace text in by default .txt files in the working directory.
+replace text in by default .R and .r files in the working directory.
 }
-\section{Functions}{
-\itemize{
-\item \code{batch_gsub_r}: Batch R File Text Replacement
-}}
-
 \seealso{
 \code{\link{batch_process}()}
 }
