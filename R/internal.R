@@ -55,7 +55,7 @@ touch_file <- function(path, file) {
   Sys.setFileTime(file.path(path, file), Sys.time())
 }
 
-process_file <- function(file, fun, dots, path) {
+process_file <- function(file, fun, dots, path, progress) {
   dots <- c(file.path(path, file), dots)
   logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
   output <- try(do.call("fun", dots), silent = TRUE)
@@ -67,14 +67,18 @@ process_file <- function(file, fun, dots, path) {
                                   level = "ERROR")
     error(logger, msg)
     error(logger_error, p(msg, as.character(output)))
+    
+    if(progress != "none") cat("ERROR ", file, "\n")
     return(FALSE)
   }
   if(isFALSE(output)) {
     warn(logger, msg)
+    if(!progress %in% c("none", "error")) cat("WARN  ", file, "\n")
     return(FALSE)
   }
   touch_file(path, file)
   info(logger, msg)
+  if(progress == "info") cat("INFO  ", file, "\n")
   TRUE
 }
 
