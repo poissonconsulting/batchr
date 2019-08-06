@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remaining Files — batch_remaining_files • batchr</title>
+<title>Runs Batch Processing — batch_run • batchr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Remaining Files — batch_remaining_files" />
+<meta property="og:title" content="Runs Batch Processing — batch_run" />
 
-<meta property="og:description" content="Gets the names of the files that are remaining to be processed." />
+<meta property="og:description" content="Starts (or restarts if previously stopped) processing the files
+specified in the configuration file." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,18 +114,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remaining Files</h1>
+    <h1>Runs Batch Processing</h1>
     
-    <div class="hidden name"><code>batch_remaining_files.Rd</code></div>
+    <div class="hidden name"><code>batch_run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Gets the names of the files that are remaining to be processed.</p>
+    <p>Starts (or restarts if previously stopped) processing the files
+specified in the configuration file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_remaining_files</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_run</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='st'>"none"</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,15 +141,26 @@
       <td><p>A logical scalar specifying whether to exclude (FALSE),
 include (NA), or only include (TRUE) files that have thus far failed to process.</p></td>
     </tr>
+    <tr>
+      <th>parallel</th>
+      <td><p>A flag specifying whether to process the files in 
+parallel (not yet used).</p></td>
+    </tr>
+    <tr>
+      <th>progress</th>
+      <td><p>A string specifying the level of output to the console. 
+The possible values are ""all", "failures" or "none".</p></td>
+    </tr>
+    <tr>
+      <th>ask</th>
+      <td><p>A flag specifying whether to ask before processing the files.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector of the names of the remaining files.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>By default, files that were not successfully processed are excluded.</p>
+    <p>An invisible named logical vector indicating for each file
+whether it was successfully processed.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -160,8 +174,6 @@ include (NA), or only include (TRUE) files that have thus far failed to process.
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

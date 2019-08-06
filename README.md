@@ -43,14 +43,14 @@ write.csv(data.frame(x = 3), file.path(path, "file2.csv"), row.names = FALSE)
 ``` r
 library(batchr)
 
-FUN <- function(file) {
+fun <- function(file) {
   data <- read.csv(file)
   data$x <- data$x * 2
   write.csv(data, file, row.names = FALSE)
   TRUE
 }
 
-batch_process(FUN, path)
+batch_process(fun, path, ask = FALSE)
 #> [1] TRUE
 ```
 

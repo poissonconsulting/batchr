@@ -1,8 +1,8 @@
 ---
-title: "batchr-demo"
+title: "Batchr Demonstration"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{batchr-demo}
+  %\VignetteIndexEntry{Batchr Demonstration}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remaining Files — batch_remaining_files • batchr</title>
+<title>Reconfigures Batch Processing — batch_reconfig • batchr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Remaining Files — batch_remaining_files" />
+<meta property="og:title" content="Reconfigures Batch Processing — batch_reconfig" />
 
-<meta property="og:description" content="Gets the names of the files that are remaining to be processed." />
+<meta property="og:description" content="Updates the batch processing function in the configuration file." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,40 +113,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remaining Files</h1>
+    <h1>Reconfigures Batch Processing</h1>
     
-    <div class="hidden name"><code>batch_remaining_files.Rd</code></div>
+    <div class="hidden name"><code>batch_reconfig.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Gets the names of the files that are remaining to be processed.</p>
+    <p>Updates the batch processing function in the configuration file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_remaining_files</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_reconfig</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>fun</th>
+      <td><p>A function to process each of the files.</p></td>
+    </tr>
+    <tr>
       <th>path</th>
       <td><p>A string of the path to the directory with the files.</p></td>
     </tr>
     <tr>
-      <th>failed</th>
-      <td><p>A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that have thus far failed to process.</p></td>
+      <th>...</th>
+      <td><p>Additional arguments passed to fun.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector of the names of the remaining files.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>By default, files that were not successfully processed are excluded.</p>
+    <p>An invisible character vector of the paths to the files 
+(failed and untested) remaining to be processed.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -160,8 +160,6 @@ include (NA), or only include (TRUE) files that have thus far failed to process.
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

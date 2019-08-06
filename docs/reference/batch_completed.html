@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Start Batch Processing — batch_start • batchr</title>
+<title>Batch Completed? — batch_completed • batchr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +32,9 @@
 
 
 
-<meta property="og:title" content="Start Batch Processing — batch_start" />
+<meta property="og:title" content="Batch Completed? — batch_completed" />
 
-<meta property="og:description" content="Starts (or restarts if previously stopped) processing the files
-specified in the configuration file." />
+<meta property="og:description" content="Tests if there are any remaining files to batch process." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -90,7 +89,7 @@ specified in the configuration file." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/batchr-demo.html">batchr-demo</a>
+      <a href="../articles/batchr-demo.html">Batchr Demonstration</a>
     </li>
   </ul>
 </li>
@@ -114,20 +113,18 @@ specified in the configuration file." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Start Batch Processing</h1>
+    <h1>Batch Completed?</h1>
     
-    <div class="hidden name"><code>batch_start.Rd</code></div>
+    <div class="hidden name"><code>batch_completed.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Starts (or restarts if previously stopped) processing the files
-specified in the configuration file.</p>
+    <p>Tests if there are any remaining files to batch process.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_start</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>logger</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_completed</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,22 +138,16 @@ specified in the configuration file.</p>
       <td><p>A logical scalar specifying whether to exclude (FALSE),
 include (NA), or only include (TRUE) files that have thus far failed to process.</p></td>
     </tr>
-    <tr>
-      <th>parallel</th>
-      <td><p>A flag specifying whether to process the files in 
-parallel (not yet used).</p></td>
-    </tr>
-    <tr>
-      <th>logger</th>
-      <td><p>A <code><a href='https://rdrr.io/pkg/log4r/man/logger.html'>logger</a></code> object that is passed to 
-the file processing function to allow the user to log their own messages.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An invisible character vector of the files successfully 
-processed by the current call.</p>
+    <p>A flag specifying whether batch processing is complete.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>By default, files that were not successfully processed are 
+excluded.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -170,6 +161,8 @@ processed by the current call.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
