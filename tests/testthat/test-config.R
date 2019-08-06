@@ -28,9 +28,9 @@ test_that("batch_reconfig", {
   
   expect_identical(batch_config(function(x) FALSE, path = path, pattern = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv"))
-  expect_equal(batch_read_config(path)$FUN, function(x) FALSE)
+  expect_equal(batch_read_config(path)$fun, function(x) FALSE)
   batch_reconfig(function(x) TRUE, path)
-  expect_equal(batch_read_config(path)$FUN, function(x) TRUE)
+  expect_equal(batch_read_config(path)$fun, function(x) TRUE)
 })
 
 test_that("batch_config with no files", {
@@ -77,7 +77,7 @@ test_that("batch_config with non-function", {
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
   
   expect_error(batch_config(1, path = path, pattern = "^file\\d[.]csv$"),
-               "^`FUN` must be a function[.]$")
+               "^`fun` must be a function[.]$")
 })
 
 test_that("batch_config recursive", {

@@ -19,7 +19,7 @@ test_that("batch_read_config", {
   
   expect_equal(config, 
                    list(pattern = "^file\\d[.]csv$", recursive = FALSE, 
-                        FUN = function (x) 
+                        fun = function (x) 
 TRUE, dots = list()))
 })
 

@@ -4,11 +4,11 @@
 \alias{batch_process}
 \title{Batch File Processing}
 \usage{
-batch_process(FUN, path = ".", pattern = ".*", recursive = FALSE,
+batch_process(fun, path = ".", pattern = ".*", recursive = FALSE,
   parallel = FALSE, force = TRUE, ...)
 }
 \arguments{
-\item{FUN}{A function to process each of the files.}
+\item{fun}{A function to process each of the files.}
 
 \item{path}{A string of the path to the directory with the files.}
 
@@ -23,7 +23,7 @@ parallel (not yet used).}
 \item{force}{A flag specifying whether to remove configuration and 
 log files even if there are files remaining to be processed.}
 
-\item{...}{Additional arguments passed to FUN.}
+\item{...}{Additional arguments passed to fun.}
 }
 \value{
 An invisible flag indicating whether all the files where 
@@ -58,12 +58,12 @@ The pattern must match at least one non-hidden file in the directory
 (or if \code{recursive = TRUE} in the directory or subdirectories).
 Hidden files are excluded to prevent accidental modification of system files.
 
-The FUN function's first argument should be 
+The fun function's first argument should be 
 a string of the path to a single file.
 The function should return anything other than a FALSE if 
 processing was successful.
 
-Processing is only considered to have failed if the FUN returns FALSE or
+Processing is only considered to have failed if the fun returns FALSE or
 throws an error. 
 Any errors are caught and batch processing resumes at the next file.
 

@@ -4,14 +4,14 @@
 \alias{batch_reconfig}
 \title{Reconfigures Batch Processing}
 \usage{
-batch_reconfig(FUN, path = ".", ...)
+batch_reconfig(fun, path = ".", ...)
 }
 \arguments{
-\item{FUN}{A function to process each of the files.}
+\item{fun}{A function to process each of the files.}
 
 \item{path}{A string of the path to the directory with the files.}
 
-\item{...}{Additional arguments passed to FUN.}
+\item{...}{Additional arguments passed to fun.}
 }
 \value{
 An invisible character vector of the paths to the files 

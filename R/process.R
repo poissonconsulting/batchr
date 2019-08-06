@@ -27,12 +27,12 @@
 #' (or if \code{recursive = TRUE} in the directory or subdirectories).
 #' Hidden files are excluded to prevent accidental modification of system files.
 #' 
-#' The FUN function's first argument should be 
+#' The fun function's first argument should be 
 #' a string of the path to a single file.
 #' The function should return anything other than a FALSE if 
 #' processing was successful.
 #' 
-#' Processing is only considered to have failed if the FUN returns FALSE or
+#' Processing is only considered to have failed if the fun returns FALSE or
 #' throws an error. 
 #' Any errors are caught and batch processing resumes at the next file.
 #' 
@@ -51,9 +51,9 @@
 #' @return An invisible flag indicating whether all the files where 
 #' successfully processed.
 #' @export
-batch_process <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, 
+batch_process <- function(fun, path = ".", pattern = ".*", recursive = FALSE, 
                           parallel = FALSE, force = TRUE, ...) {
-  batch_config(FUN, path = path, pattern = pattern, recursive = recursive, ...)
+  batch_config(fun, path = path, pattern = pattern, recursive = recursive, ...)
   success <- batch_run(path = path, parallel = parallel)
   batch_cleanup(path, force = force)
   all(success)

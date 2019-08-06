@@ -1,6 +1,6 @@
-save_config <- function(path, pattern, recursive, FUN, dots) {
+save_config <- function(path, pattern, recursive, fun, dots) {
   args <- list(time = sys_time(), pattern = pattern, 
-               recursive = recursive, FUN = FUN, 
+               recursive = recursive, fun = fun, 
                dots = dots)
   saveRDS(args, file = file.path(path, ".batchr.rds"))
 }

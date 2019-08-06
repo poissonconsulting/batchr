@@ -2,19 +2,19 @@
 #' 
 #' Configures a directory for batch file processing.
 #' 
-#' @param FUN A function to process each of the files. 
+#' @param fun A function to process each of the files. 
 #' @param path A string of the path to the directory with the files.
 #' @param pattern A string of a regular expression. Only non-hidden file names 
 #' which match the regular expression will be batch processed.
 #' @param recursive A flag specifying whether to recurse into sub directories.
-#' @param ... Additional arguments passed to FUN.
+#' @param ... Additional arguments passed to fun.
 #'
 #' @return An invisible character vector of the paths to the files to
 #' be processed.
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...) {
-  chk_function(FUN)
+batch_config <- function(fun, path = ".", pattern = ".*", recursive = FALSE, ...) {
+  chk_function(fun)
   chk_dir(path)
   chk_string(pattern)
   chk_flag(recursive)
@@ -33,7 +33,7 @@ batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...
   }
   dots <- list(...)
   cleanup_log_file(path)
-  save_config(path, pattern, recursive, FUN = FUN, dots = dots)
+  save_config(path, pattern, recursive, fun = fun, dots = dots)
   invisible(files)
 }
 
@@ -47,8 +47,8 @@ batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...
 #' (failed and untested) remaining to be processed.
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_reconfig <- function(FUN, path = ".", ...) {
-  chk_function(FUN)
+batch_reconfig <- function(fun, path = ".", ...) {
+  chk_function(fun)
   chk_dir(path)
 
   config <- batch_read_config(path)
@@ -59,6 +59,6 @@ batch_reconfig <- function(FUN, path = ".", ...) {
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
   dots <- list(...)
-  save_config(path, pattern, recursive, FUN = FUN, dots = dots)
+  save_config(path, pattern, recursive, fun = fun, dots = dots)
   invisible(batch_remaining_files(path, failed = NA))
 }

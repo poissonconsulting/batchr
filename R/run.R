@@ -22,7 +22,7 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE) {
   config <- batch_read_config(path)
   
   recursive <- config$recursive
-  fun <- config$FUN
+  fun <- config$fun
   dots <- config$dots
   
   if(!lock_config(path))
