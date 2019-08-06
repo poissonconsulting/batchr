@@ -18,13 +18,13 @@ read_log <- function(path) {
 }
 
 logged_data <- function(lines) {
+  levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
   if(!length(lines)) {
-    levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
     level <- ordered(character(0), levels = levels)
     return(tibble(level = level, time = sys_time()[-1], file = character(0)))
   }
-  levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
   level <- str_extract(lines, "^\\w+")
+  levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
   level <- ordered(level, levels = levels)
   time <- str_extract(lines, "\\[\\d{4,4}(-\\d{2,2}){2,2} \\d{2,2}(:\\d{2,2}){2,2}\\]")
   time <- as.POSIXct(substr(time, 2, 20), tz = "UTC")
@@ -53,7 +53,7 @@ process_file <- function(file, fun, dots, path) {
   dots <- c(file.path(path, file), dots)
   logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
   output <- try(do.call("fun", dots), silent = TRUE)
-
+  
   if(is_try_error(output)) {
     error(logger, file)
     return(FALSE)
