@@ -16,6 +16,7 @@
 batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...) {
   chk_function(FUN)
   chk_dir(path)
+  chk_string(pattern)
   chk_flag(recursive)
   
   if(length(batch_config_files(path, recursive = FALSE)))
@@ -34,4 +35,30 @@ batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...
   cleanup_log_file(path)
   save_config(path, pattern, recursive, FUN = FUN, dots = dots)
   invisible(files)
+}
+
+#' Reconfigures Batch Processing
+#' 
+#' Updates the batch processing function in the configuration file.
+#' 
+#' @inheritParams batch_config
+#'
+#' @return An invisible character vector of the paths to the files 
+#' (failed and untested) remaining to be processed.
+#' @seealso \code{\link{batch_process}()}
+#' @export
+batch_reconfig <- function(FUN, path = ".", ...) {
+  chk_function(FUN)
+  chk_dir(path)
+
+  config <- batch_read_config(path)
+  recursive <- config$recursive
+  pattern <- config$pattern
+
+  if(recursive && length(batch_config_files(path, recursive = TRUE)) > 1L)
+    err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
+  
+  dots <- list(...)
+  save_config(path, pattern, recursive, FUN = FUN, dots = dots)
+  invisible(batch_remaining_files(path, failed = NA))
 }

@@ -15,6 +15,24 @@ test_that("batch_config returns matching files", {
                    c("file1.csv", "file2.csv"))
 })
 
+test_that("batch_reconfig", {
+  teardown(unlink(file.path(tempdir(), "batchr")))
+  
+  path <- file.path(tempdir(), "batchr")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file.csv"))
+  write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  
+  expect_identical(batch_config(function(x) FALSE, path = path, pattern = "^file\\d[.]csv$"),
+                   c("file1.csv", "file2.csv"))
+  expect_equal(batch_read_config(path)$FUN, function(x) FALSE)
+  batch_reconfig(function(x) TRUE, path)
+  expect_equal(batch_read_config(path)$FUN, function(x) TRUE)
+})
+
 test_that("batch_config with no files", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
