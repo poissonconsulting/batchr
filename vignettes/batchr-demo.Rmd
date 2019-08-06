@@ -57,5 +57,5 @@ If a file is successfully processed its modification time is set to the current 
 
 The next task is to start (or restart) processing the files using `batch_start()`.
 ```{r}
-batch_run(path)
+batch_run(path, ask = FALSE)
 ```

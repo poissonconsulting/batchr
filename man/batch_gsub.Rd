@@ -5,7 +5,8 @@
 \title{Batch File Text Replacement}
 \usage{
 batch_gsub(pattern_gsub, replacement_gsub, path = ".",
-  pattern = "[.](R|r)$", recursive = FALSE, parallel = FALSE)
+  pattern = "[.](R|r)$", recursive = FALSE, parallel = FALSE,
+  ask = getOption("batchr.ask", TRUE))
 }
 \arguments{
 \item{pattern_gsub}{A string of the regular expression to match.}
@@ -21,6 +22,8 @@ which match the regular expression will be batch processed.}
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
+
+\item{ask}{A flag specifying whether to ask before processing files.}
 }
 \value{
 An invisible flag indicating whether all the files were 

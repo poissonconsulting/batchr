@@ -10,7 +10,7 @@ test_that("batch_process",{
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_true(batch_process(function(x) TRUE, path = path, 
-                            pattern = "^file\\d[.]csv$"))
+                            pattern = "^file\\d[.]csv$", ask = FALSE))
 })
 
 test_that("batch_process changes files", {
@@ -30,7 +30,7 @@ test_that("batch_process changes files", {
     TRUE
   }
 
-  expect_true(batch_process(fun, path))
+  expect_true(batch_process(fun, path, ask = FALSE))
   # should be x = 2L
   expect_identical(read.csv(file.path(path, "file1.csv")), 
                    structure(list(X.1 = 1L, X = 1L, x = 2L), class = "data.frame", row.names = c(NA, -1L)))
@@ -53,7 +53,7 @@ test_that("batch_process with failure", {
 
   expect_error(batch_read_config(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
-  expect_false(batch_process(fun, path))
+  expect_false(batch_process(fun, path, ask = FALSE))
   expect_error(batch_read_config(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
 })

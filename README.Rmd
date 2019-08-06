@@ -54,7 +54,7 @@ FUN <- function(file) {
   TRUE
 }
 
-batch_process(FUN, path)
+batch_process(FUN, path, ask = FALSE)
 ```
 
 ```{r}

@@ -52,9 +52,10 @@
 #' successfully processed.
 #' @export
 batch_process <- function(fun, path = ".", pattern = ".*", recursive = FALSE, 
-                          parallel = FALSE, force = TRUE, ...) {
+                          ..., parallel = FALSE, force = TRUE, 
+                          ask = getOption("batchr.ask", TRUE)) {
   batch_config(fun, path = path, pattern = pattern, recursive = recursive, ...)
-  success <- batch_run(path = path, parallel = parallel)
+  success <- batch_run(path = path, parallel = parallel, ask = ask)
   batch_cleanup(path, force = force)
   all(success)
 }

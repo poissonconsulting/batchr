@@ -5,7 +5,8 @@
 \title{Batch File Processing}
 \usage{
 batch_process(fun, path = ".", pattern = ".*", recursive = FALSE,
-  parallel = FALSE, force = TRUE, ...)
+  ..., parallel = FALSE, force = TRUE, ask = getOption("batchr.ask",
+  TRUE))
 }
 \arguments{
 \item{fun}{A function to process each of the files.}
@@ -17,13 +18,15 @@ which match the regular expression will be batch processed.}
 
 \item{recursive}{A flag specifying whether to recurse into sub directories.}
 
+\item{...}{Additional arguments passed to fun.}
+
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
 \item{force}{A flag specifying whether to remove configuration and 
 log files even if there are files remaining to be processed.}
 
-\item{...}{Additional arguments passed to fun.}
+\item{ask}{A flag specifying whether to ask before processing files.}
 }
 \value{
 An invisible flag indicating whether all the files where 

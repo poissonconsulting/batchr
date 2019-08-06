@@ -4,7 +4,8 @@
 \alias{batch_run}
 \title{Runs Batch Processing}
 \usage{
-batch_run(path = ".", failed = FALSE, parallel = FALSE)
+batch_run(path = ".", failed = FALSE, parallel = FALSE,
+  ask = getOption("batchr.ask", TRUE))
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
@@ -14,6 +15,8 @@ include (NA), or only include (TRUE) files that have thus far failed to process.
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
+
+\item{ask}{A flag specifying whether to ask before processing files.}
 }
 \value{
 An invisible named logical vector indicating for each file

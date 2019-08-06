@@ -15,3 +15,8 @@ tibble <- function(...) {
   class(data) <- c("tbl_df", "tbl", "data.frame")
   data
 }
+
+set_names <- function(x, names) {
+  names(x) <- names
+  x
+}
