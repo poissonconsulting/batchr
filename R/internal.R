@@ -19,8 +19,8 @@ read_lines_log <- function(path) {
 
 no_log_data <- function() {
   time <- sys_time_utc()[-1]
-  tibble(type = character(0), time = time, file = character(0))
-  #  tibble(type = type, time = time, file = file, error_msg = character(0))
+  tibble(type = character(0), time = time, file = character(0), 
+         error = character(0))
 }
 
 logged_data <- function(path) {
@@ -81,20 +81,20 @@ process_file <- function(file, fun, dots, path, progress) {
   if(is_try_error(output)) {
     output <- gsub("\n+", " ", as.character(output))
     msg <- p("FAILURE", msg, output)
-    if(progress != "none") console_msg(msg)
     log_msg(path, msg)
+    if(progress != "none") console_msg(msg)
     return(FALSE)
   }
   if(isFALSE(output)) {
     msg <- p("FAILURE", msg)
-    if(progress != "none") console_msg(msg)
     log_msg(path, msg)
+    if(progress != "none") console_msg(msg)
     return(FALSE)
   }
   touch_file(path, file)
   msg <- p("SUCCESS", msg)
-  if(progress == "all") console_msg(msg)
   log_msg(path, msg)
+  if(progress == "all") console_msg(msg)
   TRUE
 }
 

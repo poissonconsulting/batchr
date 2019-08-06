@@ -59,7 +59,7 @@ test_that("batch_read_log not yet processed", {
   
   expect_identical(batch_read_log(path),
                    structure(list(type = character(0), time = structure(numeric(0), class = c("POSIXct", 
-"POSIXt"), tzone = "UTC"), file = character(0)), class = c("tbl_df", 
+"POSIXt"), tzone = "UTC"), file = character(0), error = character(0)), class = c("tbl_df", 
 "tbl", "data.frame"), row.names = integer(0)))
 })
 
@@ -77,7 +77,7 @@ test_that("batch_read_log all processed successfully", {
   
   expect_identical(batch_read_log(path),
                    structure(list(type = character(0), time = structure(numeric(0), class = c("POSIXct", 
-"POSIXt"), tzone = "UTC"), file = character(0)), class = c("tbl_df", 
+"POSIXt"), tzone = "UTC"), file = character(0), error = character(0)), class = c("tbl_df", 
 "tbl", "data.frame"), row.names = integer(0)))
 
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
