@@ -1,9 +1,9 @@
 #' Batch Completed?
 #' 
-#' Tests if there are any remaining files to batch process.
+#' Tests if there are any remaining files to process as listed
+#' by \code{\link{batch_remaining_files}()}.
 #' 
-#' By default, files that were not successfully processed are 
-#' excluded.
+#' By default, files that previously failed to process are excluded.
 #'
 #' @inheritParams batch_config
 #' @inheritParams batch_run

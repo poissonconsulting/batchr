@@ -1,14 +1,14 @@
 #' Configuration Files
 #'
-#' @inheritParams batch_config
+#' @inheritParams batch_cleanup
 #' @return A character vector of the names of the configuration file(s).
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_config_files <- function(path = ".", recurse = FALSE) {
+batch_config_files <- function(path = ".", recursive = FALSE) {
   chk_dir(path)
-  chk_flag(recurse)
+  chk_flag(recursive)
 
-  list.files(path, pattern = "^[.]batchr[.]rds$", recursive = recurse,
+  list.files(path, pattern = "^[.]batchr[.]rds$", recursive = recursive,
              all.files = TRUE)
 }
 
@@ -28,9 +28,13 @@ batch_log_files <- function(path = ".", recurse = FALSE) {
 
 #' Remaining Files
 #' 
-#' Gets the names of the files that are remaining to be processed.
+#' Gets the names of the files that are remaining to be processed by
+#' \code{\link{batch_run}()}.
 #' 
-#' By default, files that were not successfully processed are excluded.
+#' By default, files that previously failed to process are excluded.
+#' 
+#' \code{\link{batch_completed}()} can be used to easily test if there are any
+#' files remaining.
 #'
 #' @inheritParams batch_config
 #' @inheritParams batch_run

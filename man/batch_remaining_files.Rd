@@ -9,17 +9,21 @@ batch_remaining_files(path = ".", failed = FALSE)
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{failed}{A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that have thus far failed to process.}
+\item{failed}{A logical scalar specifying whether to exclude (the default; FALSE),
+include (NA), or only include (TRUE) files that previously failed to process.}
 }
 \value{
 A character vector of the names of the remaining files.
 }
 \description{
-Gets the names of the files that are remaining to be processed.
+Gets the names of the files that are remaining to be processed by
+\code{\link{batch_run}()}.
 }
 \details{
-By default, files that were not successfully processed are excluded.
+By default, files that previously failed to process are excluded.
+
+\code{\link{batch_completed}()} can be used to easily test if there are any
+files remaining.
 }
 \seealso{
 \code{\link{batch_process}()}

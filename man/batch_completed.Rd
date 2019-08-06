@@ -9,18 +9,18 @@ batch_completed(path = ".", failed = FALSE)
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{failed}{A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that have thus far failed to process.}
+\item{failed}{A logical scalar specifying whether to exclude (the default; FALSE),
+include (NA), or only include (TRUE) files that previously failed to process.}
 }
 \value{
 A flag specifying whether batch processing is complete.
 }
 \description{
-Tests if there are any remaining files to batch process.
+Tests if there are any remaining files to process as listed
+by \code{\link{batch_remaining_files}()}.
 }
 \details{
-By default, files that were not successfully processed are 
-excluded.
+By default, files that previously failed to process are excluded.
 }
 \seealso{
 \code{\link{batch_process}()}

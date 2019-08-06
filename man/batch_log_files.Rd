@@ -9,7 +9,7 @@ batch_log_files(path = ".", recurse = FALSE)
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{recurse}{A flag specifying whether to recurse into sub directories.}
+\item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 }
 \value{
 A character vector of the names of the log file(s).

@@ -7,11 +7,14 @@
 batch_reconfig(fun, path = ".", ...)
 }
 \arguments{
-\item{fun}{A function to process each of the files.}
+\item{fun}{A function to process each of the files. 
+\code{fun}'s first argument should be a string of the path to a single file.
+If processing is unsuccessful \code{fun} should return FALSE 
+or throw an error (error messages are automatically logged).}
 
 \item{path}{A string of the path to the directory with the files.}
 
-\item{...}{Additional arguments passed to fun.}
+\item{...}{Additional arguments passed to \code{fun}.}
 }
 \value{
 An invisible character vector of the paths to the files 

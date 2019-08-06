@@ -4,12 +4,13 @@
 \alias{batch_config_files}
 \title{Configuration Files}
 \usage{
-batch_config_files(path = ".", recurse = FALSE)
+batch_config_files(path = ".", recursive = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{recurse}{A flag specifying whether to recurse into sub directories.}
+\item{recursive}{A flag specifying whether to recurse into subdirectories
+when cleaning up.}
 }
 \value{
 A character vector of the names of the configuration file(s).

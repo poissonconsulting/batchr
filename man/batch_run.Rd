@@ -10,16 +10,17 @@ batch_run(path = ".", failed = FALSE, parallel = FALSE,
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{failed}{A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that have thus far failed to process.}
+\item{failed}{A logical scalar specifying whether to exclude (the default; FALSE),
+include (NA), or only include (TRUE) files that previously failed to process.}
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
-\item{progress}{A string specifying the level of output to the console. 
-The possible values are ""all", "failures" or "none".}
+\item{progress}{A string specifying the type of output to log to the console
+when \code{parallel = FALSE}. 
+The possible values are "all", "failures" or "none".}
 
-\item{ask}{A flag specifying whether to ask before processing the files.}
+\item{ask}{A flag specifying whether to ask before starting to process the files.}
 }
 \value{
 An invisible named logical vector indicating for each file
@@ -27,7 +28,14 @@ whether it was successfully processed.
 }
 \description{
 Starts (or restarts if previously stopped) processing the files
-specified in the configuration file.
+prespecified by \code{\link{batch_config}()}.
+}
+\details{
+When there are no more files remaining to process the hidden configuration
+and log files can be removed using \code{\link{batch_cleanup}()}.
+
+The files that are remaining to be processed can be got 
+using \code{\link{batch_remaining_files}()}.
 }
 \seealso{
 \code{\link{batch_process}()}

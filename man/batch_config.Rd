@@ -7,20 +7,23 @@
 batch_config(fun, path = ".", regexp = ".*", recurse = FALSE, ...)
 }
 \arguments{
-\item{fun}{A function to process each of the files.}
+\item{fun}{A function to process each of the files. 
+\code{fun}'s first argument should be a string of the path to a single file.
+If processing is unsuccessful \code{fun} should return FALSE 
+or throw an error (error messages are automatically logged).}
 
 \item{path}{A string of the path to the directory with the files.}
 
 \item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}
 
-\item{recurse}{A flag specifying whether to recurse into sub directories.}
+\item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 
-\item{...}{Additional arguments passed to fun.}
+\item{...}{Additional arguments passed to \code{fun}.}
 }
 \value{
 An invisible character vector of the paths to the files to
-be processed.
+that will be processed when \code{\link{batch_run}()} is called.
 }
 \description{
 Configures a directory for batch file processing.

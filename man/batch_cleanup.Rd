@@ -4,13 +4,11 @@
 \alias{batch_cleanup}
 \title{Cleanup Batch Processing}
 \usage{
-batch_cleanup(path = ".", recurse = FALSE, force = FALSE,
-  remaining = FALSE, failed = NA, silent = FALSE)
+batch_cleanup(path = ".", force = FALSE, remaining = FALSE,
+  failed = NA, silent = FALSE, recursive = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
-
-\item{recurse}{A flag specifying whether to recurse into sub directories.}
 
 \item{force}{A flag specifying whether to remove configuration and 
 log files even if there are files remaining to be processed.}
@@ -25,13 +23,17 @@ or only untested files (FALSE).}
 
 \item{silent}{A flag specifying whether to suppress warnings about
 directories that could not be cleaned.}
+
+\item{recursive}{A flag specifying whether to recurse into subdirectories
+when cleaning up.}
 }
 \value{
 A named logical vector indicating which directories 
 were successfully cleaned up.
 }
 \description{
-Removes configuration and log files and optionally unprocessed files.
+Removes configuration file created by \code{\link{batch_config}()} 
+and log file created by \code{\link{batch_run}()}.
 }
 \seealso{
 \code{\link{batch_process}()}

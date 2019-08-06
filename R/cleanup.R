@@ -1,6 +1,7 @@
 #' Cleanup Batch Processing
 #' 
-#' Removes configuration and log files and optionally unprocessed files.
+#' Removes configuration file created by \code{\link{batch_config}()} 
+#' and log file created by \code{\link{batch_run}()}.
 #'
 #' @inheritParams batch_config
 #' @param force A flag specifying whether to remove configuration and 
@@ -13,17 +14,20 @@
 #' or only untested files (FALSE).
 #' @param silent A flag specifying whether to suppress warnings about
 #' directories that could not be cleaned.
+#' @param recursive A flag specifying whether to recurse into subdirectories
+#' when cleaning up.
 #' @return A named logical vector indicating which directories 
 #' were successfully cleaned up.
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_cleanup <- function(path = ".", recurse = FALSE, force = FALSE, 
-                          remaining = FALSE, failed = NA, silent = FALSE) {
-  chk_flag(recurse)
+batch_cleanup <- function(path = ".", force = FALSE, 
+                          remaining = FALSE, failed = NA, silent = FALSE,
+                          recursive = FALSE) {
+  chk_flag(recursive)
   chk_flag(force)
   chk_lgl(failed)
   
-  files <- batch_config_files(path, recurse = recurse)
+  files <- batch_config_files(path, recursive = recursive)
   if(!length(files)) return(structure(logical(0), .Names = character(0)))
   files <- dirname(files)
   paths <- file.path(path, files)
