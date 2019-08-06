@@ -17,9 +17,9 @@ include (NA), or only include (TRUE) files that have thus far failed to process.
 parallel (not yet used).}
 
 \item{progress}{A string specifying the level of output to the console. 
-The possible values are "info", "warn", "error" or "none".}
+The possible values are ""all", "failures" or "none".}
 
-\item{ask}{A flag specifying whether to ask before processing files.}
+\item{ask}{A flag specifying whether to ask before processing the files.}
 }
 \value{
 An invisible named logical vector indicating for each file

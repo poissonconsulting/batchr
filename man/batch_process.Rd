@@ -26,7 +26,7 @@ parallel (not yet used).}
 \item{force}{A flag specifying whether to remove configuration and 
 log files even if there are files remaining to be processed.}
 
-\item{ask}{A flag specifying whether to ask before processing files.}
+\item{ask}{A flag specifying whether to ask before processing the files.}
 }
 \value{
 An invisible flag indicating whether all the files where 
@@ -77,11 +77,8 @@ throws an error.
 Any errors are caught and batch processing resumes at the next file.
 
 All attempts to process a file are logged in the '.batchr.log' file 
-with the level (INFO (success), WARN (returned FALSE), or ERROR (threw an error)),
-system time and file name using a \code{\link[log4r]{logger}} object.
-All failed attempts which result in an error are also logged in the
-'.batchr_error.log' file with the level (ERROR), system time, file name
-and error message.
+with the type (TRUE (success), FALSE (returned FALSE) or ERROR (threw an error)),
+system time in UTC, file name and error message.
 This information can be read as a tibble
 using \code{\link{batch_read_log}()}.
 }

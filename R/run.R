@@ -9,8 +9,8 @@
 #' @param parallel A flag specifying whether to process the files in 
 #' parallel (not yet used).
 #' @param progress A string specifying the level of output to the console. 
-#' The possible values are "info", "warn", "error" or "none".
-#' @param ask A flag specifying whether to ask before processing files.
+#' The possible values are ""all", "failures" or "none".
+#' @param ask A flag specifying whether to ask before processing the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
 #' @seealso \code{\link{batch_process}()}
@@ -22,7 +22,7 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
   chk_flag(failed)
   chk_flag(parallel)
   chk_string(progress)
-  chk_in(progress, c("info", "warn", "error", "none"))
+  chk_in(progress, c("all", "failures", "none"))
   chk_flag(ask)
 
   if(parallel) .NotYetUsed("parallel", error = FALSE) 
@@ -45,9 +45,6 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
   if(ask && !yesno(question))
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
 
-  # to ensure modified file dates after config 
-  # and same file from separate runs different sys time.
-  if(config$time == sys_time_utc()) Sys.sleep(1) 
   success <- lapply(remaining, process_file, fun = fun, dots = dots, 
                     path = path, progress = progress)
   success <- unlist(success)

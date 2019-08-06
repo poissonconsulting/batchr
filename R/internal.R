@@ -11,43 +11,33 @@ lock_config <- function(path) {
   !is_try_error(lock)
 }
 
-read_log <- function(path) {
+read_lines_log <- function(path) {
   file <- file.path(path, ".batchr.log")
   if(!file.exists(file)) return(character(0))
-  readLines(file.path(path, ".batchr.log"))
+  readLines(file.path(path, ".batchr.log"), warn = FALSE)
 }
 
-read_log_error <- function(path) {
-  file <- file.path(path, ".batchr_error.log")
-  if(!file.exists(file)) return(character(0))
-  readLines(file.path(path, ".batchr_error.log"))
-}
-
-no_log_data <- function(error_msgs) {
-  level <- ordered(character(0), levels = .levels)
+no_log_data <- function() {
   time <- sys_time_utc()[-1]
-  file <- character(0)
-  if(!error_msgs) return(tibble(level = level, time = time, file = file))
-  tibble(level = level, time = time, file = file, error_msg = character(0))
+  tibble(type = character(0), time = time, file = character(0))
+#  tibble(type = type, time = time, file = file, error_msg = character(0))
 }
 
-logged_data <- function(path, error_msgs) {
-  lines <- read_log(path)
-  if(!length(lines)) return(no_log_data(error_msgs))
+logged_data <- function(path) {
+  lines <- read_lines_log(path)
+  if(!length(lines)) return(no_log_data())
   
-  level <- str_extract(lines, "^\\w+")
-  level <- ordered(level, levels = .levels)
+  type <- str_extract(lines, "^\\w+")
   time <- str_extract(lines, "\\[\\d{4,4}(-\\d{2,2}){2,2} \\d{2,2}(:\\d{2,2}){2,2}\\]")
   time <- as.POSIXct(substr(time, 2, 20), tz = "UTC")
   file <- str_extract(lines, "[^ ]+$")
-  data <- tibble(level = level, time = time, file = file)
-  if(!error_msgs) return(data)
+  tibble(type = type, time = time, file = file)
 }
 
 failed_files <- function(path) {
-  log <- logged_data(path, error_msgs = FALSE)
+  log <- logged_data(path)
   log <- log[!duplicated(log$file, fromLast = TRUE),]
-  log <- log[log$level != "INFO",]
+  log <- log[log$type == "FAILURE",]
   sort(log$file)
 }
 
@@ -61,38 +51,42 @@ touch_file <- function(path, file) {
   Sys.setFileTime(file.path(path, file), Sys.time())
 }
 
+log_msg <- function(path, msg) {
+  file <- file.path(path, ".batchr.log")
+  msg <- p(msg )
+  cat(msg, file = file, append = file.exists(file))
+}
+
 process_file <- function(file, fun, dots, path, progress) {
   dots <- c(file.path(path, file), dots)
-  logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
   output <- try(do.call("fun", dots), silent = TRUE)
   
-  msg <- p(sys_time_utc(), file)
+  time <- sys_time_utc()
+  time <- format(time, format = "%Y-%m-%d %H:%M%:%S")
+  msg <- p0("[", time, "]", " ", file, "\n")
   
   if(is_try_error(output)) {
-    logger_error <- create.logger(file.path(path, ".batchr_error.log"), 
-                                  level = "ERROR")
-    error(logger, msg)
-    error(logger_error, p(msg, as.character(output)))
-    
-    if(progress != "none") cat("ERROR ", file, "\n")
+    msg <- p("FAILURE", msg)
+    log_msg(path, msg)
+    if(progress != "none") cat(msg)
     return(FALSE)
   }
   if(isFALSE(output)) {
-    warn(logger, msg)
-    if(!progress %in% c("none", "error")) cat("WARN  ", file, "\n")
+    msg <- p("FAILURE", msg)
+    log_msg(path, msg)
+    if(progress != "none") cat(msg)
     return(FALSE)
   }
   touch_file(path, file)
-  info(logger, msg)
-  if(progress == "info") cat("INFO  ", file, "\n")
+  msg <- p("SUCCESS", msg)
+  log_msg(path, msg)
+  if(progress == "all") cat(msg)
   TRUE
 }
 
 cleanup_log_files <- function(path) {
   file <- file.path(path, ".batchr.log")
   if(file.exists(file)) unlink(file)
-  file2 <- file.path(path, ".batchr_error.log")
-  if(file.exists(file2)) unlink(file2)
 }
 
 cleanup_config <- function(path, force, remaining, failed) {

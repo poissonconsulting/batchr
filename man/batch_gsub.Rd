@@ -23,7 +23,7 @@ which match the regular expression will be batch processed.}
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
-\item{ask}{A flag specifying whether to ask before processing files.}
+\item{ask}{A flag specifying whether to ask before processing the files.}
 }
 \value{
 An invisible flag indicating whether all the files were 
