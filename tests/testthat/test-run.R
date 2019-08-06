@@ -115,7 +115,7 @@ test_that("batch_run subdirectories with config", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                regexp = "^file\\d[.]csv$", recursive = TRUE),
+                                regexp = "^file\\d[.]csv$", recurse = TRUE),
                    "file1.csv")
   
   path <- file.path(tempdir(), "batchr_run", "batch_sub")

@@ -24,13 +24,13 @@
 #' The configuration details are saved in the '.batchr.rds file'
 #' which can be read using \code{\link{batch_read_config}()}.
 #' Configuration is only possible if the directory does not already contain
-#' a configuration file. If \code{recursive = TRUE} then the subdirectories
+#' a configuration file. If \code{recurse = TRUE} then the subdirectories
 #' must also not contain configuration files.
 #' Existing configuration files can be listed 
 #' using \code{\link{batch_config_files}()}.
 #' 
 #' The regexp must match at least one non-hidden file in the directory 
-#' (or if \code{recursive = TRUE} in the directory or subdirectories).
+#' (or if \code{recurse = TRUE} in the directory or subdirectories).
 #' Hidden files are excluded to prevent accidental modification of system files.
 #' 
 #' The fun function's first argument should be 
@@ -57,10 +57,10 @@
 #' @return An invisible flag indicating whether all the files where 
 #' successfully processed.
 #' @export
-batch_process <- function(fun, path = ".", regexp = ".*", recursive = FALSE, 
+batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE, 
                           ..., parallel = FALSE, force = TRUE, 
                           ask = getOption("batchr.ask", TRUE)) {
-  batch_config(fun, path = path, regexp = regexp, recursive = recursive, ...)
+  batch_config(fun, path = path, regexp = regexp, recurse = recurse, ...)
   success <- batch_run(path = path, parallel = parallel, ask = ask)
   batch_cleanup(path, force = force)
   all(success)

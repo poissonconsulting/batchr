@@ -17,13 +17,13 @@
 #' were successfully cleaned up.
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_cleanup <- function(path = ".", recursive = FALSE, force = FALSE, 
+batch_cleanup <- function(path = ".", recurse = FALSE, force = FALSE, 
                           remaining = FALSE, failed = NA, silent = FALSE) {
-  chk_flag(recursive)
+  chk_flag(recurse)
   chk_flag(force)
   chk_lgl(failed)
   
-  files <- batch_config_files(path, recursive = recursive)
+  files <- batch_config_files(path, recurse = recurse)
   if(!length(files)) return(structure(logical(0), .Names = character(0)))
   files <- dirname(files)
   paths <- file.path(path, files)

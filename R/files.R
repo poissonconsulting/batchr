@@ -4,11 +4,11 @@
 #' @return A character vector of the names of the configuration file(s).
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_config_files <- function(path = ".", recursive = FALSE) {
+batch_config_files <- function(path = ".", recurse = FALSE) {
   chk_dir(path)
-  chk_flag(recursive)
+  chk_flag(recurse)
 
-  list.files(path, pattern = "^[.]batchr[.]rds$", recursive = recursive,
+  list.files(path, pattern = "^[.]batchr[.]rds$", recursive = recurse,
              all.files = TRUE)
 }
 
@@ -18,11 +18,11 @@ batch_config_files <- function(path = ".", recursive = FALSE) {
 #' @return A character vector of the names of the log file(s).
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_log_files <- function(path = ".", recursive = FALSE) {
+batch_log_files <- function(path = ".", recurse = FALSE) {
   chk_dir(path)
-  chk_flag(recursive)
+  chk_flag(recurse)
 
-  list.files(path, pattern = "^[.]batchr[.]log$", recursive = recursive,
+  list.files(path, pattern = "^[.]batchr[.]log$", recursive = recurse,
              all.files = TRUE)
 }
 
@@ -40,7 +40,7 @@ batch_log_files <- function(path = ".", recursive = FALSE) {
 batch_remaining_files <- function(path = ".", failed = FALSE) {
   chk_lgl(failed)
   config <- batch_read_config(path)
-  files <- list.files(path, pattern = config$regexp, recursive = config$recursive)
+  files <- list.files(path, pattern = config$regexp, recursive = config$recurse)
   files <- files[file_time(path, files) <= config$time]
   if(!length(files) || is.na(failed)) return(files)
   failed_files <- failed_files(path)

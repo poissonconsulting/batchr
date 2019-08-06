@@ -4,13 +4,13 @@
 \alias{batch_cleanup}
 \title{Cleanup Batch Processing}
 \usage{
-batch_cleanup(path = ".", recursive = FALSE, force = FALSE,
+batch_cleanup(path = ".", recurse = FALSE, force = FALSE,
   remaining = FALSE, failed = NA, silent = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{recursive}{A flag specifying whether to recurse into sub directories.}
+\item{recurse}{A flag specifying whether to recurse into sub directories.}
 
 \item{force}{A flag specifying whether to remove configuration and 
 log files even if there are files remaining to be processed.}

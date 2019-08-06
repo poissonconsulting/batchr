@@ -80,7 +80,7 @@ test_that("batch_config with non-function", {
                "^`fun` must be a function[.]$")
 })
 
-test_that("batch_config recursive", {
+test_that("batch_config recurse", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -94,7 +94,7 @@ test_that("batch_config recursive", {
   expect_error(batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
                "^Directory '.*batchr' does not contain any files matching '.*'[.]$")
   expect_identical(batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$",
-                               recursive = TRUE),
+                               recurse = TRUE),
                    "batchr_sub/file3.csv")
 })
 
@@ -132,7 +132,7 @@ test_that("batch_config with existing recursive .batchr.rds files", {
   
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
   
-  expect_error(batch_config(function(x) TRUE, path = path, recursive = TRUE,
+  expect_error(batch_config(function(x) TRUE, path = path, recurse = TRUE,
                                regexp = "^file\\d[.]csv$"),
                "^Subdirectories of '.*batchr' contain '.batchr.rds' files[.]$")
 

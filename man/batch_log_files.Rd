@@ -4,12 +4,12 @@
 \alias{batch_log_files}
 \title{Log Files}
 \usage{
-batch_log_files(path = ".", recursive = FALSE)
+batch_log_files(path = ".", recurse = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
 
-\item{recursive}{A flag specifying whether to recurse into sub directories.}
+\item{recurse}{A flag specifying whether to recurse into sub directories.}
 }
 \value{
 A character vector of the names of the log file(s).

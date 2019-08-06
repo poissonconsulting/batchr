@@ -5,7 +5,7 @@
 \title{Batch File Text Replacement}
 \usage{
 batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
-  recursive = FALSE, parallel = FALSE, ask = getOption("batchr.ask",
+  recurse = FALSE, parallel = FALSE, ask = getOption("batchr.ask",
   TRUE))
 }
 \arguments{
@@ -18,7 +18,7 @@ batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
 \item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}
 
-\item{recursive}{A flag specifying whether to recurse into sub directories.}
+\item{recurse}{A flag specifying whether to recurse into sub directories.}
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}

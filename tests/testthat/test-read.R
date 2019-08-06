@@ -18,7 +18,7 @@ test_that("batch_read_config", {
   config$time <- NULL
   
   expect_equal(config, 
-                   list(regexp = "^file\\d[.]csv$", recursive = FALSE, 
+                   list(regexp = "^file\\d[.]csv$", recurse = FALSE, 
                         fun = function (x) 
 TRUE, dots = list()))
 })
