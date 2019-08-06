@@ -20,17 +20,23 @@ read_lines_log <- function(path) {
 no_log_data <- function() {
   time <- sys_time_utc()[-1]
   tibble(type = character(0), time = time, file = character(0))
-#  tibble(type = type, time = time, file = file, error_msg = character(0))
+  #  tibble(type = type, time = time, file = file, error_msg = character(0))
 }
 
 logged_data <- function(path) {
   lines <- read_lines_log(path)
   if(!length(lines)) return(no_log_data())
   
-  type <- str_extract(lines, "^\\w+")
-  time <- str_extract(lines, "\\[\\d{4,4}(-\\d{2,2}){2,2} \\d{2,2}(:\\d{2,2}){2,2}\\]")
-  time <- as.POSIXct(substr(time, 2, 20), tz = "UTC")
-  file <- str_extract(lines, "[^ ]+$")
+  pattern <- p0("^((SUCCESS)|(FAILURE))( \\[)",
+                "(\\d{4,4}(-\\d{2,2}){2,2} \\d{2,2}(:\\d{2,2}){2,2})",
+                "(\\] ')([^']+)('.*)$")
+  
+  type <- gsub(pattern, "\\1", lines)
+  time <- gsub(pattern, "\\5", lines)
+  file <- gsub(pattern, "\\9", lines)
+  
+  time <- as.POSIXct(time, tz = "UTC")
+  
   tibble(type = type, time = time, file = file)
 }
 
@@ -53,8 +59,13 @@ touch_file <- function(path, file) {
 
 log_msg <- function(path, msg) {
   file <- file.path(path, ".batchr.log")
-  msg <- p(msg )
+  msg <- p0(msg, "\n")
   cat(msg, file = file, append = file.exists(file))
+}
+
+console_msg <- function(msg) {
+  msg <- p0(msg, "\n")
+  cat(msg)
 }
 
 process_file <- function(file, fun, dots, path, progress) {
@@ -63,24 +74,25 @@ process_file <- function(file, fun, dots, path, progress) {
   
   time <- sys_time_utc()
   time <- format(time, format = "%Y-%m-%d %H:%M%:%S")
-  msg <- p0("[", time, "]", " ", file, "\n")
+  msg <- p0("[", time, "]", " '", file, "'")
   
   if(is_try_error(output)) {
-    msg <- p("FAILURE", msg)
+    output <- gsub("\n+", " ", as.character(output))
+    msg <- p("FAILURE", msg, output)
+    if(progress != "none") console_msg(msg)
     log_msg(path, msg)
-    if(progress != "none") cat(msg)
     return(FALSE)
   }
   if(isFALSE(output)) {
     msg <- p("FAILURE", msg)
+    if(progress != "none") console_msg(msg)
     log_msg(path, msg)
-    if(progress != "none") cat(msg)
     return(FALSE)
   }
   touch_file(path, file)
   msg <- p("SUCCESS", msg)
+  if(progress == "all") console_msg(msg)
   log_msg(path, msg)
-  if(progress == "all") cat(msg)
   TRUE
 }
 
