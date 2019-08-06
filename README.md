@@ -63,7 +63,9 @@ read.csv(file.path(path, "file2.csv"))
 #> 1 6
 ```
 
-For a more realistic demonstration see
+For a more realistic demonstration see the [Batchr
+Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr-demo.html)
+vignette.
 
 ## Contribution
 
@@ -76,4 +78,4 @@ always welcome.
 Please note that the ‘batchr’ project is released with a [Contributor
 Code of
 Conduct](https://poissonconsulting.github.io/batchr/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+By contributing to this project, you agree to abide by its terms
