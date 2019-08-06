@@ -47,9 +47,9 @@ batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
   invisible(files)
 }
 
-#' Reconfigures Batch Processing
+#' Updates Batch Processing Configuration
 #' 
-#' Updates the batch processing function in the configuration file.
+#' Updates a directory that was configured using \code{\link{batch_config}()}.
 #' 
 #' @inheritParams batch_config
 #'
@@ -57,7 +57,7 @@ batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
 #' (failed and untested) remaining to be processed.
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_reconfig <- function(fun, path = ".", ...) {
+batch_update_config <- function(fun, path = ".", ...) {
   chk_function(fun)
   chk_dir(path)
 
