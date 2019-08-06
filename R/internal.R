@@ -60,19 +60,21 @@ process_file <- function(file, fun, dots, path) {
   logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
   output <- try(do.call("fun", dots), silent = TRUE)
   
+  msg <- p(sys_time(), file)
+  
   if(is_try_error(output)) {
     logger_error <- create.logger(file.path(path, ".batchr_error.log"), 
                                   level = "ERROR")
-    error(logger, file)
-    error(logger_error, p(file, as.character(output)))
+    error(logger, msg)
+    error(logger_error, p(msg, as.character(output)))
     return(FALSE)
   }
   if(isFALSE(output)) {
-    warn(logger, file)
+    warn(logger, msg)
     return(FALSE)
   }
   touch_file(path, file)
-  info(logger, file)
+  info(logger, msg)
   TRUE
 }
 
