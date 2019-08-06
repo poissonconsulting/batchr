@@ -4,14 +4,14 @@
 \alias{gsub_file}
 \title{File Text Replacement}
 \usage{
-gsub_file(file, pattern_gsub, replacement_gsub)
+gsub_file(file, pattern, replacement)
 }
 \arguments{
 \item{file}{A string of the name of the file to modify.}
 
-\item{pattern_gsub}{A string of the regular expression to match.}
+\item{pattern}{A string of the regular expression to match.}
 
-\item{replacement_gsub}{A string of the replacement text.}
+\item{replacement}{A string of the replacement text.}
 }
 \value{
 TRUE

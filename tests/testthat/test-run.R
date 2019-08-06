@@ -10,7 +10,7 @@ test_that("batch_run", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
   expect_identical(batch_run(path, ask = FALSE), 
@@ -27,7 +27,7 @@ test_that("batch_run fails all", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) FALSE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
   expect_identical(batch_run(path, ask = FALSE), structure(logical(0), .Names = character(0)))
@@ -43,7 +43,7 @@ test_that("batch_run returns non-flag", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) 1, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
   expect_identical(batch_run(path, ask = FALSE), structure(logical(0), .Names = character(0)))
@@ -59,7 +59,7 @@ test_that("batch_run errors", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) stop("a problem"), path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
   expect_identical(batch_run(path, ask = FALSE), structure(logical(0), .Names = character(0)))
@@ -75,7 +75,7 @@ test_that("batch_run locks", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   
   # seems to need chk on CRAN  
@@ -98,7 +98,7 @@ test_that("batch_run parallel", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   
   expect_warning(batch_run(path, parallel = TRUE, ask = FALSE), 
@@ -115,7 +115,7 @@ test_that("batch_run subdirectories with config", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$", recursive = TRUE),
+                                regexp = "^file\\d[.]csv$", recursive = TRUE),
                    "file1.csv")
   
   path <- file.path(tempdir(), "batchr_run", "batch_sub")
@@ -124,7 +124,7 @@ test_that("batch_run subdirectories with config", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   
   path <- file.path(tempdir(), "batchr_run")

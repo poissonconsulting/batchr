@@ -10,7 +10,7 @@ test_that("batch_config_files", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_config_files(path), character(0))
-  expect_identical(batch_config(function(x) TRUE, path = path, pattern = "^file\\d[.]csv$"),
+  expect_identical(batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_config_files(path), ".batchr.rds")
 })
@@ -45,7 +45,7 @@ test_that("batch_remaining_files ignores later ones", {
                "^Can't find file '.*.batchr.rds'[.]$")
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv", "file3.csv"))
 
   expect_identical(batch_remaining_files(path), 
@@ -87,7 +87,7 @@ test_that("batch_remaining_files ignores non-matching ones", {
                "^Can't find file '.*.batchr.rds'[.]$")
   
   expect_identical(batch_config(function(x) TRUE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    c("file2.csv", "file3.csv"))
   
   Sys.setFileTime(file.path(path, "file2.csv"), Sys.time())
@@ -109,7 +109,7 @@ test_that("batch_remaining_files gets failed ones", {
                "^Can't find file '.*.batchr.rds'[.]$")
   
   expect_identical(batch_config(function(x) FALSE, path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    "file2.csv")
   
   expect_identical(batch_remaining_files(path), "file2.csv")
@@ -136,7 +136,7 @@ test_that("batch_remaining_files gets mix", {
                "^Can't find file '.*.batchr.rds'[.]$")
   
   expect_identical(batch_config(function(x) grepl("file1[.]csv$", x), path = path, 
-                                pattern = "^file\\d[.]csv$"),
+                                regexp = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv"))
   
   expect_identical(batch_remaining_files(path), c("file1.csv", "file2.csv"))
@@ -161,7 +161,7 @@ test_that("batch_log_files", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(batch_log_files(path), character(0))
-  expect_identical(batch_config(function(x) FALSE, path = path, pattern = "^file\\d[.]csv$"),
+  expect_identical(batch_config(function(x) FALSE, path = path, regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_log_files(path), character(0))
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))

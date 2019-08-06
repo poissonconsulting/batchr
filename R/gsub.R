@@ -3,16 +3,16 @@
 #' Uses \code{\link[base]{gsub}} to perform text pattern replacement on a file.
 #'
 #' @param file A string of the name of the file to modify.
-#' @param pattern_gsub A string of the regular expression to match.
-#' @param replacement_gsub A string of the replacement text.
+#' @param pattern A string of the regular expression to match.
+#' @param replacement A string of the replacement text.
 #'
 #' @return TRUE
 #' @seealso \code{\link[base]{gsub}}
 #' @export
-gsub_file <- function(file, pattern_gsub, replacement_gsub) {
+gsub_file <- function(file, pattern, replacement) {
   chk_file(file)
   lines <- readLines(file)
-  lines <- gsub(pattern = pattern_gsub, replacement = replacement_gsub, lines)
+  lines <- gsub(pattern = pattern, replacement = replacement, lines)
   writeLines(lines, file)
   invisible(TRUE)
 }
@@ -31,10 +31,10 @@ gsub_file <- function(file, pattern_gsub, replacement_gsub) {
 #' @return An invisible flag indicating whether all the files were 
 #' successfully processed.
 #' @export
-batch_gsub <- function(pattern_gsub, replacement_gsub, 
-                       path = ".", pattern = "[.](R|r)$", recursive = FALSE, 
+batch_gsub <- function(pattern, replacement, 
+                       path = ".", regexp = "[.](R|r)$", recursive = FALSE, 
                        parallel = FALSE, ask = getOption("batchr.ask", TRUE)) {
-  batch_process(gsub_file, path = path, pattern = pattern, recursive = recursive,
-                parallel = parallel, pattern_gsub = pattern_gsub, 
-                replacement_gsub = replacement_gsub, ask = ask)
+  batch_process(gsub_file, path = path, regexp = regexp, recursive = recursive,
+                parallel = parallel, pattern = pattern, 
+                replacement = replacement, ask = ask)
 }

@@ -4,8 +4,8 @@
 \alias{batch_process}
 \title{Batch File Processing}
 \usage{
-batch_process(fun, path = ".", pattern = ".*", recursive = FALSE,
-  ..., parallel = FALSE, force = TRUE, ask = getOption("batchr.ask",
+batch_process(fun, path = ".", regexp = ".*", recursive = FALSE, ...,
+  parallel = FALSE, force = TRUE, ask = getOption("batchr.ask",
   TRUE))
 }
 \arguments{
@@ -13,7 +13,7 @@ batch_process(fun, path = ".", pattern = ".*", recursive = FALSE,
 
 \item{path}{A string of the path to the directory with the files.}
 
-\item{pattern}{A string of a regular expression. Only non-hidden file names 
+\item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}
 
 \item{recursive}{A flag specifying whether to recurse into sub directories.}
@@ -63,7 +63,7 @@ must also not contain configuration files.
 Existing configuration files can be listed 
 using \code{\link{batch_config_files}()}.
 
-The pattern must match at least one non-hidden file in the directory 
+The regexp must match at least one non-hidden file in the directory 
 (or if \code{recursive = TRUE} in the directory or subdirectories).
 Hidden files are excluded to prevent accidental modification of system files.
 

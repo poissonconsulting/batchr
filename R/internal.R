@@ -1,5 +1,5 @@
-save_config <- function(path, pattern, recursive, fun, dots) {
-  args <- list(time = sys_time_utc(), pattern = pattern, 
+save_config <- function(path, regexp, recursive, fun, dots) {
+  args <- list(time = sys_time_utc(), regexp = regexp, 
                recursive = recursive, fun = fun, 
                dots = dots)
   saveRDS(args, file = file.path(path, ".batchr.rds"))
@@ -27,14 +27,14 @@ logged_data <- function(path) {
   lines <- read_lines_log(path)
   if(!length(lines)) return(no_log_data())
   
-  pattern <- p0("^([SUCESFAILUR]{7,7})( \\[)",
+  regexp <- p0("^([SUCESFAILUR]{7,7})( \\[)",
                 "(\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d)",
                 "(\\] ')([^']+)('\\s*)(.*)$")
 
-  type <- gsub(pattern, "\\1", lines)
-  time <- gsub(pattern, "\\3", lines)
-  file <- gsub(pattern, "\\5", lines)
-  error <- gsub(pattern, "\\7", lines)
+  type <- gsub(regexp, "\\1", lines)
+  time <- gsub(regexp, "\\3", lines)
+  file <- gsub(regexp, "\\5", lines)
+  error <- gsub(regexp, "\\7", lines)
   
   time <- as.POSIXct(time, tz = "UTC")
   is.na(error[error == ""]) <- TRUE

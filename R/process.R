@@ -29,7 +29,7 @@
 #' Existing configuration files can be listed 
 #' using \code{\link{batch_config_files}()}.
 #' 
-#' The pattern must match at least one non-hidden file in the directory 
+#' The regexp must match at least one non-hidden file in the directory 
 #' (or if \code{recursive = TRUE} in the directory or subdirectories).
 #' Hidden files are excluded to prevent accidental modification of system files.
 #' 
@@ -57,10 +57,10 @@
 #' @return An invisible flag indicating whether all the files where 
 #' successfully processed.
 #' @export
-batch_process <- function(fun, path = ".", pattern = ".*", recursive = FALSE, 
+batch_process <- function(fun, path = ".", regexp = ".*", recursive = FALSE, 
                           ..., parallel = FALSE, force = TRUE, 
                           ask = getOption("batchr.ask", TRUE)) {
-  batch_config(fun, path = path, pattern = pattern, recursive = recursive, ...)
+  batch_config(fun, path = path, regexp = regexp, recursive = recursive, ...)
   success <- batch_run(path = path, parallel = parallel, ask = ask)
   batch_cleanup(path, force = force)
   all(success)

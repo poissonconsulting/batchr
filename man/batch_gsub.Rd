@@ -4,18 +4,18 @@
 \alias{batch_gsub}
 \title{Batch File Text Replacement}
 \usage{
-batch_gsub(pattern_gsub, replacement_gsub, path = ".",
-  pattern = "[.](R|r)$", recursive = FALSE, parallel = FALSE,
-  ask = getOption("batchr.ask", TRUE))
+batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
+  recursive = FALSE, parallel = FALSE, ask = getOption("batchr.ask",
+  TRUE))
 }
 \arguments{
-\item{pattern_gsub}{A string of the regular expression to match.}
+\item{pattern}{A string of the regular expression to match.}
 
-\item{replacement_gsub}{A string of the replacement text.}
+\item{replacement}{A string of the replacement text.}
 
 \item{path}{A string of the path to the directory with the files.}
 
-\item{pattern}{A string of a regular expression. Only non-hidden file names 
+\item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}
 
 \item{recursive}{A flag specifying whether to recurse into sub directories.}

@@ -4,14 +4,14 @@
 \alias{batch_config}
 \title{Configure Batch Processing}
 \usage{
-batch_config(fun, path = ".", pattern = ".*", recursive = FALSE, ...)
+batch_config(fun, path = ".", regexp = ".*", recursive = FALSE, ...)
 }
 \arguments{
 \item{fun}{A function to process each of the files.}
 
 \item{path}{A string of the path to the directory with the files.}
 
-\item{pattern}{A string of a regular expression. Only non-hidden file names 
+\item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}
 
 \item{recursive}{A flag specifying whether to recurse into sub directories.}

@@ -10,7 +10,7 @@ test_that("batch_process",{
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_true(batch_process(function(x) TRUE, path = path, 
-                            pattern = "^file\\d[.]csv$", ask = FALSE))
+                            regexp = "^file\\d[.]csv$", ask = FALSE))
 })
 
 test_that("batch_process changes files", {
