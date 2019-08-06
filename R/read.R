@@ -28,8 +28,5 @@ batch_read_config <- function(path) {
 batch_read_log <- function(path = ".", error_msgs = FALSE) {
   chk_flag(error_msgs)
   batch_read_config(path) # checks configuration file exists
-  file <- file.path(path, ".batchr.log")
-  if(!file.exists(file)) return(logged_data(character(0)))
-  lines <- readLines(file)
-  logged_data(lines)
+  logged_data(path)
 }

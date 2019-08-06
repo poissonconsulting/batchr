@@ -23,7 +23,8 @@ read_log_error <- function(path) {
   readLines(file.path(path, ".batchr_error.log"))
 }
 
-logged_data <- function(lines) {
+logged_data <- function(path) {
+  lines <- read_log(path)
   levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
   if(!length(lines)) {
     level <- ordered(character(0), levels = levels)
@@ -39,7 +40,7 @@ logged_data <- function(lines) {
 }
 
 failed_files <- function(path) {
-  log <- logged_data(read_log(path))
+  log <- logged_data(path)
   log <- log[!duplicated(log$file, fromLast = TRUE),]
   log <- log[log$level != "INFO",]
   sort(log$file)
