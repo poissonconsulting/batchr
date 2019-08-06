@@ -19,11 +19,14 @@ batch_read_config <- function(path) {
 #' Reads the values in the .batchr.log processing failure file.
 #'
 #' @inheritParams batch_config
+#' @param error_msgs A flag specifying whether to include error messages.
 #' @return A tibble with an ordered factor of the \code{level} (WARN, ERROR, FATAL), 
-#' a POSIXct of the time of failure in UTC and a character vector of the file name.
+#' a POSIXct of the time of failure in UTC, a character vector of the file name
+#' and optionally a character vector of the error message (or NA if no error).
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_read_log <- function(path = ".") {
+batch_read_log <- function(path = ".", error_msgs = FALSE) {
+  chk_flag(error_msgs)
   batch_read_config(path) # checks configuration file exists
   file <- file.path(path, ".batchr.log")
   if(!file.exists(file)) return(logged_data(character(0)))

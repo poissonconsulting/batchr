@@ -4,14 +4,17 @@
 \alias{batch_read_log}
 \title{Read Log File}
 \usage{
-batch_read_log(path = ".")
+batch_read_log(path = ".", error_msgs = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files.}
+
+\item{error_msgs}{A flag specifying whether to include error messages.}
 }
 \value{
 A tibble with an ordered factor of the \code{level} (WARN, ERROR, FATAL), 
-a POSIXct of the time of failure in UTC and a character vector of the file name.
+a POSIXct of the time of failure in UTC, a character vector of the file name
+and optionally a character vector of the error message (or NA if no error).
 }
 \description{
 Reads the values in the .batchr.log processing failure file.
