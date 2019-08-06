@@ -16,7 +16,6 @@
 batch_config <- function(FUN, path = ".", pattern = ".*", recursive = FALSE, ...) {
   chk_function(FUN)
   chk_dir(path)
-  chk_string(pattern)
   chk_flag(recursive)
   
   if(length(batch_config_files(path, recursive = FALSE)))
