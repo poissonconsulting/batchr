@@ -12,8 +12,14 @@
 #' using \code{\link{batch_run}()}
 #' which locks the configuration file with \code{\link[filelock]{lock}} 
 #' to prevent concurrent calls. 
+#' 
 #' The files that have not yet been processed can be got 
-#' using \code{\link{batch_remaining_files}()}.
+#' using \code{\link{batch_remaining_files}()} while 
+#' \code{\link{batch_completed}()} tests whether there are any remaining files.
+#' By default (\code{failed = FALSE}) both functions exclude files that failed
+#' to process. To only consider files that failed to process set
+#' \code{failed = TRUE}. If \code{failed = NA} then remaining files are those
+#' that have not yet been processed as well as those that have failed to process.
 #' 
 #' The configuration details are saved in the '.batchr.rds file'
 #' which can be read using \code{\link{batch_read_config}()}.
