@@ -26,8 +26,6 @@
 #' Configuration is only possible if the directory does not already contain
 #' a configuration file. If \code{recurse = TRUE} then the subdirectories
 #' must also not contain configuration files.
-#' Existing configuration files can be listed 
-#' using \code{\link{batch_config_files}()}.
 #' 
 #' The regexp must match at least one non-hidden file in the directory 
 #' (or if \code{recurse = TRUE} in the directory or subdirectories).

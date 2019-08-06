@@ -113,3 +113,8 @@ cleanup_config <- function(path, force, remaining, failed) {
   cleanup_log_files(path)
   TRUE
 }
+
+config_files <- function(path, recursive) {
+  list.files(path, pattern = "^[.]batchr[.]rds$", recursive = recursive,
+             all.files = TRUE)
+}

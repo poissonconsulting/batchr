@@ -8,7 +8,7 @@ batch_cleanup(path = ".", force = FALSE, remaining = FALSE,
   failed = NA, silent = FALSE, recursive = FALSE)
 }
 \arguments{
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 
 \item{force}{A flag specifying whether to remove configuration and 
 log files even if there are files remaining to be processed.}

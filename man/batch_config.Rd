@@ -12,7 +12,7 @@ batch_config(fun, path = ".", regexp = ".*", recurse = FALSE, ...)
 If processing is unsuccessful \code{fun} should return FALSE 
 or throw an error (error messages are automatically logged).}
 
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 
 \item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}
@@ -26,7 +26,15 @@ An invisible character vector of the paths to the files to
 that will be processed when \code{\link{batch_run}()} is called.
 }
 \description{
-Configures a directory for batch file processing.
+Configures a directory for batch file processing by \code{\link{batch_run}()}.
+}
+\details{
+\code{batch_config()} creates a hidden configuration file in path 
+named '.batchr.rds'.
+
+The contents of the file can be read using
+\code{\link{batch_read_config}()} 
+or updated using \code{\link{batch_config}()}.
 }
 \seealso{
 \code{\link{batch_process}()}

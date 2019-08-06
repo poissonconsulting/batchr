@@ -13,7 +13,7 @@ batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
 
 \item{replacement}{A string of the replacement text.}
 
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 
 \item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}

@@ -23,11 +23,12 @@
 batch_cleanup <- function(path = ".", force = FALSE, 
                           remaining = FALSE, failed = NA, silent = FALSE,
                           recursive = FALSE) {
+  chk_dir(path)
   chk_flag(recursive)
   chk_flag(force)
   chk_lgl(failed)
   
-  files <- batch_config_files(path, recursive = recursive)
+  files <- config_files(path, recursive = recursive)
   if(!length(files)) return(structure(logical(0), .Names = character(0)))
   files <- dirname(files)
   paths <- file.path(path, files)

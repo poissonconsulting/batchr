@@ -1,20 +1,5 @@
 context("files")
 
-test_that("batch_config_files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-  
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-  
-  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
-  
-  expect_identical(batch_config_files(path), character(0))
-  expect_identical(batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
-                   "file1.csv")
-  expect_identical(batch_config_files(path), ".batchr.rds")
-})
-
 test_that("batch_remaining_files errors if no configuration file", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
@@ -149,21 +134,4 @@ test_that("batch_remaining_files gets mix", {
                    "file2.csv")
   expect_identical(batch_remaining_files(path, failed = TRUE),
                    "file2.csv")
-})
-
-test_that("batch_log_files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-  
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-  
-  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
-  
-  expect_identical(batch_log_files(path), character(0))
-  expect_identical(batch_config(function(x) FALSE, path = path, regexp = "^file\\d[.]csv$"),
-                   "file1.csv")
-  expect_identical(batch_log_files(path), character(0))
-  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
-  expect_identical(batch_log_files(path), ".batchr.log")
 })

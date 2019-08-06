@@ -7,15 +7,15 @@
 batch_read_config(path)
 }
 \arguments{
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 }
 \value{
-A named list of the argument values.
+A named list of the configuration values.
 }
 \description{
-Reads the values in the .batchr.rds configuration file which was created 
-when the project was set up.
+Reads the values in the 
+configuration file created by \code{\link{batch_config}()}.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link{batch_process}()} and \code{\link{batch_read_log}()}
 }

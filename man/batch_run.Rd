@@ -8,7 +8,7 @@ batch_run(path = ".", failed = FALSE, parallel = FALSE,
   progress = "none", ask = getOption("batchr.ask", TRUE))
 }
 \arguments{
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 
 \item{failed}{A logical scalar specifying whether to exclude (the default; FALSE),
 include (NA), or only include (TRUE) files that previously failed to process.}

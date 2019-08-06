@@ -12,7 +12,7 @@ batch_reconfig(fun, path = ".", ...)
 If processing is unsuccessful \code{fun} should return FALSE 
 or throw an error (error messages are automatically logged).}
 
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 
 \item{...}{Additional arguments passed to \code{fun}.}
 }

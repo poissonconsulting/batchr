@@ -1,11 +1,11 @@
 #' Read Configuration File
 #' 
-#' Reads the values in the .batchr.rds configuration file which was created 
-#' when the project was set up.
+#' Reads the values in the 
+#' configuration file created by \code{\link{batch_config}()}.
 #'
 #' @inheritParams batch_config
-#' @return A named list of the argument values.
-#' @seealso \code{\link{batch_process}()}
+#' @return A named list of the configuration values.
+#' @seealso \code{\link{batch_process}()} and \code{\link{batch_read_log}()}
 #' @export
 batch_read_config <- function(path) {
   chk_dir(path)
@@ -16,17 +16,19 @@ batch_read_config <- function(path) {
 
 #' Read Log File
 #' 
-#' Reads the values in the .batchr.log processing failure file.
+#' Reads the values in the log file created by \code{\link{batch_run}()}.
 #'
 #' @inheritParams batch_config
-#' @return A tibble with four columns.
-#' type is a character vector indicating SUCCESS or FAILURE,
-#' time is a POSIXct of the datetime of processing in UTC, 
-#' file is a character vector of the file name and 
-#' error is a character vector of the error message (or NA if no error).
-#' @seealso \code{\link{batch_process}()}
+#' @return A tibble with four columns:
+#' \describe{
+#'   \item{type}{A character vector indicating SUCCESS or FAILURE}
+#'   \item{time}{A POSIXct vector of the time of processing in UTC}
+#'   \item{file}{A character vector of the file name}
+#'   \item{error}{A character vector of the error message (or NA if no error)}
+#' }
+#' @seealso \code{\link{batch_process}()} and \code{\link{batch_read_config}()}
 #' @export
 batch_read_log <- function(path = ".") {
-  batch_read_config(path) # checks configuration file exists
+  batch_read_config(path)
   logged_data(path)
 }

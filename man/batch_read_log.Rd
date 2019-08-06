@@ -7,18 +7,20 @@
 batch_read_log(path = ".")
 }
 \arguments{
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 }
 \value{
-A tibble with four columns.
-type is a character vector indicating SUCCESS or FAILURE,
-time is a POSIXct of the datetime of processing in UTC, 
-file is a character vector of the file name and 
-error is a character vector of the error message (or NA if no error).
+A tibble with four columns:
+\describe{
+  \item{type}{A character vector indicating SUCCESS or FAILURE}
+  \item{time}{A POSIXct vector of the time of processing in UTC}
+  \item{file}{A character vector of the file name}
+  \item{error}{A character vector of the error message (or NA if no error)}
+}
 }
 \description{
-Reads the values in the .batchr.log processing failure file.
+Reads the values in the log file created by \code{\link{batch_run}()}.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link{batch_process}()} and \code{\link{batch_read_config}()}
 }

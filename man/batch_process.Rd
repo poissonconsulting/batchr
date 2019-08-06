@@ -14,7 +14,7 @@ batch_process(fun, path = ".", regexp = ".*", recurse = FALSE, ...,
 If processing is unsuccessful \code{fun} should return FALSE 
 or throw an error (error messages are automatically logged).}
 
-\item{path}{A string of the path to the directory with the files.}
+\item{path}{A string of the path to the directory with the files for processing.}
 
 \item{regexp}{A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.}
@@ -63,8 +63,6 @@ which can be read using \code{\link{batch_read_config}()}.
 Configuration is only possible if the directory does not already contain
 a configuration file. If \code{recurse = TRUE} then the subdirectories
 must also not contain configuration files.
-Existing configuration files can be listed 
-using \code{\link{batch_config_files}()}.
 
 The regexp must match at least one non-hidden file in the directory 
 (or if \code{recurse = TRUE} in the directory or subdirectories).
