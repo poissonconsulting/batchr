@@ -20,7 +20,7 @@ batch_read_config <- function(path) {
 #'
 #' @inheritParams batch_config
 #' @param error_msgs A flag specifying whether to include error messages.
-#' @return A tibble with an ordered factor of the \code{level} (WARN, ERROR, FATAL), 
+#' @return A tibble with an ordered factor of the \code{level} (INFO, WARN, ERROR), 
 #' a POSIXct of the time of failure in UTC, a character vector of the file name
 #' and optionally a character vector of the error message (or NA if no error).
 #' @seealso \code{\link{batch_process}()}
@@ -28,5 +28,5 @@ batch_read_config <- function(path) {
 batch_read_log <- function(path = ".", error_msgs = FALSE) {
   chk_flag(error_msgs)
   batch_read_config(path) # checks configuration file exists
-  logged_data(path)
+  logged_data(path, error_msgs = error_msgs)
 }

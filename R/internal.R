@@ -23,24 +23,29 @@ read_log_error <- function(path) {
   readLines(file.path(path, ".batchr_error.log"))
 }
 
-logged_data <- function(path) {
+no_log_data <- function(error_msgs) {
+  level <- ordered(character(0), levels = .levels)
+  time <- sys_time_utc()[-1]
+  file <- character(0)
+  if(!error_msgs) return(tibble(level = level, time = time, file = file))
+  tibble(level = level, time = time, file = file, error_msg = character(0))
+}
+
+logged_data <- function(path, error_msgs) {
   lines <- read_log(path)
-  levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
-  if(!length(lines)) {
-    level <- ordered(character(0), levels = levels)
-    return(tibble(level = level, time = sys_time_utc()[-1], file = character(0)))
-  }
+  if(!length(lines)) return(no_log_data(error_msgs))
+  
   level <- str_extract(lines, "^\\w+")
-  levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
-  level <- ordered(level, levels = levels)
+  level <- ordered(level, levels = .levels)
   time <- str_extract(lines, "\\[\\d{4,4}(-\\d{2,2}){2,2} \\d{2,2}(:\\d{2,2}){2,2}\\]")
   time <- as.POSIXct(substr(time, 2, 20), tz = "UTC")
   file <- str_extract(lines, "[^ ]+$")
-  return(tibble(level = level, time = time, file = file))
+  data <- tibble(level = level, time = time, file = file)
+  if(!error_msgs) return(data)
 }
 
 failed_files <- function(path) {
-  log <- logged_data(path)
+  log <- logged_data(path, error_msgs = FALSE)
   log <- log[!duplicated(log$file, fromLast = TRUE),]
   log <- log[log$level != "INFO",]
   sort(log$file)
