@@ -47,7 +47,7 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
 
   # to ensure modified file dates after config 
   # and same file from separate runs different sys time.
-  if(config$time == sys_time()) Sys.sleep(1) 
+  if(config$time == sys_time_utc()) Sys.sleep(1) 
   success <- lapply(remaining, process_file, fun = fun, dots = dots, 
                     path = path, progress = progress)
   success <- unlist(success)

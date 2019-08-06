@@ -1,5 +1,5 @@
 save_config <- function(path, pattern, recursive, fun, dots) {
-  args <- list(time = sys_time(), pattern = pattern, 
+  args <- list(time = sys_time_utc(), pattern = pattern, 
                recursive = recursive, fun = fun, 
                dots = dots)
   saveRDS(args, file = file.path(path, ".batchr.rds"))
@@ -28,7 +28,7 @@ logged_data <- function(path) {
   levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
   if(!length(lines)) {
     level <- ordered(character(0), levels = levels)
-    return(tibble(level = level, time = sys_time()[-1], file = character(0)))
+    return(tibble(level = level, time = sys_time_utc()[-1], file = character(0)))
   }
   level <- str_extract(lines, "^\\w+")
   levels <- c("DEBUG", "INFO", "WARN",  "ERROR", "FATAL")
@@ -61,7 +61,7 @@ process_file <- function(file, fun, dots, path, progress) {
   logger <- create.logger(file.path(path, ".batchr.log"), level = "INFO")
   output <- try(do.call("fun", dots), silent = TRUE)
   
-  msg <- p(sys_time(), file)
+  msg <- p(sys_time_utc(), file)
   
   if(is_try_error(output)) {
     logger_error <- create.logger(file.path(path, ".batchr_error.log"), 
