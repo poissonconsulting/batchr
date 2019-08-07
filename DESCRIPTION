@@ -11,9 +11,10 @@ Imports:
     chk,
     yesno
 Suggests: 
+    plyr,
+    doParallel,
     covr,
     testthat,
-    callr,
     knitr,
     rmarkdown
 Remotes:

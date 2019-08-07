@@ -42,11 +42,6 @@ batch_run <- function(path = ".",
   chk_lgl(progress)
   chk_flag(ask)
 
-  if(parallel) {
-    if(!isFALSE(progress)) wrn("progress set to FALSE as parallel = TRUE")
-    .NotYetUsed("parallel", error = FALSE) 
-  }
-  
   config <- batch_config_read(path)
   
   recurse <- config$recurse
@@ -64,7 +59,8 @@ batch_run <- function(path = ".",
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
   
   success <- process_files(remaining, fun = fun, dots = dots, 
-                    path = path, config_time = config$time, progress = progress)
+                    path = path, config_time = config$time,
+                    parallel = parallel, progress = progress)
 
   invisible(success)
 }

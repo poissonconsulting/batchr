@@ -103,9 +103,19 @@ process_file <- function(file, fun, dots, path, config_time, progress) {
   TRUE
 }
 
-process_files <- function(remaining, fun, dots, path, config_time, progress) {
-  success <- lapply(remaining, process_file, fun = fun, dots = dots, 
-                    path = path, config_time = config_time, progress = progress)
+process_files <- function(remaining, fun, dots, path, config_time, parallel, 
+                          progress) {
+  if(parallel) {
+    if(!requireNamespace("plyr", quietly = TRUE))
+      err("plyr is required to batch process files in parallel")
+    success <- plyr::llply(remaining, process_file, fun = fun, dots = dots, 
+                           path = path, config_time = config_time, 
+                           .parallel = TRUE, progress = FALSE)
+  } else {
+    success <- lapply(remaining, process_file, fun = fun, dots = dots, 
+                      path = path, config_time = config_time, 
+                      progress = progress)
+  }
   success <- unlist(success)
   invisible(set_names(success, remaining))
 }

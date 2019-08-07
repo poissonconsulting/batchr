@@ -73,6 +73,14 @@ read.csv(file.path(path, "file2.csv"))
 
 For a more realistic demonstration with finer control over the batch processing see the [Batchr Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr-demo.html) vignette.
 
+### Parallel Chains
+
+To process the files in parallel:
+
+1) Ensure plyr and doParallel are installed using `install.packages(c("plyr", "doParallel"))`.
+2) Register a parallel backend using `doParallel::registerDoParallel(4)`.
+3) Set `parallel = TRUE` in the call to `batch_process()` or `batch_run()`.
+
 ### `batch_gsub()`
 
 The `batchr` package also provides `batch_gsub()` to perform text replacement on multiple files.
