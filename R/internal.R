@@ -14,7 +14,7 @@ read_lines_log <- function(path) {
 no_log_data <- function() {
   time <- sys_time_utc()[-1]
   tibble(type = character(0), time = time, file = character(0), 
-         error = character(0))
+         message = character(0))
 }
 
 logged_data <- function(path) {
@@ -26,14 +26,15 @@ logged_data <- function(path) {
                "(\\] ')([^']+)('\\s*)(.*)$")
   
   type <- gsub(regexp, "\\1", lines)
+  count <- gsub(regexp, "\\3", lines)
   time <- gsub(regexp, "\\5", lines)
   file <- gsub(regexp, "\\7", lines)
-  error <- gsub(regexp, "\\9", lines)
+  message <- gsub(regexp, "\\9", lines)
   
   time <- as.POSIXct(time, tz = "UTC")
-  is.na(error[error == ""]) <- TRUE
+  is.na(message[message == ""]) <- TRUE
   
-  tibble(type = type, time = time, file = file, error = error)
+  tibble(type = type, time = time, file = file, message = message)
 }
 
 failed_files <- function(path) {
