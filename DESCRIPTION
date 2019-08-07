@@ -8,6 +8,7 @@ Description: Batch processes files with a user-supplied R function.
 License: MIT + file LICENSE
 Depends: R (>= 3.5)
 Imports:
+    stats,
     chk,
     yesno
 Suggests: 
