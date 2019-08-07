@@ -73,7 +73,8 @@ validate_remaining_file <- function(path, file, config_time) {
         "' has been modified by a different process!")
 }
 
-process_file <- function(file, fun, dots, path, config_time, progress) {
+process_file <- function(file, fun, dots, path, config_time, progress,
+                         i = 1, n = 1, e = 0) {
   validate_remaining_file(path, file, config_time)
   
   dots <- c(file.path(path, file), dots)
@@ -112,11 +113,14 @@ process_files <- function(remaining, fun, dots, path, config_time, parallel,
                            path = path, config_time = config_time, 
                            .parallel = TRUE, progress = FALSE)
   } else {
-    success <- rep(NA, length(remaining))
+    n <- length(remaining)
+    success <- rep(NA, n)
+    e <- 0L
     for(i in seq_along(remaining)) {
       success[i] <- process_file(remaining[i], fun = fun, dots = dots, 
                                  path = path, config_time = config_time, 
-                                 progress = progress)
+                                 progress = progress, i = i, n = n, e = e)
+      if(!success[i]) e <- e + 1L
     }
   }
   success <- unlist(success)
