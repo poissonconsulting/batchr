@@ -1,5 +1,11 @@
 language: R
-sudo: required
+cache: packages
+
+r:
+  - 3.5
+  - oldrel
+  - release
+  - devel
 
 r_packages:
   - covr
@@ -12,7 +18,7 @@ notifications:
     recipients:
       - audrey.beliveau@uwaterloo.ca
     on_success: change
-    on_failure: always
+    on_failure: change
   slack:
     rooms:
       - poissonconsulting:BKjfn7jsVh8zXTu2rq7BEQEb
