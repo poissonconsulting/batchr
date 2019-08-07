@@ -73,6 +73,11 @@ validate_remaining_file <- function(path, file, config_time) {
         "' has been modified by a different process!")
 }
 
+formatc <- function(i, n) {
+  n <- formatC(n, format = "fg")
+  formatC(i, format = "fg", width = nchar(n), flag = "0")
+}
+
 process_file <- function(file, fun, dots, path, config_time, progress,
                          i = 1, n = 1, e = 0) {
   validate_remaining_file(path, file, config_time)
@@ -86,18 +91,21 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   
   if(is_try_error(output)) {
     output <- gsub("\n+", " ", as.character(output))
+    count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
     msg <- p("FAILURE", msg, output)
     log_msg(path, msg)
     if(!isFALSE(progress)) console_msg(msg)
     return(FALSE)
   }
   if(isFALSE(output)) {
+    count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
     msg <- p("FAILURE", msg)
     log_msg(path, msg)
     if(!isFALSE(progress)) console_msg(msg)
     return(FALSE)
   }
   touch_file(path, file)
+  count <- p(formatc(i, n), formatc(n, n), formatc(e, n), sep = "/")
   msg <- p("SUCCESS", msg)
   log_msg(path, msg)
   if(isTRUE(progress)) console_msg(msg)
