@@ -15,7 +15,7 @@ test_that("batch_config returns matching files", {
                    c("file1.csv", "file2.csv"))
 })
 
-test_that("batch_update_config", {
+test_that("batch_config_update", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -29,7 +29,7 @@ test_that("batch_update_config", {
   expect_identical(batch_config(function(x) FALSE, path = path, regexp = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv"))
   expect_equal(batch_read_config(path)$fun, function(x) FALSE)
-  batch_update_config(function(x) TRUE, path)
+  batch_config_update(function(x) TRUE, path)
   expect_equal(batch_read_config(path)$fun, function(x) TRUE)
 })
 

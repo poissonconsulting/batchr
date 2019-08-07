@@ -57,7 +57,7 @@ batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
 #' (failed and untested) remaining to be processed.
 #' @seealso \code{\link{batch_process}()}
 #' @export
-batch_update_config <- function(fun, path = ".", ...) {
+batch_config_update <- function(fun, path = ".", ...) {
   chk_function(fun)
   chk_dir(path)
 
