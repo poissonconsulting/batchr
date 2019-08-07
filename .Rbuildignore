@@ -11,3 +11,5 @@
 ^docs$
 ^pkgdown$
 ^build\.R$
+
+^\.batchr\.rds\.lck$

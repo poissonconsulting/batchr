@@ -5,35 +5,39 @@
 \title{Cleanup Batch Processing}
 \usage{
 batch_cleanup(path = ".", force = FALSE, remaining = FALSE,
-  failed = NA, silent = FALSE, recursive = FALSE)
+  failed = NA, recursive = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{force}{A flag specifying whether to remove configuration and 
+\item{force}{A flag specifying whether to delete configuration and 
 log files even if there are files remaining to be processed.}
 
-\item{remaining}{When \code{force = TRUE} a flag specifying 
-whether to remove files that have not yet been processed.}
+\item{remaining}{A flag specifying whether to delete 
+any files that are remaining to be processed 
+(only applied when \code{force = TRUE}).
+Files that have been processed are never deleted.}
 
-\item{failed}{When \code{remaining = TRUE} a logical scalar specifying 
-whether to remove all remaining files (NA), 
-only those files that failed to process (TRUE),
-or only untested files (FALSE).}
-
-\item{silent}{A flag specifying whether to suppress warnings about
-directories that could not be cleaned.}
+\item{failed}{A logical scalar specifying how to treat files 
+that previously failed to process. If FALSE (the default) failed files 
+are excluded, if NA they are included and if TRUE they are only included.}
 
 \item{recursive}{A flag specifying whether to recurse into subdirectories
-when cleaning up.}
+when cleaning up. This is unrelated to the \code{recurse} option
+of \code{\link{batch_config}()} and is only expected to be used 
+if the user has neglected to clean up multiple nested directories.}
 }
 \value{
 A named logical vector indicating which directories 
 were successfully cleaned up.
 }
 \description{
-Removes configuration file created by \code{\link{batch_config}()} 
+Deletes configuration file created by \code{\link{batch_config}()} 
 and log file created by \code{\link{batch_run}()}.
+}
+\details{
+The \code{\link{batch_completed}()} function can be used to test
+if batch processing is complete.
 }
 \seealso{
 \code{\link{batch_process}()}

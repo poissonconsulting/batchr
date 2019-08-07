@@ -26,7 +26,7 @@ which match the regular expression will be batch processed.}
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
-\item{force}{A flag specifying whether to remove configuration and 
+\item{force}{A flag specifying whether to delete configuration and 
 log files even if there are files remaining to be processed.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}

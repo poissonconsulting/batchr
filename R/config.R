@@ -42,7 +42,7 @@ batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
         regexp, "'.")
   }
   dots <- list(...)
-  cleanup_log_files(path)
+  cleanup_log_file(path)
   save_config(path, regexp, recurse, fun = fun, dots = dots)
   invisible(files)
 }

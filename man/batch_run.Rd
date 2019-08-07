@@ -41,7 +41,7 @@ The hidden log file can be read using \code{\link{batch_log_read}()}.
 are remaining to be processed.
 
 When processing is complete the hidden configuration file
-and hidden log file can be removed using \code{\link{batch_cleanup}()}.
+and hidden log file can be deleted using \code{\link{batch_cleanup}()}.
 }
 \seealso{
 \code{\link{batch_process}()}, \code{\link{batch_config}()} and 

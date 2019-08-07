@@ -98,7 +98,7 @@ process_file <- function(file, fun, dots, path, progress) {
   TRUE
 }
 
-cleanup_log_files <- function(path) {
+cleanup_log_file <- function(path) {
   file <- file.path(path, ".batchr.log")
   if(file.exists(file)) unlink(file)
 }
@@ -110,7 +110,7 @@ cleanup_config <- function(path, force, remaining, failed) {
     if(remaining) unlink(remaining_files)
   }
   unlink(file.path(path, ".batchr.rds"))
-  cleanup_log_files(path)
+  cleanup_log_file(path)
   TRUE
 }
 
