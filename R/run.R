@@ -26,6 +26,8 @@
 #' @param progress A logic scalar specifying whether to 
 #' write logging information to the console (TRUE or FALSE) or only to write
 #' logging information to the console for failed attempts (NA).
+#' @param files A character vector of the remaining files to process.
+#' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
@@ -34,14 +36,18 @@
 #' @export
 batch_run <- function(path = ".", 
                       failed = FALSE, parallel = FALSE, 
-                      progress = !parallel, 
+                      progress = !parallel, files = NULL,
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
   chk_lgl(failed)
   chk_flag(parallel)
   chk_lgl(progress)
   chk_flag(ask)
-
+  if(!is.null(files)) {
+    chk_is(files, "character")
+    chk_no_missing(files)
+  }
+  
   config <- batch_config_read(path)
   
   recurse <- config$recurse
@@ -51,7 +57,18 @@ batch_run <- function(path = ".",
   if(recurse && length(config_files(path = path, recursive = recurse)) > 1)
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
+  
   remaining <- batch_files_remaining(path, failed = failed)
+  
+  if(!is.null(files)) {  
+    if(!length(files)) return(structure(logical(0), .Names = character(0)))
+    files <- unique(files)
+    unknown <- setdiff(files, remaining)
+    if(length(unknown)) err("The following files are not remaining: ", 
+                            cc(unknown, " and "), ".")
+    remaining <- files
+  }
+  
   if(!length(remaining)) return(structure(logical(0), .Names = character(0)))
   question <- p0("Batch process ", length(remaining), " files in '", 
                  normalizePath(path), "'?")
@@ -59,8 +76,8 @@ batch_run <- function(path = ".",
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
   
   success <- process_files(remaining, fun = fun, dots = dots, 
-                    path = path, config_time = config$time,
-                    parallel = parallel, progress = progress)
-
+                           path = path, config_time = config$time,
+                           parallel = parallel, progress = progress)
+  
   invisible(success)
 }

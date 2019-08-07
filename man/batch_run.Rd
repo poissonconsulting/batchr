@@ -5,7 +5,8 @@
 \title{Runs Batch Processing}
 \usage{
 batch_run(path = ".", failed = FALSE, parallel = FALSE,
-  progress = !parallel, ask = getOption("batchr.ask", TRUE))
+  progress = !parallel, files = NULL, ask = getOption("batchr.ask",
+  TRUE))
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
@@ -20,6 +21,9 @@ parallel (not yet used).}
 \item{progress}{A logic scalar specifying whether to 
 write logging information to the console (TRUE or FALSE) or only to write
 logging information to the console for failed attempts (NA).}
+
+\item{files}{A character vector of the remaining files to process.
+If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }
