@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Demonstration
 
-Consider a temporary directory with the four txt files
+Consider a temporary directory with four txt files
 
 ```{r}
 path <- file.path(tempdir(), "demo")
@@ -29,7 +29,7 @@ writeLines("the contents of file3.txt", file.path(path, "file3.txt"))
 writeLines("the contents of file4.txt", file.path(path, "file4.txt"))
 ```
 
-and a function that would successfully process the first two files 
+and a function that will successfully process the first two files 
 but fail for the last two by returning FALSE and throwing an error, respectively.
 
 ```{r}
@@ -44,26 +44,40 @@ fun <- function(file) {
 
 ### Configuration
 
-First the user should configure the directory by providing a regular expression.
+Now let the user configure the directory to only process files names that include
+a digit before the file extension.
 ```{r}
 library(batchr)
-
-
-
-batch_config(fun, path = path, pattern = "^file\\d[.]csv$")
+print(batch_config(fun, path = path, regexp = "file\\d[.]txt$"))
 ```
 
-Configuring a directory creates a hidden file which can be read as follows
+The contents of the hidden figuration file are as follows
 ```{r}
 batch_config_read(path)
 ```
 The `time` value specifies the system time (in UTC) that the project was configured.
-A file is only treated as unprocessed if the time it was last modified is *before* the time of configuration 
-If a file is successfully processed its modification time is set to the current time; otherwise the name of the file is logged in the `.batchr.log` file.
+It is very important because only files that were last modified *before* the configuration time are considered to be unprocessed (when a file is successfully processed its modification time is automatically set to the current system time).
 
 ### Start
 
-The next task is to start (or restart) processing the files using `batch_start()`.
+With the directory configured the next task is to start processing the files
 ```{r}
-batch_run(path, ask = FALSE)
+print(batch_run(path, ask = FALSE))
+```
+
+From the output we can see that 'file2.csv' was processed successfully but
+processing of the other two files that matched regexp failed.
+The output is also recorded in a hidden log file that can be read as follows
+```{r}
+batch_log_read(path)
+```
+
+At this point we can either update the fun using `batch_config_update()` 
+or clean up the directory by deleting the hidden configuration and log files
+and optionally the files that were or were not successfully processed.
+
+```{r}
+list.files(path)
+print(batch_cleanup(path, force = TRUE, remaining = TRUE, failed = TRUE))
+list.files(path)
 ```
