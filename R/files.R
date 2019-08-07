@@ -1,17 +1,15 @@
-#' Remaining Files
+#' Batch Files
 #' 
 #' Gets the names of the files that are remaining to be processed by
 #' \code{\link{batch_run}()}.
 #' 
-#' By default, files that previously failed to process are excluded.
-#' 
-#' \code{\link{batch_completed}()} can be used to easily test if there are any
+#' \code{\link{batch_completed}()} can be used to test if there are any
 #' files remaining.
 #'
 #' @inheritParams batch_config
 #' @inheritParams batch_run
 #' @return A character vector of the names of the remaining files.
-#' @seealso \code{\link{batch_process}()}
+#' @seealso \code{\link{batch_process}()} and \code{\link{batch_run}()} 
 #' @export
 batch_files <- function(path = ".", failed = FALSE) {
   chk_lgl(failed)

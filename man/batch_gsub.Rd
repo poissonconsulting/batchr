@@ -31,7 +31,8 @@ successfully processed.
 }
 \description{
 Uses \code{\link{batch_process}()} and \code{\link{gsub_file}()} to
-replace text in by default .R and .r files in the working directory.
+perform batch text file replacement.
+By default it replaces text in all .R and .r files in the working directory.
 }
 \seealso{
 \code{\link{batch_process}()}

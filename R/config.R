@@ -7,7 +7,7 @@
 #' 
 #' The contents of the file can be read using
 #' \code{\link{batch_config_read}()} 
-#' or updated using \code{\link{batch_config}()}.
+#' or updated using \code{\link{batch_config_update}()}.
 #' 
 #' @param fun A function to process each of the files. 
 #' \code{fun}'s first argument should be a string of the path to a single file.
@@ -21,7 +21,7 @@
 #'
 #' @return An invisible character vector of the paths to the files to
 #' that will be processed when \code{\link{batch_run}()} is called.
-#' @seealso \code{\link{batch_process}()}
+#' @seealso \code{\link{batch_process}()} and \code{\link{batch_run}()}
 #' @export
 batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
   chk_function(fun)
@@ -49,13 +49,23 @@ batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
 
 #' Updates Batch Processing Configuration
 #' 
-#' Updates a directory that was configured using \code{\link{batch_config}()}.
+#' Updates the function that was provided when a directory was configured 
+#' using \code{\link{batch_config}()}.
+#' 
+#' \code{batch_config_update()} is useful if a new version of the files is required
+#' to successfully process some of the files.
+#' 
+#' It should be noted that \code{batch_config_update()} does not alter the 
+#' configuration time.
+#' 
+#' In order to process previously failed files \code{\link{batch_run}()}
+#' should be called with \code{failed = NA} or \code{failed = TRUE}.
 #' 
 #' @inheritParams batch_config
 #'
 #' @return An invisible character vector of the paths to the files 
-#' (failed and untested) remaining to be processed.
-#' @seealso \code{\link{batch_process}()}
+#' remaining to be processed.
+#' @seealso \code{\link{batch_process}()} and \code{\link{batch_config}()}
 #' @export
 batch_config_update <- function(fun, path = ".", ...) {
   chk_function(fun)

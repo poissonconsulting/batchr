@@ -34,8 +34,8 @@ named '.batchr.rds'.
 
 The contents of the file can be read using
 \code{\link{batch_config_read}()} 
-or updated using \code{\link{batch_config}()}.
+or updated using \code{\link{batch_config_update}()}.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link{batch_process}()} and \code{\link{batch_run}()}
 }

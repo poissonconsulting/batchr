@@ -1,6 +1,6 @@
 #' File Text Replacement
 #' 
-#' Uses \code{\link[base]{gsub}} to perform text pattern replacement on a file.
+#' Uses \code{\link[base]{gsub}} to perform text replacement on a file.
 #'
 #' @param file A string of the name of the file to modify.
 #' @param pattern A string of the regular expression to match.
@@ -20,7 +20,8 @@ gsub_file <- function(file, pattern, replacement) {
 #' Batch File Text Replacement
 #' 
 #' Uses \code{\link{batch_process}()} and \code{\link{gsub_file}()} to
-#' replace text in by default .R and .r files in the working directory.
+#' perform batch text file replacement.
+#' By default it replaces text in all .R and .r files in the working directory.
 #' 
 #' @inheritParams batch_config
 #' @inheritParams batch_run

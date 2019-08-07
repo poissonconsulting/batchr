@@ -18,11 +18,22 @@ or throw an error (error messages are automatically logged).}
 }
 \value{
 An invisible character vector of the paths to the files 
-(failed and untested) remaining to be processed.
+remaining to be processed.
 }
 \description{
-Updates a directory that was configured using \code{\link{batch_config}()}.
+Updates the function that was provided when a directory was configured 
+using \code{\link{batch_config}()}.
+}
+\details{
+\code{batch_config_update()} is useful if a new version of the files is required
+to successfully process some of the files.
+
+It should be noted that \code{batch_config_update()} does not alter the 
+configuration time.
+
+In order to process previously failed files \code{\link{batch_run}()}
+should be called with \code{failed = NA} or \code{failed = TRUE}.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link{batch_process}()} and \code{\link{batch_config}()}
 }

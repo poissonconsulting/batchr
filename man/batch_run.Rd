@@ -10,8 +10,9 @@ batch_run(path = ".", failed = FALSE, parallel = FALSE,
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{failed}{A logical scalar specifying whether to exclude (the default; FALSE),
-include (NA), or only include (TRUE) files that previously failed to process.}
+\item{failed}{A logical scalar specifying how to treat files 
+that previously failed to process. If FALSE (the default) failed files 
+are excluded, if NA they are included and if TRUE they are only included.}
 
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
@@ -27,16 +28,22 @@ An invisible named logical vector indicating for each file
 whether it was successfully processed.
 }
 \description{
-Starts (or restarts if previously stopped) processing the files
-prespecified by \code{\link{batch_config}()}.
+Starts (or restarts if previously stopped) processing the remaining files
+specified by \code{\link{batch_config}()}.
 }
 \details{
-When there are no more files remaining to process the hidden configuration
-and log files can be removed using \code{\link{batch_cleanup}()}.
+\code{batch_run()} logs all file processing attempts together with the
+the type (SUCCESS or FAILURE), the 
+system time in UTC, the file name and any error messages.
+The hidden log file can be read using \code{\link{batch_log_read}()}.
 
-The files that are remaining to be processed can be got 
-using \code{\link{batch_files}()}.
+\code{\link{batch_files}()} provides a vector of the files that
+are remaining to be processed.
+
+When processing is complete the hidden configuration file
+and hidden log file can be removed using \code{\link{batch_cleanup}()}.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link{batch_process}()}, \code{\link{batch_config}()} and 
+\code{\link{batch_cleanup}()}
 }

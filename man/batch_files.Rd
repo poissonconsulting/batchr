@@ -2,15 +2,16 @@
 % Please edit documentation in R/files.R
 \name{batch_files}
 \alias{batch_files}
-\title{Remaining Files}
+\title{Batch Files}
 \usage{
 batch_files(path = ".", failed = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{failed}{A logical scalar specifying whether to exclude (the default; FALSE),
-include (NA), or only include (TRUE) files that previously failed to process.}
+\item{failed}{A logical scalar specifying how to treat files 
+that previously failed to process. If FALSE (the default) failed files 
+are excluded, if NA they are included and if TRUE they are only included.}
 }
 \value{
 A character vector of the names of the remaining files.
@@ -20,11 +21,9 @@ Gets the names of the files that are remaining to be processed by
 \code{\link{batch_run}()}.
 }
 \details{
-By default, files that previously failed to process are excluded.
-
-\code{\link{batch_completed}()} can be used to easily test if there are any
+\code{\link{batch_completed}()} can be used to test if there are any
 files remaining.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link{batch_process}()} and \code{\link{batch_run}()}
 }
