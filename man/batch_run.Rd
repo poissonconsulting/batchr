@@ -35,7 +35,7 @@ When there are no more files remaining to process the hidden configuration
 and log files can be removed using \code{\link{batch_cleanup}()}.
 
 The files that are remaining to be processed can be got 
-using \code{\link{batch_remaining_files}()}.
+using \code{\link{batch_files}()}.
 }
 \seealso{
 \code{\link{batch_process}()}

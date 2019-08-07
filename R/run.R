@@ -7,7 +7,7 @@
 #' and log files can be removed using \code{\link{batch_cleanup}()}.
 #' 
 #' The files that are remaining to be processed can be got 
-#' using \code{\link{batch_remaining_files}()}.
+#' using \code{\link{batch_files}()}.
 #'
 #' @inheritParams batch_config
 #' @param failed A logical scalar specifying whether to exclude (the default; FALSE),
@@ -46,7 +46,7 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
   if(recurse && length(config_files(path = path, recursive = recurse)) > 1)
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
-  remaining <- batch_remaining_files(path, failed = failed)
+  remaining <- batch_files(path, failed = failed)
   if(!length(remaining)) return(structure(logical(0), .Names = character(0)))
   question <- p0("Batch process ", length(remaining), " files in '", path, "'?")
   if(ask && !yesno(question))

@@ -104,7 +104,7 @@ cleanup_log_files <- function(path) {
 }
 
 cleanup_config <- function(path, force, remaining, failed) {
-  remaining_files <- batch_remaining_files(path, failed = failed)
+  remaining_files <- batch_files(path, failed = failed)
   if(length(remaining_files)) {
     if(!force) return(FALSE)
     if(remaining) unlink(remaining_files)

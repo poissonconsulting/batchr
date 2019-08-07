@@ -13,9 +13,9 @@ test_that("batch_cleanup", {
                                 regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
-  expect_identical(batch_remaining_files(path, FALSE), character(0))
-  expect_identical(batch_remaining_files(path, NA), character(0))
-  expect_identical(batch_remaining_files(path, TRUE), character(0))
+  expect_identical(batch_files(path, FALSE), character(0))
+  expect_identical(batch_files(path, NA), character(0))
+  expect_identical(batch_files(path, TRUE), character(0))
   expect_identical(batch_cleanup(path), c(. = TRUE))
   expect_identical(batch_cleanup(path), structure(logical(0), .Names = character(0)))
 })

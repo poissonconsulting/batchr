@@ -14,7 +14,7 @@
 #' to prevent concurrent calls. 
 #' 
 #' The files that have not yet been processed can be got 
-#' using \code{\link{batch_remaining_files}()} while 
+#' using \code{\link{batch_files}()} while 
 #' \code{\link{batch_completed}()} tests whether there are any remaining files.
 #' By default (\code{failed = FALSE}) both functions exclude files that failed
 #' to process. To only consider files that failed to process set
