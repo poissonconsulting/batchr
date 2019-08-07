@@ -34,8 +34,9 @@ gsub_file <- function(file, pattern, replacement) {
 #' @export
 batch_gsub <- function(pattern, replacement, 
                        path = ".", regexp = "[.](R|r)$", recurse = FALSE, 
-                       parallel = FALSE, ask = getOption("batchr.ask", TRUE)) {
-  batch_process(gsub_file, path = path, regexp = regexp, recurse = recurse,
-                parallel = parallel, pattern = pattern, 
-                replacement = replacement, ask = ask)
+                       parallel = FALSE, progress = TRUE, 
+                       ask = getOption("batchr.ask", TRUE)) {
+  batch_process(gsub_file, pattern = pattern, replacement = replacement, 
+                path = path, regexp = regexp, recurse = recurse,
+                parallel = parallel, progress = progress, ask = ask)
 }

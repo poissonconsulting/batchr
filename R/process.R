@@ -18,7 +18,7 @@
 #' successfully processed.
 #' @export
 batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE, 
-                          parallel = FALSE, force = TRUE, 
+                          parallel = FALSE, progress = TRUE, force = TRUE, 
                           ask = getOption("batchr.ask", TRUE), ...) {
   batch_config(fun, path = path, regexp = regexp, recurse = recurse, ...)
   success <- batch_run(path = path, parallel = parallel, ask = ask)
