@@ -19,6 +19,21 @@ MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org
 
 `batchr` is an R package to batch process files using an R function.
 
+The key design principle is that only files which were last modified
+*before* the directory was ‘configured’ are considered for processing.
+To implement this principle, configuration creates a hidden file and
+existing successfully processed files are automatically ‘touched’ to
+update their modification date.
+
+This design means that:
+
+  - Batch processing can be stopped and restarted.
+  - Any files created during processing are ignored.
+
+To allow the user control over the reprocessing of problematic files all
+processing attempts (SUCCESS or FAILURE) are recorded in a hidden log
+file.
+
 ## Installation
 
 You can install the latest development version of batchr from
@@ -31,7 +46,7 @@ remotes::install_github("poissonconsulting/batchr")
 
 ## Demonstration
 
-Set up a directory with two .csv files
+Consider a directory with two .csv files
 
 ``` r
 path <- file.path(tempdir(), "example")
@@ -42,7 +57,7 @@ write.csv(data.frame(x = 1), file.path(path, "file1.csv"), row.names = FALSE)
 write.csv(data.frame(x = 3), file.path(path, "file2.csv"), row.names = FALSE)
 ```
 
-and define the function to process them.
+First define the function to process them.
 
 ``` r
 fun <- function(file) {
@@ -59,8 +74,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
-#> SUCCESS [2019-08-07 02:17:54] 'file1.csv'
-#> SUCCESS [2019-08-07 02:17:54] 'file2.csv'
+#> SUCCESS 1/2/0 [2019-08-07 16:47:18] 'file1.csv'
+#> SUCCESS 2/2/0 [2019-08-07 16:47:18] 'file2.csv'
 #> [1] TRUE
 ```
 
@@ -79,6 +94,17 @@ For a more realistic demonstration with finer control over the batch
 processing see the [Batchr
 Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr-demo.html)
 vignette.
+
+### Parallel Chains
+
+To process the files in parallel:
+
+1)  Ensure plyr and doParallel are installed using
+    `install.packages(c("plyr", "doParallel"))`.
+2)  Register a parallel backend using
+    `doParallel::registerDoParallel(4)`.
+3)  Set `parallel = TRUE` in the call to `batch_process()` or
+    `batch_run()`.
 
 ### `batch_gsub()`
 
