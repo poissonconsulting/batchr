@@ -80,5 +80,5 @@ batch_config_update <- function(fun, path = ".", ...) {
   
   dots <- list(...)
   save_config(path, regexp, recurse, fun = fun, dots = dots)
-  invisible(batch_files(path, failed = NA))
+  invisible(batch_files_remaining(path, failed = NA))
 }

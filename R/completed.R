@@ -1,7 +1,7 @@
 #' Batch Completed?
 #' 
 #' Tests if there are any remaining files to process as listed
-#' by \code{\link{batch_files}()}.
+#' by \code{\link{batch_files_remaining}()}.
 #' 
 #' By default, files that previously failed to process are excluded.
 #'
@@ -11,5 +11,5 @@
 #' @seealso \code{\link{batch_process}()}
 #' @export
 batch_completed <- function(path = ".", failed = FALSE) {
-  length(batch_files(path = path, failed = failed)) == 0L
+  length(batch_files_remaining(path = path, failed = failed)) == 0L
 }

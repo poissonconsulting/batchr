@@ -11,7 +11,7 @@
 #' @return A character vector of the names of the remaining files.
 #' @seealso \code{\link{batch_process}()} and \code{\link{batch_run}()} 
 #' @export
-batch_files <- function(path = ".", failed = FALSE) {
+batch_files_remaining <- function(path = ".", failed = FALSE) {
   chk_lgl(failed)
   config <- batch_config_read(path)
   files <- list.files(path, pattern = config$regexp, recursive = config$recurse)

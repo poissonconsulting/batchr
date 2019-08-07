@@ -37,7 +37,7 @@ the type (SUCCESS or FAILURE), the
 system time in UTC, the file name and any error messages.
 The hidden log file can be read using \code{\link{batch_log_read}()}.
 
-\code{\link{batch_files}()} provides a vector of the files that
+\code{\link{batch_files_remaining}()} provides a vector of the files that
 are remaining to be processed.
 
 When processing is complete the hidden configuration file

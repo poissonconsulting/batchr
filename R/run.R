@@ -8,7 +8,7 @@
 #' system time in UTC, the file name and any error messages.
 #' The hidden log file can be read using \code{\link{batch_log_read}()}.
 #' 
-#' \code{\link{batch_files}()} provides a vector of the files that
+#' \code{\link{batch_files_remaining}()} provides a vector of the files that
 #' are remaining to be processed.
 #' 
 #' When processing is complete the hidden configuration file
@@ -53,7 +53,7 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
   if(recurse && length(config_files(path = path, recursive = recurse)) > 1)
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
-  remaining <- batch_files(path, failed = failed)
+  remaining <- batch_files_remaining(path, failed = failed)
   if(!length(remaining)) return(structure(logical(0), .Names = character(0)))
   question <- p0("Batch process ", length(remaining), " files in '", path, "'?")
   if(ask && !yesno(question))

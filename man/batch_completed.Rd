@@ -18,7 +18,7 @@ A flag specifying whether batch processing is complete.
 }
 \description{
 Tests if there are any remaining files to process as listed
-by \code{\link{batch_files}()}.
+by \code{\link{batch_files_remaining}()}.
 }
 \details{
 By default, files that previously failed to process are excluded.
