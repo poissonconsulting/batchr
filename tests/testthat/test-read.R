@@ -136,6 +136,37 @@ test_that("batch_log_read all error processing", {
   expect_match(log$message, "^a problem $")
 })
 
+
+test_that("batch_log_read one success (string) and one failure (error)", {
+  teardown(unlink(file.path(tempdir(), "batchr")))
+  
+  path <- file.path(tempdir(), "batchr")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+  
+  fun <- function(x) {
+    if(grepl("file1[.]csv$", x)) stop("an error")
+    "a success"
+  }
+  
+  expect_identical(batch_config(fun, path = path, regexp = "^file\\d[.]csv$"),
+                   c("file1.csv", "file2.csv"))
+  
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
+  
+  log <- batch_log_read(path)
+  expect_identical(colnames(log), c("type", "time", "file", "message"))
+  expect_is(log$time, "POSIXct")
+  expect_identical(attr(log$time, "tzone"), "UTC")
+  expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c("file1.csv", 
+"file2.csv")), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA, 
+-2L)))
+  expect_identical(log$message, c("an error ", "a success"))
+})
+
 test_that("batch_log_read with no configuration", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
