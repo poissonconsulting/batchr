@@ -18,7 +18,7 @@
 #' remaining to be processed.
 #' @seealso \code{\link{batch_process}()} and \code{\link{batch_config}()}
 #' @export
-batch_reconfig_fun <- function(fun, path = ".", ...) {
+batch_reconfig_fun <- function(path = ".", fun, ...) {
   chk_function(fun)
   chk_dir(path)
 
@@ -55,8 +55,8 @@ batch_reconfig_fun <- function(fun, path = ".", ...) {
 #' @export
 batch_reconfig_fileset <- function(path = ".", regexp = NULL, recurse = NULL) {
   chk_dir(path)
-  if(is.null(regexp)) chk_string(regexp)
-  if(is.null(recurse)) chk_flag(recurse)
+  if(!is.null(regexp)) chk_string(regexp)
+  if(!is.null(recurse)) chk_flag(recurse)
   
   if(is.null(regexp) && is.null(recurse)) 
     err("`regexp` and `recurse` must not both be NULL.")

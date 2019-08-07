@@ -4,15 +4,15 @@
 \alias{batch_reconfig_fun}
 \title{Reconfigures Batch Processing Function}
 \usage{
-batch_reconfig_fun(fun, path = ".", ...)
+batch_reconfig_fun(path = ".", fun, ...)
 }
 \arguments{
+\item{path}{A string of the path to the directory with the files for processing.}
+
 \item{fun}{A function to process each of the files. 
 \code{fun}'s first argument should be a string of the path to a single file.
 If processing is unsuccessful \code{fun} should return FALSE 
 or throw an error (error messages are caught and automatically logged).}
-
-\item{path}{A string of the path to the directory with the files for processing.}
 
 \item{...}{Additional arguments passed to \code{fun}.}
 }
