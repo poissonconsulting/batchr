@@ -17,5 +17,5 @@ Reads the values in the
 configuration file created by \code{\link{batch_config}()}.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{batch_read_log}()}
+\code{\link{batch_process}()} and \code{\link{batch_log_read}()}
 }

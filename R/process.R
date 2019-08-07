@@ -44,7 +44,7 @@
 #' with the type (TRUE (success), FALSE (returned FALSE) or ERROR (threw an error)),
 #' system time in UTC, file name and error message.
 #' This information can be read as a tibble
-#' using \code{\link{batch_read_log}()}.
+#' using \code{\link{batch_log_read}()}.
 #' 
 #' @inheritParams batch_config
 #' @inheritParams batch_run

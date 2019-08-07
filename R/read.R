@@ -5,7 +5,7 @@
 #'
 #' @inheritParams batch_config
 #' @return A named list of the configuration values.
-#' @seealso \code{\link{batch_process}()} and \code{\link{batch_read_log}()}
+#' @seealso \code{\link{batch_process}()} and \code{\link{batch_log_read}()}
 #' @export
 batch_config_read <- function(path) {
   chk_dir(path)
@@ -28,7 +28,7 @@ batch_config_read <- function(path) {
 #' }
 #' @seealso \code{\link{batch_process}()} and \code{\link{batch_config_read}()}
 #' @export
-batch_read_log <- function(path = ".") {
+batch_log_read <- function(path = ".") {
   batch_config_read(path)
   logged_data(path)
 }
