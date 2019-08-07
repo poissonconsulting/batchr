@@ -62,9 +62,9 @@ batch_run <- function(path = ".",
                  normalizePath(path), "'?")
   if(ask && !yesno(question))
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
-
-  success <- lapply(remaining, process_file, fun = fun, dots = dots, 
+  
+  success <- process_files(remaining, fun = fun, dots = dots, 
                     path = path, config_time = config$time, progress = progress)
-  success <- unlist(success)
-  invisible(set_names(success, remaining))
+
+  invisible(success)
 }

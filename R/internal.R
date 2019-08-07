@@ -22,9 +22,9 @@ logged_data <- function(path) {
   if(!length(lines)) return(no_log_data())
   
   regexp <- p0("^([SUCESFAILUR]{7,7})( \\[)",
-                "(\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d)",
-                "(\\] ')([^']+)('\\s*)(.*)$")
-
+               "(\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d)",
+               "(\\] ')([^']+)('\\s*)(.*)$")
+  
   type <- gsub(regexp, "\\1", lines)
   time <- gsub(regexp, "\\3", lines)
   file <- gsub(regexp, "\\5", lines)
@@ -32,7 +32,7 @@ logged_data <- function(path) {
   
   time <- as.POSIXct(time, tz = "UTC")
   is.na(error[error == ""]) <- TRUE
-
+  
   tibble(type = type, time = time, file = file, error = error)
 }
 
@@ -101,6 +101,13 @@ process_file <- function(file, fun, dots, path, config_time, progress) {
   log_msg(path, msg)
   if(isTRUE(progress)) console_msg(msg)
   TRUE
+}
+
+process_files <- function(remaining, fun, dots, path, config_time, progress) {
+  success <- lapply(remaining, process_file, fun = fun, dots = dots, 
+                    path = path, config_time = config_time, progress = progress)
+  success <- unlist(success)
+  invisible(set_names(success, remaining))
 }
 
 cleanup_log_file <- function(path) {
