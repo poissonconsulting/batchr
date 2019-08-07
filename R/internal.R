@@ -21,14 +21,14 @@ logged_data <- function(path) {
   lines <- read_lines_log(path)
   if(!length(lines)) return(no_log_data())
   
-  regexp <- p0("^([SUCESFAILUR]{7,7})( \\[)",
+  regexp <- p0("^([SUCESFAILUR]{7,7})( )([123456789]\\d*/\\d+/\\d+)( \\[)",
                "(\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d)",
                "(\\] ')([^']+)('\\s*)(.*)$")
   
   type <- gsub(regexp, "\\1", lines)
-  time <- gsub(regexp, "\\3", lines)
-  file <- gsub(regexp, "\\5", lines)
-  error <- gsub(regexp, "\\7", lines)
+  time <- gsub(regexp, "\\5", lines)
+  file <- gsub(regexp, "\\7", lines)
+  error <- gsub(regexp, "\\9", lines)
   
   time <- as.POSIXct(time, tz = "UTC")
   is.na(error[error == ""]) <- TRUE
@@ -92,21 +92,21 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   if(is_try_error(output)) {
     output <- gsub("\n+", " ", as.character(output))
     count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
-    msg <- p("FAILURE", msg, output)
+    msg <- p("FAILURE", count, msg, output)
     log_msg(path, msg)
     if(!isFALSE(progress)) console_msg(msg)
     return(FALSE)
   }
   if(isFALSE(output)) {
     count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
-    msg <- p("FAILURE", msg)
+    msg <- p("FAILURE", count, msg)
     log_msg(path, msg)
     if(!isFALSE(progress)) console_msg(msg)
     return(FALSE)
   }
   touch_file(path, file)
   count <- p(formatc(i, n), formatc(n, n), formatc(e, n), sep = "/")
-  msg <- p("SUCCESS", msg)
+  msg <- p("SUCCESS", count, msg)
   log_msg(path, msg)
   if(isTRUE(progress)) console_msg(msg)
   TRUE

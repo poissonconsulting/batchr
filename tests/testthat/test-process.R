@@ -11,7 +11,7 @@ test_that("batch_process",{
   
   expect_output(batch_process(function(x) TRUE, path = path, 
                             regexp = "^file\\d[.]csv$", ask = FALSE),
-                "^SUCCESS \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'$")
+                "^SUCCESS 1/1/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'$")
 })
 
 test_that("batch_process changes files", {
@@ -55,7 +55,7 @@ test_that("batch_process with failure FALSE", {
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
   expect_output(batch_process(fun, path, ask = FALSE), 
-                "^FAILURE \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s*FAILURE \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'$")
+                "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s*FAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'$")
   expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
@@ -76,7 +76,7 @@ test_that("batch_process with failure ERROR", {
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
   expect_output(batch_process(fun, path, ask = FALSE), 
-                "^FAILURE \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s+Error\\s+:\\s+a problem\\s*FAILURE \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\s+Error\\s+:\\s+a problem\\s$")
+                "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s+Error\\s+:\\s+a problem\\s*FAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\s+Error\\s+:\\s+a problem\\s$")
   expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
