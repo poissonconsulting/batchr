@@ -10,7 +10,7 @@ batch_config(fun, path = ".", regexp = ".*", recurse = FALSE, ...)
 \item{fun}{A function to process each of the files. 
 \code{fun}'s first argument should be a string of the path to a single file.
 If processing is unsuccessful \code{fun} should return FALSE 
-or throw an error (error messages are automatically logged).}
+or throw an error (error messages are caught and automatically logged).}
 
 \item{path}{A string of the path to the directory with the files for processing.}
 
@@ -35,6 +35,15 @@ named '.batchr.rds'.
 The contents of the file can be read using
 \code{\link{batch_config_read}()} 
 or updated using \code{\link{batch_config_update}()}.
+
+Configuration is only possible if the directory does not already contain
+a configuration file. 
+If \code{recurse = TRUE} then the subdirectories
+must also not contain configuration files.
+
+The regexp must match at least one non-hidden file in the directory 
+or if \code{recurse = TRUE} in the directory or subdirectories.
+Hidden files are excluded to prevent accidental modification of system files.
 }
 \seealso{
 \code{\link{batch_process}()} and \code{\link{batch_run}()}

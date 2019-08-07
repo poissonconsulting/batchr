@@ -10,7 +10,7 @@ batch_config_update(fun, path = ".", ...)
 \item{fun}{A function to process each of the files. 
 \code{fun}'s first argument should be a string of the path to a single file.
 If processing is unsuccessful \code{fun} should return FALSE 
-or throw an error (error messages are automatically logged).}
+or throw an error (error messages are caught and automatically logged).}
 
 \item{path}{A string of the path to the directory with the files for processing.}
 

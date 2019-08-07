@@ -35,5 +35,5 @@ perform batch text file replacement.
 By default it replaces text in all .R and .r files in the working directory.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link{batch_process}()} and \code{\link{gsub_file}()}
 }

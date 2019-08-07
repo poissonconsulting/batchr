@@ -9,10 +9,19 @@
 #' \code{\link{batch_config_read}()} 
 #' or updated using \code{\link{batch_config_update}()}.
 #' 
+#' Configuration is only possible if the directory does not already contain
+#' a configuration file. 
+#' If \code{recurse = TRUE} then the subdirectories
+#' must also not contain configuration files.
+#' 
+#' The regexp must match at least one non-hidden file in the directory 
+#' or if \code{recurse = TRUE} in the directory or subdirectories.
+#' Hidden files are excluded to prevent accidental modification of system files.
+#' 
 #' @param fun A function to process each of the files. 
 #' \code{fun}'s first argument should be a string of the path to a single file.
 #' If processing is unsuccessful \code{fun} should return FALSE 
-#' or throw an error (error messages are automatically logged).
+#' or throw an error (error messages are caught and automatically logged).
 #' @param path A string of the path to the directory with the files for processing.
 #' @param regexp A string of a regular expression. Only non-hidden file names 
 #' which match the regular expression will be batch processed.

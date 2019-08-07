@@ -4,15 +4,15 @@
 \alias{batch_process}
 \title{Batch File Processing}
 \usage{
-batch_process(fun, path = ".", regexp = ".*", recurse = FALSE, ...,
+batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
   parallel = FALSE, force = TRUE, ask = getOption("batchr.ask",
-  TRUE))
+  TRUE), ...)
 }
 \arguments{
 \item{fun}{A function to process each of the files. 
 \code{fun}'s first argument should be a string of the path to a single file.
 If processing is unsuccessful \code{fun} should return FALSE 
-or throw an error (error messages are automatically logged).}
+or throw an error (error messages are caught and automatically logged).}
 
 \item{path}{A string of the path to the directory with the files for processing.}
 
@@ -21,8 +21,6 @@ which match the regular expression will be batch processed.}
 
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 
-\item{...}{Additional arguments passed to \code{fun}.}
-
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
@@ -30,6 +28,8 @@ parallel (not yet used).}
 log files even if there are files remaining to be processed.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
+
+\item{...}{Additional arguments passed to \code{fun}.}
 }
 \value{
 An invisible flag indicating whether all the files where 
@@ -38,50 +38,12 @@ successfully processed.
 \description{
 Performs batch processing of files in a directory using the 
 \code{\link{batch_config}()}, \code{\link{batch_run}()}
-and \code{\link{batch_cleanup}()} functions. 
-For more control and interactivity the user should call these functions
-instead of \code{\link{batch_process}()}.
+and \code{\link{batch_cleanup}()} functions.
+For more control the user should call these three functions instead.
 }
 \details{
-As well as the directory and a regular expression to identify files the
-user must provide the function that will be used to process each file.
-Processing is started (and can be manually restarted) 
-using \code{\link{batch_run}()}
-which locks the configuration file with \code{\link[filelock]{lock}} 
-to prevent concurrent calls.
-
-The files that have not yet been processed can be got 
-using \code{\link{batch_files_remaining}()} while 
-\code{\link{batch_completed}()} tests whether there are any remaining files.
-By default (\code{failed = FALSE}) both functions exclude files that failed
-to process. To only consider files that failed to process set
-\code{failed = TRUE}. If \code{failed = NA} then remaining files are those
-that have not yet been processed as well as those that have failed to process.
-
-The configuration details are saved in the '.batchr.rds file'
-which can be read using \code{\link{batch_config_read}()}.
-Configuration is only possible if the directory does not already contain
-a configuration file. If \code{recurse = TRUE} then the subdirectories
-must also not contain configuration files.
-
-The regexp must match at least one non-hidden file in the directory 
-(or if \code{recurse = TRUE} in the directory or subdirectories).
-Hidden files are excluded to prevent accidental modification of system files.
-
-The fun function's first argument should be 
-a string of the path to a single file.
-The function should return anything other than a FALSE if 
-processing was successful.
-
-Processing is only considered to have failed if the fun returns FALSE or
-throws an error. 
-Any errors are caught and batch processing resumes at the next file.
-
-All attempts to process a file are logged in the '.batchr.log' file 
-with the type (TRUE (success), FALSE (returned FALSE) or ERROR (threw an error)),
-system time in UTC, file name and error message.
-This information can be read as a tibble
-using \code{\link{batch_log_read}()}.
+\code{\link{batch_gsub}()} provides a simple wrapper for
+batch text replacement.
 }
 \seealso{
 \code{\link{batch_config}()}, \code{\link{batch_run}()}

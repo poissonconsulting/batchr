@@ -28,7 +28,7 @@ gsub_file <- function(file, pattern, replacement) {
 #' @inheritParams batch_cleanup
 #' @inheritParams gsub_file
 #'
-#' @seealso \code{\link{batch_process}()}
+#' @seealso \code{\link{batch_process}()} and \code{\link{gsub_file}()}
 #' @return An invisible flag indicating whether all the files were 
 #' successfully processed.
 #' @export
