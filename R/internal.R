@@ -112,9 +112,12 @@ process_files <- function(remaining, fun, dots, path, config_time, parallel,
                            path = path, config_time = config_time, 
                            .parallel = TRUE, progress = FALSE)
   } else {
-    success <- lapply(remaining, process_file, fun = fun, dots = dots, 
-                      path = path, config_time = config_time, 
-                      progress = progress)
+    success <- rep(NA, length(remaining))
+    for(i in seq_along(remaining)) {
+      success[i] <- process_file(remaining[i], fun = fun, dots = dots, 
+                                 path = path, config_time = config_time, 
+                                 progress = progress)
+    }
   }
   success <- unlist(success)
   invisible(set_names(success, remaining))
