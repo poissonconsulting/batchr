@@ -38,7 +38,7 @@ This design means that:
 
 To allow the user control over the reprocessing of problematic files, 
 all processing attempts (SUCCESS or FAILURE) are recorded in a hidden log file.
-It is worth noting that if a file is modified (or deleted) 
+It is worth noting that if a file is modified or deleted 
 during processing it is no longer considered (even if processing failed).
 
 ## Installation

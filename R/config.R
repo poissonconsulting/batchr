@@ -22,6 +22,8 @@
 #' \code{fun}'s first argument should be a string of the path to a single file.
 #' If processing is unsuccessful \code{fun} should return FALSE 
 #' or throw an error (error messages are caught and automatically logged).
+#' If fun deletes or modifies the file then it is no longer considered 
+#' for processing.
 #' @param path A string of the path to the directory with the files for processing.
 #' @param regexp A string of a regular expression. Only non-hidden file names 
 #' which match the regular expression will be batch processed.

@@ -86,12 +86,34 @@ formatc <- function(i, n) {
   formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
+sum2intswrap <- function(x, y) {
+  x <- as.double(x) + as.double(y)
+  mx <- as.double(.Machine$integer.max)
+  if(x < -mx || x > mx) {
+    x <- x %% mx
+  }
+  as.integer(x)
+}
+
+addstring2int <- function(x, string) {
+  if(!requireNamespace("digest", quietly = TRUE))
+    err("Package digest is required to update the seed using the file name.")
+  int <- digest::digest2int(string)
+  sum2intswrap(x, int)
+}
+
+set_seed_string <- function(seed, string) {
+  seed <- addstring2int(seed, string)
+  set.seed(seed)
+}
+
 process_file <- function(file, fun, dots, path, config_time, progress,
                          seed, i = 1, n = 1, e = 0) {
   validate_remaining_file(path, file, config_time)
   
   dots <- c(file.path(path, file), dots)
-  if(!is.null(seed)) set.seed(seed)
+  if(!is.null(seed)) set_seed_string(seed, file)
+  
   output <- try(do.call("fun", dots), silent = TRUE)
   
   time <- sys_time_utc()
@@ -127,7 +149,7 @@ process_files <- function(remaining, fun, dots, path, config_time, parallel,
                           progress, seed) {
   if(parallel) {
     if(!requireNamespace("plyr", quietly = TRUE))
-      err("plyr is required to batch process files in parallel")
+      err("Package plyr is required to batch process files in parallel.")
     success <- plyr::llply(remaining, process_file, fun = fun, dots = dots, 
                            path = path, config_time = config_time, 
                            .parallel = TRUE, progress = FALSE, seed = seed)

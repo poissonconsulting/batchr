@@ -32,7 +32,7 @@ This design means that:
 
 To allow the user control over the reprocessing of problematic files,
 all processing attempts (SUCCESS or FAILURE) are recorded in a hidden
-log file. It is worth noting that if a file is modified (or deleted)
+log file. It is worth noting that if a file is modified or deleted
 during processing it is no longer considered (even if processing
 failed).
 
@@ -76,8 +76,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
-#> SUCCESS 1/2/0 [2019-08-07 21:29:32] 'file1.csv'
-#> SUCCESS 2/2/0 [2019-08-07 21:29:32] 'file2.csv'
+#> SUCCESS 1/2/0 [2019-08-07 21:31:05] 'file1.csv'
+#> SUCCESS 2/2/0 [2019-08-07 21:31:05] 'file2.csv'
 #> [1] TRUE
 ```
 
