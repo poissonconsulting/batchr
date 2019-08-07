@@ -56,11 +56,13 @@ touch_file <- function(path, file) {
 
 log_msg <- function(path, msg) {
   file <- file.path(path, ".batchr.log")
+  msg <- gsub("\n+", " ", msg)
   msg <- p0(msg, "\n")
   cat(msg, file = file, append = file.exists(file))
 }
 
 console_msg <- function(msg) {
+  msg <- gsub("\n+", " ", msg)
   msg <- p0(msg, "\n")
   cat(msg)
 }
@@ -91,7 +93,8 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   msg <- p0("[", time, "]", " '", file, "'")
   
   if(is_try_error(output)) {
-    output <- gsub("\n+", " ", as.character(output))
+    output <- as.character(output)
+    output <- sub("^Error[^:]+:\\s+", "", output)
     count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
     msg <- p("FAILURE", count, msg, output)
     log_msg(path, msg)
@@ -108,6 +111,7 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   touch_file(path, file)
   count <- p(formatc(i, n), formatc(n, n), formatc(e, n), sep = "/")
   msg <- p("SUCCESS", count, msg)
+  if(chk_string(output, err = FALSE)) msg <- p(msg, output)
   log_msg(path, msg)
   if(isTRUE(progress)) console_msg(msg)
   TRUE

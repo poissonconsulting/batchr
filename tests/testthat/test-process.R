@@ -76,9 +76,48 @@ test_that("batch_process with failure ERROR", {
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
   expect_output(batch_process(fun, path, ask = FALSE), 
-                "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s+Error\\s+:\\s+a problem\\s*FAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\s+Error\\s+:\\s+a problem\\s$")
+                "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\sa problem\\s*FAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\sa problem\\s$")
   expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
 })
 
+test_that("batch_process with sucess character scalar", {
+  teardown(unlink(file.path(tempdir(), "batchr_process")))
+  
+  path <- file.path(tempdir(), "batchr_process")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
+  
+  fun <- function(file) " it worked"
+
+  expect_error(batch_config_read(path),
+               "^Can't find file '.*[.]batchr.rds'[.]$")
+  expect_output(batch_process(fun, path, ask = FALSE), 
+                "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s\\sit worked\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\s\\sit worked$")
+  expect_error(batch_config_read(path),
+               "^Can't find file '.*[.]batchr.rds'[.]$")
+})
+
+test_that("batch_process with sucess character vector", {
+  teardown(unlink(file.path(tempdir(), "batchr_process")))
+  
+  path <- file.path(tempdir(), "batchr_process")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
+  
+  fun <- function(file) c(" it worked", "shouldn't show")
+
+  expect_error(batch_config_read(path),
+               "^Can't find file '.*[.]batchr.rds'[.]$")
+  expect_output(batch_process(fun, path, ask = FALSE), 
+                "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'$")
+  expect_error(batch_config_read(path),
+               "^Can't find file '.*[.]batchr.rds'[.]$")
+})
