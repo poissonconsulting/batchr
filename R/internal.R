@@ -54,16 +54,20 @@ touch_file <- function(path, file) {
   Sys.setFileTime(file.path(path, file), Sys.time())
 }
 
-log_msg <- function(path, msg) {
-  file <- file.path(path, ".batchr.log")
+clean_msg <- function(msg) {
   msg <- gsub("\n+", " ", msg)
   msg <- p0(msg, "\n")
+  msg  
+}
+
+log_msg <- function(path, msg) {
+  file <- file.path(path, ".batchr.log")
+  msg <- clean_msg(msg)
   cat(msg, file = file, append = file.exists(file))
 }
 
 console_msg <- function(msg) {
-  msg <- gsub("\n+", " ", msg)
-  msg <- p0(msg, "\n")
+  msg <- clean_msg(msg)
   cat(msg)
 }
 
