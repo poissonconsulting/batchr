@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Log Files — batch_log_files • batchr</title>
+<title>Updates Batch Processing Configuration — batch_config_update • batchr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Log Files — batch_log_files" />
+<meta property="og:title" content="Updates Batch Processing Configuration — batch_config_update" />
 
-<meta property="og:description" content="Log Files" />
+<meta property="og:description" content="Updates the function that was provided when a directory was configured 
+using batch_config()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -113,39 +114,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Log Files</h1>
+    <h1>Updates Batch Processing Configuration</h1>
     
-    <div class="hidden name"><code>batch_log_files.Rd</code></div>
+    <div class="hidden name"><code>batch_config_update.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Log Files</p>
+    <p>Updates the function that was provided when a directory was configured 
+using <code><a href='batch_config.html'>batch_config</a>()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_log_files</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_config_update</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>A string of the path to the directory with the files.</p></td>
+      <th>fun</th>
+      <td><p>A function to process each of the files. 
+<code>fun</code>'s first argument should be a string of the path to a single file.
+If processing is unsuccessful <code>fun</code> should return FALSE 
+or throw an error (error messages are caught and automatically logged).</p></td>
     </tr>
     <tr>
-      <th>recursive</th>
-      <td><p>A flag specifying whether to recurse into sub directories.</p></td>
+      <th>path</th>
+      <td><p>A string of the path to the directory with the files for processing.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code>fun</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector of the names of the log file(s).</p>
+    <p>An invisible character vector of the paths to the files 
+remaining to be processed.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>batch_config_update()</code> is useful if a new version of the files is required
+to successfully process some of the files.</p>
+<p>It should be noted that <code>batch_config_update()</code> does not alter the 
+configuration time.</p>
+<p>In order to process previously failed files <code><a href='batch_run.html'>batch_run</a>()</code>
+should be called with <code>failed = NA</code> or <code>failed = TRUE</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code> and <code><a href='batch_config.html'>batch_config</a>()</code></p></div>
     
 
   </div>
@@ -155,6 +174,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

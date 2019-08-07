@@ -34,7 +34,7 @@
 
 <meta property="og:title" content="File Text Replacement — gsub_file" />
 
-<meta property="og:description" content="Uses gsub to perform text pattern replacement on a file." />
+<meta property="og:description" content="Uses gsub to perform text replacement on a file." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -120,11 +120,11 @@
 
     <div class="ref-description">
     
-    <p>Uses <code><a href='https://rdrr.io/r/base/grep.html'>gsub</a></code> to perform text pattern replacement on a file.</p>
+    <p>Uses <code><a href='https://rdrr.io/r/base/grep.html'>gsub</a></code> to perform text replacement on a file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gsub_file</span>(<span class='no'>file</span>, <span class='no'>pattern_gsub</span>, <span class='no'>replacement_gsub</span>)</pre>
+    <pre class="usage"><span class='fu'>gsub_file</span>(<span class='no'>file</span>, <span class='no'>pattern</span>, <span class='no'>replacement</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,11 +134,11 @@
       <td><p>A string of the name of the file to modify.</p></td>
     </tr>
     <tr>
-      <th>pattern_gsub</th>
+      <th>pattern</th>
       <td><p>A string of the regular expression to match.</p></td>
     </tr>
     <tr>
-      <th>replacement_gsub</th>
+      <th>replacement</th>
       <td><p>A string of the replacement text.</p></td>
     </tr>
     </table>

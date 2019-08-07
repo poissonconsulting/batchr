@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Configuration Files — batch_config_files • batchr</title>
+<title>Read Log File — batch_log_read • batchr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Configuration Files — batch_config_files" />
+<meta property="og:title" content="Read Log File — batch_log_read" />
 
-<meta property="og:description" content="Configuration Files" />
+<meta property="og:description" content="Reads the values in the log file created by batch_run()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -113,39 +113,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Configuration Files</h1>
+    <h1>Read Log File</h1>
     
-    <div class="hidden name"><code>batch_config_files.Rd</code></div>
+    <div class="hidden name"><code>batch_log_read.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Configuration Files</p>
+    <p>Reads the values in the log file created by <code><a href='batch_run.html'>batch_run</a>()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_config_files</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_log_read</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>A string of the path to the directory with the files.</p></td>
-    </tr>
-    <tr>
-      <th>recursive</th>
-      <td><p>A flag specifying whether to recurse into sub directories.</p></td>
+      <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector of the names of the configuration file(s).</p>
+    <p>A tibble with four columns:</p><dl class='dl-horizontal'>
+  <dt>type</dt><dd><p>A character vector indicating SUCCESS or FAILURE</p></dd>
+  <dt>time</dt><dd><p>A POSIXct vector of the time of processing in UTC</p></dd>
+  <dt>file</dt><dd><p>A character vector of the file name</p></dd>
+  <dt>error</dt><dd><p>A character vector of the error message (or NA if no error)</p></dd>
+</dl>
+
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code> and <code><a href='batch_config_read.html'>batch_config_read</a>()</code></p></div>
     
 
   </div>

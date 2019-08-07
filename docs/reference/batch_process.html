@@ -36,9 +36,8 @@
 
 <meta property="og:description" content="Performs batch processing of files in a directory using the 
 batch_config(), batch_run()
-and batch_cleanup() functions. 
-For more control and interactivity the user should call these functions
-instead of batch_process()." />
+and batch_cleanup() functions.
+For more control the user should call these three functions instead." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +69,7 @@ instead of batch_process()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -126,39 +125,37 @@ instead of batch_process()." />
     
     <p>Performs batch processing of files in a directory using the 
 <code><a href='batch_config.html'>batch_config</a>()</code>, <code><a href='batch_run.html'>batch_run</a>()</code>
-and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code> functions. 
-For more control and interactivity the user should call these functions
-instead of <code>batch_process()</code>.</p>
+and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code> functions.
+For more control the user should call these three functions instead.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_process</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>,
-  <span class='fl'>TRUE</span>))</pre>
+    <pre class="usage"><span class='fu'>batch_process</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fun</th>
-      <td><p>A function to process each of the files.</p></td>
+      <td><p>A function to process each of the files. 
+<code>fun</code>'s first argument should be a string of the path to a single file.
+If processing is unsuccessful <code>fun</code> should return FALSE 
+or throw an error (error messages are caught and automatically logged).</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>A string of the path to the directory with the files.</p></td>
+      <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
     <tr>
-      <th>pattern</th>
+      <th>regexp</th>
       <td><p>A string of a regular expression. Only non-hidden file names 
 which match the regular expression will be batch processed.</p></td>
     </tr>
     <tr>
-      <th>recursive</th>
-      <td><p>A flag specifying whether to recurse into sub directories.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to fun.</p></td>
+      <th>recurse</th>
+      <td><p>A flag specifying whether to recurse into path's subdirectories.</p></td>
     </tr>
     <tr>
       <th>parallel</th>
@@ -166,13 +163,23 @@ which match the regular expression will be batch processed.</p></td>
 parallel (not yet used).</p></td>
     </tr>
     <tr>
+      <th>progress</th>
+      <td><p>A string specifying the type of output to log to the console
+when <code>parallel = FALSE</code>. 
+The possible values are "all", "failures" or "none".</p></td>
+    </tr>
+    <tr>
       <th>force</th>
-      <td><p>A flag specifying whether to remove configuration and 
+      <td><p>A flag specifying whether to delete configuration and 
 log files even if there are files remaining to be processed.</p></td>
     </tr>
     <tr>
       <th>ask</th>
-      <td><p>A flag specifying whether to ask before processing the files.</p></td>
+      <td><p>A flag specifying whether to ask before starting to process the files.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code>fun</code>.</p></td>
     </tr>
     </table>
     
@@ -183,41 +190,8 @@ successfully processed.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>As well as the directory and a regular expression to identify files the
-user must provide the function that will be used to process each file.
-Processing is started (and can be manually restarted) 
-using <code><a href='batch_run.html'>batch_run</a>()</code>
-which locks the configuration file with <code><a href='https://rdrr.io/pkg/filelock/man/lock.html'>lock</a></code> 
-to prevent concurrent calls.</p>
-<p>The files that have not yet been processed can be got 
-using <code><a href='batch_remaining_files.html'>batch_remaining_files</a>()</code> while 
-<code><a href='batch_completed.html'>batch_completed</a>()</code> tests whether there are any remaining files.
-By default (<code>failed = FALSE</code>) both functions exclude files that failed
-to process. To only consider files that failed to process set
-<code>failed = TRUE</code>. If <code>failed = NA</code> then remaining files are those
-that have not yet been processed as well as those that have failed to process.</p>
-<p>The configuration details are saved in the '.batchr.rds file'
-which can be read using <code><a href='batch_read_config.html'>batch_read_config</a>()</code>.
-Configuration is only possible if the directory does not already contain
-a configuration file. If <code>recursive = TRUE</code> then the subdirectories
-must also not contain configuration files.
-Existing configuration files can be listed 
-using <code><a href='batch_config_files.html'>batch_config_files</a>()</code>.</p>
-<p>The pattern must match at least one non-hidden file in the directory 
-(or if <code>recursive = TRUE</code> in the directory or subdirectories).
-Hidden files are excluded to prevent accidental modification of system files.</p>
-<p>The fun function's first argument should be 
-a string of the path to a single file.
-The function should return anything other than a FALSE if 
-processing was successful.</p>
-<p>Processing is only considered to have failed if the fun returns FALSE or
-throws an error. 
-Any errors are caught and batch processing resumes at the next file.</p>
-<p>All attempts to process a file are logged in the '.batchr.log' file 
-with the type (TRUE (success), FALSE (returned FALSE) or ERROR (threw an error)),
-system time in UTC, file name and error message.
-This information can be read as a tibble
-using <code><a href='batch_read_log.html'>batch_read_log</a>()</code>.</p>
+    <p><code><a href='batch_gsub.html'>batch_gsub</a>()</code> provides a simple wrapper for
+batch text replacement.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

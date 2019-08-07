@@ -34,8 +34,8 @@
 
 <meta property="og:title" content="Runs Batch Processing — batch_run" />
 
-<meta property="og:description" content="Starts (or restarts if previously stopped) processing the files
-specified in the configuration file." />
+<meta property="og:description" content="Starts (or restarts if previously stopped) processing the remaining files
+specified by batch_config()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -67,7 +67,7 @@ specified in the configuration file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -121,25 +121,26 @@ specified in the configuration file." />
 
     <div class="ref-description">
     
-    <p>Starts (or restarts if previously stopped) processing the files
-specified in the configuration file.</p>
+    <p>Starts (or restarts if previously stopped) processing the remaining files
+specified by <code><a href='batch_config.html'>batch_config</a>()</code>.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>batch_run</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='st'>"none"</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>))</pre>
+  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>A string of the path to the directory with the files.</p></td>
+      <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
     <tr>
       <th>failed</th>
-      <td><p>A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that have thus far failed to process.</p></td>
+      <td><p>A logical scalar specifying how to treat files 
+that previously failed to process. If FALSE (the default) failed files 
+are excluded, if NA they are included and if TRUE they are only included.</p></td>
     </tr>
     <tr>
       <th>parallel</th>
@@ -148,12 +149,13 @@ parallel (not yet used).</p></td>
     </tr>
     <tr>
       <th>progress</th>
-      <td><p>A string specifying the level of output to the console. 
-The possible values are ""all", "failures" or "none".</p></td>
+      <td><p>A string specifying the type of output to log to the console
+when <code>parallel = FALSE</code>. 
+The possible values are "all", "failures" or "none".</p></td>
     </tr>
     <tr>
       <th>ask</th>
-      <td><p>A flag specifying whether to ask before processing the files.</p></td>
+      <td><p>A flag specifying whether to ask before starting to process the files.</p></td>
     </tr>
     </table>
     
@@ -162,9 +164,23 @@ The possible values are ""all", "failures" or "none".</p></td>
     <p>An invisible named logical vector indicating for each file
 whether it was successfully processed.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>batch_run()</code> logs all file processing attempts together with the
+the type (SUCCESS or FAILURE), the 
+system time in UTC, the file name and any error messages.
+The hidden log file can be read using <code><a href='batch_log_read.html'>batch_log_read</a>()</code>.</p>
+<p><code><a href='batch_files_remaining.html'>batch_files_remaining</a>()</code> provides a vector of the files that
+are remaining to be processed.</p>
+<p>When processing is complete the hidden configuration file
+and hidden log file can be deleted using <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code>.</p>
+<p>If a remaining file is removed or modified by a separate process,
+<code>batch_run()</code> throws an error.</p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code>, <code><a href='batch_config.html'>batch_config</a>()</code> and 
+<code><a href='batch_cleanup.html'>batch_cleanup</a>()</code></p></div>
     
 
   </div>
@@ -174,6 +190,8 @@ whether it was successfully processed.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

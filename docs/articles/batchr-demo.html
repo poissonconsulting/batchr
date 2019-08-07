@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -88,57 +88,66 @@
 <div id="demonstration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#demonstration" class="anchor"></a>Demonstration</h2>
-<p>For the purposes of this demonstration let’s create a temporary directory with two csv files.</p>
+<p>Consider a temporary directory with the four txt files</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>path &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"demo"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(path)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(path)</span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span>), <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file1.csv"</span>))</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">3</span>), <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file2.csv"</span>))</span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file.txt"</span>, <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file.txt"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file2.txt"</span>, <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file2.txt"</span>))</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file3.txt"</span>, <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file3.txt"</span>))</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file4.txt"</span>, <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file4.txt"</span>))</span></code></pre></div>
+<p>and a function that would successfully process the first two files but fail for the last two by returning FALSE and throwing an error, respectively.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>fun &lt;-<span class="st"> </span><span class="cf">function</span>(file) {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="cf">if</span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"file3[.]txt$"</span>, file)) <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="ot">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="cf">if</span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"file4[.]txt$"</span>, file)) <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"this is the error message"</span>, <span class="dt">call. =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  txt &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(file)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  txt &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"contents"</span>, <span class="st">"modified contents"</span>, txt)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(txt, file)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>}</span></code></pre></div>
 <div id="configuration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#configuration" class="anchor"></a>Configuration</h3>
-<p>The first task is for the user to configure a directory by specify the files to process and the function to process them with.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(batchr)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>fun &lt;-<span class="st"> </span><span class="cf">function</span>(file) {</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(file)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  data<span class="op">$</span>y &lt;-<span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(data, file)</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="ot">TRUE</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>}</span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="kw"><a href="../reference/batch_config.html">batch_config</a></span>(fun, <span class="dt">path =</span> path, <span class="dt">pattern =</span> <span class="st">"^file</span><span class="ch">\\</span><span class="st">d[.]csv$"</span>)</span></code></pre></div>
-<p>Configuring a directory creates a hidden file (<code>.batchr.rds</code>) which can be read using <code><a href="../reference/batch_read_config.html">batch_read_config()</a></code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/batch_config_files.html">batch_config_files</a></span>(path) <span class="co"># hidden file</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; [1] ".batchr.rds"</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw"><a href="../reference/batch_read_config.html">batch_read_config</a></span>(path)</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; $time</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; [1] "2019-08-06 22:28:27 UTC"</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; $pattern</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; [1] "^file\\d[.]csv$"</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; </span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; $recursive</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; [1] FALSE</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; </span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; $fun</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; function(file) {</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   data &lt;- read.csv(file)</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;   data$y &lt;- data$x * 2</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt;   write.csv(data, file)</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt;   TRUE</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; }</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; </span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; $dots</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; list()</span></span></code></pre></div>
+<p>First the user should configure the directory by providing a regular expression.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(batchr)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw"><a href="../reference/batch_config.html">batch_config</a></span>(fun, <span class="dt">path =</span> path, <span class="dt">pattern =</span> <span class="st">"^file</span><span class="ch">\\</span><span class="st">d[.]csv$"</span>)</span></code></pre></div>
+<p>Configuring a directory creates a hidden file which can be read as follows</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/batch_config_read.html">batch_config_read</a></span>(path)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; $time</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; [1] "2019-08-07 02:18:10 UTC"</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; </span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; $regexp</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; [1] ".*"</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; $recurse</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; </span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; $fun</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; function(file) {</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt;   if(grepl("file3[.]txt$", file)) return(FALSE)</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;   if(grepl("file4[.]txt$", file)) stop("this is the error message", call. = FALSE)</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;   txt &lt;- readLines(file)</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt;   txt &lt;- gsub("contents", "modified contents", txt)</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt;   writeLines(txt, file)</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; }</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; </span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; $dots</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; $dots$pattern</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; [1] "^file\\d[.]csv$"</span></span></code></pre></div>
 <p>The <code>time</code> value specifies the system time (in UTC) that the project was configured. A file is only treated as unprocessed if the time it was last modified is <em>before</em> the time of configuration If a file is successfully processed its modification time is set to the current time; otherwise the name of the file is logged in the <code>.batchr.log</code> file.</p>
 </div>
 <div id="start" class="section level3">
 <h3 class="hasAnchor">
 <a href="#start" class="anchor"></a>Start</h3>
 <p>The next task is to start (or restart) processing the files using <code>batch_start()</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; FAILURE [2019-08-07 02:18:10] 'file.txt' Error in fun("/var/folders/48/q6ltldjs251000_wvjrdy_vm0000gn/T//RtmpeFbOjU/demo/file.txt",  :    unused argument (pattern = "^file\\d[.]csv$") </span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; FAILURE [2019-08-07 02:18:10] 'file2.txt' Error in fun("/var/folders/48/q6ltldjs251000_wvjrdy_vm0000gn/T//RtmpeFbOjU/demo/file2.txt",  :    unused argument (pattern = "^file\\d[.]csv$") </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; FAILURE [2019-08-07 02:18:10] 'file3.txt' Error in fun("/var/folders/48/q6ltldjs251000_wvjrdy_vm0000gn/T//RtmpeFbOjU/demo/file3.txt",  :    unused argument (pattern = "^file\\d[.]csv$") </span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; FAILURE [2019-08-07 02:18:10] 'file4.txt' Error in fun("/var/folders/48/q6ltldjs251000_wvjrdy_vm0000gn/T//RtmpeFbOjU/demo/file4.txt",  :    unused argument (pattern = "^file\\d[.]csv$")</span></span></code></pre></div>
 </div>
 </div>
   </div>

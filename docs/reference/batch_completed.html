@@ -34,7 +34,8 @@
 
 <meta property="og:title" content="Batch Completed? — batch_completed" />
 
-<meta property="og:description" content="Tests if there are any remaining files to batch process." />
+<meta property="og:description" content="Tests if there are any remaining files to process as listed
+by batch_files_remaining()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -120,7 +121,8 @@
 
     <div class="ref-description">
     
-    <p>Tests if there are any remaining files to batch process.</p>
+    <p>Tests if there are any remaining files to process as listed
+by <code><a href='batch_files_remaining.html'>batch_files_remaining</a>()</code>.</p>
     
     </div>
 
@@ -131,12 +133,13 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>A string of the path to the directory with the files.</p></td>
+      <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
     <tr>
       <th>failed</th>
-      <td><p>A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that have thus far failed to process.</p></td>
+      <td><p>A logical scalar specifying how to treat files 
+that previously failed to process. If FALSE (the default) failed files 
+are excluded, if NA they are included and if TRUE they are only included.</p></td>
     </tr>
     </table>
     
@@ -146,8 +149,7 @@ include (NA), or only include (TRUE) files that have thus far failed to process.
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>By default, files that were not successfully processed are 
-excluded.</p>
+    <p>By default, files that previously failed to process are excluded.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

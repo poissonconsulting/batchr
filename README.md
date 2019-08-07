@@ -59,6 +59,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
+#> SUCCESS [2019-08-07 02:17:54] 'file1.csv'
+#> SUCCESS [2019-08-07 02:17:54] 'file2.csv'
 #> [1] TRUE
 ```
 
@@ -94,4 +96,4 @@ always welcome.
 Please note that the ‘batchr’ project is released with a [Contributor
 Code of
 Conduct](https://poissonconsulting.github.io/batchr/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms
+By contributing to this project, you agree to abide by its terms.

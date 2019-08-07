@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remaining Files — batch_remaining_files • batchr</title>
+<title>Batch Files — batch_files_remaining • batchr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Remaining Files — batch_remaining_files" />
+<meta property="og:title" content="Batch Files — batch_files_remaining" />
 
-<meta property="og:description" content="Gets the names of the files that are remaining to be processed." />
+<meta property="og:description" content="Gets the names of the files that are remaining to be processed by
+batch_run()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -113,30 +114,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remaining Files</h1>
+    <h1>Batch Files</h1>
     
-    <div class="hidden name"><code>batch_remaining_files.Rd</code></div>
+    <div class="hidden name"><code>batch_files_remaining.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Gets the names of the files that are remaining to be processed.</p>
+    <p>Gets the names of the files that are remaining to be processed by
+<code><a href='batch_run.html'>batch_run</a>()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_remaining_files</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_files_remaining</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>A string of the path to the directory with the files.</p></td>
+      <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
     <tr>
       <th>failed</th>
-      <td><p>A logical scalar specifying whether to exclude (FALSE),
-include (NA), or only include (TRUE) files that have thus far failed to process.</p></td>
+      <td><p>A logical scalar specifying how to treat files 
+that previously failed to process. If FALSE (the default) failed files 
+are excluded, if NA they are included and if TRUE they are only included.</p></td>
     </tr>
     </table>
     
@@ -146,11 +149,12 @@ include (NA), or only include (TRUE) files that have thus far failed to process.
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>By default, files that were not successfully processed are excluded.</p>
+    <p><code><a href='batch_completed.html'>batch_completed</a>()</code> can be used to test if there are any
+files remaining.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code> and <code><a href='batch_run.html'>batch_run</a>()</code></p></div>
     
 
   </div>

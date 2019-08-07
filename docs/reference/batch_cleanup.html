@@ -34,7 +34,8 @@
 
 <meta property="og:title" content="Cleanup Batch Processing — batch_cleanup" />
 
-<meta property="og:description" content="Removes configuration and log files and optionally unprocessed files." />
+<meta property="og:description" content="Deletes configuration file created by batch_config() 
+and log file created by batch_run()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
       </span>
     </div>
 
@@ -120,45 +121,45 @@
 
     <div class="ref-description">
     
-    <p>Removes configuration and log files and optionally unprocessed files.</p>
+    <p>Deletes configuration file created by <code><a href='batch_config.html'>batch_config</a>()</code> 
+and log file created by <code><a href='batch_run.html'>batch_run</a>()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_cleanup</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>remaining</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_cleanup</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>remaining</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>A string of the path to the directory with the files.</p></td>
-    </tr>
-    <tr>
-      <th>recursive</th>
-      <td><p>A flag specifying whether to recurse into sub directories.</p></td>
+      <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
     <tr>
       <th>force</th>
-      <td><p>A flag specifying whether to remove configuration and 
+      <td><p>A flag specifying whether to delete configuration and 
 log files even if there are files remaining to be processed.</p></td>
     </tr>
     <tr>
       <th>remaining</th>
-      <td><p>When <code>force = TRUE</code> a flag specifying 
-whether to remove files that have not yet been processed.</p></td>
+      <td><p>A flag specifying whether to delete 
+any files that are remaining to be processed 
+(only applied when <code>force = TRUE</code>).
+Files that have been processed are never deleted.</p></td>
     </tr>
     <tr>
       <th>failed</th>
-      <td><p>When <code>remaining = TRUE</code> a logical scalar specifying 
-whether to remove all remaining files (NA), 
-only those files that failed to process (TRUE),
-or only untested files (FALSE).</p></td>
+      <td><p>A logical scalar specifying how to treat files 
+that previously failed to process. If FALSE (the default) failed files 
+are excluded, if NA they are included and if TRUE they are only included.</p></td>
     </tr>
     <tr>
-      <th>silent</th>
-      <td><p>A flag specifying whether to suppress warnings about
-directories that could not be cleaned.</p></td>
+      <th>recursive</th>
+      <td><p>A flag specifying whether to recurse into subdirectories
+when cleaning up. This is unrelated to the <code>recurse</code> option
+of <code><a href='batch_config.html'>batch_config</a>()</code> and is only expected to be used 
+if the user has neglected to clean up multiple nested directories.</p></td>
     </tr>
     </table>
     
@@ -166,6 +167,11 @@ directories that could not be cleaned.</p></td>
 
     <p>A named logical vector indicating which directories 
 were successfully cleaned up.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The <code><a href='batch_completed.html'>batch_completed</a>()</code> function can be used to test
+if batch processing is complete.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -179,6 +185,8 @@ were successfully cleaned up.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>
