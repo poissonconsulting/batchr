@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Updates Batch Processing Configuration — batch_config_update • batchr</title>
+<title>Reconfigures Batch Processing File Set — batch_reconfig_fileset • batchr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,10 +32,10 @@
 
 
 
-<meta property="og:title" content="Updates Batch Processing Configuration — batch_config_update" />
+<meta property="og:title" content="Reconfigures Batch Processing File Set — batch_reconfig_fileset" />
 
-<meta property="og:description" content="Updates the function that was provided when a directory was configured 
-using batch_config()." />
+<meta property="og:description" content="Updates the regular expression and/or recurse argument  that were provided 
+when a directory was configured (using batch_config())." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -67,7 +67,7 @@ using batch_config()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9012</span>
       </span>
     </div>
 
@@ -81,18 +81,6 @@ using batch_config()." />
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/batchr-demo.html">Batchr Demonstration</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -114,37 +102,35 @@ using batch_config()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Updates Batch Processing Configuration</h1>
+    <h1>Reconfigures Batch Processing File Set</h1>
     
-    <div class="hidden name"><code>batch_config_update.Rd</code></div>
+    <div class="hidden name"><code>batch_reconfig_fileset.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Updates the function that was provided when a directory was configured 
-using <code><a href='batch_config.html'>batch_config</a>()</code>.</p>
+    <p>Updates the regular expression and/or recurse argument  that were provided 
+when a directory was configured (using <code><a href='batch_config.html'>batch_config</a>()</code>).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>batch_config_update</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_reconfig_fileset</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fun</th>
-      <td><p>A function to process each of the files. 
-<code>fun</code>'s first argument should be a string of the path to a single file.
-If processing is unsuccessful <code>fun</code> should return FALSE 
-or throw an error (error messages are caught and automatically logged).</p></td>
-    </tr>
-    <tr>
       <th>path</th>
       <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to <code>fun</code>.</p></td>
+      <th>regexp</th>
+      <td><p>A string of a regular expression. Only non-hidden file names 
+which match the regular expression will be batch processed.</p></td>
+    </tr>
+    <tr>
+      <th>recurse</th>
+      <td><p>A flag specifying whether to recurse into path's subdirectories.</p></td>
     </tr>
     </table>
     
@@ -155,9 +141,8 @@ remaining to be processed.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>batch_config_update()</code> is useful if a new version of the files is required
-to successfully process some of the files.</p>
-<p>It should be noted that <code>batch_config_update()</code> does not alter the 
+    <p><code>batch_reconfig_fileset()</code> is useful for including or excluding particular files.</p>
+<p>It should be noted that <code><a href='batch_reconfig_fun.html'>batch_reconfig_fun()</a></code> does not alter the 
 configuration time.</p>
 <p>In order to process previously failed files <code><a href='batch_run.html'>batch_run</a>()</code>
 should be called with <code>failed = NA</code> or <code>failed = TRUE</code>.</p>
@@ -186,7 +171,7 @@ should be called with <code>failed = NA</code> or <code>failed = TRUE</code>.</p
 
       <footer>
       <div class="copyright">
-  <p>Developed by Audrey Beliveau, Joe Thorley.</p>
+  <p>Developed by Joe Thorley.</p>
 </div>
 
 <div class="pkgdown">

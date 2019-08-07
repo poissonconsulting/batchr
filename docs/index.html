@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9012</span>
       </span>
     </div>
 
@@ -45,18 +45,6 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/batchr-demo.html">Batchr Demonstration</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
@@ -85,6 +73,14 @@
 <!-- badges: start -->
 
 <p><code>batchr</code> is an R package to batch process files using an R function.</p>
+<p>The key design principle is that only existing files which were last modified <em>before</em> the directory was ‘configured’ are considered for processing. To implement this principle, configuration creates a hidden file and existing successfully processed files are automatically ‘touched’ to update their modification date.</p>
+<p>This design means that:</p>
+<ul>
+<li>Batch processing can be stopped and restarted.</li>
+<li>A file can be deleted during processing.</li>
+<li>Any files created during processing are ignored.</li>
+</ul>
+<p>To allow the user control over the reprocessing of problematic files, all processing attempts (SUCCESS or FAILURE) are recorded in a hidden log file.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -95,14 +91,14 @@
 <div id="demonstration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#demonstration" class="anchor"></a>Demonstration</h2>
-<p>Set up a directory with two .csv files</p>
+<p>Consider a directory with two .csv files</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>path &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"example"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(path, <span class="dt">force =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(path)</span>
 <span id="cb2-4"><a href="#cb2-4"></a></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span>), <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file1.csv"</span>), <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">3</span>), <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file2.csv"</span>), <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<p>and define the function to process them.</p>
+<p>First define the function to process them.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>fun &lt;-<span class="st"> </span><span class="cf">function</span>(file) {</span>
 <span id="cb3-2"><a href="#cb3-2"></a>  data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(file)</span>
 <span id="cb3-3"><a href="#cb3-3"></a>  data<span class="op">$</span>x &lt;-<span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span>
@@ -112,8 +108,8 @@
 <p>Then simply call <code><a href="reference/batch_process.html">batch_process()</a></code> to apply the function to all the files.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(batchr)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="reference/batch_process.html">batch_process</a></span>(fun, path, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; SUCCESS [2019-08-07 02:18:05] 'file1.csv'</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; SUCCESS [2019-08-07 02:18:05] 'file2.csv'</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; SUCCESS 1/2/0 [2019-08-07 17:02:07] 'file1.csv'</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; SUCCESS 2/2/0 [2019-08-07 17:02:07] 'file2.csv'</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>The files have been updated as follows.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file1.csv"</span>))</span>
@@ -123,6 +119,16 @@
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;   x</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 1 6</span></span></code></pre></div>
 <p>For a more realistic demonstration with finer control over the batch processing see the <a href="https://poissonconsulting.github.io/batchr/articles/batchr-demo.html">Batchr Demonstration</a> vignette.</p>
+<div id="parallel-chains" class="section level3">
+<h3 class="hasAnchor">
+<a href="#parallel-chains" class="anchor"></a>Parallel Chains</h3>
+<p>To process the files in parallel:</p>
+<ol style="list-style-type: decimal">
+<li>Ensure plyr and doParallel are installed using <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages(c("plyr", "doParallel"))</a></code>.</li>
+<li>Register a parallel backend using <code><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">doParallel::registerDoParallel(4)</a></code>.</li>
+<li>Set <code>parallel = TRUE</code> in the call to <code><a href="reference/batch_process.html">batch_process()</a></code> or <code><a href="reference/batch_run.html">batch_run()</a></code>.</li>
+</ol>
+</div>
 <div id="batch_gsub" class="section level3">
 <h3 class="hasAnchor">
 <a href="#batch_gsub" class="anchor"></a><code>batch_gsub()</code>
@@ -164,8 +170,8 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Audrey Beliveau <br><small class="roles"> Author </small>  </li>
 <li>Joe Thorley <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
@@ -186,7 +192,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Audrey Beliveau, Joe Thorley.</p>
+  <p>Developed by Joe Thorley.</p>
 </div>
 
 <div class="pkgdown">
