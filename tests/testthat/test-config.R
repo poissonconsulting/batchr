@@ -140,3 +140,33 @@ test_that("batch_config with existing recursive .batchr.rds files", {
                                regexp = "^file\\d[.]csv$"),
                    "file2.csv")
 })
+
+test_that("batch_config update with existing recursive .batchr.rds files", {
+  teardown(unlink(file.path(tempdir(), "batchr")))
+  
+  path <- file.path(tempdir(), "batchr")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
+  
+  expect_identical(batch_config(function(x) TRUE, path = path, recurse = TRUE,
+                               regexp = "^file\\d[.]csv$"),
+               "file2.csv")
+  
+  path <- file.path(tempdir(), "batchr", "batchr_sub")
+  dir.create(path)
+  
+  write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
+  
+  expect_identical(batch_config(function(x) TRUE, path = path,
+                               regexp = "^file\\d[.]csv$"),
+                   "file3.csv")
+  
+  path <- file.path(tempdir(), "batchr")
+
+  expect_error(batch_config_update(function(x) 1, path),
+               "^Subdirectories of '.*batchr' contain '[.]batchr[.]rds' files[.]$")
+
+})
+

@@ -13,6 +13,9 @@
 #' 
 #' When processing is complete the hidden configuration file
 #' and hidden log file can be deleted using \code{\link{batch_cleanup}()}.
+#' 
+#' If a remaining file is removed or modified by a separate process,
+#' \code{batch_run()} throws an error.
 #'
 #' @inheritParams batch_config
 #' @param failed A logical scalar specifying how to treat files 
