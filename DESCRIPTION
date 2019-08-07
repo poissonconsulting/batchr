@@ -9,6 +9,7 @@ License: MIT + file LICENSE
 Depends: R (>= 3.5)
 Imports:
     chk,
+    yesno,
     filelock
 Suggests: 
     covr,
