@@ -52,12 +52,13 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
   
   remaining <- batch_files_remaining(path, failed = failed)
   if(!length(remaining)) return(structure(logical(0), .Names = character(0)))
-  question <- p0("Batch process ", length(remaining), " files in '", path, "'?")
+  question <- p0("Batch process ", length(remaining), " files in '", 
+                 normalizePath(path), "'?")
   if(ask && !yesno(question))
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
 
   success <- lapply(remaining, process_file, fun = fun, dots = dots, 
-                    path = path, progress = progress)
+                    path = path, config_time = config$time, progress = progress)
   success <- unlist(success)
   invisible(set_names(success, remaining))
 }

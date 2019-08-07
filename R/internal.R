@@ -64,7 +64,18 @@ console_msg <- function(msg) {
   cat(msg)
 }
 
-process_file <- function(file, fun, dots, path, progress) {
+validate_remaining_file <- function(path, file, config_time) {
+  if(!file.exists(file.path(path, file)))
+    err("File '", normalizePath(file.path(path, file)), 
+        "' has been deleted by a different process!")
+  if(file_time(path, file) > config_time) 
+    err("File '", normalizePath(file.path(path, file)), 
+        "' has been modified by a different process!")
+}
+
+process_file <- function(file, fun, dots, path, config_time, progress) {
+  validate_remaining_file(path, file, config_time)
+  
   dots <- c(file.path(path, file), dots)
   output <- try(do.call("fun", dots), silent = TRUE)
   
