@@ -76,7 +76,7 @@ test_that("batch_process with failure ERROR", {
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
   expect_output(batch_process(fun, path, ask = FALSE), 
-                "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\sa problem\\s*FAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\sa problem\\s$")
+                "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\sa problem\\sFAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\sa problem$")
   expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
   expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")

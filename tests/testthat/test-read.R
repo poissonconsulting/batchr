@@ -133,7 +133,7 @@ test_that("batch_log_read all error processing", {
   expect_identical(attr(log$time, "tzone"), "UTC")
   expect_identical(log[c("type", "file")], structure(list(type = "FAILURE", file = "file1.csv"), class = c("tbl_df", 
 "tbl", "data.frame"), row.names = c(NA, -1L)))
-  expect_match(log$message, "^a problem $")
+  expect_match(log$message, "^a problem$")
 })
 
 
@@ -164,7 +164,7 @@ test_that("batch_log_read one success (string) and one failure (error)", {
   expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c("file1.csv", 
 "file2.csv")), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA, 
 -2L)))
-  expect_identical(log$message, c("an error ", "a success"))
+  expect_identical(log$message, c("an error", "a success"))
 })
 
 test_that("batch_log_read with no configuration", {

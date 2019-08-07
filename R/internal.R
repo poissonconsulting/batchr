@@ -56,6 +56,7 @@ touch_file <- function(path, file) {
 
 clean_msg <- function(msg) {
   msg <- gsub("\n+", " ", msg)
+  msg <- sub("\\s*$", "", msg)
   msg <- p0(msg, "\n")
   msg  
 }
