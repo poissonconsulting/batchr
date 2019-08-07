@@ -1,6 +1,6 @@
 context("read")
 
-test_that("batch_read_config", {
+test_that("batch_config_read", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -11,7 +11,7 @@ test_that("batch_read_config", {
   
   expect_identical(batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
                    "file1.csv")
-  config <- batch_read_config(path)
+  config <- batch_config_read(path)
   
   expect_is(config$time, "POSIXct")
   expect_identical(attr(config$time, "tzone"), "UTC")
@@ -23,7 +23,7 @@ test_that("batch_read_config", {
 TRUE, dots = list()))
 })
 
-test_that("batch_read_config with no configuration", {
+test_that("batch_config_read with no configuration", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -32,17 +32,17 @@ test_that("batch_read_config with no configuration", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
-  expect_error(batch_read_config(path), 
+  expect_error(batch_config_read(path), 
                "^Can't find file '.*[.]batchr[.]rds'[.]$")
 })
 
-test_that("batch_read_config with no directory", {
+test_that("batch_config_read with no directory", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
   unlink(path, recursive = TRUE)
 
-  expect_error(batch_read_config(path), "^Can't find directory '.*batchr'[.]$")
+  expect_error(batch_config_read(path), "^Can't find directory '.*batchr'[.]$")
 })
 
 test_that("batch_read_log not yet processed", {

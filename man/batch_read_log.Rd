@@ -22,5 +22,5 @@ A tibble with four columns:
 Reads the values in the log file created by \code{\link{batch_run}()}.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{batch_read_config}()}
+\code{\link{batch_process}()} and \code{\link{batch_config_read}()}
 }

@@ -51,9 +51,9 @@ test_that("batch_process with failure", {
   
   fun <- function(file) grepl(file, "file1[.]csv$")
 
-  expect_error(batch_read_config(path),
+  expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
   expect_false(batch_process(fun, path, ask = FALSE))
-  expect_error(batch_read_config(path),
+  expect_error(batch_config_read(path),
                "^Can't find file '.*[.]batchr.rds'[.]$")
 })

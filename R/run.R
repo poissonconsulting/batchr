@@ -34,7 +34,7 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
 
   if(parallel) .NotYetUsed("parallel", error = FALSE) 
   
-  config <- batch_read_config(path)
+  config <- batch_config_read(path)
   
   recurse <- config$recurse
   fun <- config$fun

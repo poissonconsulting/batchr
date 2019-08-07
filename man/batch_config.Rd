@@ -33,7 +33,7 @@ Configures a directory for batch file processing by \code{\link{batch_run}()}.
 named '.batchr.rds'.
 
 The contents of the file can be read using
-\code{\link{batch_read_config}()} 
+\code{\link{batch_config_read}()} 
 or updated using \code{\link{batch_config}()}.
 }
 \seealso{

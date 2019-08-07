@@ -6,7 +6,7 @@
 #' named '.batchr.rds'. 
 #' 
 #' The contents of the file can be read using
-#' \code{\link{batch_read_config}()} 
+#' \code{\link{batch_config_read}()} 
 #' or updated using \code{\link{batch_config}()}.
 #' 
 #' @param fun A function to process each of the files. 
@@ -61,7 +61,7 @@ batch_config_update <- function(fun, path = ".", ...) {
   chk_function(fun)
   chk_dir(path)
 
-  config <- batch_read_config(path)
+  config <- batch_config_read(path)
   recurse <- config$recurse
   regexp <- config$regexp
 

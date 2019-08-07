@@ -28,9 +28,9 @@ test_that("batch_config_update", {
   
   expect_identical(batch_config(function(x) FALSE, path = path, regexp = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv"))
-  expect_equal(batch_read_config(path)$fun, function(x) FALSE)
+  expect_equal(batch_config_read(path)$fun, function(x) FALSE)
   batch_config_update(function(x) TRUE, path)
-  expect_equal(batch_read_config(path)$fun, function(x) TRUE)
+  expect_equal(batch_config_read(path)$fun, function(x) TRUE)
 })
 
 test_that("batch_config with no files", {

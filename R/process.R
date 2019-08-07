@@ -22,7 +22,7 @@
 #' that have not yet been processed as well as those that have failed to process.
 #' 
 #' The configuration details are saved in the '.batchr.rds file'
-#' which can be read using \code{\link{batch_read_config}()}.
+#' which can be read using \code{\link{batch_config_read}()}.
 #' Configuration is only possible if the directory does not already contain
 #' a configuration file. If \code{recurse = TRUE} then the subdirectories
 #' must also not contain configuration files.

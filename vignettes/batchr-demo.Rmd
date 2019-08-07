@@ -53,9 +53,9 @@ library(batchr)
 batch_config(fun, path = path, pattern = "^file\\d[.]csv$")
 ```
 
-Configuring a directory creates a hidden file which can be read using `batch_read_config()`
+Configuring a directory creates a hidden file which can be read as follows
 ```{r}
-batch_read_config(path)
+batch_config_read(path)
 ```
 The `time` value specifies the system time (in UTC) that the project was configured.
 A file is only treated as unprocessed if the time it was last modified is *before* the time of configuration 

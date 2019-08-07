@@ -15,7 +15,7 @@
 #' @export
 batch_remaining_files <- function(path = ".", failed = FALSE) {
   chk_lgl(failed)
-  config <- batch_read_config(path)
+  config <- batch_config_read(path)
   files <- list.files(path, pattern = config$regexp, recursive = config$recurse)
   files <- files[file_time(path, files) <= config$time]
   if(!length(files) || is.na(failed)) return(files)
