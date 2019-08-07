@@ -5,12 +5,6 @@ save_config <- function(path, regexp, recurse, fun, dots) {
   saveRDS(args, file = file.path(path, ".batchr.rds"))
 }
 
-lock_config <- function(path) {
-  file <- file.path(path, ".batchr.rds.lck")
-  lock <- try(lock(file.path(path, ".batchr.rds.lck"), timeout = 0))
-  !is_try_error(lock)
-}
-
 read_lines_log <- function(path) {
   file <- file.path(path, ".batchr.log")
   if(!file.exists(file)) return(character(0))

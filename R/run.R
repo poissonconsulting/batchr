@@ -47,9 +47,6 @@ batch_run <- function(path = ".", failed = FALSE, parallel = FALSE,
   fun <- config$fun
   dots <- config$dots
   
-  if(!lock_config(path))
-    err("File '", file.path(path, ".batchr.rds"), "' is already locked.")
-  
   if(recurse && length(config_files(path = path, recursive = recurse)) > 1)
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
