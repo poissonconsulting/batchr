@@ -28,6 +28,8 @@
 #' logging information to the console for failed attempts (NA).
 #' @param files A character vector of the remaining files to process.
 #' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
+#' @param seed A whole number of the seed to set before processing each file
+#' (or NULL).
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
@@ -37,6 +39,7 @@
 batch_run <- function(path = ".", 
                       failed = FALSE, parallel = FALSE, 
                       progress = !parallel, files = NULL,
+                      seed = NULL,
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
   chk_lgl(failed)
@@ -47,6 +50,7 @@ batch_run <- function(path = ".",
     chk_is(files, "character")
     chk_no_missing(files)
   }
+  if(!is.null(seed)) chk_whole_number(seed)
   
   config <- batch_config_read(path)
   
@@ -56,7 +60,6 @@ batch_run <- function(path = ".",
   
   if(recurse && length(config_files(path = path, recursive = recurse)) > 1)
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
-  
   
   remaining <- batch_files_remaining(path, failed = failed)
   
@@ -77,7 +80,7 @@ batch_run <- function(path = ".",
   
   success <- process_files(remaining, fun = fun, dots = dots, 
                            path = path, config_time = config$time,
-                           parallel = parallel, progress = progress)
+                           parallel = parallel, progress = progress, seed = seed)
   
   invisible(success)
 }

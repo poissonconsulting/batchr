@@ -28,12 +28,13 @@ file and existing successfully processed files are automatically
 This design means that:
 
   - Batch processing can be stopped and restarted.
-  - A file can be deleted during processing.
   - Any files created during processing are ignored.
 
 To allow the user control over the reprocessing of problematic files,
 all processing attempts (SUCCESS or FAILURE) are recorded in a hidden
-log file.
+log file. It is worth noting that if a file is modified (or deleted)
+during processing it is no longer considered (even if processing
+failed).
 
 ## Installation
 
@@ -75,8 +76,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
-#> SUCCESS 1/2/0 [2019-08-07 17:01:54] 'file1.csv'
-#> SUCCESS 2/2/0 [2019-08-07 17:01:54] 'file2.csv'
+#> SUCCESS 1/2/0 [2019-08-07 21:29:32] 'file1.csv'
+#> SUCCESS 2/2/0 [2019-08-07 21:29:32] 'file2.csv'
 #> [1] TRUE
 ```
 

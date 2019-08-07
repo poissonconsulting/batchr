@@ -87,10 +87,11 @@ formatc <- function(i, n) {
 }
 
 process_file <- function(file, fun, dots, path, config_time, progress,
-                         i = 1, n = 1, e = 0) {
+                         seed, i = 1, n = 1, e = 0) {
   validate_remaining_file(path, file, config_time)
   
   dots <- c(file.path(path, file), dots)
+  if(!is.null(seed)) set.seed(seed)
   output <- try(do.call("fun", dots), silent = TRUE)
   
   time <- sys_time_utc()
@@ -123,13 +124,13 @@ process_file <- function(file, fun, dots, path, config_time, progress,
 }
 
 process_files <- function(remaining, fun, dots, path, config_time, parallel, 
-                          progress) {
+                          progress, seed) {
   if(parallel) {
     if(!requireNamespace("plyr", quietly = TRUE))
       err("plyr is required to batch process files in parallel")
     success <- plyr::llply(remaining, process_file, fun = fun, dots = dots, 
                            path = path, config_time = config_time, 
-                           .parallel = TRUE, progress = FALSE)
+                           .parallel = TRUE, progress = FALSE, seed = seed)
   } else {
     n <- length(remaining)
     success <- rep(NA, n)
@@ -137,7 +138,8 @@ process_files <- function(remaining, fun, dots, path, config_time, parallel,
     for(i in seq_along(remaining)) {
       success[i] <- process_file(remaining[i], fun = fun, dots = dots, 
                                  path = path, config_time = config_time, 
-                                 progress = progress, i = i, n = n, e = e)
+                                 progress = progress, seed = seed, 
+                                 i = i, n = n, e = e)
       if(!success[i]) e <- e + 1L
     }
   }
