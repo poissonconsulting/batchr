@@ -208,4 +208,44 @@ test_that("batch_run seed", {
                      "file1.csv", "file2.csv"))
 })
 
-
+test_that("batch_run seed max", {
+  teardown(unlink(file.path(tempdir(), "batchr_run")))
+  
+  path <- file.path(tempdir(), "batchr_run")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+  
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  
+  expect_identical(batch_config(fun, path = path, 
+                                regexp = "^file\\d[.]csv$"),
+                   c("file1.csv", "file2.csv"))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             seed = 2147483647L), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             seed = 2147483647L, failed = TRUE), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             seed = 1, failed = TRUE), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             failed = TRUE), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             seed = 2147483647L, failed = TRUE), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             seed = 2147483647L, failed = TRUE), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  
+  
+  expect_identical(batch_log_read(path)$message, 
+                   c("0.489229316823184", "0.329910852015018", "0.489229316823184", 
+"0.329910852015018", "0.691987211350352", "0.386118894442916", 
+"0.89029288222082", "0.0763199771754444", "0.489229316823184", 
+"0.329910852015018", "0.489229316823184", "0.329910852015018"))
+})

@@ -87,12 +87,14 @@ formatc <- function(i, n) {
 }
 
 sum2intswrap <- function(x, y) {
-  x <- as.double(x) + as.double(y)
-  mx <- as.double(.Machine$integer.max)
-  if(x < -mx || x > mx) {
-    x <- x %% mx
+  sum <- as.double(x) + as.double(y)
+  mx <- 2147483647
+  if(sum < -mx) {
+    sum <- sum %% mx
+  } else if(sum > mx) {
+    sum <- sum %% -mx
   }
-  as.integer(x)
+  as.integer(sum)
 }
 
 addstring2int <- function(x, string) {
