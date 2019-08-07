@@ -27,6 +27,7 @@ batch_cleanup <- function(path = ".", force = FALSE,
                           recursive = FALSE) {
   chk_dir(path)
   chk_flag(force)
+  chk_flag(remaining)
   chk_lgl(failed)
   chk_flag(recursive)
   

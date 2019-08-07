@@ -5,7 +5,7 @@
 \title{Runs Batch Processing}
 \usage{
 batch_run(path = ".", failed = FALSE, parallel = FALSE,
-  progress = "none", ask = getOption("batchr.ask", TRUE))
+  progress = "all", ask = getOption("batchr.ask", TRUE))
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

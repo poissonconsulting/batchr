@@ -18,10 +18,11 @@
 #' successfully processed.
 #' @export
 batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE, 
-                          parallel = FALSE, progress = TRUE, force = TRUE, 
+                          parallel = FALSE, progress = "all", force = TRUE, 
                           ask = getOption("batchr.ask", TRUE), ...) {
   batch_config(fun, path = path, regexp = regexp, recurse = recurse, ...)
-  success <- batch_run(path = path, parallel = parallel, ask = ask)
+  success <- batch_run(path = path, parallel = parallel, progress = progress,
+                       ask = ask)
   batch_cleanup(path, force = force)
   all(success)
 }

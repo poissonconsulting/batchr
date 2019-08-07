@@ -5,7 +5,7 @@
 \title{Batch File Text Replacement}
 \usage{
 batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
-  recurse = FALSE, parallel = FALSE, progress = TRUE,
+  recurse = FALSE, parallel = FALSE, progress = "all",
   ask = getOption("batchr.ask", TRUE))
 }
 \arguments{

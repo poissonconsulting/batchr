@@ -112,7 +112,7 @@ cleanup_config <- function(path, force, remaining, failed) {
   remaining_files <- batch_files_remaining(path, failed = failed)
   if(length(remaining_files)) {
     if(!force) return(FALSE)
-    if(remaining) unlink(remaining_files)
+    if(remaining) unlink(file.path(path, remaining_files))
   }
   unlink(file.path(path, ".batchr.rds"))
   cleanup_log_file(path)

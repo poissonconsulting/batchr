@@ -15,12 +15,14 @@ test_that("batch_gsub", {
   expect_error(batch_gsub(pattern = "zz", replacement = "z", path = path,
                           regexp = "[.]txt$"),
                "^Directory '.*batchr' does not contain any files matching '[[][.][]]txt[$]'[.]$")
-  expect_true(batch_gsub(pattern = "zz", replacement = "z", path = path,
-                         ask = FALSE))
+  expect_output(batch_gsub(pattern = "zz", replacement = "z", path = path,
+                         ask = FALSE), "^SUCCESS \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file[.]r'\\s*SUCCESS \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]R'$")
   expect_identical(readLines(file), c("some z", "and some more zz zz z z"))
   expect_identical(readLines(file2), c("text"))
   expect_true(batch_gsub(pattern = "zz", replacement = "z", path = path,
-                         ask = FALSE))
+                         ask = FALSE, progress = "failures"))
   expect_identical(readLines(file), c("some z", "and some more z z z z"))
   expect_identical(readLines(file2), c("text"))
+  expect_true(batch_gsub(pattern = "zz", replacement = "z", path = path,
+                         ask = FALSE, progress = "none"))
 })

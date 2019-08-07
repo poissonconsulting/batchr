@@ -33,7 +33,7 @@
 #' \code{\link{batch_cleanup}()} 
 #' @export
 batch_run <- function(path = ".", failed = FALSE, parallel = FALSE, 
-                      progress = "none", 
+                      progress = "all", 
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
   chk_flag(failed)

@@ -5,7 +5,7 @@
 \title{Batch File Processing}
 \usage{
 batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
-  parallel = FALSE, progress = TRUE, force = TRUE,
+  parallel = FALSE, progress = "all", force = TRUE,
   ask = getOption("batchr.ask", TRUE), ...)
 }
 \arguments{
