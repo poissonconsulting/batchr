@@ -146,6 +146,9 @@ test_that("batch_run with files specified", {
   
   expect_error(batch_run(path, files = "file.csv"), 
                "^The following files are not remaining: 'file.csv'.$")
+  
+  expect_identical(batch_run(path, files = character(0)), 
+               structure(logical(0), .Names = character(0)))
 
   expect_error(batch_run(path, files = c("file3.csv", "file.csv")), 
                "^The following files are not remaining: 'file3.csv' and 'file.csv'.$")
