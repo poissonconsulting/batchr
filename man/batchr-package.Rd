@@ -19,9 +19,9 @@ Useful links:
 \author{
 \strong{Maintainer}: Joe Thorley \email{joe@poissonconsulting.ca} (0000-0002-7683-4592)
 
-Authors:
+Other contributors:
 \itemize{
-  \item Audrey Beliveau \email{audrey.beliveau@uwaterloo.ca}
+  \item Audrey Beliveau \email{audrey.beliveau@uwaterloo.ca} [contributor]
 }
 
 }
