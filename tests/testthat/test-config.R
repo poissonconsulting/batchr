@@ -15,7 +15,7 @@ test_that("batch_config returns matching files", {
                    c("file1.csv", "file2.csv"))
 })
 
-test_that("batch_config_update", {
+test_that("batch_reconfig_fun", {
   teardown(unlink(file.path(tempdir(), "batchr")))
   
   path <- file.path(tempdir(), "batchr")
@@ -29,7 +29,7 @@ test_that("batch_config_update", {
   expect_identical(batch_config(function(x) FALSE, path = path, regexp = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv"))
   expect_equal(batch_config_read(path)$fun, function(x) FALSE)
-  batch_config_update(function(x) TRUE, path)
+  batch_reconfig_fun(function(x) TRUE, path)
   expect_equal(batch_config_read(path)$fun, function(x) TRUE)
 })
 
@@ -165,7 +165,7 @@ test_that("batch_config update with existing recursive .batchr.rds files", {
   
   path <- file.path(tempdir(), "batchr")
 
-  expect_error(batch_config_update(function(x) 1, path),
+  expect_error(batch_reconfig_fun(function(x) 1, path),
                "^Subdirectories of '.*batchr' contain '[.]batchr[.]rds' files[.]$")
 
 })

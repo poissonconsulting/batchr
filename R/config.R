@@ -7,7 +7,7 @@
 #' 
 #' The contents of the file can be read using
 #' \code{\link{batch_config_read}()} 
-#' or updated using \code{\link{batch_config_update}()}.
+#' or updated using \code{\link{batch_reconfig_fun}()}.
 #' 
 #' Configuration is only possible if the directory does not already contain
 #' a configuration file. 
@@ -61,10 +61,10 @@ batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
 #' Updates the function that was provided when a directory was configured 
 #' using \code{\link{batch_config}()}.
 #' 
-#' \code{batch_config_update()} is useful if a new version of the files is required
+#' \code{batch_reconfig_fun()} is useful if a new version of the files is required
 #' to successfully process some of the files.
 #' 
-#' It should be noted that \code{batch_config_update()} does not alter the 
+#' It should be noted that \code{batch_reconfig_fun()} does not alter the 
 #' configuration time.
 #' 
 #' In order to process previously failed files \code{\link{batch_run}()}
@@ -76,7 +76,7 @@ batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
 #' remaining to be processed.
 #' @seealso \code{\link{batch_process}()} and \code{\link{batch_config}()}
 #' @export
-batch_config_update <- function(fun, path = ".", ...) {
+batch_reconfig_fun <- function(fun, path = ".", ...) {
   chk_function(fun)
   chk_dir(path)
 

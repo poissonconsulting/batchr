@@ -34,7 +34,7 @@ named '.batchr.rds'.
 
 The contents of the file can be read using
 \code{\link{batch_config_read}()} 
-or updated using \code{\link{batch_config_update}()}.
+or updated using \code{\link{batch_reconfig_fun}()}.
 
 Configuration is only possible if the directory does not already contain
 a configuration file. 
