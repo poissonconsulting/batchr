@@ -12,8 +12,8 @@ test_that("batch_run", {
   expect_identical(batch_config(function(x) TRUE, path = path, 
                                 regexp = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), c(file1.csv = TRUE))
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), 
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = TRUE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), 
                    structure(logical(0), .Names = character(0)))
 })
 
@@ -29,8 +29,8 @@ test_that("batch_run fails all", {
   expect_identical(batch_config(function(x) FALSE, path = path, 
                                 regexp = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), c(file1.csv = FALSE))
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), structure(logical(0), .Names = character(0)))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), structure(logical(0), .Names = character(0)))
 })
 
 test_that("batch_run returns non-flag", {
@@ -45,8 +45,8 @@ test_that("batch_run returns non-flag", {
   expect_identical(batch_config(function(x) 1, path = path, 
                                 regexp = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), c(file1.csv = TRUE))
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), structure(logical(0), .Names = character(0)))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = TRUE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), structure(logical(0), .Names = character(0)))
 })
 
 test_that("batch_run errors", {
@@ -61,8 +61,8 @@ test_that("batch_run errors", {
   expect_identical(batch_config(function(x) stop("a problem"), path = path, 
                                 regexp = "^file\\d[.]csv$"),
                    "file1.csv")
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), c(file1.csv = FALSE))
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), structure(logical(0), .Names = character(0)))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), structure(logical(0), .Names = character(0)))
 })
 
 test_that("batch_run parallel", {
@@ -78,7 +78,7 @@ test_that("batch_run parallel", {
                                 regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   
-  expect_warning(batch_run(path, parallel = TRUE, ask = FALSE, progress = "none"), 
+  expect_warning(batch_run(path, parallel = TRUE, ask = FALSE, progress = FALSE), 
                "'parallel' is not used [(]yet[)]")
 })
 
@@ -106,6 +106,6 @@ test_that("batch_run subdirectories with config", {
   
   path <- file.path(tempdir(), "batchr_run")
  
-  expect_error(batch_run(path, progress = "none"), 
+  expect_error(batch_run(path, progress = FALSE), 
                "^Subdirectories of '.*batchr_run' contain '.batchr.rds' files[.]$")
 })

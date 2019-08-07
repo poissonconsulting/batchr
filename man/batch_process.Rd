@@ -5,7 +5,7 @@
 \title{Batch File Processing}
 \usage{
 batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
-  parallel = FALSE, progress = "all", force = TRUE,
+  parallel = FALSE, progress = !parallel, force = TRUE,
   ask = getOption("batchr.ask", TRUE), ...)
 }
 \arguments{
@@ -24,9 +24,9 @@ which match the regular expression will be batch processed.}
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
-\item{progress}{A string specifying the type of output to log to the console
-when \code{parallel = FALSE}. 
-The possible values are "all", "failures" or "none".}
+\item{progress}{A logic scalar specifying whether to 
+write logging information to the console (TRUE or FALSE) or only to write
+logging information to the console for failed attempts (NA).}
 
 \item{force}{A flag specifying whether to delete configuration and 
 log files even if there are files remaining to be processed.}

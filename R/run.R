@@ -23,26 +23,29 @@
 #' are excluded, if NA they are included and if TRUE they are only included.
 #' @param parallel A flag specifying whether to process the files in 
 #' parallel (not yet used).
-#' @param progress A string specifying the type of output to log to the console
-#' when \code{parallel = FALSE}. 
-#' The possible values are "all", "failures" or "none". 
+#' @param progress A logic scalar specifying whether to 
+#' write logging information to the console (TRUE or FALSE) or only to write
+#' logging information to the console for failed attempts (NA).
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
 #' @seealso \code{\link{batch_process}()}, \code{\link{batch_config}()} and 
 #' \code{\link{batch_cleanup}()} 
 #' @export
-batch_run <- function(path = ".", failed = FALSE, parallel = FALSE, 
-                      progress = "all", 
+batch_run <- function(path = ".", 
+                      failed = FALSE, parallel = FALSE, 
+                      progress = !parallel, 
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
-  chk_flag(failed)
+  chk_lgl(failed)
   chk_flag(parallel)
-  chk_string(progress)
-  chk_in(progress, c("all", "failures", "none"))
+  chk_lgl(progress)
   chk_flag(ask)
 
-  if(parallel) .NotYetUsed("parallel", error = FALSE) 
+  if(parallel) {
+    if(!isFALSE(progress)) wrn("progress set to FALSE as parallel = TRUE")
+    .NotYetUsed("parallel", error = FALSE) 
+  }
   
   config <- batch_config_read(path)
   

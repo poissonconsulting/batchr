@@ -87,19 +87,19 @@ process_file <- function(file, fun, dots, path, config_time, progress) {
     output <- gsub("\n+", " ", as.character(output))
     msg <- p("FAILURE", msg, output)
     log_msg(path, msg)
-    if(progress != "none") console_msg(msg)
+    if(!isFALSE(progress)) console_msg(msg)
     return(FALSE)
   }
   if(isFALSE(output)) {
     msg <- p("FAILURE", msg)
     log_msg(path, msg)
-    if(progress != "none") console_msg(msg)
+    if(!isFALSE(progress)) console_msg(msg)
     return(FALSE)
   }
   touch_file(path, file)
   msg <- p("SUCCESS", msg)
   log_msg(path, msg)
-  if(progress == "all") console_msg(msg)
+  if(isTRUE(progress)) console_msg(msg)
   TRUE
 }
 

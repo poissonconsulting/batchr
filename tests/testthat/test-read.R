@@ -80,7 +80,7 @@ test_that("batch_log_read all processed successfully", {
 "POSIXt"), tzone = "UTC"), file = character(0), error = character(0)), class = c("tbl_df", 
 "tbl", "data.frame"), row.names = integer(0)))
 
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), c(file1.csv = TRUE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = TRUE))
   
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "error"))
@@ -103,7 +103,7 @@ test_that("batch_log_read all failed processing", {
   expect_identical(batch_config(function(x) FALSE, path = path, regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), c(file1.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE))
   
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "error"))
@@ -125,7 +125,7 @@ test_that("batch_log_read all error processing", {
   expect_identical(batch_config(function(x) stop("a problem"), path = path, regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   
-  expect_identical(batch_run(path, ask = FALSE, progress = "none"), c(file1.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE))
   
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "error"))

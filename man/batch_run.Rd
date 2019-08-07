@@ -5,7 +5,7 @@
 \title{Runs Batch Processing}
 \usage{
 batch_run(path = ".", failed = FALSE, parallel = FALSE,
-  progress = "all", ask = getOption("batchr.ask", TRUE))
+  progress = !parallel, ask = getOption("batchr.ask", TRUE))
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
@@ -17,9 +17,9 @@ are excluded, if NA they are included and if TRUE they are only included.}
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
-\item{progress}{A string specifying the type of output to log to the console
-when \code{parallel = FALSE}. 
-The possible values are "all", "failures" or "none".}
+\item{progress}{A logic scalar specifying whether to 
+write logging information to the console (TRUE or FALSE) or only to write
+logging information to the console for failed attempts (NA).}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }
