@@ -25,8 +25,8 @@ logging information to the console for failed attempts (NA).}
 \item{files}{A character vector of the remaining files to process.
 If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.}
 
-\item{seed}{A whole number of the seed to set before processing each file
-(or NULL).}
+\item{seed}{A whole number of the seed to use for random number generation
+(or NULL). The final seed for each file is also based on the file name.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }

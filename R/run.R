@@ -28,8 +28,8 @@
 #' logging information to the console for failed attempts (NA).
 #' @param files A character vector of the remaining files to process.
 #' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
-#' @param seed A whole number of the seed to set before processing each file
-#' (or NULL).
+#' @param seed A whole number of the seed to use for random number generation
+#' (or NULL). The final seed for each file is also based on the file name.
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.

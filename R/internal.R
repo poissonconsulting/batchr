@@ -86,27 +86,20 @@ formatc <- function(i, n) {
   formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
-sum2intswrap <- function(x, y) {
-  sum <- as.double(x) + as.double(y)
-  mx <- 2147483647
-  if(sum < -mx) {
-    sum <- sum %% mx
-  } else if(sum > mx) {
-    sum <- sum %% -mx
-  }
-  as.integer(sum)
-}
-
-addstring2int <- function(x, string) {
+string2int <- function(string) {
   if(!requireNamespace("digest", quietly = TRUE))
     err("Package digest is required to update the seed using the file name.")
-  int <- digest::digest2int(string)
-  sum2intswrap(x, int)
+  digest::digest2int(string)
 }
 
-set_seed_string <- function(seed, string) {
-  seed <- addstring2int(seed, string)
-  set.seed(seed)
+sum2intswrap <- function(x, y) {
+  sum <- as.double(x) + as.double(y)
+  is_na <- is.na(sum)
+  sum[!is_na & sum < -.max_integer] <- 
+    sum[!is_na & sum < -.max_integer] %% .max_integer
+  sum[!is_na & sum > .max_integer] <- 
+    sum[!is_na & sum > .max_integer] %% -.max_integer
+  as.integer(sum)
 }
 
 process_file <- function(file, fun, dots, path, config_time, progress,
@@ -114,8 +107,13 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   validate_remaining_file(path, file, config_time)
   
   dots <- c(file.path(path, file), dots)
-  if(!is.null(seed)) set_seed_string(seed, file)
   
+  if(!is.null(seed)) {
+    int <- string2int(file)
+    seed <- sum2intswrap(seed, int)
+    set.seed(seed)
+  }
+
   output <- try(do.call("fun", dots), silent = TRUE)
   
   time <- sys_time_utc()
