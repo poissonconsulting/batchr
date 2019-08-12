@@ -175,31 +175,35 @@ test_that("batch_run seed", {
   expect_identical(batch_config(fun, path = path, 
                                 regexp = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv"))
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 101), 
+  set.seed(101)
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(101)
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 101, failed = TRUE), 
+                             failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 1, failed = TRUE), 
-                   c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(1)
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
                              failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 101, failed = TRUE), 
+                             failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(101)
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 1, failed = TRUE), 
+                             failed = TRUE), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(1)
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
   
   
   expect_identical(batch_log_read(path)$message, 
-                   c("0.313109797192737", "0.484942433657125", "0.313109797192737", 
-"0.484942433657125", "0.691987211350352", "0.386118894442916", 
-"0.89029288222082", "0.0763199771754444", "0.313109797192737", 
-"0.484942433657125", "0.691987211350352", "0.386118894442916"
+                   c("0.107952900230885", "0.0103197921998799", "0.107952900230885", 
+"0.0103197921998799", "0.346915341448039", "0.378237006487325", 
+"0.485794363776222", "0.799492958001792", "0.107952900230885", 
+"0.0103197921998799", "0.346915341448039", "0.378237006487325"
 ))
   
   expect_identical(batch_log_read(path)$file, 
@@ -223,29 +227,33 @@ test_that("batch_run seed max", {
   expect_identical(batch_config(fun, path = path, 
                                 regexp = "^file\\d[.]csv$"),
                    c("file1.csv", "file2.csv"))
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 2147483647L), 
+  set.seed(2147483647L)
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(2147483647L)
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 2147483647L, failed = TRUE), 
+                             failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 1, failed = TRUE), 
-                   c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(1)
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
                              failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 2147483647L, failed = TRUE), 
+                             failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(2147483647L)
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
-                             seed = 2147483647L, failed = TRUE), 
+                             failed = TRUE), 
+                   c(file1.csv = FALSE, file2.csv = FALSE))
+  set.seed(2147483647L)
+  expect_identical(batch_run(path, ask = FALSE, progress = FALSE,
+                             failed = TRUE), 
                    c(file1.csv = FALSE, file2.csv = FALSE))
   
   
   expect_identical(batch_log_read(path)$message, 
-                   c("0.489229316823184", "0.329910852015018", "0.489229316823184", 
-"0.329910852015018", "0.691987211350352", "0.386118894442916", 
-"0.89029288222082", "0.0763199771754444", "0.489229316823184", 
-"0.329910852015018", "0.489229316823184", "0.329910852015018"))
+                   c("0.65898539731279", "0.957285346696153", "0.65898539731279", 
+"0.957285346696153", "0.346915341448039", "0.378237006487325", 
+"0.485794363776222", "0.799492958001792", "0.65898539731279", 
+"0.957285346696153", "0.65898539731279", "0.957285346696153"))
 })

@@ -86,12 +86,6 @@ formatc <- function(i, n) {
   formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
-string2int <- function(string) {
-  if(!requireNamespace("digest", quietly = TRUE))
-    err("Package digest is required to update the seed using the file name.")
-  digest::digest2int(string)
-}
-
 sum2intswrap <- function(x, y) {
   sum <- as.double(x) + as.double(y)
   is_na <- is.na(sum)
@@ -102,18 +96,20 @@ sum2intswrap <- function(x, y) {
   as.integer(sum)
 }
 
+rinteger <- function(n = 1) as.integer(runif(n, -.max_integer, .max_integer))
+
 process_file <- function(file, fun, dots, path, config_time, progress,
                          seed, i = 1, n = 1, e = 0) {
   validate_remaining_file(path, file, config_time)
   
   dots <- c(file.path(path, file), dots)
   
-  if(!is.null(seed)) {
-    int <- string2int(file)
-    seed <- sum2intswrap(seed, int)
-    set.seed(seed)
-  }
-
+  .Random.seed <<- seed
+  seed <- rinteger()
+  int <- digest2int(file)
+  seed <- sum2intswrap(seed, int)
+  set.seed(seed)
+  
   output <- try(do.call("fun", dots), silent = TRUE)
   
   time <- sys_time_utc()
@@ -146,7 +142,11 @@ process_file <- function(file, fun, dots, path, config_time, progress,
 }
 
 process_files <- function(remaining, fun, dots, path, config_time, parallel, 
-                          progress, seed) {
+                          progress) {
+  
+  if (!exists(".Random.seed")) runif(1)
+  seed <- .Random.seed
+   
   if(parallel) {
     if(!requireNamespace("plyr", quietly = TRUE))
       err("Package plyr is required to batch process files in parallel.")
