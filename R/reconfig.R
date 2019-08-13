@@ -25,12 +25,13 @@ batch_reconfig_fun <- function(path = ".", fun, ...) {
   config <- batch_config_read(path)
   recurse <- config$recurse
   regexp <- config$regexp
+  time <- config$time
 
   if(recurse && length(config_files(path, recursive = TRUE)) > 1L)
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
   dots <- list(...)
-  save_config(path, regexp, recurse, fun = fun, dots = dots)
+  save_config(path, regexp, recurse, fun = fun, dots = dots, time = time)
   invisible(batch_files_remaining(path, failed = NA))
 }
 
@@ -66,10 +67,11 @@ batch_reconfig_fileset <- function(path = ".", regexp = NULL, recurse = NULL) {
   if(is.null(recurse)) recurse <- config$recurse
   fun <- config$fun
   dots <- config$dots
+  time <- config$time
 
   if(recurse && length(config_files(path, recursive = TRUE)) > 1L)
     err("Subdirectories of '", path, "' contain '.batchr.rds' files.")
   
-  save_config(path, regexp, recurse, fun = fun, dots = dots)
+  save_config(path, regexp, recurse, fun = fun, dots = dots, time = time)
   invisible(batch_files_remaining(path, failed = NA))
 }
