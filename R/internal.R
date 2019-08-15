@@ -113,7 +113,7 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   output <- try(do.call("fun", dots), silent = TRUE)
   
   time <- sys_time_utc()
-  time <- format(time, format = "%Y-%m-%d %H:%M%:%S")
+  time <- format(time, format = "%Y-%m-%d %H:%M:%S")
   msg <- p0("[", time, "]", " '", file, "'")
   
   if(is_try_error(output)) {
