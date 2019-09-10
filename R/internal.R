@@ -135,7 +135,7 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   touch_file(path, file)
   count <- p(formatc(i, n), formatc(n, n), formatc(e, n), sep = "/")
   msg <- p("SUCCESS", count, msg)
-  if(chk_string(output, err = FALSE)) msg <- p(msg, output)
+  if(vld_string(output)) msg <- p(msg, output)
   log_msg(path, msg)
   if(isTRUE(progress)) console_msg(msg)
   TRUE
