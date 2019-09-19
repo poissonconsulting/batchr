@@ -44,7 +44,7 @@ batch_run <- function(path = ".",
   chk_lgl(progress)
   chk_flag(ask)
   if(!is.null(files)) {
-    chk_is(files, "character")
+    chk_s3_class(files, "character")
     chk_no_missing(files)
   }
 
