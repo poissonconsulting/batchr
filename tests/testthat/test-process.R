@@ -53,12 +53,14 @@ test_that("batch_process with failure FALSE", {
   fun <- function(file) grepl(file, "file1[.]csv$")
 
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
   expect_output(batch_process(fun, path, ask = FALSE), 
                 "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s*FAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'$")
   expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
 })
 
 test_that("batch_process with failure ERROR", {
@@ -74,12 +76,14 @@ test_that("batch_process with failure ERROR", {
   fun <- function(file) stop("a problem", call. = FALSE)
 
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
   expect_output(batch_process(fun, path, ask = FALSE), 
                 "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\sa problem\\sFAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\sa problem$")
   expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
 })
 
 test_that("batch_process with sucess character scalar", {
@@ -95,11 +99,13 @@ test_that("batch_process with sucess character scalar", {
   fun <- function(file) " it worked"
 
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
   expect_output(batch_process(fun, path, ask = FALSE), 
                 "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s\\sit worked\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\s\\sit worked$")
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
 })
 
 test_that("batch_process with sucess character vector", {
@@ -115,9 +121,11 @@ test_that("batch_process with sucess character vector", {
   fun <- function(file) c(" it worked", "shouldn't show")
 
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
   expect_output(batch_process(fun, path, ask = FALSE), 
                 "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'$")
   expect_error(batch_config_read(path),
-               "^Can't find file '.*[.]batchr.rds'[.]$")
+               "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
 })

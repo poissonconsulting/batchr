@@ -46,7 +46,7 @@ test_that("batch_config with no path", {
   unlink(path, recursive = TRUE)
   
   expect_error(batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
-               "^Can't find directory '.*batchr'[.]$")
+               "^`path` must specify an existing directory [(]'.*batchr' can't be found[)][.]$", class = "chk_error")
 })
 
 test_that("batch_config with non-function", {
@@ -59,7 +59,7 @@ test_that("batch_config with non-function", {
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
   
   expect_error(batch_config(1, path = path, regexp = "^file\\d[.]csv$"),
-               "^`fun` must be a function[.]$")
+               "^`fun` must be a function[.]$", class = "chk_error")
 })
 
 test_that("batch_config recurse", {

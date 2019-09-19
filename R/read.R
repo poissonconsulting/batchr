@@ -10,7 +10,8 @@
 batch_config_read <- function(path) {
   chk_dir(path)
   file <- file.path(path, ".batchr.rds")
-  chk_file(file)
+  if(!vld_file(file))
+    abort_chk("directory path ('", path, "') must contain file '.batch.rds'")
   readRDS(file)
 }
 

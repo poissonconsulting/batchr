@@ -33,7 +33,8 @@ test_that("batch_config_read with no configuration", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_error(batch_config_read(path), 
-               "^Can't find file '.*[.]batchr[.]rds'[.]$")
+               "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
 })
 
 test_that("batch_config_read with no directory", {
@@ -42,7 +43,9 @@ test_that("batch_config_read with no directory", {
   path <- file.path(tempdir(), "batchr")
   unlink(path, recursive = TRUE)
 
-  expect_error(batch_config_read(path), "^Can't find directory '.*batchr'[.]$")
+  expect_error(batch_config_read(path),                
+               "^`path` must specify an existing directory [(]'.*batchr' can't be found[)][.]$", 
+               class = "chk_error")
 })
 
 test_that("batch_log_read not yet processed", {
@@ -177,7 +180,8 @@ test_that("batch_log_read with no configuration", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_error(batch_log_read(path), 
-               "^Can't find file '.*[.]batchr[.]rds'[.]$")
+               "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$", 
+               class = "chk_error")
 })
 
 test_that("batch_log_read with no directory", {
@@ -186,5 +190,7 @@ test_that("batch_log_read with no directory", {
   path <- file.path(tempdir(), "batchr")
   unlink(path, recursive = TRUE)
 
-  expect_error(batch_log_read(path), "^Can't find directory '.*batchr'[.]$")
+  expect_error(batch_log_read(path),                
+               "^`path` must specify an existing directory [(]'.*batchr' can't be found[)][.]$", 
+               class = "chk_error")
 })
