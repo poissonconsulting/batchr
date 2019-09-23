@@ -148,11 +148,9 @@ process_files <- function(remaining, fun, dots, path, config_time, parallel,
   seed <- .Random.seed
    
   if(parallel) {
-    if(!requireNamespace("plyr", quietly = TRUE))
-      err("Package plyr is required to batch process files in parallel.")
-    success <- plyr::llply(remaining, process_file, fun = fun, dots = dots, 
+    success <- future_map(remaining, process_file, fun = fun, dots = dots, 
                            path = path, config_time = config_time, 
-                           .parallel = TRUE, progress = FALSE, seed = seed)
+                           progress = FALSE, seed = seed)
   } else {
     n <- length(remaining)
     success <- rep(NA, n)

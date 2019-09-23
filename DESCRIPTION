@@ -1,6 +1,6 @@
 Package: batchr
 Title: Batch Process Files
-Version: 0.0.0.9014
+Version: 0.0.0.9015
 Authors@R: 
   c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("cre", "aut"), comment = c(ORCID = "0000-0002-7683-4592")),
     person("Audrey", "Beliveau", email = "audrey.beliveau@uwaterloo.ca", role = "ctb"))
@@ -11,12 +11,12 @@ Imports:
     stats,
     chk (>= 0.0.1.9023),
     yesno,
-    digest
+    digest,
+    furrr
 Suggests: 
-    plyr,
-    doParallel,
     covr,
     testthat,
+    future,
     knitr,
     rmarkdown
 Remotes:

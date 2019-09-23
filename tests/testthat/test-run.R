@@ -65,23 +65,6 @@ test_that("batch_run errors", {
   expect_identical(batch_run(path, ask = FALSE, progress = FALSE), structure(logical(0), .Names = character(0)))
 })
 
-test_that("batch_run parallel without registered", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-  
-  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
-  
-  expect_identical(batch_config(function(x) TRUE, path = path, 
-                                regexp = "^file\\d[.]csv$"),
-                   "file1.csv")
-  
-  expect_warning(batch_run(path, parallel = TRUE, ask = FALSE),
-                 "(n|N)o parallel backend registered")
-})
-
 test_that("batch_run parallel with registered", {
   teardown(unlink(file.path(tempdir(), "batchr_run")))
   
@@ -95,9 +78,10 @@ test_that("batch_run parallel with registered", {
                                 regexp = "^file\\d[.]csv$"),
                    "file1.csv")
   
-  doParallel::registerDoParallel(2)
-  teardown(doParallel::stopImplicitCluster())
-  
+  options(mc.cores = 2)
+  future::plan(future::multisession)
+  teardown(future::plan(future::sequential))
+
   expect_identical(batch_run(path, parallel = TRUE, ask = FALSE), 
                    c(file1.csv = TRUE))
 })
