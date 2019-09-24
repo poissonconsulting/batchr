@@ -6,7 +6,8 @@
 \usage{
 batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
   recurse = FALSE, parallel = FALSE, progress = !parallel,
-  ask = getOption("batchr.ask", TRUE))
+  options = furrr::future_options(), ask = getOption("batchr.ask",
+  TRUE))
 }
 \arguments{
 \item{pattern}{A string of the regular expression to match.}
@@ -26,6 +27,8 @@ parallel (not yet used).}
 \item{progress}{A flag specifying whether to write logging information to the
 console or when \code{parallel = TRUE} to print a progress bar.
 logging information to the console for failed attempts (NA).}
+
+\item{options}{The future specific options to use with the workers.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }

@@ -28,6 +28,7 @@
 #' logging information to the console for failed attempts (NA).
 #' @param files A character vector of the remaining files to process.
 #' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
+#' @param options The future specific options to use with the workers.
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
@@ -37,6 +38,7 @@
 batch_run <- function(path = ".",
                       failed = FALSE, parallel = FALSE,
                       progress = !parallel, files = NULL,
+                      options = furrr::future_options(),
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
   chk_lgl(failed)
@@ -47,6 +49,7 @@ batch_run <- function(path = ".",
     chk_s3_class(files, "character")
     chk_no_missing(files)
   }
+  chk_s3_class(options, "future_options")
 
   config <- batch_config_read(path)
 
@@ -89,7 +92,7 @@ batch_run <- function(path = ".",
   success <- process_files(remaining,
     fun = fun, dots = dots,
     path = path, config_time = config$time,
-    parallel = parallel, progress = progress
+    parallel = parallel, progress = progress, options = options
   )
 
   invisible(success)

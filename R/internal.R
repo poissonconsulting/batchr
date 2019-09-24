@@ -158,7 +158,7 @@ process_file <- function(file, fun, dots, path, config_time, progress,
 }
 
 process_files <- function(remaining, fun, dots, path, config_time, parallel,
-                          progress) {
+                          progress, options) {
   if (!exists(".Random.seed")) runif(1)
   seed <- .Random.seed
 
@@ -166,7 +166,7 @@ process_files <- function(remaining, fun, dots, path, config_time, parallel,
     success <- future_map(remaining, process_file,
       fun = fun, dots = dots,
       path = path, config_time = config_time,
-      progress = FALSE,
+      progress = FALSE, .options = options,
       .progress = progress, seed = seed
     )
   } else {
