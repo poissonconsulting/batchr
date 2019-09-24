@@ -24,30 +24,35 @@ knitr::opts_chunk$set(
 
 `batchr` is an R package to batch process files using an R function.
 
-The key design principle is that only existing 
-files which were last modified *before*
-the directory was 'configured' are considered for processing.
-To implement this principle, configuration creates a hidden file and 
-existing successfully processed files are automatically 'touched' to update 
+The key design principle is that only files which were last modified *before*
+the directory was 'configured' are processed.
+A hidden file stores the configuration time and function etc while 
+successfully processed files are automatically 'touched' to update 
 their modification date.
 
-This design means that:
+As a result:
 
 - Batch processing can be stopped and restarted.
-- Any files created during processing are ignored.
+- Any files created (or modified or deleted) during processing are ignored.
 
 To allow the user control over the reprocessing of problematic files, 
 all processing attempts (SUCCESS or FAILURE) are recorded in a hidden log file.
-It is worth noting that if a file is modified or deleted 
-during processing it is no longer considered (even if processing failed).
 
 ## Installation
 
-You can install the latest development version of batchr from [GitHub](https://github.com/poissonconsulting/batchr) with:
+You can install the latest development version of batchr from [GitHub](https://github.com/poissonconsulting/batchr) with
 
-``` r
+```{r, eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("poissonconsulting/batchr")
+```
+
+To install the latest developmental release from the Poisson drat [repository](https://github.com/poissonconsulting/drat)
+
+```{r, eval=FALSE}
+# install.packages("drat")
+drat::addRepo("poissonconsulting")
+install.packages("batchr")
 ```
 
 ## Demonstration
@@ -94,9 +99,8 @@ For a more realistic demonstration with finer control over the batch processing 
 
 To process the files in parallel:
 
-1) Ensure plyr and doParallel are installed using `install.packages(c("plyr", "doParallel"))`.
-2) Register a parallel backend using `doParallel::registerDoParallel(4)`.
-3) Set `parallel = TRUE` in the call to `batch_process()` or `batch_run()`.
+1) Call `future::plan(future::multisession)`.
+2) Set `parallel = TRUE` in the call to `batch_process()` or `batch_run()`.
 
 ### `batch_gsub()`
 

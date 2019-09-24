@@ -23,8 +23,8 @@
 #' are excluded, if NA they are included and if TRUE they are only included.
 #' @param parallel A flag specifying whether to process the files in 
 #' parallel (not yet used).
-#' @param progress A logic scalar specifying whether to 
-#' write logging information to the console (TRUE or FALSE) or only to write
+#' @param progress A flag specifying whether to write logging information to the
+#' console or when \code{parallel = TRUE} to print a progress bar.
 #' logging information to the console for failed attempts (NA).
 #' @param files A character vector of the remaining files to process.
 #' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
@@ -41,7 +41,7 @@ batch_run <- function(path = ".",
   chk_dir(path)
   chk_lgl(failed)
   chk_flag(parallel)
-  chk_lgl(progress)
+  chk_flag(progress)
   chk_flag(ask)
   if(!is.null(files)) {
     chk_s3_class(files, "character")

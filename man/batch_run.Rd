@@ -18,8 +18,8 @@ are excluded, if NA they are included and if TRUE they are only included.}
 \item{parallel}{A flag specifying whether to process the files in 
 parallel (not yet used).}
 
-\item{progress}{A logic scalar specifying whether to 
-write logging information to the console (TRUE or FALSE) or only to write
+\item{progress}{A flag specifying whether to write logging information to the
+console or when \code{parallel = TRUE} to print a progress bar.
 logging information to the console for failed attempts (NA).}
 
 \item{files}{A character vector of the remaining files to process.

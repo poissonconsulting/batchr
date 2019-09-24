@@ -19,31 +19,39 @@ MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org
 
 `batchr` is an R package to batch process files using an R function.
 
-The key design principle is that only existing files which were last
-modified *before* the directory was ‘configured’ are considered for
-processing. To implement this principle, configuration creates a hidden
-file and existing successfully processed files are automatically
-‘touched’ to update their modification date.
+The key design principle is that only files which were last modified
+*before* the directory was ‘configured’ are processed. A hidden file
+stores the configuration time and function etc while successfully
+processed files are automatically ‘touched’ to update their modification
+date.
 
-This design means that:
+As a result:
 
   - Batch processing can be stopped and restarted.
-  - Any files created during processing are ignored.
+  - Any files created (or modified or deleted) during processing are
+    ignored.
 
 To allow the user control over the reprocessing of problematic files,
 all processing attempts (SUCCESS or FAILURE) are recorded in a hidden
-log file. It is worth noting that if a file is modified or deleted
-during processing it is no longer considered (even if processing
-failed).
+log file.
 
 ## Installation
 
 You can install the latest development version of batchr from
-[GitHub](https://github.com/poissonconsulting/batchr) with:
+[GitHub](https://github.com/poissonconsulting/batchr) with
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("poissonconsulting/batchr")
+```
+
+To install the latest developmental release from the Poisson drat
+[repository](https://github.com/poissonconsulting/drat)
+
+``` r
+# install.packages("drat")
+drat::addRepo("poissonconsulting")
+install.packages("batchr")
 ```
 
 ## Demonstration
@@ -76,8 +84,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
-#> SUCCESS 1/2/0 [2019-08-13 00:37:49] 'file1.csv'
-#> SUCCESS 2/2/0 [2019-08-13 00:37:49] 'file2.csv'
+#> SUCCESS 1/2/0 [2019-09-24 16:22:46] 'file1.csv'
+#> SUCCESS 2/2/0 [2019-09-24 16:22:46] 'file2.csv'
 #> [1] TRUE
 ```
 
@@ -101,11 +109,8 @@ vignette.
 
 To process the files in parallel:
 
-1)  Ensure plyr and doParallel are installed using
-    `install.packages(c("plyr", "doParallel"))`.
-2)  Register a parallel backend using
-    `doParallel::registerDoParallel(4)`.
-3)  Set `parallel = TRUE` in the call to `batch_process()` or
+1)  Call `future::plan(future::multisession)`.
+2)  Set `parallel = TRUE` in the call to `batch_process()` or
     `batch_run()`.
 
 ### `batch_gsub()`

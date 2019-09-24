@@ -122,14 +122,14 @@ process_file <- function(file, fun, dots, path, config_time, progress,
     count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
     msg <- p("FAILURE", count, msg, output)
     log_msg(path, msg)
-    if(!isFALSE(progress)) console_msg(msg)
+    if(progress) console_msg(msg)
     return(FALSE)
   }
   if(isFALSE(output)) {
     count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
     msg <- p("FAILURE", count, msg)
     log_msg(path, msg)
-    if(!isFALSE(progress)) console_msg(msg)
+    if(progress) console_msg(msg)
     return(FALSE)
   }
   touch_file(path, file)
@@ -137,7 +137,7 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   msg <- p("SUCCESS", count, msg)
   if(vld_string(output)) msg <- p(msg, output)
   log_msg(path, msg)
-  if(isTRUE(progress)) console_msg(msg)
+  if(progress) console_msg(msg)
   TRUE
 }
 
@@ -146,11 +146,12 @@ process_files <- function(remaining, fun, dots, path, config_time, parallel,
   
   if (!exists(".Random.seed")) runif(1)
   seed <- .Random.seed
-   
+  
   if(parallel) {
     success <- future_map(remaining, process_file, fun = fun, dots = dots, 
-                           path = path, config_time = config_time, 
-                           progress = FALSE, seed = seed)
+                          path = path, config_time = config_time, 
+                          progress = FALSE,
+                          .progress = progress, seed = seed)
   } else {
     n <- length(remaining)
     success <- rep(NA, n)

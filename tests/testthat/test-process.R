@@ -31,7 +31,7 @@ test_that("batch_process changes files", {
     TRUE
   }
 
-  expect_true(batch_process(fun, path, ask = FALSE, progress = NA))
+  expect_true(batch_process(fun, path, ask = FALSE, progress = FALSE))
   # should be x = 2L
   expect_identical(read.csv(file.path(path, "file1.csv")), 
                    structure(list(X.1 = 1L, X = 1L, x = 2L), class = "data.frame", row.names = c(NA, -1L)))
