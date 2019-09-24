@@ -15,12 +15,12 @@ batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
 
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{regexp}{A string of a regular expression. Only non-hidden file names 
+\item{regexp}{A string of a regular expression. Only non-hidden file names
 which match the regular expression will be batch processed.}
 
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 
-\item{parallel}{A flag specifying whether to process the files in 
+\item{parallel}{A flag specifying whether to process the files in
 parallel (not yet used).}
 
 \item{progress}{A flag specifying whether to write logging information to the
@@ -30,7 +30,7 @@ logging information to the console for failed attempts (NA).}
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }
 \value{
-An invisible flag indicating whether all the files were 
+An invisible flag indicating whether all the files were
 successfully processed.
 }
 \description{

@@ -11,11 +11,11 @@ batch_run(path = ".", failed = FALSE, parallel = FALSE,
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{failed}{A logical scalar specifying how to treat files 
-that previously failed to process. If FALSE (the default) failed files 
+\item{failed}{A logical scalar specifying how to treat files
+that previously failed to process. If FALSE (the default) failed files
 are excluded, if NA they are included and if TRUE they are only included.}
 
-\item{parallel}{A flag specifying whether to process the files in 
+\item{parallel}{A flag specifying whether to process the files in
 parallel (not yet used).}
 
 \item{progress}{A flag specifying whether to write logging information to the
@@ -37,7 +37,7 @@ specified by \code{\link{batch_config}()}.
 }
 \details{
 \code{batch_run()} logs all file processing attempts together with the
-the type (SUCCESS or FAILURE), the 
+the type (SUCCESS or FAILURE), the
 system time in UTC, the file name and any error messages.
 The hidden log file can be read using \code{\link{batch_log_read}()}.
 
@@ -51,6 +51,6 @@ If a remaining file is removed or modified by a separate process,
 \code{batch_run()} throws an error.
 }
 \seealso{
-\code{\link{batch_process}()}, \code{\link{batch_config}()} and 
+\code{\link{batch_process}()}, \code{\link{batch_config}()} and
 \code{\link{batch_cleanup}()}
 }

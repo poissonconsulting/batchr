@@ -9,28 +9,28 @@ batch_reconfig_fun(path = ".", fun, ...)
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{fun}{A function to process each of the files. 
+\item{fun}{A function to process each of the files.
 \code{fun}'s first argument should be a string of the path to a single file.
-If processing is unsuccessful \code{fun} should return FALSE 
+If processing is unsuccessful \code{fun} should return FALSE
 or throw an error (error messages are caught and automatically logged).
-If fun deletes or modifies the file then it is no longer considered 
+If fun deletes or modifies the file then it is no longer considered
 for processing.}
 
 \item{...}{Additional arguments passed to \code{fun}.}
 }
 \value{
-An invisible character vector of the paths to the files 
+An invisible character vector of the paths to the files
 remaining to be processed.
 }
 \description{
-Updates the function and function arguments that were provided 
+Updates the function and function arguments that were provided
 when a directory was configured (using \code{\link{batch_config}()}).
 }
 \details{
 \code{batch_reconfig_fun()} is useful if a new version of the function is required
 to successfully process some of the files.
 
-It should be noted that \code{batch_reconfig_fun()} does not alter the 
+It should be noted that \code{batch_reconfig_fun()} does not alter the
 configuration time.
 
 In order to process previously failed files \code{\link{batch_run}()}

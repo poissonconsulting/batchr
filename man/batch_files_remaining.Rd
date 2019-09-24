@@ -9,8 +9,8 @@ batch_files_remaining(path = ".", failed = FALSE)
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{failed}{A logical scalar specifying how to treat files 
-that previously failed to process. If FALSE (the default) failed files 
+\item{failed}{A logical scalar specifying how to treat files
+that previously failed to process. If FALSE (the default) failed files
 are excluded, if NA they are included and if TRUE they are only included.}
 }
 \value{

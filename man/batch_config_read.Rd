@@ -13,7 +13,7 @@ batch_config_read(path)
 A named list of the configuration values.
 }
 \description{
-Reads the values in the 
+Reads the values in the
 configuration file created by \code{\link{batch_config}()}.
 }
 \seealso{

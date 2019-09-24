@@ -1,6 +1,6 @@
 sys_time_utc <- function() {
   time <- Sys.time()
-  attr(time, "tzone") <- "UTC" 
+  attr(time, "tzone") <- "UTC"
   time
 }
 

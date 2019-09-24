@@ -9,28 +9,28 @@ batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
   ask = getOption("batchr.ask", TRUE), ...)
 }
 \arguments{
-\item{fun}{A function to process each of the files. 
+\item{fun}{A function to process each of the files.
 \code{fun}'s first argument should be a string of the path to a single file.
-If processing is unsuccessful \code{fun} should return FALSE 
+If processing is unsuccessful \code{fun} should return FALSE
 or throw an error (error messages are caught and automatically logged).
-If fun deletes or modifies the file then it is no longer considered 
+If fun deletes or modifies the file then it is no longer considered
 for processing.}
 
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{regexp}{A string of a regular expression. Only non-hidden file names 
+\item{regexp}{A string of a regular expression. Only non-hidden file names
 which match the regular expression will be batch processed.}
 
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 
-\item{parallel}{A flag specifying whether to process the files in 
+\item{parallel}{A flag specifying whether to process the files in
 parallel (not yet used).}
 
 \item{progress}{A flag specifying whether to write logging information to the
 console or when \code{parallel = TRUE} to print a progress bar.
 logging information to the console for failed attempts (NA).}
 
-\item{force}{A flag specifying whether to delete configuration and 
+\item{force}{A flag specifying whether to delete configuration and
 log files even if there are files remaining to be processed.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
@@ -38,11 +38,11 @@ log files even if there are files remaining to be processed.}
 \item{...}{Additional arguments passed to \code{fun}.}
 }
 \value{
-An invisible flag indicating whether all the files where 
+An invisible flag indicating whether all the files where
 successfully processed.
 }
 \description{
-Performs batch processing of files in a directory using the 
+Performs batch processing of files in a directory using the
 \code{\link{batch_config}()}, \code{\link{batch_run}()}
 and \code{\link{batch_cleanup}()} functions.
 For more control the user should call these three functions instead.

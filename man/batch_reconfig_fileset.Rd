@@ -9,23 +9,23 @@ batch_reconfig_fileset(path = ".", regexp = NULL, recurse = NULL)
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{regexp}{A string of a regular expression. Only non-hidden file names 
+\item{regexp}{A string of a regular expression. Only non-hidden file names
 which match the regular expression will be batch processed.}
 
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 }
 \value{
-An invisible character vector of the paths to the files 
+An invisible character vector of the paths to the files
 remaining to be processed.
 }
 \description{
-Updates the regular expression and/or recurse argument  that were provided 
+Updates the regular expression and/or recurse argument  that were provided
 when a directory was configured (using \code{\link{batch_config}()}).
 }
 \details{
 \code{batch_reconfig_fileset()} is useful for including or excluding particular files.
 
-It should be noted that \code{batch_reconfig_fun()} does not alter the 
+It should be noted that \code{batch_reconfig_fun()} does not alter the
 configuration time.
 
 In order to process previously failed files \code{\link{batch_run}()}

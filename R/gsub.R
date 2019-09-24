@@ -1,5 +1,5 @@
 #' File Text Replacement
-#' 
+#'
 #' Uses \code{\link[base]{gsub}} to perform text replacement on a file.
 #'
 #' @param file A string of the name of the file to modify.
@@ -18,25 +18,27 @@ gsub_file <- function(file, pattern, replacement) {
 }
 
 #' Batch File Text Replacement
-#' 
+#'
 #' Uses \code{\link{batch_process}()} and \code{\link{gsub_file}()} to
 #' perform batch text file replacement.
 #' By default it replaces text in all .R and .r files in the working directory.
-#' 
+#'
 #' @inheritParams batch_config
 #' @inheritParams batch_run
 #' @inheritParams batch_cleanup
 #' @inheritParams gsub_file
 #'
 #' @seealso \code{\link{batch_process}()} and \code{\link{gsub_file}()}
-#' @return An invisible flag indicating whether all the files were 
+#' @return An invisible flag indicating whether all the files were
 #' successfully processed.
 #' @export
-batch_gsub <- function(pattern, replacement, 
-                       path = ".", regexp = "[.](R|r)$", recurse = FALSE, 
-                       parallel = FALSE, progress = !parallel, 
+batch_gsub <- function(pattern, replacement,
+                       path = ".", regexp = "[.](R|r)$", recurse = FALSE,
+                       parallel = FALSE, progress = !parallel,
                        ask = getOption("batchr.ask", TRUE)) {
-  batch_process(gsub_file, pattern = pattern, replacement = replacement, 
-                path = path, regexp = regexp, recurse = recurse,
-                parallel = parallel, progress = progress, ask = ask)
+  batch_process(gsub_file,
+    pattern = pattern, replacement = replacement,
+    path = path, regexp = regexp, recurse = recurse,
+    parallel = parallel, progress = progress, ask = ask
+  )
 }

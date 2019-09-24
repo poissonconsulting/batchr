@@ -1,6 +1,6 @@
 #' Read Configuration File
-#' 
-#' Reads the values in the 
+#'
+#' Reads the values in the
 #' configuration file created by \code{\link{batch_config}()}.
 #'
 #' @inheritParams batch_config
@@ -10,13 +10,14 @@
 batch_config_read <- function(path) {
   chk_dir(path)
   file <- file.path(path, ".batchr.rds")
-  if(!vld_file(file))
+  if (!vld_file(file)) {
     abort_chk("directory path ('", path, "') must contain file '.batch.rds'")
+  }
   readRDS(file)
 }
 
 #' Read Log File
-#' 
+#'
 #' Reads the values in the log file created by \code{\link{batch_run}()}.
 #'
 #' @inheritParams batch_config

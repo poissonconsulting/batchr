@@ -2,7 +2,7 @@ context("gsub")
 
 test_that("batch_gsub", {
   teardown(unlink(file.path(tempdir(), "batchr")))
-  
+
   path <- file.path(tempdir(), "batchr")
   unlink(path, recursive = TRUE)
   dir.create(path)
@@ -12,17 +12,27 @@ test_that("batch_gsub", {
   file2 <- file.path(path, "file2.R")
   lines2 <- c("text")
   writeLines(lines2, file2)
-  expect_error(batch_gsub(pattern = "zz", replacement = "z", path = path,
-                          regexp = "[.]txt$"),
-               "^Directory '.*batchr' does not contain any files matching '[[][.][]]txt[$]'[.]$")
-  expect_output(batch_gsub(pattern = "zz", replacement = "z", path = path,
-                         ask = FALSE), "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file[.]r'\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]R'$")
+  expect_error(
+    batch_gsub(
+      pattern = "zz", replacement = "z", path = path,
+      regexp = "[.]txt$"
+    ),
+    "^Directory '.*batchr' does not contain any files matching '[[][.][]]txt[$]'[.]$"
+  )
+  expect_output(batch_gsub(
+    pattern = "zz", replacement = "z", path = path,
+    ask = FALSE
+  ), "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file[.]r'\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]R'$")
   expect_identical(readLines(file), c("some z", "and some more zz zz z z"))
   expect_identical(readLines(file2), c("text"))
-  expect_true(batch_gsub(pattern = "zz", replacement = "z", path = path,
-                         ask = FALSE, progress = FALSE))
+  expect_true(batch_gsub(
+    pattern = "zz", replacement = "z", path = path,
+    ask = FALSE, progress = FALSE
+  ))
   expect_identical(readLines(file), c("some z", "and some more z z z z"))
   expect_identical(readLines(file2), c("text"))
-  expect_true(batch_gsub(pattern = "zz", replacement = "z", path = path,
-                         ask = FALSE, progress = FALSE))
+  expect_true(batch_gsub(
+    pattern = "zz", replacement = "z", path = path,
+    ask = FALSE, progress = FALSE
+  ))
 })

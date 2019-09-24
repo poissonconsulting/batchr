@@ -7,16 +7,16 @@
 batch_config(fun, path = ".", regexp = ".*", recurse = FALSE, ...)
 }
 \arguments{
-\item{fun}{A function to process each of the files. 
+\item{fun}{A function to process each of the files.
 \code{fun}'s first argument should be a string of the path to a single file.
-If processing is unsuccessful \code{fun} should return FALSE 
+If processing is unsuccessful \code{fun} should return FALSE
 or throw an error (error messages are caught and automatically logged).
-If fun deletes or modifies the file then it is no longer considered 
+If fun deletes or modifies the file then it is no longer considered
 for processing.}
 
 \item{path}{A string of the path to the directory with the files for processing.}
 
-\item{regexp}{A string of a regular expression. Only non-hidden file names 
+\item{regexp}{A string of a regular expression. Only non-hidden file names
 which match the regular expression will be batch processed.}
 
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
@@ -31,19 +31,19 @@ that will be processed when \code{\link{batch_run}()} is called.
 Configures a directory for batch file processing by \code{\link{batch_run}()}.
 }
 \details{
-\code{batch_config()} creates a hidden configuration file in path 
+\code{batch_config()} creates a hidden configuration file in path
 named '.batchr.rds'.
 
 The contents of the file can be read using
-\code{\link{batch_config_read}()} 
+\code{\link{batch_config_read}()}
 or updated using \code{\link{batch_reconfig_fun}()}.
 
 Configuration is only possible if the directory does not already contain
-a configuration file. 
+a configuration file.
 If \code{recurse = TRUE} then the subdirectories
 must also not contain configuration files.
 
-The regexp must match at least one non-hidden file in the directory 
+The regexp must match at least one non-hidden file in the directory
 or if \code{recurse = TRUE} in the directory or subdirectories.
 Hidden files are excluded to prevent accidental modification of system files.
 }
