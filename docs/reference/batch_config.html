@@ -8,11 +8,13 @@
 
 <title>Configure Batch Processing — batch_config • batchr</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,10 +34,11 @@
 
 
 
-<meta property="og:title" content="Configure Batch Processing — batch_config" />
 
+<meta property="og:title" content="Configure Batch Processing — batch_config" />
 <meta property="og:description" content="Configures a directory for batch file processing by batch_run()." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -66,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9012</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9016</span>
       </span>
     </div>
 
@@ -81,11 +84,19 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/batchr-demo.html">Batchr Demonstration</a>
+    </li>
+  </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -107,22 +118,22 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Configures a directory for batch file processing by <code><a href='batch_run.html'>batch_run</a>()</code>.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>batch_config</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fun</th>
-      <td><p>A function to process each of the files. 
+      <td><p>A function to process each of the files.
 <code>fun</code>'s first argument should be a string of the path to a single file.
-If processing is unsuccessful <code>fun</code> should return FALSE 
-or throw an error (error messages are caught and automatically logged).</p></td>
+If processing is unsuccessful <code>fun</code> should return FALSE
+or throw an error (error messages are caught and automatically logged).
+If fun deletes or modifies the file then it is no longer considered
+for processing.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -130,7 +141,7 @@ or throw an error (error messages are caught and automatically logged).</p></td>
     </tr>
     <tr>
       <th>regexp</th>
-      <td><p>A string of a regular expression. Only non-hidden file names 
+      <td><p>A string of a regular expression. Only non-hidden file names
 which match the regular expression will be batch processed.</p></td>
     </tr>
     <tr>
@@ -142,44 +153,38 @@ which match the regular expression will be batch processed.</p></td>
       <td><p>Additional arguments passed to <code>fun</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An invisible character vector of the paths to the files to
 that will be processed when <code><a href='batch_run.html'>batch_run</a>()</code> is called.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>batch_config()</code> creates a hidden configuration file in path 
+    <p><code>batch_config()</code> creates a hidden configuration file in path
 named '.batchr.rds'.</p>
 <p>The contents of the file can be read using
-<code><a href='batch_config_read.html'>batch_config_read</a>()</code> 
+<code><a href='batch_config_read.html'>batch_config_read</a>()</code>
 or updated using <code><a href='batch_reconfig_fun.html'>batch_reconfig_fun</a>()</code>.</p>
 <p>Configuration is only possible if the directory does not already contain
-a configuration file. 
+a configuration file.
 If <code>recurse = TRUE</code> then the subdirectories
 must also not contain configuration files.</p>
-<p>The regexp must match at least one non-hidden file in the directory 
+<p>The regexp must match at least one non-hidden file in the directory
 or if <code>recurse = TRUE</code> in the directory or subdirectories.
 Hidden files are excluded to prevent accidental modification of system files.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code> and <code><a href='batch_run.html'>batch_run</a>()</code></p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -191,7 +196,7 @@ Hidden files are excluded to prevent accidental modification of system files.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

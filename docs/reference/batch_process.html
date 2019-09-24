@@ -8,11 +8,13 @@
 
 <title>Batch File Processing — batch_process • batchr</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,13 +34,14 @@
 
 
 
-<meta property="og:title" content="Batch File Processing — batch_process" />
 
-<meta property="og:description" content="Performs batch processing of files in a directory using the 
+<meta property="og:title" content="Batch File Processing — batch_process" />
+<meta property="og:description" content="Performs batch processing of files in a directory using the
 batch_config(), batch_run()
 and batch_cleanup() functions.
 For more control the user should call these three functions instead." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -69,7 +72,7 @@ For more control the user should call these three functions instead." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9012</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9016</span>
       </span>
     </div>
 
@@ -84,11 +87,19 @@ For more control the user should call these three functions instead." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/batchr-demo.html">Batchr Demonstration</a>
+    </li>
+  </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -110,27 +121,27 @@ For more control the user should call these three functions instead." />
     </div>
 
     <div class="ref-description">
-    
-    <p>Performs batch processing of files in a directory using the 
+    <p>Performs batch processing of files in a directory using the
 <code><a href='batch_config.html'>batch_config</a>()</code>, <code><a href='batch_run.html'>batch_run</a>()</code>
 and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code> functions.
 For more control the user should call these three functions instead.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>batch_process</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> !<span class='no'>parallel</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>), <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fun</th>
-      <td><p>A function to process each of the files. 
+      <td><p>A function to process each of the files.
 <code>fun</code>'s first argument should be a string of the path to a single file.
-If processing is unsuccessful <code>fun</code> should return FALSE 
-or throw an error (error messages are caught and automatically logged).</p></td>
+If processing is unsuccessful <code>fun</code> should return FALSE
+or throw an error (error messages are caught and automatically logged).
+If fun deletes or modifies the file then it is no longer considered
+for processing.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -138,7 +149,7 @@ or throw an error (error messages are caught and automatically logged).</p></td>
     </tr>
     <tr>
       <th>regexp</th>
-      <td><p>A string of a regular expression. Only non-hidden file names 
+      <td><p>A string of a regular expression. Only non-hidden file names
 which match the regular expression will be batch processed.</p></td>
     </tr>
     <tr>
@@ -147,18 +158,18 @@ which match the regular expression will be batch processed.</p></td>
     </tr>
     <tr>
       <th>parallel</th>
-      <td><p>A flag specifying whether to process the files in 
+      <td><p>A flag specifying whether to process the files in
 parallel (not yet used).</p></td>
     </tr>
     <tr>
       <th>progress</th>
-      <td><p>A logic scalar specifying whether to 
-write logging information to the console (TRUE or FALSE) or only to write
+      <td><p>A flag specifying whether to write logging information to the
+console or when <code>parallel = TRUE</code> to print a progress bar.
 logging information to the console for failed attempts (NA).</p></td>
     </tr>
     <tr>
       <th>force</th>
-      <td><p>A flag specifying whether to delete configuration and 
+      <td><p>A flag specifying whether to delete configuration and
 log files even if there are files remaining to be processed.</p></td>
     </tr>
     <tr>
@@ -170,35 +181,29 @@ log files even if there are files remaining to be processed.</p></td>
       <td><p>Additional arguments passed to <code>fun</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An invisible flag indicating whether all the files where 
+    <p>An invisible flag indicating whether all the files where
 successfully processed.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code><a href='batch_gsub.html'>batch_gsub</a>()</code> provides a simple wrapper for
 batch text replacement.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='batch_config.html'>batch_config</a>()</code>, <code><a href='batch_run.html'>batch_run</a>()</code>
 and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code></p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
@@ -210,7 +215,7 @@ and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code></p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>
