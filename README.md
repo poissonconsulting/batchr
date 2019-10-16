@@ -84,8 +84,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
-#> SUCCESS 1/2/0 [2019-09-24 16:22:46] 'file1.csv'
-#> SUCCESS 2/2/0 [2019-09-24 16:22:46] 'file2.csv'
+#> SUCCESS 1/2/0 [2019-10-16 22:51:50] 'file1.csv'
+#> SUCCESS 2/2/0 [2019-10-16 22:51:50] 'file2.csv'
 #> [1] TRUE
 ```
 

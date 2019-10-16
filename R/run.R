@@ -29,6 +29,7 @@
 #' @param files A character vector of the remaining files to process.
 #' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
 #' @param options The future specific options to use with the workers.
+#' The seed should be specified using \code{\link[base]{set.seed}()}.
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
@@ -50,7 +51,8 @@ batch_run <- function(path = ".",
     chk_no_missing(files)
   }
   chk_s3_class(options, "future_options")
-
+  chk_false(options$seed)
+  
   config <- batch_config_read(path)
 
   recurse <- config$recurse

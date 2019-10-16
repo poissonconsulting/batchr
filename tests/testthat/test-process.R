@@ -18,6 +18,25 @@ test_that("batch_process", {
   )
 })
 
+test_that("batch_process with options(seed = TRUE)", {
+  teardown(unlink(file.path(tempdir(), "batchr_process")))
+
+  path <- file.path(tempdir(), "batchr_process")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  expect_error(
+    batch_process(function(x) TRUE,
+      path = path, options = furrr::future_options(seed = TRUE)
+    ),
+    "^`options[$]seed` must be FALSE[.]$",
+    class = "chk_error"
+  )
+})
+
+
 test_that("batch_process changes files", {
   teardown(unlink(file.path(tempdir(), "batchr_process")))
 

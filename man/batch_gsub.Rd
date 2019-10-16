@@ -28,7 +28,8 @@ parallel (not yet used).}
 console or when \code{parallel = TRUE} to print a progress bar.
 logging information to the console for failed attempts (NA).}
 
-\item{options}{The future specific options to use with the workers.}
+\item{options}{The future specific options to use with the workers.
+The seed should be specified using \code{\link[base]{set.seed}()}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }
