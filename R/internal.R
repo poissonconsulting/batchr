@@ -102,16 +102,6 @@ formatc <- function(i, n) {
   formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
-sum2intswrap <- function(x, y) {
-  sum <- as.double(x) + as.double(y)
-  is_na <- is.na(sum)
-  sum[!is_na & sum < -.max_integer] <-
-    sum[!is_na & sum < -.max_integer] %% .max_integer
-  sum[!is_na & sum > .max_integer] <-
-    sum[!is_na & sum > .max_integer] %% -.max_integer
-  as.integer(sum)
-}
-
 rinteger <- function(n = 1) as.integer(runif(n, -.max_integer, .max_integer))
 
 process_file <- function(file, fun, dots, path, config_time, progress,
@@ -121,9 +111,7 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   dots <- c(file.path(path, file), dots)
 
   .Random.seed <<- seed
-  seed <- rinteger()
-  int <- digest2int(file)
-  seed <- sum2intswrap(seed, int)
+  seed <- digest2int(file, seed = rinteger())
   set.seed(seed)
 
   output <- try(do.call("fun", dots), silent = TRUE)
