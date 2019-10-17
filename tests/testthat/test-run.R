@@ -349,7 +349,7 @@ test_that("batch_run seed max", {
   )
 })
 
-test_that("batch_run seed as named files", {
+test_that("batch_run seed as named files errors if missing", {
   teardown(unlink(file.path(tempdir(), "batchr_run")))
 
   path <- file.path(tempdir(), "batchr_run")
@@ -371,9 +371,258 @@ test_that("batch_run seed as named files", {
   expect_error(batch_run(path, seed = c(file2.csv = 1L)),
                "^`names[(]seed[)]` must include 'file1[.]csv'[.]",
                class = "chk_error")
+})
+
+
+test_that("batch_run seed as named files works ignores extra ones", {
+  teardown(unlink(file.path(tempdir(), "batchr_run")))
+
+  path <- file.path(tempdir(), "batchr_run")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+
+  expect_identical(batch_run(path, seed = c(file1.csv = 1L, file2.csv = 3L), ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   "0.033562890952453")
+})
+
+test_that("batch_run seed as named files works", {
+  teardown(unlink(file.path(tempdir(), "batchr_run")))
+
+  path <- file.path(tempdir(), "batchr_run")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
 
   expect_identical(batch_run(path, seed = c(file1.csv = 1L), ask = FALSE,
                          progress = FALSE),
                c(file1.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   "0.033562890952453")
+  
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+
+  expect_identical(batch_run(path, seed = c(file1.csv = 1L), ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   "0.033562890952453")
+  
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+
+  expect_identical(batch_run(path, seed = c(file1.csv = 2L), ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   "0.11178148444742")
+  
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+
+  expect_identical(batch_run(path, seed = 1L, ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   "0.033562890952453")
+  
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    c("file1.csv", "file2.csv")
+  )
+
+  expect_identical(batch_run(path, seed = 1L, ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE, file2.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   c("0.033562890952453", "0.418956762179732"))
+  
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    c("file1.csv", "file2.csv")
+  )
+
+  expect_identical(batch_run(path, seed = 2L, ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE, file2.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   c("0.11178148444742", "0.364263514755294"))
+
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    c("file1.csv", "file2.csv")
+  )
+
+  expect_identical(batch_run(path, seed = c(file1.csv = 2L, file2.csv = 1L), ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE, file2.csv = FALSE))
+  
+  expect_identical(batch_log_read(path)$message,
+                   c("0.11178148444742", "0.418956762179732"))
 })
 
+test_that("batch_run seed as named files parallel", {
+  teardown(unlink(file.path(tempdir(), "batchr_run")))
+
+  path <- file.path(tempdir(), "batchr_run")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+
+  fun <- function(x) {
+    dat <- read.csv(x)
+    dat$runif <- runif(1)
+    write.csv(dat, x)
+  }
+  
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    c("file1.csv", "file2.csv")
+  )
+
+  expect_identical(batch_run(path, seed = c(file1.csv = 2L, file2.csv = 1L), ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = TRUE, file2.csv = TRUE))
+  
+  expect_identical(read.csv(file.path(path, "file1.csv"))$runif, 0.11178148444742)
+  expect_identical(read.csv(file.path(path, "file2.csv"))$runif, 0.418956762179732)
+})
+
+test_that("batch_run seed as named files parallel", {
+  teardown(unlink(file.path(tempdir(), "batchr_run")))
+
+  path <- file.path(tempdir(), "batchr_run")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+
+  fun <- function(x) {
+    dat <- read.csv(x)
+    dat$runif <- runif(1)
+    write.csv(dat, x)
+  }
+  
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    c("file1.csv", "file2.csv")
+  )
+
+  expect_identical(batch_run(path, seed = c(file1.csv = 1L, file2.csv = 2L), ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = TRUE, file2.csv = TRUE))
+  
+  expect_identical(read.csv(file.path(path, "file1.csv"))$runif, 0.033562890952453)
+  expect_identical(read.csv(file.path(path, "file2.csv"))$runif, 0.364263514755294)
+})
