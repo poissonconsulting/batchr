@@ -348,3 +348,32 @@ test_that("batch_run seed max", {
 )
   )
 })
+
+test_that("batch_run seed as named files", {
+  teardown(unlink(file.path(tempdir(), "batchr_run")))
+
+  path <- file.path(tempdir(), "batchr_run")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+
+  expect_identical(
+    batch_config(fun,
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+  
+  expect_error(batch_run(path, seed = c(file2.csv = 1L)),
+               "^`names[(]seed[)]` must include 'file1[.]csv'[.]",
+               class = "chk_error")
+
+  expect_identical(batch_run(path, seed = c(file1.csv = 1L), ask = FALSE,
+                         progress = FALSE),
+               c(file1.csv = FALSE))
+})
+

@@ -26,10 +26,10 @@ logging information to the console for failed attempts (NA).}
 \item{files}{A character vector of the remaining files to process.
 If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.}
 
-\item{seed}{A whole number of the seed to use.}
+\item{seed}{A whole number of the seed to use when converting the name of each file into a seed (using \code{\link[digest]{digest2int}()}) or a named whole numeric vector of the seed to use for each file in files (seeds for additional files are ignored).}
 
-\item{options}{The future specific options to use with the workers.
-The seed should be specified using \code{\link[base]{set.seed}()}.}
+\item{options}{The future specific options to use with the workers
+(seed should be \code{FALSE}).}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }

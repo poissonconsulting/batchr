@@ -28,9 +28,9 @@
 #' logging information to the console for failed attempts (NA).
 #' @param files A character vector of the remaining files to process.
 #' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
-#' @param seed A whole number of the seed to use.
-#' @param options The future specific options to use with the workers.
-#' The seed should be specified using \code{\link[base]{set.seed}()}.
+#' @param seed A whole number of the seed to use when converting the name of each file into a seed (using \code{\link[digest]{digest2int}()}) or a named whole numeric vector of the seed to use for each file in files (seeds for additional files are ignored).
+#' @param options The future specific options to use with the workers
+#' (seed should be \code{FALSE}).
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
@@ -52,7 +52,8 @@ batch_run <- function(path = ".",
     chk_s3_class(files, "character")
     chk_no_missing(files)
   }
-  chk_whole_number(seed)
+  chk_whole_numeric(seed)
+  chkor(chk_scalar(seed), chk_named(seed))
   chk_s3_class(options, "future_options")
   chk_false(options$seed)
   
@@ -86,6 +87,12 @@ batch_run <- function(path = ".",
   if (!length(remaining)) {
     return(structure(logical(0), .Names = character(0)))
   }
+  
+  if(vld_named(seed)) {
+    chk_unique(names(seed))
+    chk_superset(names(seed), remaining)
+  }
+
   question <- p0(
     "Batch process ", length(remaining), " files in '",
     normalizePath(path), "'?"
@@ -93,7 +100,7 @@ batch_run <- function(path = ".",
   if (ask && !yesno(question)) {
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
   }
-
+  
   success <- process_files(remaining,
     fun = fun, dots = dots,
     path = path, config_time = config$time,
