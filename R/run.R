@@ -28,6 +28,7 @@
 #' logging information to the console for failed attempts (NA).
 #' @param files A character vector of the remaining files to process.
 #' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
+#' @param seed A whole number of the seed to use.
 #' @param options The future specific options to use with the workers.
 #' The seed should be specified using \code{\link[base]{set.seed}()}.
 #' @param ask A flag specifying whether to ask before starting to process the files.
@@ -39,6 +40,7 @@
 batch_run <- function(path = ".",
                       failed = FALSE, parallel = FALSE,
                       progress = !parallel, files = NULL,
+                      seed = rinteger(),
                       options = furrr::future_options(),
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
@@ -50,6 +52,7 @@ batch_run <- function(path = ".",
     chk_s3_class(files, "character")
     chk_no_missing(files)
   }
+  chk_whole_number(seed)
   chk_s3_class(options, "future_options")
   chk_false(options$seed)
   
@@ -94,7 +97,8 @@ batch_run <- function(path = ".",
   success <- process_files(remaining,
     fun = fun, dots = dots,
     path = path, config_time = config$time,
-    parallel = parallel, progress = progress, options = options
+    parallel = parallel, progress = progress, seed = seed,
+    options = options
   )
 
   invisible(success)

@@ -6,8 +6,8 @@
 \usage{
 batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
   parallel = FALSE, progress = !parallel, force = TRUE,
-  options = furrr::future_options(), ask = getOption("batchr.ask",
-  TRUE), ...)
+  seed = rinteger(), options = furrr::future_options(),
+  ask = getOption("batchr.ask", TRUE), ...)
 }
 \arguments{
 \item{fun}{A function to process each of the files.
@@ -33,6 +33,8 @@ logging information to the console for failed attempts (NA).}
 
 \item{force}{A flag specifying whether to delete configuration and
 log files even if there are files remaining to be processed.}
+
+\item{seed}{A whole number of the seed to use.}
 
 \item{options}{The future specific options to use with the workers.
 The seed should be specified using \code{\link[base]{set.seed}()}.}

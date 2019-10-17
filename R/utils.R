@@ -37,3 +37,14 @@ rinteger <- function(n = 1) {
   mx <- 2147483647L
   as.integer(runif(n, -mx, mx))
 }
+
+get_random_seed <- function () {
+  if(!exists(".Random.seed")) runif(1)
+  .Random.seed
+}
+
+set_random_seed <- function (seed, advance = FALSE) {
+  .Random.seed <<- seed
+  if(advance) runif(1)
+  invisible(.Random.seed)
+}

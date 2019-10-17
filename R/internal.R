@@ -108,8 +108,7 @@ process_file <- function(file, fun, dots, path, config_time, progress,
 
   dots <- c(file.path(path, file), dots)
 
-  .Random.seed <<- seed
-  seed <- digest2int(file, seed = rinteger())
+  seed <- digest2int(file, seed = seed)
   set.seed(seed)
 
   output <- try(do.call("fun", dots), silent = TRUE)
@@ -144,9 +143,10 @@ process_file <- function(file, fun, dots, path, config_time, progress,
 }
 
 process_files <- function(remaining, fun, dots, path, config_time, parallel,
-                          progress, options) {
-  if (!exists(".Random.seed")) runif(1)
-  seed <- .Random.seed
+                          progress, seed, options) {
+
+  rseed <- get_random_seed()
+  on.exit(set_random_seed(rseed, advance = TRUE))
 
   if (parallel) {
     success <- future_map(remaining, process_file,

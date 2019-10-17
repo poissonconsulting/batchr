@@ -19,12 +19,13 @@
 #' @export
 batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE,
                           parallel = FALSE, progress = !parallel, force = TRUE,
+                          seed = rinteger(),
                           options = furrr::future_options(),
                           ask = getOption("batchr.ask", TRUE), ...) {
   batch_config(fun, path = path, regexp = regexp, recurse = recurse, ...)
   success <- batch_run(
     path = path, parallel = parallel, progress = progress,
-    options = options, ask = ask
+    seed = seed, options = options, ask = ask
   )
   batch_cleanup(path, force = force)
   all(success)

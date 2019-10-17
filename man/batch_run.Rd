@@ -5,7 +5,7 @@
 \title{Runs Batch Processing}
 \usage{
 batch_run(path = ".", failed = FALSE, parallel = FALSE,
-  progress = !parallel, files = NULL,
+  progress = !parallel, files = NULL, seed = rinteger(),
   options = furrr::future_options(), ask = getOption("batchr.ask",
   TRUE))
 }
@@ -25,6 +25,8 @@ logging information to the console for failed attempts (NA).}
 
 \item{files}{A character vector of the remaining files to process.
 If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.}
+
+\item{seed}{A whole number of the seed to use.}
 
 \item{options}{The future specific options to use with the workers.
 The seed should be specified using \code{\link[base]{set.seed}()}.}
