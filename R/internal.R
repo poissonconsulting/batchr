@@ -102,8 +102,6 @@ formatc <- function(i, n) {
   formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
-rinteger <- function(n = 1) as.integer(runif(n, -.max_integer, .max_integer))
-
 process_file <- function(file, fun, dots, path, config_time, progress,
                          seed, i = 1, n = 1, e = 0) {
   validate_remaining_file(path, file, config_time)
