@@ -83,9 +83,8 @@ files.
 
 ``` r
 library(batchr)
+#> Loading required package: purrr
 batch_process(fun, path, ask = FALSE)
-#> SUCCESS 1/2/0 [2019-10-16 22:51:50] 'file1.csv'
-#> SUCCESS 2/2/0 [2019-10-16 22:51:50] 'file2.csv'
 #> [1] TRUE
 ```
 
@@ -107,11 +106,9 @@ vignette.
 
 ### Parallel Chains
 
-To process the files in parallel:
+To process the files in parallel simply set
 
-1)  Call `future::plan(future::multisession)`.
-2)  Set `parallel = TRUE` in the call to `batch_process()` or
-    `batch_run()`.
+    future::plan(future::multisession)
 
 ### `batch_gsub()`
 

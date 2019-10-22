@@ -97,10 +97,11 @@ For a more realistic demonstration with finer control over the batch processing 
 
 ### Parallel Chains
 
-To process the files in parallel:
+To process the files in parallel simply set
 
-1) Call `future::plan(future::multisession)`.
-2) Set `parallel = TRUE` in the call to `batch_process()` or `batch_run()`.
+```
+future::plan(future::multisession)
+```
 
 ### `batch_gsub()`
 
