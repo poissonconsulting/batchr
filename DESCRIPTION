@@ -21,7 +21,7 @@ Suggests:
     future,
     knitr,
     rmarkdown
-Additional_Repositories: https://poissonconsulting.github.io/drat
+Remotes: poissonconsulting/chk
 URL: https://poissonconsulting.github.io/batchr/
 BugReports: https://github.com/poissonconsulting/batchr/issues
 Encoding: UTF-8
