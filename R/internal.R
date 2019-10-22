@@ -31,7 +31,7 @@ logged_data <- function(path) {
   
   regexp <- p0(
     "^([SUCESFAILUR]{7,7})( \\[)",
-    "(\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d)",
+    "(\\d{2,}:\\d\\d:\\d\\d)",
     "(\\] ')([^']+)('\\s*)(.*)$"
   )
   
@@ -40,7 +40,7 @@ logged_data <- function(path) {
   file <- gsub(regexp, "\\5", lines)
   message <- gsub(regexp, "\\7", lines)
   
-  time <- as.POSIXct(time, tz = "UTC")
+  time <- as_hms(time)
   is.na(message[message == ""]) <- TRUE
   
   tibble(type = type, time = time, file = file, message = message)
@@ -102,14 +102,17 @@ formatc <- function(i, n) {
 }
 
 process_file <- function(file, fun, dots, path, config_time) {
+  
   validate_remaining_file(path, file, config_time)
   
   dots <- c(file.path(path, file), dots)
   
+  time <- tmr_timer(start = TRUE)
   output <- try(do.call("fun", dots), silent = TRUE)
+  time <- tmr_stop(time)
+  time <- tmr_round(time)
+  time <- as.character(time)
   
-  time <- sys_time_utc()
-  time <- format(time, format = "%Y-%m-%d %H:%M:%S")
   msg <- p0("[", time, "]", " '", file, "'")
   
   if (is_try_error(output)) {

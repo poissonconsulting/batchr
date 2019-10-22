@@ -111,8 +111,7 @@ test_that("batch_log_read all processed successfully", {
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_is(log$time, "POSIXct")
-  expect_identical(attr(log$time, "tzone"), "UTC")
+  expect_identical(log$time, structure(0, units = "secs", class = c("hms", "difftime")))
 
   expect_identical(log[c("type", "file")], structure(list(type = "SUCCESS", file = "file1.csv"), class = c(
     "tbl_df",
@@ -138,8 +137,7 @@ test_that("batch_log_read all failed processing", {
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_is(log$time, "POSIXct")
-  expect_identical(attr(log$time, "tzone"), "UTC")
+  expect_identical(log$time, structure(0, units = "secs", class = c("hms", "difftime")))
   expect_identical(log[c("type", "file", "message")], structure(list(type = "FAILURE", file = "file1.csv", message = NA_character_), class = c(
     "tbl_df",
     "tbl", "data.frame"
@@ -164,8 +162,7 @@ test_that("batch_log_read all error processing", {
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_is(log$time, "POSIXct")
-  expect_identical(attr(log$time, "tzone"), "UTC")
+  expect_identical(log$time, structure(0, units = "secs", class = c("hms", "difftime")))
   expect_identical(log[c("type", "file")], structure(list(type = "FAILURE", file = "file1.csv"), class = c(
     "tbl_df",
     "tbl", "data.frame"
@@ -186,6 +183,7 @@ test_that("batch_log_read one success (string) and one failure (error)", {
 
   fun <- function(x) {
     if (grepl("file1[.]csv$", x)) stop("an error")
+    Sys.sleep(0.5)
     "a success"
   }
 
@@ -198,8 +196,8 @@ test_that("batch_log_read one success (string) and one failure (error)", {
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_is(log$time, "POSIXct")
-  expect_identical(attr(log$time, "tzone"), "UTC")
+  expect_identical(log$time, structure(c(0, 1), units = "secs", class = c("hms", "difftime")))
+  
   expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c(
     "file1.csv",
     "file2.csv"
