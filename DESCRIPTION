@@ -1,17 +1,19 @@
 Package: batchr
 Title: Batch Process Files
-Version: 0.0.0.9018
+Version: 0.0.0.9019
 Authors@R: 
   c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("cre", "aut"), comment = c(ORCID = "0000-0002-7683-4592")),
     person("Audrey", "Beliveau", email = "audrey.beliveau@uwaterloo.ca", role = "ctb"))
 Description: Batch processes files with a user-supplied R function.
 License: MIT + file LICENSE
-Depends: R (>= 3.5)
+Depends: 
+    R (>= 3.5),
+    purrr
 Imports:
     stats,
-    chk (>= 0.0.1.9023),
+    chk (>= 0.0.1.9033),
     yesno,
-    digest,
+    parallel,
     furrr
 Suggests: 
     covr,

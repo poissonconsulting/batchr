@@ -5,9 +5,9 @@
 \title{Batch File Processing}
 \usage{
 batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
-  parallel = FALSE, progress = !parallel, force = TRUE,
-  seed = rinteger(), options = furrr::future_options(),
-  ask = getOption("batchr.ask", TRUE), ...)
+  progress = FALSE, force = TRUE, seeds = NULL,
+  options = furrr::future_options(), ask = getOption("batchr.ask",
+  TRUE), ...)
 }
 \arguments{
 \item{fun}{A function to process each of the files.
@@ -24,20 +24,16 @@ which match the regular expression will be batch processed.}
 
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 
-\item{parallel}{A flag specifying whether to process the files in
-parallel (not yet used).}
-
-\item{progress}{A flag specifying whether to write logging information to the
-console or when \code{parallel = TRUE} to print a progress bar.
-logging information to the console for failed attempts (NA).}
+\item{progress}{A flag specifying whether to print a progress bar.}
 
 \item{force}{A flag specifying whether to delete configuration and
 log files even if there are files remaining to be processed.}
 
-\item{seed}{A whole number of the seed to use when converting the name of each file into a seed (using \code{\link[digest]{digest2int}()}) or a named whole numeric vector of the seed to use for each file in files (seeds for additional files are ignored).}
+\item{seeds}{A named list of the L'Ecuyer-CMRG seed to use for each
+file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}
 
-\item{options}{The future specific options to use with the workers
-(seed should be \code{FALSE}).}
+\item{options}{The future specific options to use with the workers. 
+seed must be \code{FALSE}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 

@@ -19,20 +19,21 @@ test_that("batch_gsub", {
     ),
     "^Directory '.*batchr' does not contain any files matching '[[][.][]]txt[$]'[.]$"
   )
-  expect_output(batch_gsub(
+  expect_true(batch_gsub(
     pattern = "zz", replacement = "z", path = path,
     ask = FALSE
-  ), "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file[.]r'\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]R'$")
+  ))
+  
   expect_identical(readLines(file), c("some z", "and some more zz zz z z"))
   expect_identical(readLines(file2), c("text"))
   expect_true(batch_gsub(
     pattern = "zz", replacement = "z", path = path,
-    ask = FALSE, progress = FALSE
+    ask = FALSE
   ))
   expect_identical(readLines(file), c("some z", "and some more z z z z"))
   expect_identical(readLines(file2), c("text"))
   expect_true(batch_gsub(
     pattern = "zz", replacement = "z", path = path,
-    ask = FALSE, progress = FALSE
+    ask = FALSE
   ))
 })

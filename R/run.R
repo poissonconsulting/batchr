@@ -16,21 +16,18 @@
 #'
 #' If a remaining file is removed or modified by a separate process,
 #' \code{batch_run()} throws an error.
-#'
+#' 
 #' @inheritParams batch_config
 #' @param failed A logical scalar specifying how to treat files
 #' that previously failed to process. If FALSE (the default) failed files
 #' are excluded, if NA they are included and if TRUE they are only included.
-#' @param parallel A flag specifying whether to process the files in
-#' parallel (not yet used).
-#' @param progress A flag specifying whether to write logging information to the
-#' console or when \code{parallel = TRUE} to print a progress bar.
-#' logging information to the console for failed attempts (NA).
+#' @param progress A flag specifying whether to print a progress bar.
 #' @param files A character vector of the remaining files to process.
-#' If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.
-#' @param seed A whole number of the seed to use when converting the name of each file into a seed (using \code{\link[digest]{digest2int}()}) or a named whole numeric vector of the seed to use for each file in files (seeds for additional files are ignored).
-#' @param options The future specific options to use with the workers
-#' (seed should be \code{FALSE}).
+#' If \code{NULL} then \code{files} is \code{batch_files_remaining(path, failed)}.
+#' @param seeds A named list of the L'Ecuyer-CMRG seed to use for each
+#' file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.
+#' @param options The future specific options to use with the workers. 
+#' seed must be \code{FALSE}.
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
@@ -38,22 +35,25 @@
 #' \code{\link{batch_cleanup}()}
 #' @export
 batch_run <- function(path = ".",
-                      failed = FALSE, parallel = FALSE,
-                      progress = !parallel, files = NULL,
-                      seed = rinteger(),
+                      failed = FALSE, progress = FALSE,
+                      files = NULL,
+                      seeds = NULL,
                       options = furrr::future_options(),
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
   chk_lgl(failed)
-  chk_flag(parallel)
   chk_flag(progress)
   chk_flag(ask)
   if (!is.null(files)) {
     chk_s3_class(files, "character")
     chk_no_missing(files)
+    chk_unique(files)
   }
-  chk_whole_numeric(seed)
-  chkor(chk_scalar(seed), chk_named(seed))
+  if(!is.null(seeds)) {
+    chk_list(seeds)
+    chk_named(seeds)
+    chk_unique(names(seeds))
+  }
   chk_s3_class(options, "future_options")
   chk_false(options$seed)
   
@@ -73,7 +73,6 @@ batch_run <- function(path = ".",
     if (!length(files)) {
       return(structure(logical(0), .Names = character(0)))
     }
-    files <- unique(files)
     unknown <- setdiff(files, remaining)
     if (length(unknown)) {
       err(
@@ -87,12 +86,15 @@ batch_run <- function(path = ".",
   if (!length(remaining)) {
     return(structure(logical(0), .Names = character(0)))
   }
-  
-  if(vld_named(seed)) {
-    chk_unique(names(seed))
-    chk_superset(names(seed), remaining)
-  }
 
+  if(is.null(seeds)) {
+    seeds <- batch_seeds(remaining)
+  } else {
+    chk_superset(names(seeds), remaining)
+    seeds <- seeds[remaining]
+  }
+  options$seed <- unname(seeds)
+  
   question <- p0(
     "Batch process ", length(remaining), " files in '",
     normalizePath(path), "'?"
@@ -104,7 +106,7 @@ batch_run <- function(path = ".",
   success <- process_files(remaining,
     fun = fun, dots = dots,
     path = path, config_time = config$time,
-    parallel = parallel, progress = progress, seed = seed,
+    progress = progress,
     options = options
   )
 

@@ -9,13 +9,11 @@ test_that("batch_process", {
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
-  expect_output(
+  expect_true(
     batch_process(function(x) TRUE,
       path = path,
       regexp = "^file\\d[.]csv$", ask = FALSE
-    ),
-    "^SUCCESS 1/1/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'$"
-  )
+    ))
 })
 
 test_that("batch_process with options(seed = TRUE)", {
@@ -54,7 +52,7 @@ test_that("batch_process changes files", {
     TRUE
   }
 
-  expect_true(batch_process(fun, path, ask = FALSE, progress = FALSE))
+  expect_true(batch_process(fun, path, ask = FALSE))
   # should be x = 2L
   expect_identical(
     read.csv(file.path(path, "file1.csv")),
@@ -83,11 +81,7 @@ test_that("batch_process with failure FALSE", {
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
-  expect_output(
-    batch_process(fun, path, ask = FALSE),
-    "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s*FAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'$"
-  )
-  expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
+  expect_false(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
@@ -110,11 +104,7 @@ test_that("batch_process with failure ERROR", {
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
-  expect_output(
-    batch_process(fun, path, ask = FALSE),
-    "^FAILURE 1/2/1 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\sa problem\\sFAILURE 2/2/2 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\sa problem$"
-  )
-  expect_false(batch_process(fun, path, ask = FALSE, progress = FALSE))
+  expect_false(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
@@ -137,10 +127,7 @@ test_that("batch_process with sucess character scalar", {
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
-  expect_output(
-    batch_process(fun, path, ask = FALSE),
-    "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s\\sit worked\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'\\s\\sit worked$"
-  )
+  expect_true(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
@@ -163,10 +150,7 @@ test_that("batch_process with sucess character vector", {
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
-  expect_output(
-    batch_process(fun, path, ask = FALSE),
-    "^SUCCESS 1/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file1[.]csv'\\s*SUCCESS 2/2/0 \\[\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d\\] 'file2[.]csv'$"
-  )
+  expect_true(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
     "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"

@@ -33,7 +33,7 @@ test_that("demo", {
   )
 
   expect_identical(
-    batch_run(path, ask = FALSE, progress = FALSE),
+    batch_run(path, ask = FALSE),
     c(file2.txt = TRUE, file3.txt = FALSE, file4.txt = FALSE)
   )
 
@@ -83,10 +83,10 @@ test_that("demo", {
   expect_identical(reconfig$recurse, config$recurse)
   expect_identical(reconfig$dots, config$dots)
 
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file.txt = TRUE))
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(x = TRUE)[-1])
+  expect_identical(batch_run(path, ask = FALSE), c(file.txt = TRUE))
+  expect_identical(batch_run(path, ask = FALSE), c(x = TRUE)[-1])
 
   expect_identical(batch_cleanup(path), c("." = FALSE))
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE, failed = NA), c(file3.txt = TRUE, file4.txt = TRUE))
+  expect_identical(batch_run(path, ask = FALSE, failed = NA), c(file3.txt = TRUE, file4.txt = TRUE))
   expect_identical(batch_cleanup(path), c("." = TRUE))
 })

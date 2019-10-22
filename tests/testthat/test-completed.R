@@ -17,6 +17,6 @@ test_that("batch_completed", {
     "file1.csv"
   )
   expect_false(batch_completed(path))
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = TRUE))
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
   expect_true(batch_completed(path))
 })

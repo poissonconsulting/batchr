@@ -30,16 +30,15 @@ logged_data <- function(path) {
   }
   
   regexp <- p0(
-    "^([SUCESFAILUR]{7,7})( )([123456789]\\d*/\\d+/\\d+)( \\[)",
+    "^([SUCESFAILUR]{7,7})( \\[)",
     "(\\d{4,4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d)",
     "(\\] ')([^']+)('\\s*)(.*)$"
   )
   
   type <- gsub(regexp, "\\1", lines)
-  count <- gsub(regexp, "\\3", lines)
-  time <- gsub(regexp, "\\5", lines)
-  file <- gsub(regexp, "\\7", lines)
-  message <- gsub(regexp, "\\9", lines)
+  time <- gsub(regexp, "\\3", lines)
+  file <- gsub(regexp, "\\5", lines)
+  message <- gsub(regexp, "\\7", lines)
   
   time <- as.POSIXct(time, tz = "UTC")
   is.na(message[message == ""]) <- TRUE
@@ -102,16 +101,10 @@ formatc <- function(i, n) {
   formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
-process_file <- function(file, fun, dots, path, config_time, progress,
-                         seed, i = 1, n = 1, e = 0) {
+process_file <- function(file, fun, dots, path, config_time) {
   validate_remaining_file(path, file, config_time)
   
   dots <- c(file.path(path, file), dots)
-  
-  if(!is.null(seed)) {
-    seed <- digest2int(file, seed = seed)
-    set.seed(seed)
-  }
   
   output <- try(do.call("fun", dots), silent = TRUE)
   
@@ -122,65 +115,30 @@ process_file <- function(file, fun, dots, path, config_time, progress,
   if (is_try_error(output)) {
     output <- as.character(output)
     output <- sub("^Error[^:]+:\\s+", "", output)
-    count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
-    msg <- p("FAILURE", count, msg, output)
+    msg <- p("FAILURE", msg, output)
     log_msg(path, msg)
-    if (progress) console_msg(msg)
     return(FALSE)
   }
   if (isFALSE(output)) {
-    count <- p(formatc(i, n), formatc(n, n), formatc(e + 1L, n), sep = "/")
-    msg <- p("FAILURE", count, msg)
+    msg <- p("FAILURE", msg)
     log_msg(path, msg)
-    if (progress) console_msg(msg)
     return(FALSE)
   }
   touch_file(path, file)
-  count <- p(formatc(i, n), formatc(n, n), formatc(e, n), sep = "/")
-  msg <- p("SUCCESS", count, msg)
+  msg <- p("SUCCESS", msg)
   if (vld_string(output)) msg <- p(msg, output)
   log_msg(path, msg)
-  if (progress) console_msg(msg)
   TRUE
 }
 
-process_files <- function(remaining, fun, dots, path, config_time, parallel,
-                          progress, seed, options) {
+process_files <- function(remaining, fun, dots, path, config_time,
+                          progress, options) {
   
-  rseed <- get_random_seed()
-  on.exit(set_random_seed(rseed, advance = TRUE))
-
-  if(vld_scalar(seed)) {
-    seed <- unname(seed)
-    seed <- rep(seed, length(remaining))
-  } else {
-    seed <- seed[remaining]
-  }
+  success <- future_map(remaining, process_file,
+                        fun = fun, dots = dots,
+                        path = path, config_time = config_time,
+                        .progress = progress, .options = options)
   
-  if (parallel) {
-    options$seed <- seed
-    seed <- NULL
-    
-    success <- future_map(remaining, process_file,
-                          fun = fun, dots = dots,
-                          path = path, config_time = config_time,
-                          progress = FALSE, .options = options,
-                          .progress = progress, seed = seed
-    )
-  } else {
-    n <- length(remaining)
-    success <- rep(NA, n)
-    e <- 0L
-    for (i in seq_along(remaining)) {
-      success[i] <- process_file(remaining[i],
-                                 fun = fun, dots = dots,
-                                 path = path, config_time = config_time,
-                                 progress = progress, seed = seed[i],
-                                 i = i, n = n, e = e
-      )
-      if (!success[i]) e <- e + 1L
-    }
-  }
   success <- unlist(success)
   invisible(set_names(success, remaining))
 }

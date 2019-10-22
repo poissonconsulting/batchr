@@ -18,33 +18,3 @@ set_names <- function(x, names) {
   names(x) <- names
   x
 }
-
-#' Random Integer
-#' 
-#' Generates random integers between -2147483647L and 2147483647L.
-#'
-#' @param n A non-negative whole number of the number of random integers to generate.
-#'
-#' @return A integer vector.
-#' @export
-#'
-#' @examples
-#' rinteger()
-rinteger <- function(n = 1) {
-  chk_whole_number(n)
-  chk_gte(n, 0L)
-  if(n == 0) integer(0)
-  mx <- 2147483647L
-  as.integer(runif(n, -mx, mx))
-}
-
-get_random_seed <- function () {
-  if(!exists(".Random.seed")) runif(1)
-  .Random.seed
-}
-
-set_random_seed <- function (seed, advance = FALSE) {
-  .Random.seed <<- seed
-  if(advance) runif(1)
-  invisible(.Random.seed)
-}

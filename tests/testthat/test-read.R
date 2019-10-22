@@ -107,7 +107,7 @@ test_that("batch_log_read all processed successfully", {
     ), row.names = integer(0))
   )
 
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = TRUE))
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
@@ -134,7 +134,7 @@ test_that("batch_log_read all failed processing", {
     "file1.csv"
   )
 
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
@@ -160,7 +160,7 @@ test_that("batch_log_read all error processing", {
     "file1.csv"
   )
 
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE))
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
@@ -194,7 +194,7 @@ test_that("batch_log_read one success (string) and one failure (error)", {
     c("file1.csv", "file2.csv")
   )
 
-  expect_identical(batch_run(path, ask = FALSE, progress = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))

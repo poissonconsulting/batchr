@@ -4,10 +4,9 @@
 \alias{batch_run}
 \title{Runs Batch Processing}
 \usage{
-batch_run(path = ".", failed = FALSE, parallel = FALSE,
-  progress = !parallel, files = NULL, seed = rinteger(),
-  options = furrr::future_options(), ask = getOption("batchr.ask",
-  TRUE))
+batch_run(path = ".", failed = FALSE, progress = FALSE,
+  files = NULL, seeds = NULL, options = furrr::future_options(),
+  ask = getOption("batchr.ask", TRUE))
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
@@ -16,20 +15,16 @@ batch_run(path = ".", failed = FALSE, parallel = FALSE,
 that previously failed to process. If FALSE (the default) failed files
 are excluded, if NA they are included and if TRUE they are only included.}
 
-\item{parallel}{A flag specifying whether to process the files in
-parallel (not yet used).}
-
-\item{progress}{A flag specifying whether to write logging information to the
-console or when \code{parallel = TRUE} to print a progress bar.
-logging information to the console for failed attempts (NA).}
+\item{progress}{A flag specifying whether to print a progress bar.}
 
 \item{files}{A character vector of the remaining files to process.
-If \code{NULL} then \code{files} is as \code{batch_files_remaining(path, failed)}.}
+If \code{NULL} then \code{files} is \code{batch_files_remaining(path, failed)}.}
 
-\item{seed}{A whole number of the seed to use when converting the name of each file into a seed (using \code{\link[digest]{digest2int}()}) or a named whole numeric vector of the seed to use for each file in files (seeds for additional files are ignored).}
+\item{seeds}{A named list of the L'Ecuyer-CMRG seed to use for each
+file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}
 
-\item{options}{The future specific options to use with the workers
-(seed should be \code{FALSE}).}
+\item{options}{The future specific options to use with the workers. 
+seed must be \code{FALSE}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
 }
