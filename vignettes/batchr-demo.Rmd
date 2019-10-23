@@ -73,6 +73,11 @@ The output is also recorded in a hidden log file that can be read using `batch_l
 batch_log_read(path)
 ```
 
+or summarised using
+```{r}
+batch_summary(path)
+```
+
 The contents of 'file2.csv' are now as follows
 ```{r}
 readLines(file.path(path, "file2.txt"))
@@ -98,14 +103,22 @@ batch_reconfig_fun(path, fun)
 
 Now when we call `batch_run()` the newly included 'file.txt' is successfully processed.
 ```{r}
-print(batch_run(path, ask = FALSE))
+batch_run(path, ask = FALSE)
+```
+
+```{r}
+batch_summary(path)
 ```
 
 In order to reattempt processing of the 'file3.txt' and 'file4.txt' we need
 to set `failed = TRUE`.
 
 ```{r}
-print(batch_run(path, failed = TRUE, ask = FALSE))
+batch_run(path, failed = TRUE, ask = FALSE)
+```
+
+```{r}
+batch_summary(path)
 ```
 
 ### Clean Up

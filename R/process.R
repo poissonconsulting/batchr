@@ -11,6 +11,7 @@
 #' @inheritParams batch_config
 #' @inheritParams batch_run
 #' @inheritParams batch_cleanup
+#' @param summary A flag specifying whether to output a summary of the status of the files.
 #'
 #' @seealso \code{\link{batch_config}()}, \code{\link{batch_run}()}
 #' and \code{\link{batch_cleanup}()}
@@ -21,12 +22,15 @@ batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE,
                           progress = FALSE, force = TRUE,
                           seeds = NULL,
                           options = furrr::future_options(),
-                          ask = getOption("batchr.ask", TRUE), ...) {
+                          ask = getOption("batchr.ask", TRUE), summary = TRUE,
+                          ...) {
+  chk_flag(summary)
   batch_config(fun, path = path, regexp = regexp, recurse = recurse, ...)
   success <- batch_run(
     path = path, progress = progress,
     seeds = seeds, options = options, ask = ask
   )
+  if(summary) batch_summary(path)
   batch_cleanup(path, force = force)
   all(success)
 }

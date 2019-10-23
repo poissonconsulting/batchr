@@ -1,3 +1,35 @@
+summary_file <- function(x) {
+  
+  time <- x$time
+  if(!is.na(time)) {
+    time <- time_to_character(time)
+    time <- paste0(" [", time, "]")
+  }
+  
+  switch(x$type,
+         SUCCESS = cli_alert_success(c(col_white(x$file), col_blue(time))),
+         FAILURE = cli_alert_danger(c(col_white(x$file), col_blue(time))),
+         REMAING = cli_alert_warning(col_white(x$file)))
+}
+
+summary_files <- function(status) {
+  status <- split(status, f = status$file)
+  lapply(status, summary_file)
+}
+
+summary_types <- function(status) {
+  status$type <- factor(status$type, levels = c("SUCCESS", "FAILURE", "REMAING"))
+  
+  table <- table(status$type)
+  table <- as.data.frame(table)
+  
+  tabs <- "\t\t\t\t\t\t\t\t\t\t\t\t"
+  cli_par()
+  cli_text(col_white("Success:", tabs), col_green(table$Freq[1]))
+  cli_text(col_white("Failure:", tabs), col_red(table$Freq[2]))
+  cli_text(col_white("Remaining:", tabs), col_green(table$Freq[3]))
+}
+
 save_config <- function(path, regexp, recurse, fun, dots, time = sys_time_utc()) {
   args <- list(
     time = time, regexp = regexp,
@@ -91,8 +123,7 @@ validate_remaining_file <- function(path, file, config_time) {
   }
 }
 
-stop_timer <- function(time) {
-  time <- tmr_stop(time)
+time_to_character <- function(time) {
   time <- tmr_round(time, digits = 3)
   
   msecs <- as.numeric(time) - floor(as.numeric(time))
@@ -112,8 +143,9 @@ process_file <- function(file, fun, dots, path, config_time) {
   
   time <- tmr_timer(start = TRUE)
   output <- try(do.call("fun", dots), silent = TRUE)
-  time <- stop_timer(time)
-
+  time <- tmr_stop(time)
+  time <- time_to_character(time)
+  
   msg <- p0("[", time, "]", " '", file, "'")
   
   if (is_try_error(output)) {

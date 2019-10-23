@@ -7,7 +7,7 @@
 batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
   progress = FALSE, force = TRUE, seeds = NULL,
   options = furrr::future_options(), ask = getOption("batchr.ask",
-  TRUE), ...)
+  TRUE), summary = TRUE, ...)
 }
 \arguments{
 \item{fun}{A function to process each of the files.
@@ -36,6 +36,8 @@ file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}
 seed must be \code{FALSE}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
+
+\item{summary}{A flag specifying whether to output a summary of the status of the files.}
 
 \item{...}{Additional arguments passed to \code{fun}.}
 }

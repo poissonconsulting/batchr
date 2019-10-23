@@ -85,6 +85,13 @@ files.
 library(batchr)
 #> Loading required package: purrr
 batch_process(fun, path, ask = FALSE)
+#> ✔ file1.csv [00:00:00.002]
+#> ✔ file2.csv [00:00:00.004]
+#> 
+#> Success: 2
+#> Failure: 0
+#> Remaining: 0
+#> 
 #> [1] TRUE
 ```
 
