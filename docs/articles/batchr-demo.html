@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9031</span>
       </span>
     </div>
 
@@ -107,12 +107,13 @@
 <a href="#configure" class="anchor"></a>Configure</h3>
 <p>Now let the user configure the directory to only process files names that include a digit before the file extension.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(batchr)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/batch_config.html">batch_config</a></span>(fun, <span class="dt">path =</span> path, <span class="dt">regexp =</span> <span class="st">"file</span><span class="ch">\\</span><span class="st">d[.]txt$"</span>))</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; [1] "file2.txt" "file3.txt" "file4.txt"</span></span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Loading required package: purrr</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/batch_config.html">batch_config</a></span>(fun, <span class="dt">path =</span> path, <span class="dt">regexp =</span> <span class="st">"file</span><span class="ch">\\</span><span class="st">d[.]txt$"</span>))</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; [1] "file2.txt" "file3.txt" "file4.txt"</span></span></code></pre></div>
 <p>The contents of the hidden figuration file are as follows</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/batch_config_read.html">batch_config_read</a></span>(path)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; $time</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; [1] "2019-09-24 16:27:28 UTC"</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; [1] "2019-10-23 21:48:14 UTC"</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; </span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; $regexp</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; [1] "file\\d[.]txt$"</span></span>
@@ -138,62 +139,135 @@
 <a href="#run" class="anchor"></a>Run</h3>
 <p>With the directory configured the next task is to start processing the files</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">ask =</span> <span class="ot">FALSE</span>))</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; SUCCESS 1/3/0 [2019-09-24 16:27:28] 'file2.txt'</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; FAILURE 2/3/1 [2019-09-24 16:27:28] 'file3.txt'</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; FAILURE 3/3/2 [2019-09-24 16:27:28] 'file4.txt' Uh, Houston, we've had a problem.</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; file2.txt file3.txt file4.txt </span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;      TRUE     FALSE     FALSE</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; file2.txt file3.txt file4.txt </span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;      TRUE     FALSE     FALSE</span></span></code></pre></div>
 <p>From the output we can see that ‘file2.csv’ was processed successfully but processing of the other two files that matched regexp failed. The output is also recorded in a hidden log file that can be read using <code><a href="../reference/batch_log_read.html">batch_log_read()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/batch_log_read.html">batch_log_read</a></span>(path)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt;      type                time      file                           message</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; 1 SUCCESS 2019-09-24 16:27:28 file2.txt                              &lt;NA&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; 2 FAILURE 2019-09-24 16:27:28 file3.txt                              &lt;NA&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 3 FAILURE 2019-09-24 16:27:28 file4.txt Uh, Houston, we've had a problem.</span></span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 3 x 4</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   type    time       file      message                          </span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;time&gt;     &lt;chr&gt;     &lt;chr&gt;                            </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1 SUCCESS 00'00.000" file2.txt &lt;NA&gt;                             </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2 FAILURE 00'00.004" file3.txt &lt;NA&gt;                             </span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3 FAILURE 00'00.000" file4.txt Uh, Houston, we've had a problem.</span></span></code></pre></div>
+<p>or summarised using</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../reference/batch_summary.html">batch_summary</a></span>(path)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; Error : Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; ✔ file2.txt [00:00:00.000]</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; ✖ file3.txt [00:00:00.004]</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; ✖ file4.txt [00:00:00.000]</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; </span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; Success: 1</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; Failure: 2</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; Remaining: 0</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; </span></span></code></pre></div>
 <p>The contents of ‘file2.csv’ are now as follows</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file2.txt"</span>))</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; [1] "the modified contents of file2.txt"</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file2.txt"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; [1] "the modified contents of file2.txt"</span></span></code></pre></div>
 </div>
 <div id="reconfigure" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reconfigure" class="anchor"></a>Reconfigure</h3>
 <p>At this point let us update the function and regular expression so that all files are included and successfully processed.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="../reference/batch_reconfig_fileset.html">batch_reconfig_fileset</a></span>(path, <span class="dt">regexp =</span> <span class="st">"[.]txt$"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a>fun &lt;-<span class="st"> </span><span class="cf">function</span>(file) {</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  txt &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(file)</span>
-<span id="cb8-5"><a href="#cb8-5"></a>  txt &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"contents"</span>, <span class="st">"modified contents"</span>, txt)</span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(txt, file)</span>
-<span id="cb8-7"><a href="#cb8-7"></a>}</span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="kw"><a href="../reference/batch_reconfig_fun.html">batch_reconfig_fun</a></span>(path, fun)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="../reference/batch_reconfig_fileset.html">batch_reconfig_fileset</a></span>(path, <span class="dt">regexp =</span> <span class="st">"[.]txt$"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>fun &lt;-<span class="st"> </span><span class="cf">function</span>(file) {</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  txt &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(file)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  txt &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"contents"</span>, <span class="st">"modified contents"</span>, txt)</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="kw"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(txt, file)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>}</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="kw"><a href="../reference/batch_reconfig_fun.html">batch_reconfig_fun</a></span>(path, fun)</span></code></pre></div>
 </div>
 <div id="rerun" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rerun" class="anchor"></a>Rerun</h3>
 <p>Now when we call <code><a href="../reference/batch_run.html">batch_run()</a></code> the newly included ‘file.txt’ is successfully processed.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">ask =</span> <span class="ot">FALSE</span>))</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; SUCCESS 1/1/0 [2019-09-24 16:27:28] 'file.txt'</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; file.txt </span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;     TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="../reference/batch_summary.html">batch_summary</a></span>(path)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; ✔ file.txt [00:00:00.000]</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; ✔ file2.txt [00:00:00.000]</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; ✖ file3.txt [00:00:00.004]</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt; ✖ file4.txt [00:00:00.000]</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; </span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; Success: 2</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt; Failure: 2</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt; Remaining: 0</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt; </span></span></code></pre></div>
 <p>In order to reattempt processing of the ‘file3.txt’ and ‘file4.txt’ we need to set <code>failed = TRUE</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">failed =</span> <span class="ot">TRUE</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>))</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; SUCCESS 1/2/0 [2019-09-24 16:27:28] 'file3.txt'</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; SUCCESS 2/2/0 [2019-09-24 16:27:28] 'file4.txt'</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; file3.txt file4.txt </span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;      TRUE      TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">failed =</span> <span class="ot">TRUE</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../reference/batch_summary.html">batch_summary</a></span>(path)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; ✔ file.txt [00:00:00.000]</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; ✔ file2.txt [00:00:00.000]</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; ✔ file3.txt [00:00:00.000]</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt; ✔ file4.txt [00:00:00.006]</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt; </span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt; Success: 4</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="co">#&gt; Failure: 0</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="co">#&gt; Remaining: 0</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="co">#&gt; </span></span></code></pre></div>
 </div>
 <div id="clean-up" class="section level3">
 <h3 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean Up</h3>
 <p>With all the files successfully processed the only remaining task is to delete the hidden configuration and log files.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(path, <span class="dt">all.files =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; [1] "."           ".."          ".batchr.log" ".batchr.rds" "file.txt"   </span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; [6] "file2.txt"   "file3.txt"   "file4.txt"</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/batch_cleanup.html">batch_cleanup</a></span>(path))</span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;    . </span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; TRUE</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(path, <span class="dt">all.files =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; [1] "."         ".."        "file.txt"  "file2.txt" "file3.txt" "file4.txt"</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(path, <span class="dt">all.files =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; [1] "."           ".."          ".batchr.log" ".batchr.rds" "file.txt"   </span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; [6] "file2.txt"   "file3.txt"   "file4.txt"</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="../reference/batch_cleanup.html">batch_cleanup</a></span>(path))</span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt;    . </span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; TRUE</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(path, <span class="dt">all.files =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; [1] "."         ".."        "file.txt"  "file2.txt" "file3.txt" "file4.txt"</span></span></code></pre></div>
 </div>
 </div>
   </div>

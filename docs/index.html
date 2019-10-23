@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9031</span>
       </span>
     </div>
 
@@ -114,10 +114,16 @@
 <span id="cb4-6"><a href="#cb4-6"></a>}</span></code></pre></div>
 <p>Then simply call <code><a href="reference/batch_process.html">batch_process()</a></code> to apply the function to all the files.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(batchr)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw"><a href="reference/batch_process.html">batch_process</a></span>(fun, path, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; SUCCESS 1/2/0 [2019-09-24 16:22:46] 'file1.csv'</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; SUCCESS 2/2/0 [2019-09-24 16:22:46] 'file2.csv'</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; Loading required package: purrr</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw"><a href="reference/batch_process.html">batch_process</a></span>(fun, path, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; ✔ file1.csv [00:00:00.002]</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; ✔ file2.csv [00:00:00.004]</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; Success: 2</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; Failure: 0</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; Remaining: 0</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; </span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>The files have been updated as follows.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(path, <span class="st">"file1.csv"</span>))</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt;   x</span></span>
@@ -129,8 +135,8 @@
 <div id="parallel-chains" class="section level3">
 <h3 class="hasAnchor">
 <a href="#parallel-chains" class="anchor"></a>Parallel Chains</h3>
-<p>To process the files in parallel:</p>
-<p>1) Call <code><a href="https://rdrr.io/pkg/future/man/plan.html">future::plan(future::multisession)</a></code>. 2) Set <code>parallel = TRUE</code> in the call to <code><a href="reference/batch_process.html">batch_process()</a></code> or <code><a href="reference/batch_run.html">batch_run()</a></code>.</p>
+<p>To process the files in parallel simply set</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>future<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span>(future<span class="op">::</span>multisession)</span></code></pre></div>
 </div>
 <div id="batch_gsub" class="section level3">
 <h3 class="hasAnchor">

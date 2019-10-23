@@ -70,7 +70,7 @@ specified by batch_config()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9016</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9031</span>
       </span>
     </div>
 
@@ -123,9 +123,9 @@ specified by batch_config()." />
 specified by <code><a href='batch_config.html'>batch_config</a>()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>batch_run</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> !<span class='no'>parallel</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>,
-  <span class='fl'>TRUE</span>))</pre>
+    <pre class="usage"><span class='fu'>batch_run</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>furrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_options.html'>future_options</a></span>(),
+  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,20 +141,23 @@ that previously failed to process. If FALSE (the default) failed files
 are excluded, if NA they are included and if TRUE they are only included.</p></td>
     </tr>
     <tr>
-      <th>parallel</th>
-      <td><p>A flag specifying whether to process the files in
-parallel (not yet used).</p></td>
-    </tr>
-    <tr>
       <th>progress</th>
-      <td><p>A flag specifying whether to write logging information to the
-console or when <code>parallel = TRUE</code> to print a progress bar.
-logging information to the console for failed attempts (NA).</p></td>
+      <td><p>A flag specifying whether to print a progress bar.</p></td>
     </tr>
     <tr>
       <th>files</th>
       <td><p>A character vector of the remaining files to process.
-If <code>NULL</code> then <code>files</code> is as <code><a href='batch_files_remaining.html'>batch_files_remaining(path, failed)</a></code>.</p></td>
+If <code>NULL</code> then <code>files</code> is <code><a href='batch_files_remaining.html'>batch_files_remaining(path, failed)</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>seeds</th>
+      <td><p>A named list of the L'Ecuyer-CMRG seed to use for each
+file. If <code>NULL</code> then <code>seeds</code> is <code><a href='batch_seeds.html'>batch_seeds(files)</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>options</th>
+      <td><p>The future specific options to use with the workers.
+seed must be <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>ask</th>
