@@ -14,6 +14,9 @@ test_that("batch_summary all processed successfully", {
     "file1.csv"
   )
 
+  skip_on_cran()
+  skip_on_travis()
+  skip_on_appveyor()
   verify_output(test_path("output/summary1.txt"), batch_summary(path))
 
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
