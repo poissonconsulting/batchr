@@ -32,5 +32,5 @@ batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE,
   )
   if(summary) batch_summary(path)
   batch_cleanup(path, force = force)
-  all(success)
+  invisible(all(success))
 }
