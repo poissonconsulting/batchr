@@ -234,3 +234,87 @@ test_that("batch_log_read with no directory", {
     class = "chk_error"
   )
 })
+
+test_that("batch_log_read parallel all processed successfully", {
+  teardown(unlink(file.path(tempdir(), "batchr")))
+
+  path <- file.path(tempdir(), "batchr")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  expect_identical(
+    batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
+    "file1.csv"
+  )
+
+  expect_identical(
+    batch_log_read(path),
+    structure(list(type = character(0), time = structure(numeric(0), class = c(
+      "POSIXct",
+      "POSIXt"
+    ), tzone = "UTC"), file = character(0), message = character(0)), class = c(
+      "tbl_df",
+      "tbl", "data.frame"
+    ), row.names = integer(0))
+  )
+
+  options(mc.cores = 2)
+  future::plan(future::multisession)
+  teardown(future::plan(future::sequential))
+  
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
+
+  log <- batch_log_read(path)
+  expect_identical(colnames(log), c("type", "time", "file", "message"))
+  expect_identical(log$time, structure(0, units = "secs", class = c("hms", "difftime")))
+
+  expect_identical(log[c("type", "file")], structure(list(type = "SUCCESS", file = "file1.csv"), class = c(
+    "tbl_df",
+    "tbl", "data.frame"
+  ), row.names = c(NA, -1L)))
+})
+
+
+test_that("batch_log_read parallel one success (string) and one failure (error)", {
+  teardown(unlink(file.path(tempdir(), "batchr")))
+
+  path <- file.path(tempdir(), "batchr")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
+
+  fun <- function(x) {
+    if (grepl("file1[.]csv$", x)) stop("an error")
+    Sys.sleep(0.5)
+    "a success"
+  }
+
+  expect_identical(
+    batch_config(fun, path = path, regexp = "^file\\d[.]csv$"),
+    c("file1.csv", "file2.csv")
+  )
+
+  options(mc.cores = 2)
+  future::plan(future::multisession)
+  teardown(future::plan(future::sequential))
+  
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
+
+  log <- batch_log_read(path)
+  expect_identical(colnames(log), c("type", "time", "file", "message"))
+  expect_identical(log$time, structure(c(0, 1), units = "secs", class = c("hms", "difftime")))
+  
+  expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c(
+    "file1.csv",
+    "file2.csv"
+  )), class = c("tbl_df", "tbl", "data.frame"), row.names = c(
+    NA,
+    -2L
+  )))
+  expect_identical(log$message, c("an error", "a success"))
+})
+
