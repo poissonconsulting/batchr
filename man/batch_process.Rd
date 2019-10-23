@@ -5,9 +5,9 @@
 \title{Batch File Processing}
 \usage{
 batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
-  progress = FALSE, force = TRUE, seeds = NULL,
+  progress = FALSE, force = TRUE, summary = TRUE, seeds = NULL,
   options = furrr::future_options(), ask = getOption("batchr.ask",
-  TRUE), summary = TRUE, ...)
+  TRUE), ...)
 }
 \arguments{
 \item{fun}{A function to process each of the files.
@@ -29,6 +29,8 @@ which match the regular expression will be batch processed.}
 \item{force}{A flag specifying whether to delete configuration and
 log files even if there are files remaining to be processed.}
 
+\item{summary}{A flag specifying whether to output a summary of the status of the files.}
+
 \item{seeds}{A named list of the L'Ecuyer-CMRG seed to use for each
 file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}
 
@@ -36,8 +38,6 @@ file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}
 seed must be \code{FALSE}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
-
-\item{summary}{A flag specifying whether to output a summary of the status of the files.}
 
 \item{...}{Additional arguments passed to \code{fun}.}
 }

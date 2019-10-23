@@ -19,10 +19,10 @@
 #' successfully processed.
 #' @export
 batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE,
-                          progress = FALSE, force = TRUE,
+                          progress = FALSE, force = TRUE, summary = TRUE,
                           seeds = NULL,
                           options = furrr::future_options(),
-                          ask = getOption("batchr.ask", TRUE), summary = TRUE,
+                          ask = getOption("batchr.ask", TRUE),
                           ...) {
   chk_flag(summary)
   batch_config(fun, path = path, regexp = regexp, recurse = recurse, ...)

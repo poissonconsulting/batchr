@@ -26,6 +26,7 @@ gsub_file <- function(file, pattern, replacement) {
 #' @inheritParams batch_config
 #' @inheritParams batch_run
 #' @inheritParams batch_cleanup
+#' @inheritParams batch_process
 #' @inheritParams gsub_file
 #'
 #' @seealso \code{\link{batch_process}()} and \code{\link{gsub_file}()}
@@ -34,11 +35,11 @@ gsub_file <- function(file, pattern, replacement) {
 #' @export
 batch_gsub <- function(pattern, replacement,
                        path = ".", regexp = "[.](R|r)$", recurse = FALSE,
-                       progress = FALSE,
+                       progress = FALSE, summary = TRUE,
                        options = furrr::future_options(),
                        ask = getOption("batchr.ask", TRUE)) {
   batch_process(gsub_file,
-    pattern = pattern, replacement = replacement,
+    pattern = pattern, replacement = replacement, summary = summary,
     path = path, regexp = regexp, recurse = recurse,
     progress = progress, options = options, ask = ask
   )

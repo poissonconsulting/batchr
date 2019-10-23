@@ -5,7 +5,7 @@
 \title{Batch File Text Replacement}
 \usage{
 batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
-  recurse = FALSE, progress = FALSE,
+  recurse = FALSE, progress = FALSE, summary = TRUE,
   options = furrr::future_options(), ask = getOption("batchr.ask",
   TRUE))
 }
@@ -22,6 +22,8 @@ which match the regular expression will be batch processed.}
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 
 \item{progress}{A flag specifying whether to print a progress bar.}
+
+\item{summary}{A flag specifying whether to output a summary of the status of the files.}
 
 \item{options}{The future specific options to use with the workers.
 seed must be \code{FALSE}.}
