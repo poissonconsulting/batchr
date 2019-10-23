@@ -1,8 +1,8 @@
 ---
-title: "Batchr Demonstration"
+title: "Getting Started with batchr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Batchr Demonstration}
+  %\VignetteIndexEntry{Getting Started with batchr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,8 +13,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
-## Demonstration
 
 Consider a temporary directory with four txt files
 
@@ -43,7 +41,7 @@ fun <- function(file) {
 }
 ```
 
-### Configure
+## Configure
 
 Now let the user configure the directory to only process files names that include
 a digit before the file extension.
@@ -59,7 +57,7 @@ batch_config_read(path)
 The `time` value specifies the system time (in UTC) that the project was configured.
 It is very important because only files that were last modified *before* the configuration time are considered to be unprocessed (when a file is successfully processed its modification time is automatically set to the current system time).
 
-### Run
+## Run
 
 With the directory configured the next task is to start processing the files
 ```{r}
@@ -83,7 +81,7 @@ The contents of 'file2.csv' are now as follows
 readLines(file.path(path, "file2.txt"))
 ```
 
-### Reconfigure
+## Reconfigure
 
 At this point let us update the function and regular expression so that 
 all files are included and successfully processed.
@@ -99,7 +97,7 @@ fun <- function(file) {
 batch_reconfig_fun(path, fun)
 ```
 
-### Rerun
+## Rerun
 
 Now when we call `batch_run()` the newly included 'file.txt' is successfully processed.
 ```{r}
@@ -121,7 +119,7 @@ batch_run(path, failed = TRUE, ask = FALSE)
 batch_summary(path)
 ```
 
-### Clean Up
+## Clean Up
 
 With all the files successfully processed the only remaining task is to 
 delete the hidden configuration and log files.

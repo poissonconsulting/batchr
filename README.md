@@ -92,7 +92,6 @@ batch_process(fun, path, ask = FALSE)
 #> Failure: 0
 #> Remaining: 0
 #> 
-#> [1] TRUE
 ```
 
 The files have been updated as follows.
@@ -108,7 +107,7 @@ read.csv(file.path(path, "file2.csv"))
 
 For a more realistic demonstration with finer control over the batch
 processing see the [Batchr
-Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr-demo.html)
+Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr.html)
 vignette.
 
 ### Parallel Chains

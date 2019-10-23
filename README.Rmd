@@ -93,7 +93,7 @@ read.csv(file.path(path, "file1.csv"))
 read.csv(file.path(path, "file2.csv"))
 ```
 
-For a more realistic demonstration with finer control over the batch processing see the [Batchr Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr-demo.html) vignette.
+For a more realistic demonstration with finer control over the batch processing see the [Batchr Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr.html) vignette.
 
 ### Parallel Chains
 
