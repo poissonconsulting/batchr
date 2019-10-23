@@ -1,6 +1,6 @@
 Package: batchr
 Title: Batch Process Files
-Version: 0.0.0.9032
+Version: 0.0.0.9033
 Authors@R: 
   c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("cre", "aut"), comment = c(ORCID = "0000-0002-7683-4592")),
     person("Audrey", "Beliveau", email = "audrey.beliveau@uwaterloo.ca", role = "ctb"))
@@ -26,7 +26,7 @@ Suggests:
     rmarkdown
 Remotes: 
     poissonconsulting/chk,
-    poissonconsulting/hmstimer
+    poissonconsulting/hmstimer,
     r-lib/cli
 URL: https://poissonconsulting.github.io/batchr/
 BugReports: https://github.com/poissonconsulting/batchr/issues
