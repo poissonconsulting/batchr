@@ -76,11 +76,6 @@ log_msg <- function(path, msg) {
   cat(msg, file = file, append = file.exists(file))
 }
 
-console_msg <- function(msg) {
-  msg <- clean_msg(msg)
-  cat(msg)
-}
-
 validate_remaining_file <- function(path, file, config_time) {
   if (!file.exists(file.path(path, file))) {
     err(
@@ -94,11 +89,6 @@ validate_remaining_file <- function(path, file, config_time) {
       "' has been modified by a different process!"
     )
   }
-}
-
-formatc <- function(i, n) {
-  n <- formatC(n, format = "fg")
-  formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
 stop_timer <- function(time) {
