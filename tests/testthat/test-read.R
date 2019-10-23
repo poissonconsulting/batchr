@@ -119,6 +119,44 @@ test_that("batch_log_read all processed successfully", {
   ), row.names = c(NA, -1L)))
 })
 
+test_that("batch_log_read 1 second", {
+  teardown(unlink(file.path(tempdir(), "batchr")))
+
+  path <- file.path(tempdir(), "batchr")
+  unlink(path, recursive = TRUE)
+  dir.create(path)
+
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+
+  expect_identical(
+    batch_config(function(x) {Sys.sleep(0.5); TRUE}, path = path, regexp = "^file\\d[.]csv$"),
+    "file1.csv"
+  )
+
+  expect_identical(
+    batch_log_read(path),
+    structure(list(type = character(0), time = structure(numeric(0), class = c(
+      "POSIXct",
+      "POSIXt"
+    ), tzone = "UTC"), file = character(0), message = character(0)), class = c(
+      "tbl_df",
+      "tbl", "data.frame"
+    ), row.names = integer(0))
+  )
+
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
+
+  log <- batch_log_read(path)
+  expect_identical(colnames(log), c("type", "time", "file", "message"))
+  expect_identical(log$time, structure(1, units = "secs", class = c("hms", "difftime")))
+
+  expect_identical(log[c("type", "file")], structure(list(type = "SUCCESS", file = "file1.csv"), class = c(
+    "tbl_df",
+    "tbl", "data.frame"
+  ), row.names = c(NA, -1L)))
+})
+
+
 test_that("batch_log_read all failed processing", {
   teardown(unlink(file.path(tempdir(), "batchr")))
 
