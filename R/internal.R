@@ -31,7 +31,7 @@ logged_data <- function(path) {
   
   regexp <- p0(
     "^([SUCESFAILUR]{7,7})( \\[)",
-    "(\\d{2,}:\\d\\d:\\d\\d)",
+    "(\\d{2,}:\\d{2,2}:\\d{2,2}[.]\\d{3,3})",
     "(\\] ')([^']+)('\\s*)(.*)$"
   )
   
@@ -101,6 +101,19 @@ formatc <- function(i, n) {
   formatC(i, format = "fg", width = nchar(n), flag = "0")
 }
 
+stop_timer <- function(time) {
+  time <- tmr_stop(time)
+  time <- tmr_round(time, digits = 3)
+  
+  msecs <- as.numeric(time) - floor(as.numeric(time))
+  msecs <- formatC(msecs, digits = 3, format = "f")
+  msecs <- substr(msecs, 2, 5)
+  
+  time <- tmr_floor(time)
+  time <- paste0(time, msecs)
+  time
+}
+
 process_file <- function(file, fun, dots, path, config_time) {
   
   validate_remaining_file(path, file, config_time)
@@ -109,10 +122,8 @@ process_file <- function(file, fun, dots, path, config_time) {
   
   time <- tmr_timer(start = TRUE)
   output <- try(do.call("fun", dots), silent = TRUE)
-  time <- tmr_stop(time)
-  time <- tmr_round(time)
-  time <- as.character(time)
-  
+  time <- stop_timer(time)
+
   msg <- p0("[", time, "]", " '", file, "'")
   
   if (is_try_error(output)) {

@@ -13,7 +13,7 @@ Imports:
     stats,
     chk (>= 0.0.1.9033),
     yesno,
-    hms (>= 0.0.2.9003),
+    hms (>= 0.0.2.9004),
     hmstimer,
     parallel,
     furrr

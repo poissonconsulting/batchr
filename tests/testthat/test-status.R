@@ -1,6 +1,6 @@
 context("status")
 
-test_that("batch_log_read all processed successfully", {
+test_that("batch_file_status all processed successfully", {
   teardown(unlink(file.path(tempdir(), "batchr")))
 
   path <- file.path(tempdir(), "batchr")
@@ -14,20 +14,25 @@ test_that("batch_log_read all processed successfully", {
     "file1.csv"
   )
 
-  expect_identical(batch_file_status(path),
+  status <- batch_file_status(path)
+  expect_identical(status,
                    structure(list(type = "REMAING", time = structure(NA_real_, class = c("hms", 
 "difftime"), units = "secs"), file = "file1.csv", message = NA_character_), row.names = c(NA, 
 -1L), class = c("tbl_df", "tbl", "data.frame")))
   
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
   
-  expect_identical(batch_file_status(path),
-                   structure(list(type = "SUCCESS", time = structure(0, class = c("hms", 
-"difftime"), units = "secs"), file = "file1.csv", message = NA_character_), row.names = c(NA, 
+  status <- batch_file_status(path)
+  expect_identical(colnames(status), c("type", "time", "file", "message"))
+
+  expect_identical(status[c("type", "file", "message")],
+                   structure(list(type = "SUCCESS", file = "file1.csv", message = NA_character_), row.names = c(NA, 
 -1L), class = c("tbl_df", "tbl", "data.frame")))
+  
+  expect_identical(round(as.numeric(status$time)), 0)
 })
 
-test_that("batch_log_read all failed processing", {
+test_that("batch_file_status all failed processing", {
   teardown(unlink(file.path(tempdir(), "batchr")))
 
   path <- file.path(tempdir(), "batchr")
@@ -43,8 +48,10 @@ test_that("batch_log_read all failed processing", {
 
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
 
-  expect_identical(batch_file_status(path),
-                   structure(list(type = "FAILURE", time = structure(0, class = c("hms", 
-"difftime"), units = "secs"), file = "file1.csv", message = "darn"), row.names = c(NA, 
+  status <- batch_file_status(path)
+  expect_identical(colnames(status), c("type", "time", "file", "message"))
+  expect_identical(status[c("type", "file", "message")],
+                   structure(list(type = "FAILURE", file = "file1.csv", message = "darn"), row.names = c(NA, 
 -1L), class = c("tbl_df", "tbl", "data.frame")))
+  expect_identical(round(as.numeric(status$time)), 0)
 })
