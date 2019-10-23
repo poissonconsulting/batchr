@@ -13,10 +13,10 @@ test_that("batch_summary all processed successfully", {
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
-  
+
   verify_output(test_path("output/summary1.txt"), batch_summary(path))
-  
+
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
-  
+
   verify_output(test_path("output/summary2.txt"), batch_summary(path))
 })

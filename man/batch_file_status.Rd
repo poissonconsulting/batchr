@@ -19,7 +19,7 @@ A tibble with four columns:
 }
 }
 \description{
-Gets the current status (SUCCESS, FAILURE, REMAING) of each 
+Gets the current status (SUCCESS, FAILURE, REMAING) of each
 eligible file in path.
 }
 \seealso{

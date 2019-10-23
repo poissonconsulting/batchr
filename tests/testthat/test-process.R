@@ -13,7 +13,7 @@ test_that("batch_process", {
     batch_process(function(x) TRUE,
       path = path,
       regexp = "^file\\d[.]csv$", ask = FALSE
-    ))
+  ))
 })
 
 test_that("batch_process with options(seed = TRUE)", {

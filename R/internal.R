@@ -1,15 +1,15 @@
 summary_file <- function(x) {
-  
+
   time <- x$time
   if(!is.na(time)) {
     time <- time_to_character(time)
     time <- paste0(" [", time, "]")
   }
-  
+
   switch(x$type,
-         SUCCESS = cli_alert_success(c(col_white(x$file), col_blue(time))),
-         FAILURE = cli_alert_danger(c(col_white(x$file), col_blue(time))),
-         REMAING = cli_alert_warning(col_white(x$file)))
+    SUCCESS = cli_alert_success(c(col_white(x$file), col_blue(time))),
+    FAILURE = cli_alert_danger(c(col_white(x$file), col_blue(time))),
+    REMAING = cli_alert_warning(col_white(x$file)))
 }
 
 summary_files <- function(status) {
@@ -19,10 +19,10 @@ summary_files <- function(status) {
 
 summary_types <- function(status) {
   status$type <- factor(status$type, levels = c("SUCCESS", "FAILURE", "REMAING"))
-  
+
   table <- table(status$type)
   table <- as.data.frame(table)
-  
+
   tabs <- "\t\t\t\t\t\t\t\t\t\t\t\t"
   cli_par()
   cli_text(col_white("Success:", tabs), col_green(table$Freq[1]))
@@ -60,21 +60,21 @@ logged_data <- function(path) {
   if (!length(lines)) {
     return(no_log_data())
   }
-  
+
   regexp <- p0(
     "^([SUCESFAILUR]{7,7})( \\[)",
     "(\\d{2,}:\\d{2,2}:\\d{2,2}[.]\\d{3,3})",
     "(\\] ')([^']+)('\\s*)(.*)$"
   )
-  
+
   type <- gsub(regexp, "\\1", lines)
   time <- gsub(regexp, "\\3", lines)
   file <- gsub(regexp, "\\5", lines)
   message <- gsub(regexp, "\\7", lines)
-  
+
   time <- as_hms(time)
   is.na(message[message == ""]) <- TRUE
-  
+
   tibble(type = type, time = time, file = file, message = message)
 }
 
@@ -125,29 +125,29 @@ validate_remaining_file <- function(path, file, config_time) {
 
 time_to_character <- function(time) {
   time <- tmr_round(time, digits = 3)
-  
+
   msecs <- as.numeric(time) - floor(as.numeric(time))
   msecs <- formatC(msecs, digits = 3, format = "f")
   msecs <- substr(msecs, 2, 5)
-  
+
   time <- tmr_floor(time)
   time <- paste0(time, msecs)
   time
 }
 
 process_file <- function(file, fun, dots, path, config_time) {
-  
+
   validate_remaining_file(path, file, config_time)
-  
+
   dots <- c(file.path(path, file), dots)
-  
+
   time <- tmr_timer(start = TRUE)
   output <- try(do.call("fun", dots), silent = TRUE)
   time <- tmr_stop(time)
   time <- time_to_character(time)
-  
+
   msg <- p0("[", time, "]", " '", file, "'")
-  
+
   if (is_try_error(output)) {
     output <- as.character(output)
     output <- sub("^Error[^:]+:\\s+", "", output)
@@ -169,12 +169,12 @@ process_file <- function(file, fun, dots, path, config_time) {
 
 process_files <- function(remaining, fun, dots, path, config_time,
                           progress, options) {
-  
+
   success <- future_map(remaining, process_file,
-                        fun = fun, dots = dots,
-                        path = path, config_time = config_time,
-                        .progress = progress, .options = options)
-  
+    fun = fun, dots = dots,
+    path = path, config_time = config_time,
+    .progress = progress, .options = options)
+
   success <- unlist(success)
   invisible(set_names(success, remaining))
 }
@@ -199,7 +199,7 @@ cleanup_config <- function(path, force, remaining, failed) {
 
 config_files <- function(path, recursive) {
   list.files(path,
-             pattern = "^[.]batchr[.]rds$", recursive = recursive,
-             all.files = TRUE
+    pattern = "^[.]batchr[.]rds$", recursive = recursive,
+    all.files = TRUE
   )
 }

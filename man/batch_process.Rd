@@ -32,7 +32,7 @@ log files even if there are files remaining to be processed.}
 \item{seeds}{A named list of the L'Ecuyer-CMRG seed to use for each
 file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}
 
-\item{options}{The future specific options to use with the workers. 
+\item{options}{The future specific options to use with the workers.
 seed must be \code{FALSE}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}

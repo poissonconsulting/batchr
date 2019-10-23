@@ -17,4 +17,5 @@ Generates a named list of L'Ecuyer-CMRG seeds.
 }
 \examples{
 batch_seeds(c("a", "b"))
+# inspired by furrr:::generate_seed_streams
 }

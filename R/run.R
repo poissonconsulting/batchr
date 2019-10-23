@@ -16,7 +16,7 @@
 #'
 #' If a remaining file is removed or modified by a separate process,
 #' \code{batch_run()} throws an error.
-#' 
+#'
 #' @inheritParams batch_config
 #' @param failed A logical scalar specifying how to treat files
 #' that previously failed to process. If FALSE (the default) failed files
@@ -26,7 +26,7 @@
 #' If \code{NULL} then \code{files} is \code{batch_files_remaining(path, failed)}.
 #' @param seeds A named list of the L'Ecuyer-CMRG seed to use for each
 #' file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.
-#' @param options The future specific options to use with the workers. 
+#' @param options The future specific options to use with the workers.
 #' seed must be \code{FALSE}.
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
@@ -56,7 +56,7 @@ batch_run <- function(path = ".",
   }
   chk_s3_class(options, "future_options")
   chk_false(options$seed)
-  
+
   config <- batch_config_read(path)
 
   recurse <- config$recurse
@@ -94,7 +94,7 @@ batch_run <- function(path = ".",
     seeds <- seeds[remaining]
   }
   options$seed <- unname(seeds)
-  
+
   question <- p0(
     "Batch process ", length(remaining), " files in '",
     normalizePath(path), "'?"
@@ -102,7 +102,7 @@ batch_run <- function(path = ".",
   if (ask && !yesno(question)) {
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
   }
-  
+
   success <- process_files(remaining,
     fun = fun, dots = dots,
     path = path, config_time = config$time,

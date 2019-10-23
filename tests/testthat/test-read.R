@@ -130,7 +130,10 @@ test_that("batch_log_read 0.1 second", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) {Sys.sleep(0.101); TRUE}, path = path, regexp = "^file\\d[.]csv$"),
+    batch_config(function(x) {
+      Sys.sleep(0.101)
+      TRUE
+    }, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
 
@@ -149,7 +152,7 @@ test_that("batch_log_read 0.1 second", {
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
-  
+
   expect_s3_class(log$time, c("hms", "difftime"))
   expect_gte(log$time, 0.101)
 
@@ -239,10 +242,10 @@ test_that("batch_log_read one success (string) and one failure (error)", {
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
-  
+
   expect_s3_class(log$time, c("hms", "difftime"))
   expect_identical(round(log$time), structure(c(0, 1), units = "secs", class = c("difftime")))
-  
+
   expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c(
     "file1.csv",
     "file2.csv"
@@ -308,7 +311,7 @@ test_that("batch_log_read parallel all processed successfully", {
   options(mc.cores = 2)
   future::plan(future::multisession)
   teardown(future::plan(future::sequential))
-  
+
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
 
   log <- batch_log_read(path)
@@ -347,14 +350,14 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   options(mc.cores = 2)
   future::plan(future::multisession)
   teardown(future::plan(future::sequential))
-  
+
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
 
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
   expect_s3_class(log$time, c("hms", "difftime"))
   expect_identical(as.numeric(round(log$time, 1)),
-                   c(0, 0.5))
+    c(0, 0.5))
 
   expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c(
     "file1.csv",
@@ -365,4 +368,3 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   )))
   expect_identical(log$message, c("an error", "a success"))
 })
-

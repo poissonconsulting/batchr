@@ -6,12 +6,12 @@ rinteger <- function(n = 1L) {
   as.integer(runif(n, -mx, mx))
 }
 
-get_random_seed <- function () {
+get_random_seed <- function() {
   if(!exists(".Random.seed")) runif(1)
   .Random.seed
 }
 
-set_random_seed <- function (seed, advance = FALSE) {
+set_random_seed <- function(seed, advance = FALSE) {
   .Random.seed <<- seed
   if(advance) runif(1)
   invisible(.Random.seed)
@@ -26,7 +26,7 @@ get_lecyer_cmrg_seed <- function() {
 }
 
 #' L'Ecuyer-CMRG Seeds
-#' 
+#'
 #' Generates a named list of L'Ecuyer-CMRG seeds.
 #'
 #' @param files A character vector of the names of the files.
@@ -36,7 +36,7 @@ get_lecyer_cmrg_seed <- function() {
 #'
 #' @examples
 #' batch_seeds(c("a", "b"))
-# inspired by furrr:::generate_seed_streams
+#' # inspired by furrr:::generate_seed_streams
 batch_seeds <- function(files = batch_files_remaining()) {
   chk_s3_class(files, "character")
 

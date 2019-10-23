@@ -23,7 +23,7 @@ test_that("batch_gsub", {
     pattern = "zz", replacement = "z", path = path,
     ask = FALSE
   ))
-  
+
   expect_identical(readLines(file), c("some z", "and some more zz zz z z"))
   expect_identical(readLines(file2), c("text"))
   expect_true(batch_gsub(

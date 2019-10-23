@@ -23,7 +23,7 @@ which match the regular expression will be batch processed.}
 
 \item{progress}{A flag specifying whether to print a progress bar.}
 
-\item{options}{The future specific options to use with the workers. 
+\item{options}{The future specific options to use with the workers.
 seed must be \code{FALSE}.}
 
 \item{ask}{A flag specifying whether to ask before starting to process the files.}
