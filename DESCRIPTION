@@ -3,7 +3,8 @@ Title: Batch Process Files
 Version: 0.0.0.9036
 Authors@R: 
   c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("cre", "aut"), comment = c(ORCID = "0000-0002-7683-4592")),
-    person("Audrey", "Beliveau", email = "audrey.beliveau@uwaterloo.ca", role = "ctb"))
+    person("Audrey", "Beliveau", email = "audrey.beliveau@uwaterloo.ca", role = "ctb"),
+    person("Poisson Consulting", role = c("cph", "fnd")))
 Description: Batch processes files with a user-supplied R function.
 License: MIT + file LICENSE
 Depends: 
