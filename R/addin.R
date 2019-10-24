@@ -1,3 +1,3 @@
 batch_gsub_addin <- function(){
-  stop()
+  batchr::batch_gsub()
 }
