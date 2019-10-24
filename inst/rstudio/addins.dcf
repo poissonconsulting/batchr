@@ -1,0 +1,5 @@
+Name: batch file text replacement
+Description: Perform batch file text replacement using batch_gsub.
+Binding: batch_gsub_addin
+Interactive: true
+
