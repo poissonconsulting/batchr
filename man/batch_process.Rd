@@ -5,7 +5,7 @@
 \title{Batch File Processing}
 \usage{
 batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
-  progress = FALSE, force = TRUE, summary = TRUE, seeds = NULL,
+  progress = FALSE, force = TRUE, report = TRUE, seeds = NULL,
   options = furrr::future_options(), ask = getOption("batchr.ask",
   TRUE), ...)
 }
@@ -29,7 +29,7 @@ which match the regular expression will be batch processed.}
 \item{force}{A flag specifying whether to delete configuration and
 log files even if there are files remaining to be processed.}
 
-\item{summary}{A flag specifying whether to output a summary of the status of the files.}
+\item{report}{A flag specifying whether to outputs a report of the status of individual files to the console.}
 
 \item{seeds}{A named list of the L'Ecuyer-CMRG seed to use for each
 file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}

@@ -1,4 +1,4 @@
-summary_file <- function(x) {
+report_file <- function(x) {
 
   time <- x$time
   if(!is.na(time)) {
@@ -12,12 +12,12 @@ summary_file <- function(x) {
     REMAING = cli_alert_warning(col_white(x$file)))
 }
 
-summary_files <- function(status) {
+report_files <- function(status) {
   status <- split(status, f = status$file)
-  lapply(status, summary_file)
+  lapply(status, report_file)
 }
 
-summary_types <- function(status) {
+report_types <- function(status) {
   status$type <- factor(status$type, levels = c("SUCCESS", "FAILURE", "REMAING"))
 
   table <- table(status$type)

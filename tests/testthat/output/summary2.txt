@@ -1,4 +1,4 @@
-> batch_summary(path)
+> batch_report(path)
 Message: [32m✔[39m file1.csv [00:00:00.000]
 Message: 
 Message: Success: 1

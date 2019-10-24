@@ -1,14 +1,14 @@
-#' Batch Summary
+#' Batch Report
 #'
-#' Writes a summary of individual file status etc to the console.
+#' Outputs a report of the status of individual files to the console.
 #'
 #' @inheritParams batch_config
 #' @seealso \code{\link{batch_file_status}()}
 #' @export
-batch_summary <- function(path = ".") {
+batch_report <- function(path = ".") {
   status <- batch_file_status(path)
 
-  summary_files(status)
-  summary_types(status)
+  report_files(status)
+  report_types(status)
   invisible()
 }
