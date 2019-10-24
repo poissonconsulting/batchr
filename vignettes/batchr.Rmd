@@ -1,8 +1,8 @@
 ---
-title: "Getting Started with batchr"
+title: "Get Started with batchr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started with batchr}
+  %\VignetteIndexEntry{Get Started with batchr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
