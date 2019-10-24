@@ -25,18 +25,18 @@ which match the regular expression will be batch processed.}
 }
 \value{
 An invisible character vector of the paths to the files to
-that will be processed when \code{\link{batch_run}()} is called.
+that will be processed when \code{\link[=batch_run]{batch_run()}} is called.
 }
 \description{
-Configures a directory for batch file processing by \code{\link{batch_run}()}.
+Configures a directory for batch file processing by \code{\link[=batch_run]{batch_run()}}.
 }
 \details{
 \code{batch_config()} creates a hidden configuration file in path
 named '.batchr.rds'.
 
 The contents of the file can be read using
-\code{\link{batch_config_read}()}
-or updated using \code{\link{batch_reconfig_fun}()}.
+\code{\link[=batch_config_read]{batch_config_read()}}
+or updated using \code{\link[=batch_reconfig_fun]{batch_reconfig_fun()}}.
 
 Configuration is only possible if the directory does not already contain
 a configuration file.
@@ -48,5 +48,5 @@ or if \code{recurse = TRUE} in the directory or subdirectories.
 Hidden files are excluded to prevent accidental modification of system files.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{batch_run}()}
+\code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_run]{batch_run()}}
 }

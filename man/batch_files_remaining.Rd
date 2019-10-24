@@ -18,12 +18,12 @@ A character vector of the names of the remaining files.
 }
 \description{
 Gets the names of the files that are remaining to be processed by
-\code{\link{batch_run}()}.
+\code{\link[=batch_run]{batch_run()}}.
 }
 \details{
-\code{\link{batch_completed}()} can be used to test if there are any
+\code{\link[=batch_completed]{batch_completed()}} can be used to test if there are any
 files remaining.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{batch_run}()}
+\code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_run]{batch_run()}}
 }

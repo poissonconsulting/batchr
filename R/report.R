@@ -3,7 +3,7 @@
 #' Outputs a report of the status of individual files to the console.
 #'
 #' @inheritParams batch_config
-#' @seealso \code{\link{batch_file_status}()}
+#' @seealso [batch_file_status()]
 #' @export
 batch_report <- function(path = ".") {
   status <- batch_file_status(path)

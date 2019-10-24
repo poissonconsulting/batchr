@@ -35,10 +35,10 @@ An invisible flag indicating whether all the files were
 successfully processed.
 }
 \description{
-Uses \code{\link{batch_process}()} and \code{\link{gsub_file}()} to
+Uses \code{\link[=batch_process]{batch_process()}} and \code{\link[=gsub_file]{gsub_file()}} to
 perform batch text file replacement.
 By default it replaces text in all .R and .r files in the working directory.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{gsub_file}()}
+\code{\link[=batch_process]{batch_process()}} and \code{\link[=gsub_file]{gsub_file()}}
 }

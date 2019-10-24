@@ -1,11 +1,11 @@
 #' Batch File Processing
 #'
 #' Performs batch processing of files in a directory using the
-#' \code{\link{batch_config}()}, \code{\link{batch_run}()}
-#' and \code{\link{batch_cleanup}()} functions.
+#' [batch_config()], [batch_run()]
+#' and [batch_cleanup()] functions.
 #' For more control the user should call these three functions instead.
 #'
-#' \code{\link{batch_gsub}()} provides a simple wrapper for
+#' [batch_gsub()] provides a simple wrapper for
 #' batch text replacement.
 #'
 #' @inheritParams batch_config
@@ -13,8 +13,8 @@
 #' @inheritParams batch_cleanup
 #' @param report A flag specifying whether to outputs a report of the status of individual files to the console.
 #'
-#' @seealso \code{\link{batch_config}()}, \code{\link{batch_run}()}
-#' and \code{\link{batch_cleanup}()}
+#' @seealso [batch_config()], [batch_run()]
+#' and [batch_cleanup()]
 #' @return An invisible flag indicating whether all the files where
 #' successfully processed.
 #' @export

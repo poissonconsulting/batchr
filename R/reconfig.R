@@ -1,22 +1,22 @@
 #' Reconfigures Batch Processing Function
 #'
 #' Updates the function and function arguments that were provided
-#' when a directory was configured (using \code{\link{batch_config}()}).
+#' when a directory was configured (using [batch_config()]).
 #'
-#' \code{batch_reconfig_fun()} is useful if a new version of the function is required
+#' `batch_reconfig_fun()` is useful if a new version of the function is required
 #' to successfully process some of the files.
 #'
-#' It should be noted that \code{batch_reconfig_fun()} does not alter the
+#' It should be noted that `batch_reconfig_fun()` does not alter the
 #' configuration time.
 #'
-#' In order to process previously failed files \code{\link{batch_run}()}
-#' should be called with \code{failed = NA} or \code{failed = TRUE}.
+#' In order to process previously failed files [batch_run()]
+#' should be called with `failed = NA` or `failed = TRUE`.
 #'
 #' @inheritParams batch_config
 #'
 #' @return An invisible character vector of the paths to the files
 #' remaining to be processed.
-#' @seealso \code{\link{batch_process}()} and \code{\link{batch_config}()}
+#' @seealso [batch_process()] and [batch_config()]
 #' @export
 batch_reconfig_fun <- function(path = ".", fun, ...) {
   chk_function(fun)
@@ -39,21 +39,21 @@ batch_reconfig_fun <- function(path = ".", fun, ...) {
 #' Reconfigures Batch Processing File Set
 #'
 #' Updates the regular expression and/or recurse argument  that were provided
-#' when a directory was configured (using \code{\link{batch_config}()}).
+#' when a directory was configured (using [batch_config()]).
 #'
-#' \code{batch_reconfig_fileset()} is useful for including or excluding particular files.
+#' `batch_reconfig_fileset()` is useful for including or excluding particular files.
 #'
-#' It should be noted that \code{batch_reconfig_fun()} does not alter the
+#' It should be noted that `batch_reconfig_fun()` does not alter the
 #' configuration time.
 #'
-#' In order to process previously failed files \code{\link{batch_run}()}
-#' should be called with \code{failed = NA} or \code{failed = TRUE}.
+#' In order to process previously failed files [batch_run()]
+#' should be called with `failed = NA` or `failed = TRUE`.
 #'
 #' @inheritParams batch_config
 #'
 #' @return An invisible character vector of the paths to the files
 #' remaining to be processed.
-#' @seealso \code{\link{batch_process}()} and \code{\link{batch_config}()}
+#' @seealso [batch_process()] and [batch_config()]
 #' @export
 batch_reconfig_fileset <- function(path = ".", regexp = NULL, recurse = NULL) {
   chk_dir(path)

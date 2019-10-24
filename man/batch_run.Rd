@@ -34,24 +34,24 @@ whether it was successfully processed.
 }
 \description{
 Starts (or restarts if previously stopped) processing the remaining files
-specified by \code{\link{batch_config}()}.
+specified by \code{\link[=batch_config]{batch_config()}}.
 }
 \details{
 \code{batch_run()} logs all file processing attempts together with the
 the type (SUCCESS or FAILURE), the
 system time in UTC, the file name and any error messages.
-The hidden log file can be read using \code{\link{batch_log_read}()}.
+The hidden log file can be read using \code{\link[=batch_log_read]{batch_log_read()}}.
 
-\code{\link{batch_files_remaining}()} provides a vector of the files that
+\code{\link[=batch_files_remaining]{batch_files_remaining()}} provides a vector of the files that
 are remaining to be processed.
 
 When processing is complete the hidden configuration file
-and hidden log file can be deleted using \code{\link{batch_cleanup}()}.
+and hidden log file can be deleted using \code{\link[=batch_cleanup]{batch_cleanup()}}.
 
 If a remaining file is removed or modified by a separate process,
 \code{batch_run()} throws an error.
 }
 \seealso{
-\code{\link{batch_process}()}, \code{\link{batch_config}()} and
-\code{\link{batch_cleanup}()}
+\code{\link[=batch_process]{batch_process()}}, \code{\link[=batch_config]{batch_config()}} and
+\code{\link[=batch_cleanup]{batch_cleanup()}}
 }

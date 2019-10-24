@@ -12,10 +12,10 @@ batch_file_status(path)
 \value{
 A tibble with four columns:
 \describe{
-  \item{type}{A character vector indicating SUCCESS,  FAILURE or REMAING}
-  \item{time}{A hms vector of the file processing time}
-  \item{file}{A character vector of the file name}
-  \item{error}{A character vector of the error message (or NA if no error)}
+\item{type}{A character vector indicating SUCCESS,  FAILURE or REMAING}
+\item{time}{A hms vector of the file processing time}
+\item{file}{A character vector of the file name}
+\item{error}{A character vector of the error message (or NA if no error)}
 }
 }
 \description{
@@ -23,5 +23,5 @@ Gets the current status (SUCCESS, FAILURE, REMAING) of each
 eligible file in path.
 }
 \seealso{
-\code{\link{batch_log_read}()}
+\code{\link[=batch_log_read]{batch_log_read()}}
 }

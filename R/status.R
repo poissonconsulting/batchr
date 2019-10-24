@@ -11,7 +11,7 @@
 #'   \item{file}{A character vector of the file name}
 #'   \item{error}{A character vector of the error message (or NA if no error)}
 #' }
-#' @seealso \code{\link{batch_log_read}()}
+#' @seealso [batch_log_read()]
 #' @export
 batch_file_status <- function(path) {
   log <- batch_log_read(path)

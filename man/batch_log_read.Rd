@@ -12,15 +12,15 @@ batch_log_read(path = ".")
 \value{
 A tibble with four columns:
 \describe{
-  \item{type}{A character vector indicating SUCCESS or FAILURE}
-  \item{time}{A hms vector of the file processing time}
-  \item{file}{A character vector of the file name}
-  \item{error}{A character vector of the error message (or NA if no error)}
+\item{type}{A character vector indicating SUCCESS or FAILURE}
+\item{time}{A hms vector of the file processing time}
+\item{file}{A character vector of the file name}
+\item{error}{A character vector of the error message (or NA if no error)}
 }
 }
 \description{
-Reads the values in the log file created by \code{\link{batch_run}()}.
+Reads the values in the log file created by \code{\link[=batch_run]{batch_run()}}.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{batch_config_read}()}
+\code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_config_read]{batch_config_read()}}
 }

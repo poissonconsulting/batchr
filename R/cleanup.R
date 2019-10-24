@@ -1,9 +1,9 @@
 #' Cleanup Batch Processing
 #'
-#' Deletes configuration file created by \code{\link{batch_config}()}
-#' and log file created by \code{\link{batch_run}()}.
+#' Deletes configuration file created by [batch_config()]
+#' and log file created by [batch_run()].
 #'
-#' The \code{\link{batch_completed}()} function can be used to test
+#' The [batch_completed()] function can be used to test
 #' if batch processing is complete.
 #'
 #' @inheritParams batch_config
@@ -12,15 +12,15 @@
 #' log files even if there are files remaining to be processed.
 #' @param remaining A flag specifying whether to delete
 #' any files that are remaining to be processed
-#' (only applied when \code{force = TRUE}).
+#' (only applied when `force = TRUE`).
 #' Files that have been processed are never deleted.
 #' @param recursive A flag specifying whether to recurse into subdirectories
-#' when cleaning up. This is unrelated to the \code{recurse} option
-#' of \code{\link{batch_config}()} and is only expected to be used
+#' when cleaning up. This is unrelated to the `recurse` option
+#' of [batch_config()] and is only expected to be used
 #' if the user has neglected to clean up multiple nested directories.
 #' @return A named logical vector indicating which directories
 #' were successfully cleaned up.
-#' @seealso \code{\link{batch_process}()}
+#' @seealso [batch_process()]
 #' @export
 batch_cleanup <- function(path = ".", force = FALSE,
                           remaining = FALSE, failed = NA,

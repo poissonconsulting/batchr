@@ -1,21 +1,21 @@
 #' Runs Batch Processing
 #'
 #' Starts (or restarts if previously stopped) processing the remaining files
-#' specified by \code{\link{batch_config}()}.
+#' specified by [batch_config()].
 #'
-#' \code{batch_run()} logs all file processing attempts together with the
+#' `batch_run()` logs all file processing attempts together with the
 #' the type (SUCCESS or FAILURE), the
 #' system time in UTC, the file name and any error messages.
-#' The hidden log file can be read using \code{\link{batch_log_read}()}.
+#' The hidden log file can be read using [batch_log_read()].
 #'
-#' \code{\link{batch_files_remaining}()} provides a vector of the files that
+#' [batch_files_remaining()] provides a vector of the files that
 #' are remaining to be processed.
 #'
 #' When processing is complete the hidden configuration file
-#' and hidden log file can be deleted using \code{\link{batch_cleanup}()}.
+#' and hidden log file can be deleted using [batch_cleanup()].
 #'
 #' If a remaining file is removed or modified by a separate process,
-#' \code{batch_run()} throws an error.
+#' `batch_run()` throws an error.
 #'
 #' @inheritParams batch_config
 #' @param failed A logical scalar specifying how to treat files
@@ -23,16 +23,16 @@
 #' are excluded, if NA they are included and if TRUE they are only included.
 #' @param progress A flag specifying whether to print a progress bar.
 #' @param files A character vector of the remaining files to process.
-#' If \code{NULL} then \code{files} is \code{batch_files_remaining(path, failed)}.
+#' If `NULL` then `files` is `batch_files_remaining(path, failed)`.
 #' @param seeds A named list of the L'Ecuyer-CMRG seed to use for each
-#' file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.
+#' file. If `NULL` then `seeds` is `batch_seeds(files)`.
 #' @param options The future specific options to use with the workers.
-#' seed must be \code{FALSE}.
+#' seed must be `FALSE`.
 #' @param ask A flag specifying whether to ask before starting to process the files.
 #' @return An invisible named logical vector indicating for each file
 #' whether it was successfully processed.
-#' @seealso \code{\link{batch_process}()}, \code{\link{batch_config}()} and
-#' \code{\link{batch_cleanup}()}
+#' @seealso [batch_process()], [batch_config()] and
+#' [batch_cleanup()]
 #' @export
 batch_run <- function(path = ".",
                       failed = FALSE, progress = FALSE,

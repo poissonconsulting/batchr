@@ -24,7 +24,7 @@ remaining to be processed.
 }
 \description{
 Updates the function and function arguments that were provided
-when a directory was configured (using \code{\link{batch_config}()}).
+when a directory was configured (using \code{\link[=batch_config]{batch_config()}}).
 }
 \details{
 \code{batch_reconfig_fun()} is useful if a new version of the function is required
@@ -33,9 +33,9 @@ to successfully process some of the files.
 It should be noted that \code{batch_reconfig_fun()} does not alter the
 configuration time.
 
-In order to process previously failed files \code{\link{batch_run}()}
+In order to process previously failed files \code{\link[=batch_run]{batch_run()}}
 should be called with \code{failed = NA} or \code{failed = TRUE}.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{batch_config}()}
+\code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_config]{batch_config()}}
 }

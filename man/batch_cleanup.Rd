@@ -24,7 +24,7 @@ are excluded, if NA they are included and if TRUE they are only included.}
 
 \item{recursive}{A flag specifying whether to recurse into subdirectories
 when cleaning up. This is unrelated to the \code{recurse} option
-of \code{\link{batch_config}()} and is only expected to be used
+of \code{\link[=batch_config]{batch_config()}} and is only expected to be used
 if the user has neglected to clean up multiple nested directories.}
 }
 \value{
@@ -32,13 +32,13 @@ A named logical vector indicating which directories
 were successfully cleaned up.
 }
 \description{
-Deletes configuration file created by \code{\link{batch_config}()}
-and log file created by \code{\link{batch_run}()}.
+Deletes configuration file created by \code{\link[=batch_config]{batch_config()}}
+and log file created by \code{\link[=batch_run]{batch_run()}}.
 }
 \details{
-The \code{\link{batch_completed}()} function can be used to test
+The \code{\link[=batch_completed]{batch_completed()}} function can be used to test
 if batch processing is complete.
 }
 \seealso{
-\code{\link{batch_process}()}
+\code{\link[=batch_process]{batch_process()}}
 }

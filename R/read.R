@@ -1,11 +1,11 @@
 #' Read Configuration File
 #'
 #' Reads the values in the
-#' configuration file created by \code{\link{batch_config}()}.
+#' configuration file created by [batch_config()].
 #'
 #' @inheritParams batch_config
 #' @return A named list of the configuration values.
-#' @seealso \code{\link{batch_process}()} and \code{\link{batch_log_read}()}
+#' @seealso [batch_process()] and [batch_log_read()]
 #' @export
 batch_config_read <- function(path) {
   chk_dir(path)
@@ -18,7 +18,7 @@ batch_config_read <- function(path) {
 
 #' Read Log File
 #'
-#' Reads the values in the log file created by \code{\link{batch_run}()}.
+#' Reads the values in the log file created by [batch_run()].
 #'
 #' @inheritParams batch_config
 #' @return A tibble with four columns:
@@ -28,7 +28,7 @@ batch_config_read <- function(path) {
 #'   \item{file}{A character vector of the file name}
 #'   \item{error}{A character vector of the error message (or NA if no error)}
 #' }
-#' @seealso \code{\link{batch_process}()} and \code{\link{batch_config_read}()}
+#' @seealso [batch_process()] and [batch_config_read()]
 #' @export
 batch_log_read <- function(path = ".") {
   batch_config_read(path)

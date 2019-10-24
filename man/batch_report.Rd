@@ -13,5 +13,5 @@ batch_report(path = ".")
 Outputs a report of the status of individual files to the console.
 }
 \seealso{
-\code{\link{batch_file_status}()}
+\code{\link[=batch_file_status]{batch_file_status()}}
 }

@@ -17,8 +17,8 @@ gsub_file(file, pattern, replacement)
 TRUE
 }
 \description{
-Uses \code{\link[base]{gsub}} to perform text replacement on a file.
+Uses \code{\link[base:gsub]{base::gsub()}} to perform text replacement on a file.
 }
 \seealso{
-\code{\link[base]{gsub}}
+\code{\link[base:gsub]{base::gsub()}}
 }

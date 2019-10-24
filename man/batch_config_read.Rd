@@ -14,8 +14,8 @@ A named list of the configuration values.
 }
 \description{
 Reads the values in the
-configuration file created by \code{\link{batch_config}()}.
+configuration file created by \code{\link[=batch_config]{batch_config()}}.
 }
 \seealso{
-\code{\link{batch_process}()} and \code{\link{batch_log_read}()}
+\code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_log_read]{batch_log_read()}}
 }

@@ -1,13 +1,13 @@
 #' File Text Replacement
 #'
-#' Uses \code{\link[base]{gsub}} to perform text replacement on a file.
+#' Uses [base::gsub()] to perform text replacement on a file.
 #'
 #' @param file A string of the name of the file to modify.
 #' @param pattern A string of the regular expression to match.
 #' @param replacement A string of the replacement text.
 #'
 #' @return TRUE
-#' @seealso \code{\link[base]{gsub}}
+#' @seealso [base::gsub()]
 #' @export
 gsub_file <- function(file, pattern, replacement) {
   chk_file(file)
@@ -19,7 +19,7 @@ gsub_file <- function(file, pattern, replacement) {
 
 #' Batch File Text Replacement
 #'
-#' Uses \code{\link{batch_process}()} and \code{\link{gsub_file}()} to
+#' Uses [batch_process()] and [gsub_file()] to
 #' perform batch text file replacement.
 #' By default it replaces text in all .R and .r files in the working directory.
 #'
@@ -29,7 +29,7 @@ gsub_file <- function(file, pattern, replacement) {
 #' @inheritParams batch_process
 #' @inheritParams gsub_file
 #'
-#' @seealso \code{\link{batch_process}()} and \code{\link{gsub_file}()}
+#' @seealso [batch_process()] and [gsub_file()]
 #' @return An invisible flag indicating whether all the files were
 #' successfully processed.
 #' @export
