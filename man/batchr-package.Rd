@@ -22,6 +22,7 @@ Useful links:
 Other contributors:
 \itemize{
   \item Audrey Beliveau \email{audrey.beliveau@uwaterloo.ca} [contributor]
+  \item Poisson Consulting [copyright holder, funder]
 }
 
 }
