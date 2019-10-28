@@ -34,7 +34,7 @@
 #' @seealso [batch_process()], [batch_config()] and
 #' [batch_cleanup()]
 #' @export
-batch_run <- function(path = ".",
+batch_run <- function(path,
                       failed = FALSE, progress = FALSE,
                       files = NULL,
                       seeds = NULL,

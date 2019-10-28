@@ -34,7 +34,7 @@
 #' that will be processed when [batch_run()] is called.
 #' @seealso [batch_process()] and [batch_run()]
 #' @export
-batch_config <- function(fun, path = ".", regexp = ".*", recurse = FALSE, ...) {
+batch_config <- function(fun, path, regexp = ".*", recurse = FALSE, ...) {
   chk_function(fun)
   chk_dir(path)
   chk_string(regexp)

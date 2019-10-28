@@ -4,7 +4,7 @@
 \alias{batch_reconfig_fileset}
 \title{Reconfigures Batch Processing File Set}
 \usage{
-batch_reconfig_fileset(path = ".", regexp = NULL, recurse = NULL)
+batch_reconfig_fileset(path, regexp = NULL, recurse = NULL)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

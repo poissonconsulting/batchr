@@ -18,7 +18,7 @@
 #' remaining to be processed.
 #' @seealso [batch_process()] and [batch_config()]
 #' @export
-batch_reconfig_fun <- function(path = ".", fun, ...) {
+batch_reconfig_fun <- function(path, fun, ...) {
   chk_function(fun)
   chk_dir(path)
 
@@ -55,7 +55,7 @@ batch_reconfig_fun <- function(path = ".", fun, ...) {
 #' remaining to be processed.
 #' @seealso [batch_process()] and [batch_config()]
 #' @export
-batch_reconfig_fileset <- function(path = ".", regexp = NULL, recurse = NULL) {
+batch_reconfig_fileset <- function(path, regexp = NULL, recurse = NULL) {
   chk_dir(path)
   if (!is.null(regexp)) chk_string(regexp)
   if (!is.null(recurse)) chk_flag(recurse)

@@ -4,7 +4,7 @@
 \alias{batch_gsub}
 \title{Batch File Text Replacement}
 \usage{
-batch_gsub(pattern, replacement, path = ".", regexp = "[.](R|r)$",
+batch_gsub(pattern, replacement, path, regexp = "[.](R|r)$",
   recurse = FALSE, progress = FALSE, report = TRUE,
   options = furrr::future_options(), ask = getOption("batchr.ask",
   TRUE))

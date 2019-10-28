@@ -22,7 +22,7 @@
 #' were successfully cleaned up.
 #' @seealso [batch_process()]
 #' @export
-batch_cleanup <- function(path = ".", force = FALSE,
+batch_cleanup <- function(path, force = FALSE,
                           remaining = FALSE, failed = NA,
                           recursive = FALSE) {
   chk_dir(path)

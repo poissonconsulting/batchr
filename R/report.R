@@ -5,7 +5,7 @@
 #' @inheritParams batch_config
 #' @seealso [batch_file_status()]
 #' @export
-batch_report <- function(path = ".") {
+batch_report <- function(path) {
   status <- batch_file_status(path)
 
   report_files(status)

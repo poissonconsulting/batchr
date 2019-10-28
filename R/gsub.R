@@ -34,7 +34,7 @@ gsub_file <- function(file, pattern, replacement) {
 #' successfully processed.
 #' @export
 batch_gsub <- function(pattern, replacement,
-                       path = ".", regexp = "[.](R|r)$", recurse = FALSE,
+                       path, regexp = "[.](R|r)$", recurse = FALSE,
                        progress = FALSE, report = TRUE,
                        options = furrr::future_options(),
                        ask = getOption("batchr.ask", TRUE)) {

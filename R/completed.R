@@ -10,6 +10,6 @@
 #' @return A flag specifying whether batch processing is complete.
 #' @seealso [batch_process()]
 #' @export
-batch_completed <- function(path = ".", failed = FALSE) {
+batch_completed <- function(path, failed = FALSE) {
   length(batch_files_remaining(path = path, failed = failed)) == 0L
 }

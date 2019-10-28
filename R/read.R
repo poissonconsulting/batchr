@@ -30,7 +30,7 @@ batch_config_read <- function(path) {
 #' }
 #' @seealso [batch_process()] and [batch_config_read()]
 #' @export
-batch_log_read <- function(path = ".") {
+batch_log_read <- function(path) {
   batch_config_read(path)
   logged_data(path)
 }

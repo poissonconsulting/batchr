@@ -4,7 +4,7 @@
 \alias{batch_files_remaining}
 \title{Batch Files}
 \usage{
-batch_files_remaining(path = ".", failed = FALSE)
+batch_files_remaining(path, failed = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

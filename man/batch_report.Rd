@@ -4,7 +4,7 @@
 \alias{batch_report}
 \title{Batch Report}
 \usage{
-batch_report(path = ".")
+batch_report(path)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

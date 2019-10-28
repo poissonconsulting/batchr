@@ -4,7 +4,7 @@
 \alias{batch_is_clean}
 \title{Is Clean}
 \usage{
-batch_is_clean(path = ".", recurse = FALSE)
+batch_is_clean(path, recurse = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

@@ -4,7 +4,7 @@
 \alias{batch_completed}
 \title{Batch Completed?}
 \usage{
-batch_completed(path = ".", failed = FALSE)
+batch_completed(path, failed = FALSE)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

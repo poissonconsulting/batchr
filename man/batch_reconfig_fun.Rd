@@ -4,7 +4,7 @@
 \alias{batch_reconfig_fun}
 \title{Reconfigures Batch Processing Function}
 \usage{
-batch_reconfig_fun(path = ".", fun, ...)
+batch_reconfig_fun(path, fun, ...)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

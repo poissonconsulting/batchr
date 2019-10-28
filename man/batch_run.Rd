@@ -4,8 +4,8 @@
 \alias{batch_run}
 \title{Runs Batch Processing}
 \usage{
-batch_run(path = ".", failed = FALSE, progress = FALSE,
-  files = NULL, seeds = NULL, options = furrr::future_options(),
+batch_run(path, failed = FALSE, progress = FALSE, files = NULL,
+  seeds = NULL, options = furrr::future_options(),
   ask = getOption("batchr.ask", TRUE))
 }
 \arguments{

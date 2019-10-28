@@ -18,7 +18,7 @@
 #' @return An invisible flag indicating whether all the files where
 #' successfully processed.
 #' @export
-batch_process <- function(fun, path = ".", regexp = ".*", recurse = FALSE,
+batch_process <- function(fun, path, regexp = ".*", recurse = FALSE,
                           progress = FALSE, force = TRUE, report = TRUE,
                           seeds = NULL,
                           options = furrr::future_options(),

@@ -4,7 +4,7 @@
 \alias{batch_process}
 \title{Batch File Processing}
 \usage{
-batch_process(fun, path = ".", regexp = ".*", recurse = FALSE,
+batch_process(fun, path, regexp = ".*", recurse = FALSE,
   progress = FALSE, force = TRUE, report = TRUE, seeds = NULL,
   options = furrr::future_options(), ask = getOption("batchr.ask",
   TRUE), ...)

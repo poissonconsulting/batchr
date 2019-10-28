@@ -4,7 +4,7 @@
 \alias{batch_config}
 \title{Configure Batch Processing}
 \usage{
-batch_config(fun, path = ".", regexp = ".*", recurse = FALSE, ...)
+batch_config(fun, path, regexp = ".*", recurse = FALSE, ...)
 }
 \arguments{
 \item{fun}{A function to process each of the files.
