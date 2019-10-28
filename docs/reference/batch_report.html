@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Batch File Text Replacement — batch_gsub • batchr</title>
+<title>Batch Report — batch_report • batchr</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,8 @@
 
 
 
-<meta property="og:title" content="Batch File Text Replacement — batch_gsub" />
-<meta property="og:description" content="Uses batch_process() and gsub_file() to
-perform batch text file replacement.
-By default it replaces text in all .R and .r files in the working directory." />
+<meta property="og:title" content="Batch Report — batch_report" />
+<meta property="og:description" content="Outputs a report of the status of individual files to the console." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,79 +103,35 @@ By default it replaces text in all .R and .r files in the working directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Batch File Text Replacement</h1>
+    <h1>Batch Report</h1>
     
-    <div class="hidden name"><code>batch_gsub.Rd</code></div>
+    <div class="hidden name"><code>batch_report.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Uses <code><a href='batch_process.html'>batch_process()</a></code> and <code><a href='gsub_file.html'>gsub_file()</a></code> to
-perform batch text file replacement.
-By default it replaces text in all .R and .r files in the working directory.</p>
+    <p>Outputs a report of the status of individual files to the console.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>batch_gsub</span>(<span class='no'>pattern</span>, <span class='no'>replacement</span>, <span class='no'>path</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>"[.](R|r)$"</span>,
-  <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>report</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>furrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_options.html'>future_options</a></span>(), <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>,
-  <span class='fl'>TRUE</span>))</pre>
+    <pre class="usage"><span class='fu'>batch_report</span>(<span class='no'>path</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pattern</th>
-      <td><p>A string of the regular expression to match.</p></td>
-    </tr>
-    <tr>
-      <th>replacement</th>
-      <td><p>A string of the replacement text.</p></td>
-    </tr>
-    <tr>
       <th>path</th>
       <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
-    <tr>
-      <th>regexp</th>
-      <td><p>A string of a regular expression. Only non-hidden file names
-which match the regular expression will be batch processed.</p></td>
-    </tr>
-    <tr>
-      <th>recurse</th>
-      <td><p>A flag specifying whether to recurse into path's subdirectories.</p></td>
-    </tr>
-    <tr>
-      <th>progress</th>
-      <td><p>A flag specifying whether to print a progress bar.</p></td>
-    </tr>
-    <tr>
-      <th>report</th>
-      <td><p>A flag specifying whether to outputs a report of the status of individual files to the console.</p></td>
-    </tr>
-    <tr>
-      <th>options</th>
-      <td><p>The future specific options to use with the workers.
-seed must be <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>ask</th>
-      <td><p>A flag specifying whether to ask before starting to process the files.</p></td>
-    </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An invisible flag indicating whether all the files were
-successfully processed.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process()</a></code> and <code><a href='gsub_file.html'>gsub_file()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='batch_file_status.html'>batch_file_status()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#see-also">See also</a></li>
     </ul>
 

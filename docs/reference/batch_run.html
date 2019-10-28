@@ -70,7 +70,7 @@ specified by batch_config()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9032</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9039</span>
       </span>
     </div>
 
@@ -111,11 +111,11 @@ specified by batch_config()." />
 
     <div class="ref-description">
     <p>Starts (or restarts if previously stopped) processing the remaining files
-specified by <code><a href='batch_config.html'>batch_config</a>()</code>.</p>
+specified by <code><a href='batch_config.html'>batch_config()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>batch_run</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>furrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_options.html'>future_options</a></span>(),
+    <pre class="usage"><span class='fu'>batch_run</span>(<span class='no'>path</span>, <span class='kw'>failed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>furrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_options.html'>future_options</a></span>(),
   <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -165,17 +165,17 @@ whether it was successfully processed.</p>
     <p><code>batch_run()</code> logs all file processing attempts together with the
 the type (SUCCESS or FAILURE), the
 system time in UTC, the file name and any error messages.
-The hidden log file can be read using <code><a href='batch_log_read.html'>batch_log_read</a>()</code>.</p>
-<p><code><a href='batch_files_remaining.html'>batch_files_remaining</a>()</code> provides a vector of the files that
+The hidden log file can be read using <code><a href='batch_log_read.html'>batch_log_read()</a></code>.</p>
+<p><code><a href='batch_files_remaining.html'>batch_files_remaining()</a></code> provides a vector of the files that
 are remaining to be processed.</p>
 <p>When processing is complete the hidden configuration file
-and hidden log file can be deleted using <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code>.</p>
+and hidden log file can be deleted using <code><a href='batch_cleanup.html'>batch_cleanup()</a></code>.</p>
 <p>If a remaining file is removed or modified by a separate process,
 <code>batch_run()</code> throws an error.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code>, <code><a href='batch_config.html'>batch_config</a>()</code> and
-<code><a href='batch_cleanup.html'>batch_cleanup</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process()</a></code>, <code><a href='batch_config.html'>batch_config()</a></code> and
+<code><a href='batch_cleanup.html'>batch_cleanup()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -193,7 +193,7 @@ and hidden log file can be deleted using <code><a href='batch_cleanup.html'>batc
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley.</p>
+  <p>Developed by Joe Thorley, Poisson Consulting.</p>
 </div>
 
 <div class="pkgdown">

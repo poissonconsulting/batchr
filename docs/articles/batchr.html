@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Started with batchr • batchr</title>
+<title>Get Started with batchr • batchr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with batchr">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Get Started with batchr">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9032</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9039</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Getting Started with batchr</h1>
+      <h1>Get Started with batchr</h1>
             
       
       
@@ -101,7 +101,7 @@
 <p>The contents of the hidden figuration file are as follows</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/batch_config_read.html">batch_config_read</a></span>(path)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; $time</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; [1] "2019-10-23 21:57:47 UTC"</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; [1] "2019-10-28 23:23:40 UTC"</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; </span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; $regexp</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; [1] "file\\d[.]txt$"</span></span>
@@ -138,7 +138,7 @@
 <span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2 FAILURE 00'00.004" file3.txt &lt;NA&gt;                             </span></span>
 <span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3 FAILURE 00'00.000" file4.txt Uh, Houston, we've had a problem.</span></span></code></pre></div>
 <p>or summarised using</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../reference/batch_summary.html">batch_summary</a></span>(path)</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../reference/batch_report.html">batch_report</a></span>(path)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; Error : Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; ✔ file2.txt [00:00:00.000]</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
@@ -185,7 +185,7 @@
 <a href="#rerun" class="anchor"></a>Rerun</h2>
 <p>Now when we call <code><a href="../reference/batch_run.html">batch_run()</a></code> the newly included ‘file.txt’ is successfully processed.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="../reference/batch_summary.html">batch_summary</a></span>(path)</span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="../reference/batch_report.html">batch_report</a></span>(path)</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; ✔ file.txt [00:00:00.000]</span></span>
@@ -215,7 +215,7 @@
 <span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt; </span></span></code></pre></div>
 <p>In order to reattempt processing of the ‘file3.txt’ and ‘file4.txt’ we need to set <code>failed = TRUE</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../reference/batch_run.html">batch_run</a></span>(path, <span class="dt">failed =</span> <span class="ot">TRUE</span>, <span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../reference/batch_summary.html">batch_summary</a></span>(path)</span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../reference/batch_report.html">batch_report</a></span>(path)</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; ✔ file.txt [00:00:00.000]</span></span>
@@ -227,7 +227,7 @@
 <span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; ✔ file3.txt [00:00:00.000]</span></span>
 <span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
 <span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt; ✔ file4.txt [00:00:00.006]</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt; ✔ file4.txt [00:00:00.002]</span></span>
 <span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt; Error in mycall(sym_write, fd, data) : </span></span>
 <span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;   Cannot write to fd (system error 9, Bad file descriptor) @client.c:149</span></span>
 <span id="cb13-16"><a href="#cb13-16"></a><span class="co">#&gt; </span></span>
@@ -279,7 +279,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Joe Thorley.</p>
+  <p>Developed by Joe Thorley, Poisson Consulting.</p>
 </div>
 
 <div class="pkgdown">

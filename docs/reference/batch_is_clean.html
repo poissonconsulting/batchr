@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Batch Summary — batch_summary • batchr</title>
+<title>Is Clean — batch_is_clean • batchr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Batch Summary — batch_summary" />
-<meta property="og:description" content="Writes a summary of individual file status etc to the console." />
+<meta property="og:title" content="Is Clean — batch_is_clean" />
+<meta property="og:description" content="Tests whether directory contains configuration file created by batch_config()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9032</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9039</span>
       </span>
     </div>
 
@@ -103,16 +103,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Batch Summary</h1>
+    <h1>Is Clean</h1>
     
-    <div class="hidden name"><code>batch_summary.Rd</code></div>
+    <div class="hidden name"><code>batch_is_clean.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Writes a summary of individual file status etc to the console.</p>
+    <p>Tests whether directory contains configuration file created by <code><a href='batch_config.html'>batch_config()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>batch_summary</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_is_clean</span>(<span class='no'>path</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -121,11 +121,15 @@
       <th>path</th>
       <td><p>A string of the path to the directory with the files for processing.</p></td>
     </tr>
+    <tr>
+      <th>recurse</th>
+      <td><p>A flag specifying whether to recurse into path's subdirectories.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_file_status.html'>batch_file_status</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_cleanup.html'>batch_cleanup()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -141,7 +145,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley.</p>
+  <p>Developed by Joe Thorley, Poisson Consulting.</p>
 </div>
 
 <div class="pkgdown">

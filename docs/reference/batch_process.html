@@ -72,7 +72,7 @@ For more control the user should call these three functions instead." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9032</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9039</span>
       </span>
     </div>
 
@@ -113,15 +113,15 @@ For more control the user should call these three functions instead." />
 
     <div class="ref-description">
     <p>Performs batch processing of files in a directory using the
-<code><a href='batch_config.html'>batch_config</a>()</code>, <code><a href='batch_run.html'>batch_run</a>()</code>
-and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code> functions.
+<code><a href='batch_config.html'>batch_config()</a></code>, <code><a href='batch_run.html'>batch_run()</a></code>
+and <code><a href='batch_cleanup.html'>batch_cleanup()</a></code> functions.
 For more control the user should call these three functions instead.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>batch_process</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>batch_process</span>(<span class='no'>fun</span>, <span class='no'>path</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>report</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>seeds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw pkg'>furrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_options.html'>future_options</a></span>(), <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>,
-  <span class='fl'>TRUE</span>), <span class='kw'>summary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+  <span class='fl'>TRUE</span>), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,6 +158,10 @@ which match the regular expression will be batch processed.</p></td>
 log files even if there are files remaining to be processed.</p></td>
     </tr>
     <tr>
+      <th>report</th>
+      <td><p>A flag specifying whether to outputs a report of the status of individual files to the console.</p></td>
+    </tr>
+    <tr>
       <th>seeds</th>
       <td><p>A named list of the L'Ecuyer-CMRG seed to use for each
 file. If <code>NULL</code> then <code>seeds</code> is <code><a href='batch_seeds.html'>batch_seeds(files)</a></code>.</p></td>
@@ -172,10 +176,6 @@ seed must be <code>FALSE</code>.</p></td>
       <td><p>A flag specifying whether to ask before starting to process the files.</p></td>
     </tr>
     <tr>
-      <th>summary</th>
-      <td><p>A flag specifying whether to output a summary of the status of the files.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
       <td><p>Additional arguments passed to <code>fun</code>.</p></td>
     </tr>
@@ -187,12 +187,12 @@ seed must be <code>FALSE</code>.</p></td>
 successfully processed.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code><a href='batch_gsub.html'>batch_gsub</a>()</code> provides a simple wrapper for
+    <p><code><a href='batch_gsub.html'>batch_gsub()</a></code> provides a simple wrapper for
 batch text replacement.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_config.html'>batch_config</a>()</code>, <code><a href='batch_run.html'>batch_run</a>()</code>
-and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_config.html'>batch_config()</a></code>, <code><a href='batch_run.html'>batch_run()</a></code>
+and <code><a href='batch_cleanup.html'>batch_cleanup()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -210,7 +210,7 @@ and <code><a href='batch_cleanup.html'>batch_cleanup</a>()</code></p></div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley.</p>
+  <p>Developed by Joe Thorley, Poisson Consulting.</p>
 </div>
 
 <div class="pkgdown">

@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9032</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9039</span>
       </span>
     </div>
 
@@ -109,10 +109,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Configures a directory for batch file processing by <code><a href='batch_run.html'>batch_run</a>()</code>.</p>
+    <p>Configures a directory for batch file processing by <code><a href='batch_run.html'>batch_run()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>batch_config</span>(<span class='no'>fun</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_config</span>(<span class='no'>fun</span>, <span class='no'>path</span>, <span class='kw'>regexp</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,14 +148,14 @@ which match the regular expression will be batch processed.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An invisible character vector of the paths to the files to
-that will be processed when <code><a href='batch_run.html'>batch_run</a>()</code> is called.</p>
+that will be processed when <code><a href='batch_run.html'>batch_run()</a></code> is called.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>batch_config()</code> creates a hidden configuration file in path
 named '.batchr.rds'.</p>
 <p>The contents of the file can be read using
-<code><a href='batch_config_read.html'>batch_config_read</a>()</code>
-or updated using <code><a href='batch_reconfig_fun.html'>batch_reconfig_fun</a>()</code>.</p>
+<code><a href='batch_config_read.html'>batch_config_read()</a></code>
+or updated using <code><a href='batch_reconfig_fun.html'>batch_reconfig_fun()</a></code>.</p>
 <p>Configuration is only possible if the directory does not already contain
 a configuration file.
 If <code>recurse = TRUE</code> then the subdirectories
@@ -165,7 +165,7 @@ or if <code>recurse = TRUE</code> in the directory or subdirectories.
 Hidden files are excluded to prevent accidental modification of system files.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process</a>()</code> and <code><a href='batch_run.html'>batch_run</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process()</a></code> and <code><a href='batch_run.html'>batch_run()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -183,7 +183,7 @@ Hidden files are excluded to prevent accidental modification of system files.</p
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley.</p>
+  <p>Developed by Joe Thorley, Poisson Consulting.</p>
 </div>
 
 <div class="pkgdown">
