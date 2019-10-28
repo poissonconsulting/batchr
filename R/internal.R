@@ -17,11 +17,6 @@ report_files <- function(status) {
   lapply(status, report_file)
 }
 
-col_green0 <- function(x) {
-  if(x == 0) col_green(x)
-  col_red(x)
-}
-
 report_types <- function(status) {
   status$type <- factor(status$type, levels = c("SUCCESS", "FAILURE", "REMAING"))
 
