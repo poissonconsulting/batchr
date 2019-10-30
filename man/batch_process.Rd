@@ -51,10 +51,6 @@ Performs batch processing of files in a directory using the
 and \code{\link[=batch_cleanup]{batch_cleanup()}} functions.
 For more control the user should call these three functions instead.
 }
-\details{
-\code{\link[=batch_gsub]{batch_gsub()}} provides a simple wrapper for
-batch text replacement.
-}
 \seealso{
 \code{\link[=batch_config]{batch_config()}}, \code{\link[=batch_run]{batch_run()}}
 and \code{\link[=batch_cleanup]{batch_cleanup()}}

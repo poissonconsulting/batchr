@@ -103,10 +103,6 @@ To process the files in parallel simply set
 future::plan(future::multisession)
 ```
 
-### `batch_gsub()`
-
-The `batchr` package also provides `batch_gsub()` to perform text replacement on multiple files.
-
 ## Contribution
 
 Please report any [issues](https://github.com/poissonconsulting/batchr/issues).

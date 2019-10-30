@@ -5,9 +5,6 @@
 #' and [batch_cleanup()] functions.
 #' For more control the user should call these three functions instead.
 #'
-#' [batch_gsub()] provides a simple wrapper for
-#' batch text replacement.
-#'
 #' @inheritParams batch_config
 #' @inheritParams batch_run
 #' @inheritParams batch_cleanup
