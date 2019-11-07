@@ -22,7 +22,7 @@ report_types <- function(status) {
 
   table <- table(status$type)
   table <- as.data.frame(table)
-  
+
   freq <- table$Freq
 
   tabs <- "\t\t\t\t\t\t\t\t\t\t\t\t"
