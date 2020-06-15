@@ -12,3 +12,4 @@
 ^pkgdown$
 ^build\.R$
 ^\.RProfile$
+^\.github$
