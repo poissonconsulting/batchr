@@ -7,14 +7,16 @@ Authors@R:
     person("Poisson Consulting", role = c("cph", "fnd")))
 Description: Batch processes files with a user-supplied R function.
 License: MIT + file LICENSE
+URL: https://poissonconsulting.github.io/batchr/
+BugReports: https://github.com/poissonconsulting/batchr/issues
 Depends: 
     R (>= 3.5),
     purrr
 Imports:
     stats,
-    chk (>= 0.0.1.9033),
+    chk,
     yesno,
-    hms (>= 0.0.2.9004),
+    hms,
     hmstimer,
     cli,
     parallel,
@@ -25,15 +27,9 @@ Suggests:
     future,
     knitr,
     rmarkdown
-Remotes: 
-    poissonconsulting/chk,
-    poissonconsulting/hmstimer,
-    r-lib/cli
-URL: https://poissonconsulting.github.io/batchr/
-BugReports: https://github.com/poissonconsulting/batchr/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1.9000
 Language: en-US
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

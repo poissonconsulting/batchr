@@ -4,9 +4,15 @@
 \alias{batch_run}
 \title{Runs Batch Processing}
 \usage{
-batch_run(path, failed = FALSE, progress = FALSE, files = NULL,
-  seeds = NULL, options = furrr::future_options(),
-  ask = getOption("batchr.ask", TRUE))
+batch_run(
+  path,
+  failed = FALSE,
+  progress = FALSE,
+  files = NULL,
+  seeds = NULL,
+  options = furrr::future_options(),
+  ask = getOption("batchr.ask", TRUE)
+)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

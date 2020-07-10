@@ -4,8 +4,13 @@
 \alias{batch_cleanup}
 \title{Cleanup Batch Processing}
 \usage{
-batch_cleanup(path, force = FALSE, remaining = FALSE, failed = NA,
-  recursive = FALSE)
+batch_cleanup(
+  path,
+  force = FALSE,
+  remaining = FALSE,
+  failed = NA,
+  recursive = FALSE
+)
 }
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}

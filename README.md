@@ -7,10 +7,8 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis build
-status](https://travis-ci.com/poissonconsulting/batchr.svg?branch=master)](https://travis-ci.com/poissonconsulting/batchr)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/batchr?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/batchr)
+[![R build
+status](https://github.com/poissonconsulting/batchr/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/batchr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/poissonconsulting/batchr/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/batchr?branch=master)
 [![License:
@@ -85,9 +83,8 @@ files.
 library(batchr)
 #> Loading required package: purrr
 batch_process(fun, path, ask = FALSE)
-#> ✔ file1.csv [00:00:00.002]
-#> ✔ file2.csv [00:00:00.004]
-#> 
+#> ✓ file1.csv [00:00:00.002]
+#> ✓ file2.csv [00:00:00.004]
 #> Success: 2
 #> Failure: 0
 #> Remaining: 0
@@ -114,12 +111,10 @@ vignette.
 
 To process the files in parallel simply set
 
-    future::plan(future::multisession)
-
-### `batch_gsub()`
-
-The `batchr` package also provides `batch_gsub()` to perform text
-replacement on multiple files.
+``` r
+library(future)
+plan(multisession)
+```
 
 ## Contribution
 
@@ -129,7 +124,9 @@ Please report any
 [Pull requests](https://github.com/poissonconsulting/batchr/pulls) are
 always welcome.
 
-Please note that the ‘batchr’ project is released with a [Contributor
-Code of
-Conduct](https://poissonconsulting.github.io/batchr/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms
+## Code of Conduct
+
+Please note that the batchr project is released with a [Contributor Code
+of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.

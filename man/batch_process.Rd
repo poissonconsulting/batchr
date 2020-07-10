@@ -4,10 +4,19 @@
 \alias{batch_process}
 \title{Batch File Processing}
 \usage{
-batch_process(fun, path, regexp = ".*", recurse = FALSE,
-  progress = FALSE, force = TRUE, report = TRUE, seeds = NULL,
-  options = furrr::future_options(), ask = getOption("batchr.ask",
-  TRUE), ...)
+batch_process(
+  fun,
+  path,
+  regexp = ".*",
+  recurse = FALSE,
+  progress = FALSE,
+  force = TRUE,
+  report = TRUE,
+  seeds = NULL,
+  options = furrr::future_options(),
+  ask = getOption("batchr.ask", TRUE),
+  ...
+)
 }
 \arguments{
 \item{fun}{A function to process each of the files.

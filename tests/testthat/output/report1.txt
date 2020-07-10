@@ -1,7 +1,11 @@
 > batch_report(path)
 Message: [33m![39m file1.csv
-Message: 
+
 Message: Success: 0
+
 Message: Failure: 0
+
 Message: Remaining: 1
+
 Message: 
+

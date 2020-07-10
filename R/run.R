@@ -46,7 +46,7 @@ batch_run <- function(path,
   chk_flag(ask)
   if (!is.null(files)) {
     chk_s3_class(files, "character")
-    chk_no_missing(files)
+    chk_not_any_na(files)
     chk_unique(files)
   }
   if(!is.null(seeds)) {

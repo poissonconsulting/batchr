@@ -98,8 +98,9 @@ For a more realistic demonstration with finer control over the batch processing 
 
 To process the files in parallel simply set
 
-```
-future::plan(future::multisession)
+```{r, eval=FALSE}
+library(future)
+plan(multisession)
 ```
 
 ## Contribution
