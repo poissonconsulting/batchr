@@ -38,12 +38,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/batchr.html">Get started</a>
 </li>
 <li>
@@ -67,7 +61,8 @@
 
       
 
-      </header><div class="row">
+      </header><script src="batchr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="batchr_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="batchr_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get Started with batchr</h1>
@@ -82,40 +77,37 @@
     
 <p>Consider a temporary directory with four txt files</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"demo"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span>(<span class="kw">path</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span>(<span class="kw">path</span>)
+<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"demo"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw">path</span>, <span class="st">"file.txt"</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file2.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw">path</span>, <span class="st">"file2.txt"</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file3.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw">path</span>, <span class="st">"file3.txt"</span>))
-<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="st">"the contents of file4.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw">path</span>, <span class="st">"file4.txt"</span>))
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="st">"the contents of file.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file.txt"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="st">"the contents of file2.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file2.txt"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="st">"the contents of file3.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file3.txt"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="st">"the contents of file4.txt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file4.txt"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>and a function that will successfully process the first two files (in this case rewriting their contents) but fail for the last two by returning FALSE and throwing an error, respectively.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">fun</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">file</span>) {
-  <span class="co">if</span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"file3[.]txt$"</span>, <span class="kw">file</span>)) <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">FALSE</span>)
-  <span class="co">if</span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"file4[.]txt$"</span>, <span class="kw">file</span>)) <span class="fu"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"Uh, Houston, we've had a problem."</span>, call. = <span class="fl">FALSE</span>)
-  <span class="kw">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="kw">file</span>)
-  <span class="kw">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"contents"</span>, <span class="st">"modified contents"</span>, <span class="kw">txt</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="kw">txt</span>, <span class="kw">file</span>)
-}
-</pre></div>
+<span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"file3[.]txt$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span>
+  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"file4[.]txt$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Uh, Houston, we've had a problem."</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+  <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
+  <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"contents"</span>, <span class="st">"modified contents"</span>, <span class="va">txt</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="va">txt</span>, <span class="va">file</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <div id="configure" class="section level2">
 <h2 class="hasAnchor">
 <a href="#configure" class="anchor"></a>Configure</h2>
 <p>Now let the user configure the directory to only process files names that include a digit before the file extension.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://poissonconsulting.github.io/batchr">batchr</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/batchr/">batchr</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: purrr</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/batch_config.html">batch_config</a></span>(<span class="kw">fun</span>, path = <span class="kw">path</span>, regexp = <span class="st">"file\\d[.]txt$"</span>))
-<span class="co">#&gt; [1] "file2.txt" "file3.txt" "file4.txt"</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/batch_config.html">batch_config</a></span><span class="op">(</span><span class="va">fun</span>, path <span class="op">=</span> <span class="va">path</span>, regexp <span class="op">=</span> <span class="st">"file\\d[.]txt$"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "file2.txt" "file3.txt" "file4.txt"</span></pre></div>
 <p>The contents of the hidden figuration file are as follows</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span>(<span class="kw">path</span>)
+<span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; $time</span>
-<span class="co">#&gt; [1] "2020-06-15 22:48:47 UTC"</span>
+<span class="co">#&gt; [1] "2020-11-02 01:26:01 UTC"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $regexp</span>
 <span class="co">#&gt; [1] "file\\d[.]txt$"</span>
@@ -133,8 +125,7 @@
 <span class="co">#&gt; }</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $dots</span>
-<span class="co">#&gt; list()</span>
-</pre></div>
+<span class="co">#&gt; list()</span></pre></div>
 <p>The <code>time</code> value specifies the system time (in UTC) that the project was configured. It is very important because only files that were last modified <em>before</em> the configuration time are considered to be unprocessed (when a file is successfully processed its modification time is automatically set to the current system time).</p>
 </div>
 <div id="run" class="section level2">
@@ -142,99 +133,89 @@
 <a href="#run" class="anchor"></a>Run</h2>
 <p>With the directory configured the next task is to start processing the files</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/batch_run.html">batch_run</a></span>(<span class="kw">path</span>, ask = <span class="fl">FALSE</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; file2.txt file3.txt file4.txt </span>
-<span class="co">#&gt;      TRUE     FALSE     FALSE</span>
-</pre></div>
+<span class="co">#&gt;      TRUE     FALSE     FALSE</span></pre></div>
 <p>From the output we can see that ‘file2.csv’ was processed successfully but processing of the other two files that matched regexp failed. The output is also recorded in a hidden log file that can be read using <code><a href="../reference/batch_log_read.html">batch_log_read()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_log_read.html">batch_log_read</a></span>(<span class="kw">path</span>)
+<span class="fu"><a href="../reference/batch_log_read.html">batch_log_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt;      type         time      file                           message</span>
-<span class="co">#&gt; 1 SUCCESS 00:00:00.006 file2.txt                              &lt;NA&gt;</span>
+<span class="co">#&gt; 1 SUCCESS 00:00:00.001 file2.txt                              &lt;NA&gt;</span>
 <span class="co">#&gt; 2 FAILURE 00:00:00.007 file3.txt                              &lt;NA&gt;</span>
-<span class="co">#&gt; 3 FAILURE 00:00:00.001 file4.txt Uh, Houston, we've had a problem.</span>
-</pre></div>
+<span class="co">#&gt; 3 FAILURE 00:00:00.001 file4.txt Uh, Houston, we've had a problem.</span></pre></div>
 <p>or summarised using</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_report.html">batch_report</a></span>(<span class="kw">path</span>)
-<span class="co">#&gt; ✔ file2.txt [00:00:00.006]</span>
+<span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
+<span class="co">#&gt; ✔ file2.txt [00:00:00.001]</span>
 <span class="co">#&gt; ✖ file3.txt [00:00:00.007]</span>
 <span class="co">#&gt; ✖ file4.txt [00:00:00.001]</span>
 <span class="co">#&gt; Success: 1</span>
 <span class="co">#&gt; Failure: 2</span>
 <span class="co">#&gt; Remaining: 0</span>
-<span class="co">#&gt; </span>
-</pre></div>
+<span class="co">#&gt; </span></pre></div>
 <p>The contents of ‘file2.csv’ are now as follows</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw">path</span>, <span class="st">"file2.txt"</span>))
-<span class="co">#&gt; [1] "the modified contents of file2.txt"</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file2.txt"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "the modified contents of file2.txt"</span></pre></div>
 </div>
 <div id="reconfigure" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reconfigure" class="anchor"></a>Reconfigure</h2>
 <p>At this point let us update the function and regular expression so that all files are included and successfully processed.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_reconfig_fileset.html">batch_reconfig_fileset</a></span>(<span class="kw">path</span>, regexp = <span class="st">"[.]txt$"</span>)
+<span class="fu"><a href="../reference/batch_reconfig_fileset.html">batch_reconfig_fileset</a></span><span class="op">(</span><span class="va">path</span>, regexp <span class="op">=</span> <span class="st">"[.]txt$"</span><span class="op">)</span>
 
-<span class="kw">fun</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">file</span>) {
-  <span class="kw">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span>(<span class="kw">file</span>)
-  <span class="kw">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"contents"</span>, <span class="st">"modified contents"</span>, <span class="kw">txt</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span>(<span class="kw">txt</span>, <span class="kw">file</span>)
-}
+<span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
+  <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"contents"</span>, <span class="st">"modified contents"</span>, <span class="va">txt</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="va">txt</span>, <span class="va">file</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="fu"><a href="../reference/batch_reconfig_fun.html">batch_reconfig_fun</a></span>(<span class="kw">path</span>, <span class="kw">fun</span>)
-</pre></div>
+<span class="fu"><a href="../reference/batch_reconfig_fun.html">batch_reconfig_fun</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">fun</span><span class="op">)</span></pre></div>
 </div>
 <div id="rerun" class="section level2">
 <h2 class="hasAnchor">
 <a href="#rerun" class="anchor"></a>Rerun</h2>
 <p>Now when we call <code><a href="../reference/batch_run.html">batch_run()</a></code> the newly included ‘file.txt’ is successfully processed.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_run.html">batch_run</a></span>(<span class="kw">path</span>, ask = <span class="fl">FALSE</span>)
-</pre></div>
+<span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_report.html">batch_report</a></span>(<span class="kw">path</span>)
-<span class="co">#&gt; ✔ file.txt [00:00:00.006]</span>
-<span class="co">#&gt; ✔ file2.txt [00:00:00.006]</span>
+<span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
+<span class="co">#&gt; ✔ file.txt [00:00:00.001]</span>
+<span class="co">#&gt; ✔ file2.txt [00:00:00.001]</span>
 <span class="co">#&gt; ✖ file3.txt [00:00:00.007]</span>
 <span class="co">#&gt; ✖ file4.txt [00:00:00.001]</span>
 <span class="co">#&gt; Success: 2</span>
 <span class="co">#&gt; Failure: 2</span>
 <span class="co">#&gt; Remaining: 0</span>
-<span class="co">#&gt; </span>
-</pre></div>
+<span class="co">#&gt; </span></pre></div>
 <p>In order to reattempt processing of the ‘file3.txt’ and ‘file4.txt’ we need to set <code>failed = TRUE</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_run.html">batch_run</a></span>(<span class="kw">path</span>, failed = <span class="fl">TRUE</span>, ask = <span class="fl">FALSE</span>)
-</pre></div>
+<span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, failed <span class="op">=</span> <span class="cn">TRUE</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="fu"><a href="../reference/batch_report.html">batch_report</a></span>(<span class="kw">path</span>)
-<span class="co">#&gt; ✔ file.txt [00:00:00.006]</span>
-<span class="co">#&gt; ✔ file2.txt [00:00:00.006]</span>
-<span class="co">#&gt; ✔ file3.txt [00:00:00.006]</span>
-<span class="co">#&gt; ✔ file4.txt [00:00:00.009]</span>
+<span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
+<span class="co">#&gt; ✔ file.txt [00:00:00.001]</span>
+<span class="co">#&gt; ✔ file2.txt [00:00:00.001]</span>
+<span class="co">#&gt; ✔ file3.txt [00:00:00.001]</span>
+<span class="co">#&gt; ✔ file4.txt [00:00:00.003]</span>
 <span class="co">#&gt; Success: 4</span>
 <span class="co">#&gt; Failure: 0</span>
 <span class="co">#&gt; Remaining: 0</span>
-<span class="co">#&gt; </span>
-</pre></div>
+<span class="co">#&gt; </span></pre></div>
 </div>
 <div id="clean-up" class="section level2">
 <h2 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean Up</h2>
 <p>With all the files successfully processed the only remaining task is to delete the hidden configuration and log files.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw">path</span>, all.files = <span class="fl">TRUE</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">path</span>, all.files <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; [1] "."           ".."          ".batchr.log" ".batchr.rds" "file.txt"   </span>
 <span class="co">#&gt; [6] "file2.txt"   "file3.txt"   "file4.txt"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/batch_cleanup.html">batch_cleanup</a></span>(<span class="kw">path</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/batch_cleanup.html">batch_cleanup</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;    . </span>
 <span class="co">#&gt; TRUE</span>
-<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw">path</span>, all.files = <span class="fl">TRUE</span>)
-<span class="co">#&gt; [1] "."         ".."        "file.txt"  "file2.txt" "file3.txt" "file4.txt"</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">path</span>, all.files <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] "."         ".."        "file.txt"  "file2.txt" "file3.txt" "file4.txt"</span></pre></div>
 </div>
   </div>
 
@@ -253,7 +234,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

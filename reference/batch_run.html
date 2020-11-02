@@ -80,12 +80,6 @@ specified by batch_config()." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/batchr.html">Get started</a>
 </li>
 <li>
@@ -119,12 +113,18 @@ specified by batch_config()." />
 
     <div class="ref-description">
     <p>Starts (or restarts if previously stopped) processing the remaining files
-specified by <code><a href='https://rdrr.io/pkg/batchr/man/batch_config.html'>batch_config()</a></code>.</p>
+specified by <code><a href='batch_config.html'>batch_config()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run</a></span>(<span class='kw'>path</span>, failed = <span class='fl'>FALSE</span>, progress = <span class='fl'>FALSE</span>, files = <span class='kw'>NULL</span>,
-  seeds = <span class='kw'>NULL</span>, options = <span class='kw'>furrr</span>::<span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_options.html'>future_options</a></span>(),
-  ask = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>, <span class='fl'>TRUE</span>))</pre>
+    <pre class="usage"><span class='fu'>batch_run</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  failed <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  progress <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  files <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seeds <span class='op'>=</span> <span class='cn'>NULL</span>,
+  options <span class='op'>=</span> <span class='fu'>furrr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/furrr_options.html'>furrr_options</a></span><span class='op'>(</span><span class='op'>)</span>,
+  ask <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"batchr.ask"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,12 +146,12 @@ are excluded, if NA they are included and if TRUE they are only included.</p></t
     <tr>
       <th>files</th>
       <td><p>A character vector of the remaining files to process.
-If <code>NULL</code> then <code>files</code> is <code><a href='https://rdrr.io/pkg/batchr/man/batch_files_remaining.html'>batch_files_remaining(path, failed)</a></code>.</p></td>
+If <code>NULL</code> then <code>files</code> is <code><a href='batch_files_remaining.html'>batch_files_remaining(path, failed)</a></code>.</p></td>
     </tr>
     <tr>
       <th>seeds</th>
       <td><p>A named list of the L'Ecuyer-CMRG seed to use for each
-file. If <code>NULL</code> then <code>seeds</code> is <code><a href='https://rdrr.io/pkg/batchr/man/batch_seeds.html'>batch_seeds(files)</a></code>.</p></td>
+file. If <code>NULL</code> then <code>seeds</code> is <code><a href='batch_seeds.html'>batch_seeds(files)</a></code>.</p></td>
     </tr>
     <tr>
       <th>options</th>
@@ -170,20 +170,20 @@ seed must be <code>FALSE</code>.</p></td>
 whether it was successfully processed.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run()</a></code> logs all file processing attempts together with the
+    <p><code>batch_run()</code> logs all file processing attempts together with the
 the type (SUCCESS or FAILURE), the
 system time in UTC, the file name and any error messages.
-The hidden log file can be read using <code><a href='https://rdrr.io/pkg/batchr/man/batch_log_read.html'>batch_log_read()</a></code>.</p>
-<p><code><a href='https://rdrr.io/pkg/batchr/man/batch_files_remaining.html'>batch_files_remaining()</a></code> provides a vector of the files that
+The hidden log file can be read using <code><a href='batch_log_read.html'>batch_log_read()</a></code>.</p>
+<p><code><a href='batch_files_remaining.html'>batch_files_remaining()</a></code> provides a vector of the files that
 are remaining to be processed.</p>
 <p>When processing is complete the hidden configuration file
-and hidden log file can be deleted using <code><a href='https://rdrr.io/pkg/batchr/man/batch_cleanup.html'>batch_cleanup()</a></code>.</p>
+and hidden log file can be deleted using <code><a href='batch_cleanup.html'>batch_cleanup()</a></code>.</p>
 <p>If a remaining file is removed or modified by a separate process,
-<code><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run()</a></code> throws an error.</p>
+<code>batch_run()</code> throws an error.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/batchr/man/batch_process.html'>batch_process()</a></code>, <code><a href='https://rdrr.io/pkg/batchr/man/batch_config.html'>batch_config()</a></code> and
-<code><a href='https://rdrr.io/pkg/batchr/man/batch_cleanup.html'>batch_cleanup()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process()</a></code>, <code><a href='batch_config.html'>batch_config()</a></code> and
+<code><a href='batch_cleanup.html'>batch_cleanup()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -200,7 +200,7 @@ and hidden log file can be deleted using <code><a href='https://rdrr.io/pkg/batc
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

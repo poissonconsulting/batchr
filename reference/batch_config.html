@@ -79,12 +79,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/batchr.html">Get started</a>
 </li>
 <li>
@@ -117,10 +111,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Configures a directory for batch file processing by <code><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run()</a></code>.</p>
+    <p>Configures a directory for batch file processing by <code><a href='batch_run.html'>batch_run()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/batchr/man/batch_config.html'>batch_config</a></span>(<span class='kw'>fun</span>, <span class='kw'>path</span>, regexp = <span class='st'>".*"</span>, recurse = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_config</span><span class='op'>(</span><span class='va'>fun</span>, <span class='va'>path</span>, regexp <span class='op'>=</span> <span class='st'>".*"</span>, recurse <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,14 +150,14 @@ which match the regular expression will be batch processed.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An invisible character vector of the paths to the files to
-that will be processed when <code><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run()</a></code> is called.</p>
+that will be processed when <code><a href='batch_run.html'>batch_run()</a></code> is called.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code><a href='https://rdrr.io/pkg/batchr/man/batch_config.html'>batch_config()</a></code> creates a hidden configuration file in path
+    <p><code>batch_config()</code> creates a hidden configuration file in path
 named '.batchr.rds'.</p>
 <p>The contents of the file can be read using
-<code><a href='https://rdrr.io/pkg/batchr/man/batch_config_read.html'>batch_config_read()</a></code>
-or updated using <code><a href='https://rdrr.io/pkg/batchr/man/batch_reconfig_fun.html'>batch_reconfig_fun()</a></code>.</p>
+<code><a href='batch_config_read.html'>batch_config_read()</a></code>
+or updated using <code><a href='batch_reconfig_fun.html'>batch_reconfig_fun()</a></code>.</p>
 <p>Configuration is only possible if the directory does not already contain
 a configuration file.
 If <code>recurse = TRUE</code> then the subdirectories
@@ -173,7 +167,7 @@ or if <code>recurse = TRUE</code> in the directory or subdirectories.
 Hidden files are excluded to prevent accidental modification of system files.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/batchr/man/batch_process.html'>batch_process()</a></code> and <code><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process()</a></code> and <code><a href='batch_run.html'>batch_run()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -190,7 +184,7 @@ Hidden files are excluded to prevent accidental modification of system files.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -82,12 +82,6 @@ For more control the user should call these three functions instead." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/batchr.html">Get started</a>
 </li>
 <li>
@@ -121,15 +115,24 @@ For more control the user should call these three functions instead." />
 
     <div class="ref-description">
     <p>Performs batch processing of files in a directory using the
-<code><a href='https://rdrr.io/pkg/batchr/man/batch_config.html'>batch_config()</a></code>, <code><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run()</a></code>
-and <code><a href='https://rdrr.io/pkg/batchr/man/batch_cleanup.html'>batch_cleanup()</a></code> functions.
+<code><a href='batch_config.html'>batch_config()</a></code>, <code><a href='batch_run.html'>batch_run()</a></code>
+and <code><a href='batch_cleanup.html'>batch_cleanup()</a></code> functions.
 For more control the user should call these three functions instead.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/batchr/man/batch_process.html'>batch_process</a></span>(<span class='kw'>fun</span>, <span class='kw'>path</span>, regexp = <span class='st'>".*"</span>, recurse = <span class='fl'>FALSE</span>,
-  progress = <span class='fl'>FALSE</span>, force = <span class='fl'>TRUE</span>, report = <span class='fl'>TRUE</span>, seeds = <span class='kw'>NULL</span>,
-  options = <span class='kw'>furrr</span>::<span class='fu'><a href='https://rdrr.io/pkg/furrr/man/future_options.html'>future_options</a></span>(), ask = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"batchr.ask"</span>,
-  <span class='fl'>TRUE</span>), <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>batch_process</span><span class='op'>(</span>
+  <span class='va'>fun</span>,
+  <span class='va'>path</span>,
+  regexp <span class='op'>=</span> <span class='st'>".*"</span>,
+  recurse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  progress <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  force <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  report <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  seeds <span class='op'>=</span> <span class='cn'>NULL</span>,
+  options <span class='op'>=</span> <span class='fu'>furrr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/furrr/man/furrr_options.html'>furrr_options</a></span><span class='op'>(</span><span class='op'>)</span>,
+  ask <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"batchr.ask"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +175,7 @@ log files even if there are files remaining to be processed.</p></td>
     <tr>
       <th>seeds</th>
       <td><p>A named list of the L'Ecuyer-CMRG seed to use for each
-file. If <code>NULL</code> then <code>seeds</code> is <code><a href='https://rdrr.io/pkg/batchr/man/batch_seeds.html'>batch_seeds(files)</a></code>.</p></td>
+file. If <code>NULL</code> then <code>seeds</code> is <code><a href='batch_seeds.html'>batch_seeds(files)</a></code>.</p></td>
     </tr>
     <tr>
       <th>options</th>
@@ -195,8 +198,8 @@ seed must be <code>FALSE</code>.</p></td>
 successfully processed.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/batchr/man/batch_config.html'>batch_config()</a></code>, <code><a href='https://rdrr.io/pkg/batchr/man/batch_run.html'>batch_run()</a></code>
-and <code><a href='https://rdrr.io/pkg/batchr/man/batch_cleanup.html'>batch_cleanup()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='batch_config.html'>batch_config()</a></code>, <code><a href='batch_run.html'>batch_run()</a></code>
+and <code><a href='batch_cleanup.html'>batch_cleanup()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -213,7 +216,7 @@ and <code><a href='https://rdrr.io/pkg/batchr/man/batch_cleanup.html'>batch_clea
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
