@@ -10,7 +10,7 @@ batch_run(
   progress = FALSE,
   files = NULL,
   seeds = NULL,
-  options = furrr::future_options(),
+  options = furrr::furrr_options(),
   ask = getOption("batchr.ask", TRUE)
 )
 }

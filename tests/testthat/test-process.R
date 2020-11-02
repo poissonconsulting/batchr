@@ -27,7 +27,7 @@ test_that("batch_process with options(seed = TRUE)", {
 
   expect_error(
     batch_process(function(x) TRUE,
-      path = path, options = furrr::future_options(seed = TRUE)
+      path = path, options = furrr::furrr_options(seed = TRUE)
     ),
     "^`options[$]seed` must be FALSE[.]$",
     class = "chk_error"

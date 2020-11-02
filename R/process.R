@@ -18,7 +18,7 @@
 batch_process <- function(fun, path, regexp = ".*", recurse = FALSE,
                           progress = FALSE, force = TRUE, report = TRUE,
                           seeds = NULL,
-                          options = furrr::future_options(),
+                          options = furrr::furrr_options(),
                           ask = getOption("batchr.ask", TRUE),
                           ...) {
   chk_flag(report)

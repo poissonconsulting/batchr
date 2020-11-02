@@ -38,7 +38,7 @@ batch_run <- function(path,
                       failed = FALSE, progress = FALSE,
                       files = NULL,
                       seeds = NULL,
-                      options = furrr::future_options(),
+                      options = furrr::furrr_options(),
                       ask = getOption("batchr.ask", TRUE)) {
   chk_dir(path)
   chk_lgl(failed)
@@ -54,7 +54,7 @@ batch_run <- function(path,
     chk_named(seeds)
     chk_unique(names(seeds))
   }
-  chk_s3_class(options, "future_options")
+  chk_s3_class(options, "furrr_options")
   chk_false(options$seed)
 
   config <- batch_config_read(path)
