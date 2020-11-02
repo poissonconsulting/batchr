@@ -7,8 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![R build
-status](https://github.com/poissonconsulting/batchr/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/batchr/actions)
+[![R-CMD-check](https://github.com/poissonconsulting/batchr/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/batchr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/poissonconsulting/batchr/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/batchr?branch=master)
 [![License:
@@ -41,15 +40,6 @@ You can install the latest development version of batchr from
 ``` r
 # install.packages("remotes")
 remotes::install_github("poissonconsulting/batchr")
-```
-
-To install the latest developmental release from the Poisson drat
-[repository](https://github.com/poissonconsulting/drat)
-
-``` r
-# install.packages("drat")
-drat::addRepo("poissonconsulting")
-install.packages("batchr")
 ```
 
 ## Demonstration

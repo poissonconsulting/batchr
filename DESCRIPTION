@@ -10,7 +10,7 @@ License: MIT + file LICENSE
 URL: https://poissonconsulting.github.io/batchr/
 BugReports: https://github.com/poissonconsulting/batchr/issues
 Depends: 
-    R (>= 3.5),
+    R (>= 3.6),
     purrr
 Imports:
     stats,
