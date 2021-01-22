@@ -6,7 +6,8 @@
 \alias{batchr-package}
 \title{batchr: Batch Process Files}
 \description{
-Batch processes files with a user-supplied R function.
+Batch processes files with a user-supplied R
+    function.
 }
 \seealso{
 Useful links:
