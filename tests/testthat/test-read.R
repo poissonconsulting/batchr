@@ -19,14 +19,12 @@ test_that("batch_config_read", {
   expect_identical(attr(config$time, "tzone"), "UTC")
   config$time <- NULL
 
-  expect_equal(
-    config,
-    list(
-      regexp = "^file\\d[.]csv$", recurse = FALSE,
-      fun = function(x)
-        TRUE, dots = list()
-    )
-  )
+  expect_identical(names(config), c("regexp", "recurse", "fun", "dots"))
+  expect_identical(config$regexp, "^file\\d[.]csv$")
+  expect_identical(config$recurse, FALSE)
+  expect_is(config$fun, "function")
+  expect_identical(config$fun(FALSE), TRUE)
+  expect_identical(config$dots, list())
 })
 
 test_that("batch_config_read with no configuration", {
