@@ -47,7 +47,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/poissonconsulting/batchr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -80,32 +80,32 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the latest development version of batchr from <a href="https://github.com/poissonconsulting/batchr">GitHub</a> with</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"poissonconsulting/batchr"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"poissonconsulting/batchr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="demonstration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#demonstration" class="anchor"></a>Demonstration</h2>
 <p>Consider a directory with two .csv files</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"example"</span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"example"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">path</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file1.csv"</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file2.csv"</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file2.csv"</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>First define the function to process them.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">{</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
   <span class="va">data</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">x</span> <span class="op">*</span> <span class="fl">2</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">file</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
   <span class="cn">TRUE</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>Then simply call <code><a href="reference/batch_process.html">batch_process()</a></code> to apply the function to all the files.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/batchr/">batchr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/batchr/">batchr</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: purrr</span>
 <span class="fu"><a href="reference/batch_process.html">batch_process</a></span><span class="op">(</span><span class="va">fun</span>, <span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; ✓ file1.csv [00:00:00.002]</span>
@@ -113,23 +113,23 @@
 <span class="co">#&gt; Success: 2</span>
 <span class="co">#&gt; Failure: 0</span>
 <span class="co">#&gt; Remaining: 0</span>
-<span class="co">#&gt; </span></pre></div>
+<span class="co">#&gt; </span></code></pre></div>
 <p>The files have been updated as follows.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file1.csv"</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file1.csv"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   x</span>
 <span class="co">#&gt; 1 2</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file2.csv"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   x</span>
-<span class="co">#&gt; 1 6</span></pre></div>
+<span class="co">#&gt; 1 6</span></code></pre></div>
 <p>For a more realistic demonstration with finer control over the batch processing see the <a href="https://poissonconsulting.github.io/batchr/articles/batchr.html">Batchr Demonstration</a> vignette.</p>
 <div id="parallel-chains" class="section level3">
 <h3 class="hasAnchor">
 <a href="#parallel-chains" class="anchor"></a>Parallel Chains</h3>
 <p>To process the files in parallel simply set</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/future">future</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HenrikBengtsson/future">future</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="contribution" class="section level2">
