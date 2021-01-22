@@ -356,8 +356,7 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   log <- batch_log_read(path)
   expect_identical(colnames(log), c("type", "time", "file", "message"))
   expect_s3_class(log$time, c("hms", "difftime"))
-  expect_identical(as.numeric(round(log$time, 1)),
-    c(0, 0.5))
+  expect_lt(log$time[1], log$time[2])
 
   expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c(
     "file1.csv",
