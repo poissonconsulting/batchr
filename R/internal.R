@@ -25,11 +25,10 @@ report_types <- function(status) {
 
   freq <- table$Freq
 
-  tabs <- "\t\t\t\t\t\t\t\t\t\t\t\t"
   cli_par()
-  cli_text(col_white("Success:", tabs), col_green(freq[1]))
-  cli_text(col_white("Failure:", tabs), if(freq[2] == 0) col_green(freq[2]) else col_red(freq[2]))
-  cli_text(col_white("Remaining:", tabs), if(freq[3] == 0) col_green(freq[3]) else col_red(freq[3]))
+  cli_text(col_white("Success: "), col_green(freq[1]))
+  cli_text(col_white("Failure: "), if(freq[2] == 0) col_green(freq[2]) else col_red(freq[2]))
+  cli_text(col_white("Remaining: "), if(freq[3] == 0) col_green(freq[3]) else col_red(freq[3]))
 }
 
 save_config <- function(path, regexp, recurse, fun, dots, time = sys_time_utc()) {
