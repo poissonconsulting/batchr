@@ -74,6 +74,7 @@ test_that("batch_cleanup force remaining", {
     ),
     "file1.csv"
   )
+  expect_identical(list.files(path), "file1.csv")
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
   expect_identical(batch_cleanup(path), c(. = FALSE))
   expect_identical(batch_cleanup(path, force = TRUE, remaining = TRUE), c(. = TRUE))
