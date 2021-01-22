@@ -71,7 +71,7 @@ batch_run <- function(path,
 
   if (!is.null(files)) {
     if (!length(files)) {
-      return(structure(logical(0), .Names = character(0)))
+      return(invisible(.named_logical0))
     }
     unknown <- setdiff(files, remaining)
     if (length(unknown)) {
@@ -84,7 +84,7 @@ batch_run <- function(path,
   }
 
   if (!length(remaining)) {
-    return(structure(logical(0), .Names = character(0)))
+    return(invisible(.named_logical0))
   }
 
   if(is.null(seeds)) {

@@ -33,7 +33,7 @@ batch_cleanup <- function(path, force = FALSE,
 
   files <- config_files(path, recursive = recursive)
   if (!length(files)) {
-    return(structure(logical(0), .Names = character(0)))
+    return(invisible(.named_logical0))
   }
   files <- dirname(files)
   paths <- file.path(path, files)
