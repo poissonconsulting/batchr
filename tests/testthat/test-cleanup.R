@@ -1,11 +1,7 @@
 context("cleanup")
 
 test_that("batch_cleanup", {
-  teardown(unlink(file.path(tempdir(), "batchr_start")))
-
-  path <- file.path(tempdir(), "batchr_start")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -27,11 +23,7 @@ test_that("batch_cleanup", {
 })
 
 test_that("batch_cleanup with all failed", {
-  teardown(unlink(file.path(tempdir(), "batchr_start")))
-
-  path <- file.path(tempdir(), "batchr_start")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -65,11 +57,7 @@ test_that("batch_cleanup with all failed", {
 })
 
 test_that("batch_cleanup force remaining", {
-  teardown(unlink(file.path(tempdir(), "batchr_start")))
-
-  path <- file.path(tempdir(), "batchr_start")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
