@@ -1,0 +1,11 @@
+> batch_report(path)
+Message: [32m✓[39m file1.csv [00:00:00.000]
+
+Message: Success: 1
+
+Message: Failure: 0
+
+Message: Remaining: 0
+
+Message: 
+
