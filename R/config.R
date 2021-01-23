@@ -58,6 +58,7 @@ batch_config <- function(fun, path, regexp = ".*", recurse = FALSE, ...) {
   }
   dots <- list(...)
   cleanup_log_file(path)
-  save_config(path, regexp, recurse, fun = fun, dots = dots)
+  save_config(path, regexp, recurse, fun = fun, dots = dots, time = 
+                sys_time_utc() + 1e-05) # 1e-05 required to ensure time check
   invisible(files)
 }

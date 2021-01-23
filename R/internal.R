@@ -31,7 +31,7 @@ report_types <- function(status) {
   cli_text(col_white("Remaining: "), if(freq[3] == 0) col_green(freq[3]) else col_red(freq[3]))
 }
 
-save_config <- function(path, regexp, recurse, fun, dots, time = sys_time_utc()) {
+save_config <- function(path, regexp, recurse, fun, dots, time) {
   args <- list(
     time = time, regexp = regexp,
     recurse = recurse, fun = fun,
