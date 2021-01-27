@@ -56,8 +56,7 @@ test_that("batch_config with non-function", {
 
 test_that("batch_config recurse", {
   path <- withr::local_tempdir()
-  sub <- file.path(path, "batchr_sub")
-  dir.create(sub, recursive = TRUE)
+  sub <- withr::local_tempdir(tmpdir = path)
 
   write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
@@ -70,7 +69,7 @@ test_that("batch_config recurse", {
       path = path, regexp = "^file\\d[.]csv$",
       recurse = TRUE
     ),
-    "batchr_sub/file3.csv"
+    file.path(basename(sub), "file3.csv")
   )
 })
 
