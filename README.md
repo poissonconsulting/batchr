@@ -21,14 +21,11 @@ status](https://www.r-pkg.org/badges/version/batchr)](https://CRAN.R-project.org
 The key design principle is that only files which were last modified
 *before* the directory was configured are processed. A hidden file
 stores the configuration time and function etc while successfully
-processed files are automatically ‘touched’ to update their modification
+processed files are automatically touched to update their modification
 date.
 
-As a result:
-
-  - Batch processing can be stopped and restarted.
-  - Any files created (or modified or deleted) during processing are
-    ignored.
+As a result batch processing can be stopped and restarted and any files
+created (or modified or deleted) during processing are ignored.
 
 To allow the user control over the reprocessing of problematic files,
 all processing attempts (SUCCESS or FAILURE) are recorded in a hidden
