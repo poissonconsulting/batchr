@@ -219,19 +219,19 @@ test_that("batch_run seed", {
   )
   
   expect_identical(
-    batch_log_read(path)$message,
-    c("0.637362094961879", "0.889581146657672", "0.637362094961879",
+    sort(batch_log_read(path)$message),
+    sort(c("0.637362094961879", "0.889581146657672", "0.637362094961879",
       "0.889581146657672", "0.173519151073877", "0.23328331823529",
       "0.380833446097876", "0.409872261167837", "0.637362094961879",
-      "0.889581146657672", "0.173519151073877", "0.23328331823529"))
+      "0.889581146657672", "0.173519151073877", "0.23328331823529")))
   
   expect_identical(
-    batch_log_read(path)$file,
-    c(
+    sort(batch_log_read(path)$file),
+    sort(c(
       "file1.csv", "file2.csv", "file1.csv", "file2.csv", "file1.csv",
       "file2.csv", "file1.csv", "file2.csv", "file1.csv", "file2.csv",
       "file1.csv", "file2.csv"
-    )
+    ))
   )
 })
 
