@@ -1,11 +1,7 @@
 context("process")
 
 test_that("batch_process", {
-  teardown(unlink(file.path(tempdir(), "batchr_process")))
-
-  path <- file.path(tempdir(), "batchr_process")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -17,11 +13,7 @@ test_that("batch_process", {
 })
 
 test_that("batch_process with options(seed = TRUE)", {
-  teardown(unlink(file.path(tempdir(), "batchr_process")))
-
-  path <- file.path(tempdir(), "batchr_process")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -36,11 +28,7 @@ test_that("batch_process with options(seed = TRUE)", {
 
 
 test_that("batch_process changes files", {
-  teardown(unlink(file.path(tempdir(), "batchr_process")))
-
-  path <- file.path(tempdir(), "batchr_process")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
@@ -66,11 +54,7 @@ test_that("batch_process changes files", {
 })
 
 test_that("batch_process with failure FALSE", {
-  teardown(unlink(file.path(tempdir(), "batchr_process")))
-
-  path <- file.path(tempdir(), "batchr_process")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
@@ -78,22 +62,18 @@ test_that("batch_process with failure FALSE", {
   fun <- function(file) grepl(file, "file1[.]csv$")
 
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
   expect_false(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 })
 
 test_that("batch_process with failure ERROR", {
-  teardown(unlink(file.path(tempdir(), "batchr_process")))
-
-  path <- file.path(tempdir(), "batchr_process")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
@@ -101,22 +81,18 @@ test_that("batch_process with failure ERROR", {
   fun <- function(file) stop("a problem", call. = FALSE)
 
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
   expect_false(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 })
 
 test_that("batch_process with sucess character scalar", {
-  teardown(unlink(file.path(tempdir(), "batchr_process")))
-
-  path <- file.path(tempdir(), "batchr_process")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
@@ -124,22 +100,18 @@ test_that("batch_process with sucess character scalar", {
   fun <- function(file) " it worked"
 
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
   expect_true(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 })
 
 test_that("batch_process with sucess character vector", {
-  teardown(unlink(file.path(tempdir(), "batchr_process")))
-
-  path <- file.path(tempdir(), "batchr_process")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
@@ -147,12 +119,12 @@ test_that("batch_process with sucess character vector", {
   fun <- function(file) c(" it worked", "shouldn't show")
 
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
   expect_true(batch_process(fun, path, ask = FALSE))
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr_process'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 })
