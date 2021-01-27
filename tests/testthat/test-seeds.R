@@ -41,11 +41,7 @@ test_that("batch_seeds", {
 })
 
 test_that("batch_seeds with files", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 

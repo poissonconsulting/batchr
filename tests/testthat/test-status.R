@@ -1,11 +1,7 @@
 context("status")
 
 test_that("batch_file_status all processed successfully", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -33,11 +29,7 @@ test_that("batch_file_status all processed successfully", {
 })
 
 test_that("batch_file_status all failed processing", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 

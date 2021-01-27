@@ -1,9 +1,7 @@
 context("demo")
 
 test_that("demo", {
-  path <- file.path(tempdir(), "demo", "test")
-  unlink(path, recursive = TRUE)
-  dir.create(path, showWarnings = FALSE, recursive = TRUE)
+  path <- withr::local_tempdir()
 
   writeLines("the contents of file.txt", file.path(path, "file.txt"))
   writeLines("the contents of file2.txt", file.path(path, "file2.txt"))
