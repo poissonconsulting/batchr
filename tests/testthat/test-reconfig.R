@@ -96,11 +96,7 @@ test_that("batch_reconfig_fileset update recurse with existing recursive .batchr
 })
 
 test_that("batch_reconfig_fileset update regexp", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 2), file.path(path, "file.csv"))
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
@@ -130,11 +126,7 @@ test_that("batch_reconfig_fileset update regexp", {
 })
 
 test_that("batch_reconfig_fileset update neither", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
