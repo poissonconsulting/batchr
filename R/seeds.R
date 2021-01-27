@@ -46,8 +46,8 @@ batch_seeds <- function(files = batch_files_remaining()) {
   seed <- get_lecyer_cmrg_seed()
   seeds <- vector("list", length = length(files))
   for (i in seq_len(length(files))) {
-    seeds[[i]] <- parallel::nextRNGSubStream(seed)
-    seed <- parallel::nextRNGStream(seed)
+    seeds[[i]] <- nextRNGSubStream(seed)
+    seed <- nextRNGStream(seed)
   }
   names(seeds) <- files
   seeds
