@@ -191,16 +191,12 @@ test_that("batch_run with files specified", {
 })
 
 test_that("batch_run seed", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-  
+  path <- withr::local_tempdir()
+
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
