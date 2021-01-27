@@ -148,8 +148,8 @@ test_that("batch_reconfig_fileset update recurse", {
   expect_identical(batch_files_remaining(path), "file2.csv")
 
   expect_identical(
-    batch_reconfig_fileset(path, recurse = TRUE),
-    c("file2.csv", file.path(basename(sub), "file3.csv"))
+    sort(batch_reconfig_fileset(path, recurse = TRUE)),
+    sort(c("file2.csv", file.path(basename(sub), "file3.csv")))
   )
 
   expect_identical(
