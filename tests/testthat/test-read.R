@@ -1,11 +1,7 @@
 context("read")
 
 test_that("batch_config_read", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -28,38 +24,28 @@ test_that("batch_config_read", {
 })
 
 test_that("batch_config_read with no configuration", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_error(batch_config_read(path),
-    "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 })
 
 test_that("batch_config_read with no directory", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
+  path <- withr::local_tempdir()
   unlink(path, recursive = TRUE)
 
   expect_error(batch_config_read(path),
-    "^`path` must specify an existing directory [(]'.*batchr' can't be found[)][.]$",
+    "^`path` must specify an existing directory [(]'.*' can't be found[)][.]$",
     class = "chk_error"
   )
 })
 
 test_that("batch_log_read not yet processed", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -81,11 +67,7 @@ test_that("batch_log_read not yet processed", {
 })
 
 test_that("batch_log_read all processed successfully", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -119,11 +101,7 @@ test_that("batch_log_read all processed successfully", {
 })
 
 test_that("batch_log_read 0.1 second", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -162,11 +140,7 @@ test_that("batch_log_read 0.1 second", {
 
 
 test_that("batch_log_read all failed processing", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -188,11 +162,7 @@ test_that("batch_log_read all failed processing", {
 })
 
 test_that("batch_log_read all error processing", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
@@ -216,11 +186,7 @@ test_that("batch_log_read all error processing", {
 
 
 test_that("batch_log_read one success (string) and one failure (error)", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))

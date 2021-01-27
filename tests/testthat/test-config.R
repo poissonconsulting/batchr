@@ -55,19 +55,15 @@ test_that("batch_config with non-function", {
 })
 
 test_that("batch_config recurse", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
+  path <- withr::local_tempdir()
+  sub <- file.path(path, "batchr_sub")
+  dir.create(sub, recursive = TRUE)
 
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  path <- file.path(tempdir(), "batchr", "batchr_sub")
-  dir.create(path, recursive = TRUE)
+  write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
-  write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
-
-  path <- file.path(tempdir(), "batchr")
   expect_error(
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
-    "^Directory '.*batchr' does not contain any files matching '.*'[.]$"
+    "^Directory '.*' does not contain any files matching '.*'[.]$"
   )
   expect_identical(
     batch_config(function(x) TRUE,
@@ -94,25 +90,18 @@ test_that("batch_config with existing .batchr.rds files", {
 })
 
 test_that("batch_config with existing recursive .batchr.rds files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
+  path <- withr::local_tempdir()
+  sub <- withr::local_tempdir(tmpdir = path)
 
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-
-  path <- file.path(tempdir(), "batchr", "batchr_sub")
-  dir.create(path, recursive = TRUE)
-
-  write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
+  write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
   expect_identical(
     batch_config(function(x) TRUE,
-      path = path,
+      path = sub,
       regexp = "^file\\d[.]csv$"
     ),
     "file3.csv"
   )
-
-  path <- file.path(tempdir(), "batchr")
 
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
@@ -121,7 +110,7 @@ test_that("batch_config with existing recursive .batchr.rds files", {
       path = path, recurse = TRUE,
       regexp = "^file\\d[.]csv$"
     ),
-    "^Subdirectories of '.*batchr' contain '.batchr.rds' files[.]$"
+    "^Subdirectories of '.*' contain '.batchr.rds' files[.]$"
   )
 
   expect_identical(
