@@ -91,12 +91,9 @@ test_that("batch_run parallel with registered", {
 })
 
 test_that("batch_run subdirectories with config", {
-  teardown(unlink(file.path(tempdir(), "batchr_run", "batch_sub")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-  
+  path <- withr::local_tempdir()
+  sub <- withr::local_tempdir(tmpdir = path)
+
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(
@@ -107,24 +104,19 @@ test_that("batch_run subdirectories with config", {
     "file1.csv"
   )
   
-  path <- file.path(tempdir(), "batchr_run", "batch_sub")
-  dir.create(path)
-  
-  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(sub, "file1.csv"))
   
   expect_identical(
     batch_config(function(x) TRUE,
-                 path = path,
+                 path = sub,
                  regexp = "^file\\d[.]csv$"
     ),
     "file1.csv"
   )
   
-  path <- file.path(tempdir(), "batchr_run")
-  
   expect_error(
     batch_run(path),
-    "^Subdirectories of '.*batchr_run' contain '.batchr.rds' files[.]$"
+    "^Subdirectories of '.*' contain '.batchr.rds' files[.]$"
   )
 })
 
@@ -535,15 +527,11 @@ test_that("batch_run seed as named files works", {
 })
 
 test_that("batch_run seed as named files parallel", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
+  path <- withr::local_tempdir()
   
   options(mc.cores = 2)
   future::plan(future::multisession)
   teardown(future::plan(future::sequential))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
