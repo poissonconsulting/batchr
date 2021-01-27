@@ -1,35 +1,27 @@
 context("files")
 
 test_that("batch_files_remaining errors if no configuration file", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
 
   expect_error(batch_files_remaining(path),
-    "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 })
 
 test_that("batch_files_remaining ignores later ones", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
 
   expect_error(batch_files_remaining(path),
-    "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 
@@ -80,18 +72,14 @@ test_that("batch_files_remaining ignores later ones", {
 })
 
 test_that("batch_files_remaining ignores non-matching ones", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file.csv"))
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
 
   expect_error(batch_files_remaining(path),
-    "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 
@@ -112,16 +100,12 @@ test_that("batch_files_remaining ignores non-matching ones", {
 })
 
 test_that("batch_files_remaining gets failed ones", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-
+  path <- withr::local_tempdir()
+  
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
   expect_error(batch_files_remaining(path),
-    "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 
@@ -146,17 +130,13 @@ test_that("batch_files_remaining gets failed ones", {
 })
 
 test_that("batch_files_remaining gets mix", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_error(batch_files_remaining(path),
-    "^Directory path [(]'.*batchr'[)] must contain file '.batch.rds'[.]$",
+    "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
 

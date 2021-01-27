@@ -1,11 +1,7 @@
 context("run")
 
 test_that("batch_run", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -24,11 +20,7 @@ test_that("batch_run", {
 })
 
 test_that("batch_run fails all", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -44,11 +36,7 @@ test_that("batch_run fails all", {
 })
 
 test_that("batch_run returns non-flag", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -64,11 +52,7 @@ test_that("batch_run returns non-flag", {
 })
 
 test_that("batch_run errors", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -84,11 +68,7 @@ test_that("batch_run errors", {
 })
 
 test_that("batch_run parallel with registered", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -149,11 +129,7 @@ test_that("batch_run subdirectories with config", {
 })
 
 test_that("batch_run with files specified", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
@@ -268,11 +244,7 @@ test_that("batch_run seed", {
 })
 
 test_that("batch_run seed max", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
@@ -342,11 +314,7 @@ test_that("batch_run seed max", {
 })
 
 test_that("batch_run seed as named files errors if missing", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -370,11 +338,7 @@ test_that("batch_run seed as named files errors if missing", {
 })
 
 test_that("batch_run seed as named files works ignores extra ones", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
@@ -398,11 +362,7 @@ test_that("batch_run seed as named files works ignores extra ones", {
 })
 
 test_that("batch_run seed as named files works", {
-  teardown(unlink(file.path(tempdir(), "batchr_run")))
-  
-  path <- file.path(tempdir(), "batchr_run")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
