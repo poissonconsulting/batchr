@@ -87,3 +87,46 @@ test_that("batch_cleanup force remaining", {
     structure(logical(0), .Names = character(0))
   )
 })
+
+test_that("batch_cleanup with nested configuration files", {
+  path <- withr::local_tempdir()
+  sub <- withr::local_tempdir(tmpdir = path)
+  sub_sub <- withr::local_tempdir(tmpdir = sub)
+  
+  write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(sub, "file1.csv"))
+  write.csv(data.frame(x = 1), file.path(sub_sub, "file1.csv"))
+  
+  expect_identical(
+    batch_config(function(x) TRUE,
+                 path = path,
+                 regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+  expect_identical(
+    batch_config(function(x) TRUE,
+                 path = sub,
+                 regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+  expect_identical(
+    batch_config(function(x) TRUE,
+                 path = sub_sub,
+                 regexp = "^file\\d[.]csv$"
+    ),
+    "file1.csv"
+  )
+
+  
+  expect_identical(batch_run(sub, ask = FALSE), c(file1.csv = TRUE))
+  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
+  expect_identical(batch_run(sub_sub, ask = FALSE), c(file1.csv = TRUE))
+  expect_identical(batch_cleanup(sub), c(. = TRUE))
+  expect_identical(batch_cleanup(path), c(. = TRUE))
+  expect_identical(batch_cleanup(sub_sub), c(. = TRUE))
+  expect_identical(batch_cleanup(sub), structure(logical(0), .Names = character(0)))
+  expect_identical(batch_cleanup(path), structure(logical(0), .Names = character(0)))
+  expect_identical(batch_cleanup(sub_sub), structure(logical(0), .Names = character(0)))
+})
