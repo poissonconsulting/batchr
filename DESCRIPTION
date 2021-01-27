@@ -27,7 +27,6 @@ Imports:
     hms,
     hmstimer,
     parallel,
-    purrr,
     stats,
     yesno
 Suggests: 
