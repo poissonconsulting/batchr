@@ -41,7 +41,11 @@
 
 <meta property="og:title" content="batchr: Batch Process Files — batchr-package" />
 <meta property="og:description" content="Batch processes files with a user-supplied R
-    function." />
+    function. The key design principle is that only files which were 
+    last modified before the directory was configured are processed.
+    A hidden file stores the configuration time and function etc while 
+    successfully processed files are automatically 'touched' to update 
+    their modification date." />
 
 
 
@@ -75,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">batchr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9040</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -86,6 +90,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -115,7 +122,11 @@
 
     <div class="ref-description">
     <p>Batch processes files with a user-supplied R
-    function.</p>
+    function. The key design principle is that only files which were 
+    last modified before the directory was configured are processed.
+    A hidden file stores the configuration time and function etc while 
+    successfully processed files are automatically 'touched' to update 
+    their modification date.</p>
     </div>
 
 

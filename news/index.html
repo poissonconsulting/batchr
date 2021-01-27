@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reconfigures Batch Processing Function — batch_reconfig_fun • batchr</title>
+<title>Changelog • batchr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,7 @@
 
 
 
-<meta property="og:title" content="Reconfigures Batch Processing Function — batch_reconfig_fun" />
-<meta property="og:description" content="Updates the function and function arguments that were provided
-when a directory was configured (using batch_config())." />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -62,7 +60,7 @@ when a directory was configured (using batch_config())." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -111,62 +109,25 @@ when a directory was configured (using batch_config())." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reconfigures Batch Processing Function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/poissonconsulting/batchr/blob/master/R/reconfig.R'><code>R/reconfig.R</code></a></small>
-    <div class="hidden name"><code>batch_reconfig_fun.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/poissonconsulting/batchr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Updates the function and function arguments that were provided
-when a directory was configured (using <code><a href='batch_config.html'>batch_config()</a></code>).</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>batch_reconfig_fun</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>fun</span>, <span class='va'>...</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>A string of the path to the directory with the files for processing.</p></td>
-    </tr>
-    <tr>
-      <th>fun</th>
-      <td><p>A function to process each of the files.
-<code>fun</code>'s first argument should be a string of the path to a single file.
-If processing is unsuccessful <code>fun</code> should return FALSE
-or throw an error (error messages are caught and automatically logged).
-If fun deletes or modifies the file then it is no longer considered
-for processing.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to <code>fun</code>.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An invisible character vector of the paths to the files
-remaining to be processed.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>batch_reconfig_fun()</code> is useful if a new version of the function is required
-to successfully process some of the files.</p>
-<p>It should be noted that <code>batch_reconfig_fun()</code> does not alter the
-configuration time.</p>
-<p>In order to process previously failed files <code><a href='batch_run.html'>batch_run()</a></code>
-should be called with <code>failed = NA</code> or <code>failed = TRUE</code>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='batch_process.html'>batch_process()</a></code> and <code><a href='batch_config.html'>batch_config()</a></code></p></div>
-
+    <div id="batchr-001" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.1">
+<a href="#batchr-001" class="anchor"></a>batchr 0.0.1</h1>
+<ul>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
