@@ -1,11 +1,7 @@
 context("config")
 
 test_that("batch_config returns matching files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 1), file.path(path, "file.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
@@ -18,51 +14,37 @@ test_that("batch_config returns matching files", {
 })
 
 test_that("batch_config with no files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-
+  path <- withr::local_tempdir()
+  
   expect_error(
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
-    "^Directory '.*batchr' does not contain any files matching '.*'[.]$"
+    "^Directory '.*' does not contain any files matching '.*'[.]$"
   )
 })
 
 test_that("batch_config with no matching files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 3), file.path(path, "file.csv"))
 
   expect_error(
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
-    "^Directory '.*batchr' does not contain any files matching '.*'[.]$"
+    "^Directory '.*' does not contain any files matching '.*'[.]$"
   )
 })
 
 test_that("batch_config with no path", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
+  path <- withr::local_tempdir()
   unlink(path, recursive = TRUE)
 
   expect_error(batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
-    "^`path` must specify an existing directory [(]'.*batchr' can't be found[)][.]$",
+    "^`path` must specify an existing directory [(]'.*' can't be found[)][.]$",
     class = "chk_error"
   )
 })
 
 test_that("batch_config with non-function", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
 
@@ -97,11 +79,7 @@ test_that("batch_config recurse", {
 })
 
 test_that("batch_config with existing .batchr.rds files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
 
   write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
 
@@ -111,7 +89,7 @@ test_that("batch_config with existing .batchr.rds files", {
   )
   expect_error(
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
-    "^Directory '.*batchr' already contains a '[.]batchr[.]rds' file[.]$"
+    "^Directory '.*' already contains a '[.]batchr[.]rds' file[.]$"
   )
 })
 
