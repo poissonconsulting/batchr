@@ -108,7 +108,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; $time</span>
-<span class="co">#&gt; [1] "2021-01-27 19:16:15 UTC"</span>
+<span class="co">#&gt; [1] "2021-01-27 19:20:13 UTC"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $regexp</span>
 <span class="co">#&gt; [1] "file\\d[.]txt$"</span>
@@ -142,13 +142,13 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_log_read.html">batch_log_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt;      type         time      file                           message</span>
 <span class="co">#&gt; 1 SUCCESS 00:00:00.001 file2.txt                              &lt;NA&gt;</span>
-<span class="co">#&gt; 2 FAILURE 00:00:00.006 file3.txt                              &lt;NA&gt;</span>
+<span class="co">#&gt; 2 FAILURE 00:00:00.007 file3.txt                              &lt;NA&gt;</span>
 <span class="co">#&gt; 3 FAILURE 00:00:00.001 file4.txt Uh, Houston, we've had a problem.</span></code></pre></div>
 <p>or summarised using</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; ✔ file2.txt [00:00:00.001]</span>
-<span class="co">#&gt; ✖ file3.txt [00:00:00.006]</span>
+<span class="co">#&gt; ✖ file3.txt [00:00:00.007]</span>
 <span class="co">#&gt; ✖ file4.txt [00:00:00.001]</span>
 <span class="co">#&gt; Success: 1</span>
 <span class="co">#&gt; Failure: 2</span>
@@ -184,7 +184,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; ✔ file.txt [00:00:00.001]</span>
 <span class="co">#&gt; ✔ file2.txt [00:00:00.001]</span>
-<span class="co">#&gt; ✖ file3.txt [00:00:00.006]</span>
+<span class="co">#&gt; ✖ file3.txt [00:00:00.007]</span>
 <span class="co">#&gt; ✖ file4.txt [00:00:00.001]</span>
 <span class="co">#&gt; Success: 2</span>
 <span class="co">#&gt; Failure: 2</span>
@@ -198,7 +198,7 @@
 <span class="co">#&gt; ✔ file.txt [00:00:00.001]</span>
 <span class="co">#&gt; ✔ file2.txt [00:00:00.001]</span>
 <span class="co">#&gt; ✔ file3.txt [00:00:00.001]</span>
-<span class="co">#&gt; ✔ file4.txt [00:00:00.003]</span>
+<span class="co">#&gt; ✔ file4.txt [00:00:00.004]</span>
 <span class="co">#&gt; Success: 4</span>
 <span class="co">#&gt; Failure: 0</span>
 <span class="co">#&gt; Remaining: 0</span>

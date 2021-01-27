@@ -17,7 +17,9 @@
     last modified before the directory was configured are processed.
     A hidden file stores the configuration time and function etc while 
     successfully processed files are automatically touched to update 
-    their modification date.">
+    their modification date. As a result batch processing can be 
+    stopped and restarted and any files created (or modified or deleted) 
+    during processing are ignored.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -77,12 +79,8 @@
 <!-- badges: start -->
 
 <p><code>batchr</code> is an R package to batch process files using an R function.</p>
-<p>The key design principle is that only files which were last modified <em>before</em> the directory was configured are processed. A hidden file stores the configuration time and function etc while successfully processed files are automatically ‘touched’ to update their modification date.</p>
-<p>As a result:</p>
-<ul>
-<li>Batch processing can be stopped and restarted.</li>
-<li>Any files created (or modified or deleted) during processing are ignored.</li>
-</ul>
+<p>The key design principle is that only files which were last modified <em>before</em> the directory was configured are processed. A hidden file stores the configuration time and function etc while successfully processed files are automatically touched to update their modification date.</p>
+<p>As a result batch processing can be stopped and restarted and any files created (or modified or deleted) during processing are ignored.</p>
 <p>To allow the user control over the reprocessing of problematic files, all processing attempts (SUCCESS or FAILURE) are recorded in a hidden log file.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
