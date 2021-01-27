@@ -151,7 +151,7 @@ process_file <- function(file, fun, dots, path, config_time) {
 
   if (is_try_error(output)) {
     output <- as.character(output)
-    output <- sub("^Error[^:]+:\\s+", "", output)
+    output <- sub("^Error([^:]*:\\\\){0,1}[^:]+:\\s+", "", output)
     msg <- p("FAILURE", msg, output)
     log_msg(path, msg)
     return(FALSE)
