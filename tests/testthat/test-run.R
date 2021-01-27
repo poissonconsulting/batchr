@@ -296,12 +296,12 @@ test_that("batch_run seed max", {
   )
   
   expect_identical(
-    batch_log_read(path)$message,
-    c("0.635232788773351", "0.558590787506402", "0.635232788773351",
+    sort(batch_log_read(path)$message),
+    sort(c("0.635232788773351", "0.558590787506402", "0.635232788773351",
       "0.558590787506402", "0.173519151073877", "0.23328331823529",
       "0.380833446097876", "0.409872261167837", "0.635232788773351",
       "0.558590787506402", "0.635232788773351", "0.558590787506402"
-    )
+    ))
   )
 })
 
@@ -463,8 +463,8 @@ test_that("batch_run seed as named files works", {
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE, file2.csv = FALSE))
   
-  expect_identical(batch_log_read(path)$message,
-                   c("0.808620538607489", "0.451294830504182"))
+  expect_identical(sort(batch_log_read(path)$message),
+                   sort(c("0.808620538607489", "0.451294830504182")))
   
   unlink(path, recursive = TRUE)
   dir.create(path)
