@@ -36,8 +36,15 @@ log file.
 
 ## Installation
 
-You can install the latest development version of batchr from
-[GitHub](https://github.com/poissonconsulting/batchr) with
+You can install the released version of batchr from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("batchr")
+```
+
+And the development version from
+[GitHub](https://github.com/poissonconsulting/batchr) with:
 
 ``` r
 # install.packages("remotes")
@@ -73,7 +80,6 @@ files.
 
 ``` r
 library(batchr)
-#> Loading required package: purrr
 batch_process(fun, path, ask = FALSE)
 #> ✓ file1.csv [00:00:00.002]
 #> ✓ file2.csv [00:00:00.004]

@@ -40,9 +40,15 @@ all processing attempts (SUCCESS or FAILURE) are recorded in a hidden log file.
 
 ## Installation
 
-You can install the latest development version of batchr from [GitHub](https://github.com/poissonconsulting/batchr) with
+You can install the released version of batchr from [CRAN](https://CRAN.R-project.org) with:
 
-```{r, eval=FALSE}
+``` r
+install.packages("batchr")
+```
+
+And the development version from [GitHub](https://github.com/poissonconsulting/batchr) with:
+
+``` r
 # install.packages("remotes")
 remotes::install_github("poissonconsulting/batchr")
 ```
