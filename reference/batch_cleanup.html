@@ -123,7 +123,8 @@ and log file created by <code><a href='batch_run.html'>batch_run()</a></code>.</
   force <span class='op'>=</span> <span class='cn'>FALSE</span>,
   remaining <span class='op'>=</span> <span class='cn'>FALSE</span>,
   failed <span class='op'>=</span> <span class='cn'>NA</span>,
-  recursive <span class='op'>=</span> <span class='cn'>FALSE</span>
+  recursive <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,6 +158,10 @@ are excluded, if NA they are included and if TRUE they are only included.</p></t
 when cleaning up. This is unrelated to the <code>recurse</code> option
 of <code><a href='batch_config.html'>batch_config()</a></code> and is only expected to be used
 if the user has neglected to clean up multiple nested directories.</p></td>
+    </tr>
+    <tr>
+      <th>silent</th>
+      <td><p>A flag specifying whether to suppress warnings (and messages).</p></td>
     </tr>
     </table>
 
