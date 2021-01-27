@@ -129,18 +129,10 @@ test_that("batch_reconfig_fileset update neither", {
 })
 
 test_that("batch_reconfig_fileset update recurse", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
+  path <- withr::local_tempdir()
+  sub <- withr::local_tempdir(tmpdir = path)
 
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-
-  path <- file.path(tempdir(), "batchr", "batchr_sub")
-  dir.create(path)
-
-  write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
-
-  path <- file.path(tempdir(), "batchr")
+  write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
   write.csv(data.frame(x = 2), file.path(path, "file.csv"))
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
@@ -157,16 +149,16 @@ test_that("batch_reconfig_fileset update recurse", {
 
   expect_identical(
     batch_reconfig_fileset(path, recurse = TRUE),
-    c("batchr_sub/file3.csv", "file2.csv")
+    c("file2.csv", file.path(basename(sub), "file3.csv"))
   )
 
   expect_identical(
     batch_reconfig_fileset(path, regexp = "file3[.]csv$"),
-    c("batchr_sub/file3.csv")
+    file.path(basename(sub), "file3.csv")
   )
 
   expect_identical(
-    batch_reconfig_fileset(path, regexp = "_sub"),
+    batch_reconfig_fileset(path, regexp = basename(sub)),
     character(0)
   )
 })
