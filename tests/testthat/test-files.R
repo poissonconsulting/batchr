@@ -91,6 +91,7 @@ test_that("batch_files_remaining ignores non-matching ones", {
     c("file2.csv", "file3.csv")
   )
 
+  Sys.sleep(0.1)
   Sys.setFileTime(file.path(path, "file2.csv"), Sys.time())
 
   expect_identical(

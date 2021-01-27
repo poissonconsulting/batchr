@@ -130,7 +130,7 @@ test_that("batch_log_read 0.1 second", {
   expect_identical(colnames(log), c("type", "time", "file", "message"))
 
   expect_s3_class(log$time, c("hms", "difftime"))
-  expect_gte(log$time, 0.101)
+  expect_gte(log$time, 0.09)
 
   expect_identical(log[c("type", "file")], structure(list(type = "SUCCESS", file = "file1.csv"), class = c(
     "tbl_df",
