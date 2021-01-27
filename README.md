@@ -19,7 +19,7 @@ status](https://www.r-pkg.org/badges/version/batchr)](https://CRAN.R-project.org
 `batchr` is an R package to batch process files using an R function.
 
 The key design principle is that only files which were last modified
-*before* the directory was ‘configured’ are processed. A hidden file
+*before* the directory was configured are processed. A hidden file
 stores the configuration time and function etc while successfully
 processed files are automatically ‘touched’ to update their modification
 date.

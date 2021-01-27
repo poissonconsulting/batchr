@@ -1,5 +1,3 @@
-# batchr 0.0.1 (2021-01-27)
+# batchr 0.0.1
 
-- Switched from furrr::future_options() to furrr::furrr_options().
-
-
+* Added a `NEWS.md` file to track changes to the package.

@@ -7,7 +7,11 @@
 \title{batchr: Batch Process Files}
 \description{
 Batch processes files with a user-supplied R
-    function.
+    function. The key design principle is that only files which were 
+    last modified before the directory was configured are processed.
+    A hidden file stores the configuration time and function etc while 
+    successfully processed files are automatically 'touched' to update 
+    their modification date.
 }
 \seealso{
 Useful links:
