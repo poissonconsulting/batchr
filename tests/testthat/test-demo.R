@@ -84,7 +84,8 @@ test_that("demo", {
   expect_identical(batch_run(path, ask = FALSE), c(file.txt = TRUE))
   expect_identical(batch_run(path, ask = FALSE), c(x = TRUE)[-1])
 
-  expect_identical(batch_cleanup(path), c("." = FALSE))
+  expect_warning(expect_identical(batch_cleanup(path), c(. = FALSE)),
+                 "^Clean up of 1 file failed[.]$")
   expect_identical(batch_run(path, ask = FALSE, failed = NA), c(file3.txt = TRUE, file4.txt = TRUE))
   expect_identical(batch_cleanup(path), c("." = TRUE))
 })

@@ -39,7 +39,8 @@ test_that("batch_cleanup with all failed", {
   )
   expect_lte(file_time(path, "file1.csv"), batch_config_read(path)$time)
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
-  expect_identical(batch_cleanup(path), c(. = FALSE))
+  expect_warning(expect_identical(batch_cleanup(path), c(. = FALSE)),
+                 "^Clean up of 1 file failed[.]$")
   expect_identical(batch_cleanup(path, force = TRUE), c(. = TRUE))
   expect_identical(list.files(path, pattern = "^file\\d[.]csv$"), "file1.csv")
   expect_identical(
@@ -70,7 +71,8 @@ test_that("batch_cleanup force remaining", {
   )
   expect_lte(file_time(path, "file1.csv"), batch_config_read(path)$time)
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
-  expect_identical(batch_cleanup(path), c(. = FALSE))
+  expect_warning(expect_identical(batch_cleanup(path), c(. = FALSE)),
+                 "^Clean up of 1 file failed[.]$")
   expect_identical(batch_cleanup(path, force = TRUE, remaining = TRUE), c(. = TRUE))
   expect_identical(list.files(path, pattern = "^file\\d[.]csv$"), character(0))
 

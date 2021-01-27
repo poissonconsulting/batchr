@@ -9,7 +9,8 @@ batch_cleanup(
   force = FALSE,
   remaining = FALSE,
   failed = NA,
-  recursive = FALSE
+  recursive = FALSE,
+  silent = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ are excluded, if NA they are included and if TRUE they are only included.}
 when cleaning up. This is unrelated to the \code{recurse} option
 of \code{\link[=batch_config]{batch_config()}} and is only expected to be used
 if the user has neglected to clean up multiple nested directories.}
+
+\item{silent}{A flag specifying whether to suppress warnings (and messages).}
 }
 \value{
 A named logical vector indicating which directories

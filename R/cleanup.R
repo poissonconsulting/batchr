@@ -18,13 +18,15 @@
 #' when cleaning up. This is unrelated to the `recurse` option
 #' of [batch_config()] and is only expected to be used
 #' if the user has neglected to clean up multiple nested directories.
+#' @param silent A flag specifying whether to suppress warnings (and messages).
 #' @return A named logical vector indicating which directories
 #' were successfully cleaned up.
 #' @seealso [batch_process()]
 #' @export
 batch_cleanup <- function(path, force = FALSE,
                           remaining = FALSE, failed = NA,
-                          recursive = FALSE) {
+                          recursive = FALSE,
+                          silent = FALSE) {
   chk_dir(path)
   chk_flag(force)
   chk_flag(remaining)
@@ -42,5 +44,9 @@ batch_cleanup <- function(path, force = FALSE,
     remaining = remaining, failed = failed
   )
   names(clean) <- files
+  nfailed <- sum(!clean)
+  if(nfailed > 0 && !silent) {
+    wrn("Clean up of %n file%s failed", n = nfailed)
+  }
   invisible(clean)
 }
