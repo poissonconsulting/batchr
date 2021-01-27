@@ -167,7 +167,7 @@ test_that("batch_log_read all error processing", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) stop("a problem"), path = path, regexp = "^file\\d[.]csv$"),
+    batch_config(function(x) { Sys.sleep(1e-05); stop("a problem")  }, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
 
@@ -192,7 +192,7 @@ test_that("batch_log_read one success (string) and one failure (error)", {
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
 
   fun <- function(x) {
-    if (grepl("file1[.]csv$", x)) stop("an error")
+    if (grepl("file1[.]csv$", x)) {Sys.sleep(1e-05); stop("an error")}
     Sys.sleep(0.51)
     "a success"
   }
@@ -287,7 +287,7 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
 
   fun <- function(x) {
-    if (grepl("file1[.]csv$", x)) stop("an error")
+    if (grepl("file1[.]csv$", x)) {Sys.sleep(1e-05); stop("an error") }
     Sys.sleep(0.5)
     "a success"
   }

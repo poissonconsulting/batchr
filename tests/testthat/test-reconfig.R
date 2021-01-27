@@ -17,11 +17,8 @@ test_that("batch_reconfig_fun", {
 })
 
 test_that("batch_config update with existing recursive .batchr.rds files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
-
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
+  path <- withr::local_tempdir()
+  sub <- withr::local_tempdir(tmpdir = path)
 
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
@@ -33,48 +30,35 @@ test_that("batch_config update with existing recursive .batchr.rds files", {
     "file2.csv"
   )
 
-  path <- file.path(tempdir(), "batchr", "batchr_sub")
-  dir.create(path)
-
-  write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
+  write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
   expect_identical(
     batch_config(function(x) TRUE,
-      path = path,
+      path = sub,
       regexp = "^file\\d[.]csv$"
     ),
     "file3.csv"
   )
 
-  path <- file.path(tempdir(), "batchr")
-
   expect_error(
     batch_reconfig_fun(path, function(x) 1),
-    "^Subdirectories of '.*batchr' contain '[.]batchr[.]rds' files[.]$"
+    "^Subdirectories of '.*' contain '[.]batchr[.]rds' files[.]$"
   )
 })
 
 test_that("batch_reconfig_fileset update recurse with existing recursive .batchr.rds files", {
-  teardown(unlink(file.path(tempdir(), "batchr")))
+  path <- withr::local_tempdir()
+  sub <- withr::local_tempdir(tmpdir = path)
 
-  path <- file.path(tempdir(), "batchr")
-  unlink(path, recursive = TRUE)
-  dir.create(path)
-
-  path <- file.path(tempdir(), "batchr", "batchr_sub")
-  dir.create(path)
-
-  write.csv(data.frame(x = 3), file.path(path, "file3.csv"))
+  write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
   expect_identical(
     batch_config(function(x) TRUE,
-      path = path,
+      path = sub,
       regexp = "^file\\d[.]csv$"
     ),
     "file3.csv"
   )
-
-  path <- file.path(tempdir(), "batchr")
 
   write.csv(data.frame(x = 2), file.path(path, "file.csv"))
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
@@ -91,7 +75,7 @@ test_that("batch_reconfig_fileset update recurse with existing recursive .batchr
 
   expect_error(
     batch_reconfig_fileset(path, recurse = TRUE),
-    "^Subdirectories of '.*batchr' contain '[.]batchr[.]rds' files[.]$"
+    "^Subdirectories of '.*' contain '[.]batchr[.]rds' files[.]$"
   )
 })
 

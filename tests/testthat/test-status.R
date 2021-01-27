@@ -34,7 +34,7 @@ test_that("batch_file_status all failed processing", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) stop("darn"), path = path, regexp = "^file\\d[.]csv$"),
+    batch_config(function(x) {Sys.sleep(1e-05); stop("darn")}, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
 

@@ -57,7 +57,7 @@ test_that("batch_run errors", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
   expect_identical(
-    batch_config(function(x) stop("a problem"),
+    batch_config(function(x) { Sys.sleep(1e-05); stop("a problem") },
                  path = path,
                  regexp = "^file\\d[.]csv$"
     ),
@@ -241,7 +241,7 @@ test_that("batch_run seed max", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -310,7 +310,7 @@ test_that("batch_run seed as named files errors if missing", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -334,7 +334,7 @@ test_that("batch_run seed as named files works ignores extra ones", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -358,7 +358,7 @@ test_that("batch_run seed as named files works", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -380,7 +380,7 @@ test_that("batch_run seed as named files works", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -401,7 +401,7 @@ test_that("batch_run seed as named files works", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -423,7 +423,7 @@ test_that("batch_run seed as named files works", {
   
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -445,7 +445,7 @@ test_that("batch_run seed as named files works", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -472,7 +472,7 @@ test_that("batch_run seed as named files works", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
@@ -509,7 +509,7 @@ test_that("batch_run seed as named files works", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
   
-  fun <- function(x) stop(as.character(runif(1)), call. = TRUE)
+  fun <- function(x) { Sys.sleep(1e-05); stop(as.character(runif(1)), call. = TRUE) }
   
   expect_identical(
     batch_config(fun,
