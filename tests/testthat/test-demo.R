@@ -35,23 +35,12 @@ test_that("demo", {
     c(file2.txt = TRUE, file3.txt = FALSE, file4.txt = FALSE)
   )
   
-  batch_log <- batch_log_read(path)[c("type", "file", "message")]
-  batch_log <- batch_log[order(batch_log$file),]
-
-  expect_identical(
-    batch_log,
-    structure(list(
-      type = c("SUCCESS", "FAILURE", "FAILURE"),
-      file = c("file2.txt", "file3.txt", "file4.txt"), message = c(
-        NA,
-        NA, "Uh, Houston, we've had a problem."
-      )
-    ), class = c(
-      "tbl_df",
-      "tbl", "data.frame"
-    ), row.names = c(NA, -3L))
-  )
-
+  log <- batch_log_read(path)
+  log <- log[order(log$file),]
+  
+  expect_identical(log$type, c("SUCCESS", "FAILURE", "FAILURE"))
+  expect_identical(log$message, c(NA, NA, "Uh, Houston, we've had a problem."))
+  
   expect_identical(
     readLines(file.path(path, "file.txt")),
     "the contents of file.txt"

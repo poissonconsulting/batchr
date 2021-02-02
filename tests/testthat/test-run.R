@@ -218,15 +218,17 @@ test_that("batch_run seed", {
     c(file1.csv = FALSE, file2.csv = FALSE)
   )
   
+  log <- batch_log_read(path)
+  
   expect_identical(
-    sort(batch_log_read(path)$message),
+    sort(log$message),
     sort(c("0.637362094961879", "0.889581146657672", "0.637362094961879",
       "0.889581146657672", "0.173519151073877", "0.23328331823529",
       "0.380833446097876", "0.409872261167837", "0.637362094961879",
       "0.889581146657672", "0.173519151073877", "0.23328331823529")))
   
   expect_identical(
-    sort(batch_log_read(path)$file),
+    sort(log$file),
     sort(c(
       "file1.csv", "file2.csv", "file1.csv", "file2.csv", "file1.csv",
       "file2.csv", "file1.csv", "file2.csv", "file1.csv", "file2.csv",
@@ -349,8 +351,8 @@ test_that("batch_run seed as named files works ignores extra ones", {
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE))
   
-  expect_identical(batch_log_read(path)$message,
-                   "0.173519151073877")
+  log <- batch_log_read(path)
+  expect_identical(log$message, "0.173519151073877")
 })
 
 test_that("batch_run seed as named files works", {
@@ -372,8 +374,9 @@ test_that("batch_run seed as named files works", {
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE))
   
-  expect_identical(batch_log_read(path)$message,
-                   "0.808620538607489")
+  log <- batch_log_read(path)
+  
+  expect_identical(log$message, "0.808620538607489")
   
   unlink(path, recursive = TRUE)
   dir.create(path)
@@ -393,8 +396,9 @@ test_that("batch_run seed as named files works", {
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE))
   
-  expect_identical(batch_log_read(path)$message,
-                   "0.808620538607489")
+  log <- batch_log_read(path)
+  
+  expect_identical(log$message, "0.808620538607489")
   
   unlink(path, recursive = TRUE)
   dir.create(path)
@@ -415,8 +419,9 @@ test_that("batch_run seed as named files works", {
                                                               808604029L, 190404460L)), ask = FALSE),
                    c(file1.csv = FALSE))
   
-  expect_identical(batch_log_read(path)$message,
-                   "0.451294830504182")
+  log <- batch_log_read(path)
+  
+  expect_identical(log$message, "0.451294830504182")
   
   unlink(path, recursive = TRUE)
   dir.create(path)
@@ -436,8 +441,9 @@ test_that("batch_run seed as named files works", {
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE))
   
-  expect_identical(batch_log_read(path)$message,
-                   "0.808620538607489")
+  log <- batch_log_read(path)
+  
+  expect_identical(log$message, "0.808620538607489")
   
   unlink(path, recursive = TRUE)
   dir.create(path)
@@ -463,8 +469,10 @@ test_that("batch_run seed as named files works", {
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE, file2.csv = FALSE))
   
-  expect_identical(sort(batch_log_read(path)$message),
-                   sort(c("0.808620538607489", "0.451294830504182")))
+  log <- batch_log_read(path)
+  log <- log[order(log$file),]
+
+  expect_identical(log$message, c("0.808620538607489", "0.451294830504182"))
   
   unlink(path, recursive = TRUE)
   dir.create(path)
@@ -491,14 +499,10 @@ test_that("batch_run seed as named files works", {
                    c(file1.csv = FALSE, file2.csv = FALSE))
   
   log <- batch_log_read(path)
-  expect_identical(colnames(log), c("type", "time", "file", "message"))
-  log <- log[order(log$message),]
+  log <- log[order(log$file),]
   
   expect_identical(log$type,
                    c("FAILURE", "FAILURE"))
-
-  expect_identical(log$file,
-                   c("file1.csv", "file2.csv"))
 
   expect_identical(log$message,
                    c("0.451294830504182", "0.808620538607489"))
@@ -521,8 +525,10 @@ test_that("batch_run seed as named files works", {
   
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE, file2.csv = FALSE))
-  expect_identical(sort(batch_log_read(path)$message),
-                   sort(c("0.451294830504182", "0.808620538607489")))
+  
+  log <- batch_log_read(path)
+  log <- log[order(log$file),]
+  expect_identical(log$message, c("0.451294830504182", "0.808620538607489"))
 })
 
 test_that("batch_run seed as named files parallel", {

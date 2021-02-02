@@ -53,17 +53,15 @@ test_that("batch_log_read not yet processed", {
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
-
-  expect_identical(
-    batch_log_read(path),
-    structure(list(type = character(0), time = structure(numeric(0), class = c(
-      "POSIXct",
-      "POSIXt"
-    ), tzone = "UTC"), file = character(0), message = character(0)), class = c(
-      "tbl_df",
-      "tbl", "data.frame"
-    ), row.names = integer(0))
-  )
+  
+  log <- batch_log_read(path)
+  expect_s3_class(log, "tbl_df")
+  expect_identical(colnames(log), c("type", "time", "file", "message"))
+  expect_identical(nrow(log), 0L)
+  expect_is(log$type, "character")
+  expect_is(log$time, "hms")
+  expect_is(log$file, "character")
+  expect_is(log$message, "character")
 })
 
 test_that("batch_log_read all processed successfully", {
@@ -76,28 +74,30 @@ test_that("batch_log_read all processed successfully", {
     "file1.csv"
   )
 
-  expect_identical(
-    batch_log_read(path),
-    structure(list(type = character(0), time = structure(numeric(0), class = c(
-      "POSIXct",
-      "POSIXt"
-    ), tzone = "UTC"), file = character(0), message = character(0)), class = c(
-      "tbl_df",
-      "tbl", "data.frame"
-    ), row.names = integer(0))
-  )
+  log <- batch_log_read(path)
+  expect_s3_class(log, "tbl_df")
+  expect_identical(colnames(log), c("type", "time", "file", "message"))
+  expect_identical(nrow(log), 0L)
+  expect_is(log$type, "character")
+  expect_is(log$time, "hms")
+  expect_is(log$file, "character")
+  expect_is(log$message, "character")
 
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
 
   log <- batch_log_read(path)
+  expect_s3_class(log, "tbl_df")
   expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_s3_class(log$time, c("hms", "difftime"))
-  expect_identical(round(as.numeric(log$time)), 0)
-
-  expect_identical(log[c("type", "file")], structure(list(type = "SUCCESS", file = "file1.csv"), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = c(NA, -1L)))
+  expect_identical(nrow(log), 1L)
+  expect_is(log$type, "character")
+  expect_is(log$time, "hms")
+  expect_is(log$file, "character")
+  expect_is(log$message, "character")
+  
+  expect_identical(log$type, "SUCCESS")
+  expect_lt(log$time, 5)
+  expect_identical(log$file, "file1.csv")
+  expect_identical(log$message, NA_character_)
 })
 
 test_that("batch_log_read 0.1 second", {
@@ -113,31 +113,16 @@ test_that("batch_log_read 0.1 second", {
     "file1.csv"
   )
 
-  expect_identical(
-    batch_log_read(path),
-    structure(list(type = character(0), time = structure(numeric(0), class = c(
-      "POSIXct",
-      "POSIXt"
-    ), tzone = "UTC"), file = character(0), message = character(0)), class = c(
-      "tbl_df",
-      "tbl", "data.frame"
-    ), row.names = integer(0))
-  )
+  log <- batch_log_read(path)
+  expect_identical(nrow(log), 0L)
 
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
 
   log <- batch_log_read(path)
-  expect_identical(colnames(log), c("type", "time", "file", "message"))
-
-  expect_s3_class(log$time, c("hms", "difftime"))
+  expect_identical(log$type, "SUCCESS")
   expect_gte(log$time, 0.09)
-
-  expect_identical(log[c("type", "file")], structure(list(type = "SUCCESS", file = "file1.csv"), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = c(NA, -1L)))
+  expect_identical(log$file, "file1.csv")
 })
-
 
 test_that("batch_log_read all failed processing", {
   path <- withr::local_tempdir()
@@ -152,13 +137,10 @@ test_that("batch_log_read all failed processing", {
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
 
   log <- batch_log_read(path)
-  expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_s3_class(log$time, c("hms", "difftime"))
-  expect_identical(round(as.numeric(log$time)), 0)
-  expect_identical(log[c("type", "file", "message")], structure(list(type = "FAILURE", file = "file1.csv", message = NA_character_), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = c(NA, -1L)))
+  expect_identical(nrow(log), 1L)
+  expect_identical(log$type, "FAILURE")
+  expect_identical(log$file, "file1.csv")
+  expect_identical(log$message, NA_character_)
 })
 
 test_that("batch_log_read all error processing", {
@@ -167,23 +149,17 @@ test_that("batch_log_read all error processing", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) { Sys.sleep(1e-05); stop("a problem")  }, path = path, regexp = "^file\\d[.]csv$"),
+    batch_config(function(x) { stop("a problem")  }, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
 
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE))
 
   log <- batch_log_read(path)
-  expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_s3_class(log$time, c("hms", "difftime"))
-  expect_identical(round(as.numeric(log$time)), 0)
-  expect_identical(log[c("type", "file")], structure(list(type = "FAILURE", file = "file1.csv"), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = c(NA, -1L)))
-  expect_match(log$message, "^a problem$")
+  expect_identical(log$type, "FAILURE")
+  expect_identical(log$file, "file1.csv")
+  expect_identical(log$message, "a problem")
 })
-
 
 test_that("batch_log_read one success (string) and one failure (error)", {
   path <- withr::local_tempdir()
@@ -205,18 +181,10 @@ test_that("batch_log_read one success (string) and one failure (error)", {
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
 
   log <- batch_log_read(path)
-  expect_identical(colnames(log), c("type", "time", "file", "message"))
-
-  expect_s3_class(log$time, c("hms", "difftime"))
-  expect_identical(round(log$time), structure(c(0, 1), units = "secs", class = c("difftime")))
-
-  expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c(
-    "file1.csv",
-    "file2.csv"
-  )), class = c("tbl_df", "tbl", "data.frame"), row.names = c(
-    NA,
-    -2L
-  )))
+  log <- log[order(log$file),]
+  
+  expect_identical(log$type, c("FAILURE", "SUCCESS"))
+  expect_gt(log$time[2], log$time[1])
   expect_identical(log$message, c("an error", "a success"))
 })
 
@@ -251,16 +219,8 @@ test_that("batch_log_read parallel all processed successfully", {
     "file1.csv"
   )
 
-  expect_identical(
-    batch_log_read(path),
-    structure(list(type = character(0), time = structure(numeric(0), class = c(
-      "POSIXct",
-      "POSIXt"
-    ), tzone = "UTC"), file = character(0), message = character(0)), class = c(
-      "tbl_df",
-      "tbl", "data.frame"
-    ), row.names = integer(0))
-  )
+  log <- batch_log_read(path)
+  expect_identical(nrow(log), 0L)
 
   options(mc.cores = 2)
   future::plan(future::multisession)
@@ -269,16 +229,9 @@ test_that("batch_log_read parallel all processed successfully", {
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = TRUE))
 
   log <- batch_log_read(path)
-  expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_s3_class(log$time, c("hms", "difftime"))
-  expect_identical(round(as.numeric(log$time)), 0)
-
-  expect_identical(log[c("type", "file")], structure(list(type = "SUCCESS", file = "file1.csv"), class = c(
-    "tbl_df",
-    "tbl", "data.frame"
-  ), row.names = c(NA, -1L)))
+  expect_identical(nrow(log), 1L)
+  expect_identical(log$type, "SUCCESS")
 })
-
 
 test_that("batch_log_read parallel one success (string) and one failure (error)", {
   path <- withr::local_tempdir()
@@ -304,16 +257,9 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
 
   log <- batch_log_read(path)
-  expect_identical(colnames(log), c("type", "time", "file", "message"))
-  expect_s3_class(log$time, c("hms", "difftime"))
-  expect_lt(log$time[1], log$time[2])
-
-  expect_identical(log[c("type", "file")], structure(list(type = c("FAILURE", "SUCCESS"), file = c(
-    "file1.csv",
-    "file2.csv"
-  )), class = c("tbl_df", "tbl", "data.frame"), row.names = c(
-    NA,
-    -2L
-  )))
+  log <- log[order(log$file),]
+  
+  expect_identical(log$type, c("FAILURE", "SUCCESS"))
+  expect_gt(log$time[2], log$time[1])
   expect_identical(log$message, c("an error", "a success"))
 })

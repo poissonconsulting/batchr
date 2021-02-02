@@ -49,9 +49,10 @@ read_lines_log <- function(path) {
 }
 
 no_log_data <- function() {
-  time <- sys_time_utc()[-1]
   tibble(
-    type = character(0), time = time, file = character(0),
+    type = character(0), 
+    time = hms::as_hms(integer(0)), 
+    file = character(0),
     message = character(0)
   )
 }
