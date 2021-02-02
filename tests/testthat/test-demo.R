@@ -34,9 +34,12 @@ test_that("demo", {
     batch_run(path, ask = FALSE),
     c(file2.txt = TRUE, file3.txt = FALSE, file4.txt = FALSE)
   )
+  
+  batch_log <- batch_log_read(path)[c("type", "file", "message")]
+  batch_log <- batch_log[order(batch_log$file),]
 
   expect_identical(
-    batch_log_read(path)[c("type", "file", "message")],
+    batch_log,
     structure(list(
       type = c("SUCCESS", "FAILURE", "FAILURE"),
       file = c("file2.txt", "file3.txt", "file4.txt"), message = c(

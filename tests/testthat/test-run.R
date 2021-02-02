@@ -521,9 +521,8 @@ test_that("batch_run seed as named files works", {
   
   expect_identical(batch_run(path, seeds = seeds, ask = FALSE),
                    c(file1.csv = FALSE, file2.csv = FALSE))
-  
-  expect_identical(batch_log_read(path)$message,
-                   c("0.451294830504182", "0.808620538607489"))
+  expect_identical(sort(batch_log_read(path)$message),
+                   sort(c("0.451294830504182", "0.808620538607489")))
 })
 
 test_that("batch_run seed as named files parallel", {
