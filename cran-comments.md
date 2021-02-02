@@ -8,6 +8,9 @@ release 4.0.3
 * Windows (actions) - release
 * Windows (winbuilder) - devel
 
-## R CMD check results
+0 errors | 0 warnings | 1 note
 
-0 errors | 0 warnings | 0 notes
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
+
+New submission
