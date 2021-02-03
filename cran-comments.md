@@ -14,3 +14,12 @@ release 4.0.3
 Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
 
 New submission
+
+### Resubmission
+
+   URL: https://www.tidyverse.org/lifecycle/#experimental (moved to https://lifecycle.r-lib.org/articles/stages.html)
+     From: README.md
+     Status: 200
+     Message: OK
+
+The URL has been updated to the new address.
