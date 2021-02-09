@@ -17,9 +17,17 @@ New submission
 
 ### Resubmission
 
-   URL: https://www.tidyverse.org/lifecycle/#experimental (moved to https://lifecycle.r-lib.org/articles/stages.html)
-     From: README.md
-     Status: 200
-     Message: OK
+> Please do not start the description with "This package", package name, title or similar.
 
-The URL has been updated to the new address.
+I start with a complete sentence that does not include the package name and is not the title.
+Can you be more specific about how you would like me to change it?
+
+> Please add \value to .Rd files regarding exported methods and explain the functions results in the documentation. Please write about the structure of the output (class) and also what the output means. (If a function does not return a value, please document that too, e.g. \value{No return value, called for side effects} or similar)
+> Missing Rd-tags:
+     batch_is_clean.Rd: \value
+     batch_report.Rd: \value
+
+Done.
+
+> Please add small executable examples in your Rd-files to illustrate the use of the exported function.
+

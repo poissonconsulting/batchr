@@ -11,6 +11,9 @@ batch_is_clean(path, recurse = FALSE)
 
 \item{recurse}{A flag specifying whether to recurse into path's subdirectories.}
 }
+\value{
+A flag specifying whether the directory is clean.
+}
 \description{
 Tests whether directory contains configuration file created by \code{\link[=batch_config]{batch_config()}}.
 }

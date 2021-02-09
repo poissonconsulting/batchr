@@ -9,6 +9,10 @@ batch_report(path)
 \arguments{
 \item{path}{A string of the path to the directory with the files for processing.}
 }
+\value{
+An invisible NULL. The function is called for its side-effect of
+outputting a report of the status of individual files to the console.
+}
 \description{
 Outputs a report of the status of individual files to the console.
 }
