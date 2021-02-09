@@ -55,6 +55,15 @@ batch_reconfig_fun <- function(path, fun, ...) {
 #' remaining to be processed.
 #' @seealso [batch_process()] and [batch_config()]
 #' @export
+#' @examples 
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_config_read(path)
+#' batch_reconfig_fileset(path, regexp = "file\\d+[.]csv$")
+#' batch_config_read(path)
+#' batch_cleanup(path, force = TRUE, remaining = TRUE)
+#' unlink(file.path(path, "file1.csv"))
 batch_reconfig_fileset <- function(path, regexp = NULL, recurse = NULL) {
   chk_dir(path)
   if (!is.null(regexp)) chk_string(regexp)

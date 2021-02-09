@@ -22,6 +22,16 @@ A tibble with four columns:
 Gets the current status (SUCCESS, FAILURE, REMAING) of each
 eligible file in path.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_file_status(path)
+batch_run(path, ask = FALSE)
+batch_file_status(path)
+batch_cleanup(path)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_log_read]{batch_log_read()}}
 }

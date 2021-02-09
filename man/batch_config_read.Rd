@@ -16,6 +16,14 @@ A named list of the configuration values.
 Reads the values in the
 configuration file created by \code{\link[=batch_config]{batch_config()}}.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_config_read(path)
+batch_cleanup(path, force = TRUE, remaining = TRUE)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_log_read]{batch_log_read()}}
 }

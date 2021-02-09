@@ -19,8 +19,7 @@ New submission
 
 > Please do not start the description with "This package", package name, title or similar.
 
-I start with a complete sentence that does not include the package name and is not the title.
-Can you be more specific about how you would like me to change it?
+Done.
 
 > Please add \value to .Rd files regarding exported methods and explain the functions results in the documentation. Please write about the structure of the output (class) and also what the output means. (If a function does not return a value, please document that too, e.g. \value{No return value, called for side effects} or similar)
 > Missing Rd-tags:
@@ -31,3 +30,4 @@ Done.
 
 > Please add small executable examples in your Rd-files to illustrate the use of the exported function.
 
+Done.

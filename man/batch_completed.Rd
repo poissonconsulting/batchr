@@ -23,6 +23,16 @@ by \code{\link[=batch_files_remaining]{batch_files_remaining()}}.
 \details{
 By default, files that previously failed to process are excluded.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_completed(path)
+batch_run(path, ask = FALSE)
+batch_completed(path)
+batch_cleanup(path)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_process]{batch_process()}}
 }

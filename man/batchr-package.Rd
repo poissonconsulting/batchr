@@ -6,7 +6,7 @@
 \alias{batchr-package}
 \title{batchr: Batch Process Files}
 \description{
-Batch processes files with a user-supplied R
+Processes multiple files with a user-supplied
     function. The key design principle is that only files which were 
     last modified before the directory was configured are processed.
     A hidden file stores the configuration time and function etc while 

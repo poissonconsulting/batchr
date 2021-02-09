@@ -31,6 +31,16 @@ configuration time.
 In order to process previously failed files \code{\link[=batch_run]{batch_run()}}
 should be called with \code{failed = NA} or \code{failed = TRUE}.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_config_read(path)
+batch_reconfig_fileset(path, regexp = "file\\\\d+[.]csv$")
+batch_config_read(path)
+batch_cleanup(path, force = TRUE, remaining = TRUE)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_config]{batch_config()}}
 }

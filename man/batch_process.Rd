@@ -38,7 +38,8 @@ which match the regular expression will be batch processed.}
 \item{force}{A flag specifying whether to delete configuration and
 log files even if there are files remaining to be processed.}
 
-\item{report}{A flag specifying whether to outputs a report of the status of individual files to the console.}
+\item{report}{A flag specifying whether to outputs a report of
+the status of individual files to the console.}
 
 \item{seeds}{A named list of the L'Ecuyer-CMRG seed to use for each
 file. If \code{NULL} then \code{seeds} is \code{batch_seeds(files)}.}
@@ -59,6 +60,12 @@ Performs batch processing of files in a directory using the
 \code{\link[=batch_config]{batch_config()}}, \code{\link[=batch_run]{batch_run()}}
 and \code{\link[=batch_cleanup]{batch_cleanup()}} functions.
 For more control the user should call these three functions instead.
+}
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_process(function(x) TRUE, path, regexp = "[.]csv$", ask = FALSE)
+unlink(file.path(path, "file1.csv"))
 }
 \seealso{
 \code{\link[=batch_config]{batch_config()}}, \code{\link[=batch_run]{batch_run()}}

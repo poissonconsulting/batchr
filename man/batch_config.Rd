@@ -47,6 +47,14 @@ The regexp must match at least one non-hidden file in the directory
 or if \code{recurse = TRUE} in the directory or subdirectories.
 Hidden files are excluded to prevent accidental modification of system files.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_run(path, ask = FALSE)
+batch_cleanup(path)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_run]{batch_run()}}
 }

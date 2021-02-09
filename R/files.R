@@ -11,6 +11,15 @@
 #' @return A character vector of the names of the remaining files.
 #' @seealso [batch_process()] and [batch_run()]
 #' @export
+#' @examples 
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_files_remaining(path)
+#' batch_run(path, ask = FALSE)
+#' batch_files_remaining(path)
+#' batch_cleanup(path)
+#' unlink(file.path(path, "file1.csv"))
 batch_files_remaining <- function(path, failed = FALSE) {
   chk_lgl(failed)
   config <- batch_config_read(path)

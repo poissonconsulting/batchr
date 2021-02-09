@@ -78,8 +78,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
-#> ✓ file1.csv [00:00:00.002]
-#> ✓ file2.csv [00:00:00.004]
+#> ✓ file1.csv [00:00:00.004]
+#> ✓ file2.csv [00:00:00.009]
 #> Success: 2
 #> Failure: 0
 #> Remaining: 0

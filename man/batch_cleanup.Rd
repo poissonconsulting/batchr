@@ -47,6 +47,14 @@ and log file created by \code{\link[=batch_run]{batch_run()}}.
 The \code{\link[=batch_completed]{batch_completed()}} function can be used to test
 if batch processing is complete.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_run(path, ask = FALSE)
+batch_cleanup(path)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_process]{batch_process()}}
 }

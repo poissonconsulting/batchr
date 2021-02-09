@@ -36,7 +36,7 @@ get_lecyer_cmrg_seed <- function() {
 #'
 #' @examples
 #' batch_seeds(c("a", "b"))
-#' # inspired by furrr:::generate_seed_streams
+# inspired by furrr:::generate_seed_streams
 batch_seeds <- function(files = batch_files_remaining()) {
   chk_s3_class(files, "character")
 

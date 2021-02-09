@@ -23,6 +23,13 @@
 #' were successfully cleaned up.
 #' @seealso [batch_process()]
 #' @export
+#' @examples
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_run(path, ask = FALSE)
+#' batch_cleanup(path)
+#' unlink(file.path(path, "file1.csv"))
 batch_cleanup <- function(path, force = FALSE,
                           remaining = FALSE, failed = NA,
                           recursive = FALSE,

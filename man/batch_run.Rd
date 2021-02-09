@@ -57,6 +57,14 @@ and hidden log file can be deleted using \code{\link[=batch_cleanup]{batch_clean
 If a remaining file is removed or modified by a separate process,
 \code{batch_run()} throws an error.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_run(path, ask = FALSE)
+batch_cleanup(path)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_process]{batch_process()}}, \code{\link[=batch_config]{batch_config()}} and
 \code{\link[=batch_cleanup]{batch_cleanup()}}

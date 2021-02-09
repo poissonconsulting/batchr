@@ -7,6 +7,13 @@
 #' @return A named list of the configuration values.
 #' @seealso [batch_process()] and [batch_log_read()]
 #' @export
+#' @examples 
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_config_read(path)
+#' batch_cleanup(path, force = TRUE, remaining = TRUE)
+#' unlink(file.path(path, "file1.csv"))
 batch_config_read <- function(path) {
   chk_dir(path)
   file <- file.path(path, ".batchr.rds")
@@ -30,6 +37,15 @@ batch_config_read <- function(path) {
 #' }
 #' @seealso [batch_process()] and [batch_config_read()]
 #' @export
+#' @examples 
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_log_read(path)
+#' batch_run(path, ask = FALSE)
+#' batch_log_read(path)
+#' batch_cleanup(path)
+#' unlink(file.path(path, "file1.csv"))
 batch_log_read <- function(path) {
   batch_config_read(path)
   logged_data(path)

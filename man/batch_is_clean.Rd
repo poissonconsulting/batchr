@@ -17,6 +17,16 @@ A flag specifying whether the directory is clean.
 \description{
 Tests whether directory contains configuration file created by \code{\link[=batch_config]{batch_config()}}.
 }
+\examples{
+path <- tempdir()
+batch_is_clean(path)
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_is_clean(path)
+batch_cleanup(path, force = TRUE, remaining = TRUE)
+batch_is_clean(path)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_cleanup]{batch_cleanup()}}
 }

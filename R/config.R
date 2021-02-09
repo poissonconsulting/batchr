@@ -34,6 +34,13 @@
 #' that will be processed when [batch_run()] is called.
 #' @seealso [batch_process()] and [batch_run()]
 #' @export
+#' @examples 
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_run(path, ask = FALSE)
+#' batch_cleanup(path)
+#' unlink(file.path(path, "file1.csv"))
 batch_config <- function(fun, path, regexp = ".*", recurse = FALSE, ...) {
   chk_function(fun)
   chk_dir(path)

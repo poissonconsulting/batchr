@@ -34,6 +34,13 @@
 #' @seealso [batch_process()], [batch_config()] and
 #' [batch_cleanup()]
 #' @export
+#' @examples
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_run(path, ask = FALSE)
+#' batch_cleanup(path)
+#' unlink(file.path(path, "file1.csv"))
 batch_run <- function(path,
                       failed = FALSE, progress = FALSE,
                       files = NULL,

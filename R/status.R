@@ -13,6 +13,15 @@
 #' }
 #' @seealso [batch_log_read()]
 #' @export
+#' @examples
+#' path <- tempdir()
+#' write.csv(mtcars, file.path(path, "file1.csv"))
+#' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+#' batch_file_status(path)
+#' batch_run(path, ask = FALSE)
+#' batch_file_status(path)
+#' batch_cleanup(path)
+#' unlink(file.path(path, "file1.csv"))
 batch_file_status <- function(path) {
   log <- batch_log_read(path)
   log <- log[!duplicated(log$file, fromLast = TRUE), ]

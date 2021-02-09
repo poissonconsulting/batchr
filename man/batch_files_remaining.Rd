@@ -24,6 +24,16 @@ Gets the names of the files that are remaining to be processed by
 \code{\link[=batch_completed]{batch_completed()}} can be used to test if there are any
 files remaining.
 }
+\examples{
+path <- tempdir()
+write.csv(mtcars, file.path(path, "file1.csv"))
+batch_config(function(x) TRUE, path, regexp = "[.]csv$")
+batch_files_remaining(path)
+batch_run(path, ask = FALSE)
+batch_files_remaining(path)
+batch_cleanup(path)
+unlink(file.path(path, "file1.csv"))
+}
 \seealso{
 \code{\link[=batch_process]{batch_process()}} and \code{\link[=batch_run]{batch_run()}}
 }
