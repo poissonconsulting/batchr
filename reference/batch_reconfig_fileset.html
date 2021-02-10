@@ -156,6 +156,46 @@ should be called with <code>failed = NA</code> or <code>failed = TRUE</code>.</p
 
     <div class='dont-index'><p><code><a href='batch_process.html'>batch_process()</a></code> and <code><a href='batch_config.html'>batch_config()</a></code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"file1.csv"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='batch_config.html'>batch_config</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='cn'>TRUE</span>, <span class='va'>path</span>, regexp <span class='op'>=</span> <span class='st'>"[.]csv$"</span><span class='op'>)</span>
+<span class='fu'><a href='batch_config_read.html'>batch_config_read</a></span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $time
+#&gt; [1] "2021-02-10 00:17:44 UTC"
+#&gt; 
+#&gt; $regexp
+#&gt; [1] "[.]csv$"
+#&gt; 
+#&gt; $recurse
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $fun
+#&gt; function(x) TRUE
+#&gt; &lt;environment: 0x7fba1b523150&gt;
+#&gt; 
+#&gt; $dots
+#&gt; list()
+#&gt; </div><div class='input'><span class='fu'>batch_reconfig_fileset</span><span class='op'>(</span><span class='va'>path</span>, regexp <span class='op'>=</span> <span class='st'>"file\\d+[.]csv$"</span><span class='op'>)</span>
+<span class='fu'><a href='batch_config_read.html'>batch_config_read</a></span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $time
+#&gt; [1] "2021-02-10 00:17:44 UTC"
+#&gt; 
+#&gt; $regexp
+#&gt; [1] "file\\d+[.]csv$"
+#&gt; 
+#&gt; $recurse
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $fun
+#&gt; function(x) TRUE
+#&gt; &lt;environment: 0x7fba1b714ec0&gt;
+#&gt; 
+#&gt; $dots
+#&gt; list()
+#&gt; </div><div class='input'><span class='fu'><a href='batch_cleanup.html'>batch_cleanup</a></span><span class='op'>(</span><span class='va'>path</span>, force <span class='op'>=</span> <span class='cn'>TRUE</span>, remaining <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"file1.csv"</span><span class='op'>)</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
