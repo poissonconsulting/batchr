@@ -7,14 +7,17 @@ rinteger <- function(n = 1L) {
 }
 
 get_random_seed <- function() {
-  if(!exists(".Random.seed")) runif(1)
-  .Random.seed
+  globalenv()$.Random.seed
 }
 
 set_random_seed <- function(seed, advance = FALSE) {
-  .Random.seed <<- seed
-  if(advance) runif(1)
-  invisible(.Random.seed)
+  env <- globalenv()
+  env$.Random.seed <- seed
+  if(advance) {
+    fun <- if(is.null(seed)) suppressWarnings else identity
+    fun(runif(1))
+  }
+  invisible(env$.Random.seed)
 }
 
 get_lecyer_cmrg_seed <- function() {
@@ -39,10 +42,10 @@ get_lecyer_cmrg_seed <- function() {
 # inspired by furrr:::generate_seed_streams
 batch_seeds <- function(files = batch_files_remaining()) {
   chk_s3_class(files, "character")
-
+  
   oseed <- get_random_seed()
   on.exit(set_random_seed(oseed, advance = TRUE))
-
+  
   seed <- get_lecyer_cmrg_seed()
   seeds <- vector("list", length = length(files))
   for (i in seq_len(length(files))) {
