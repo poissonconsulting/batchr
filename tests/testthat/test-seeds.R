@@ -1,5 +1,3 @@
-context("utils")
-
 test_that("rinteger", {
   expect_error(rinteger(-1))
   expect_identical(rinteger(0), integer(0))

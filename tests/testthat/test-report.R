@@ -1,5 +1,3 @@
-context("status")
-
 test_that("batch_report all processed successfully", {
   path <- withr::local_tempdir()
 

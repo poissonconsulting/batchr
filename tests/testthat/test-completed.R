@@ -1,5 +1,3 @@
-context("completed")
-
 test_that("batch_completed", {
   path <- withr::local_tempdir()
 

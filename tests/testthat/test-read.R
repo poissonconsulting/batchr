@@ -1,5 +1,3 @@
-context("read")
-
 test_that("batch_config_read", {
   path <- withr::local_tempdir()
 

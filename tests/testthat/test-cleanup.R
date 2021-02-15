@@ -1,5 +1,3 @@
-context("cleanup")
-
 test_that("batch_cleanup", {
   path <- withr::local_tempdir()
 
