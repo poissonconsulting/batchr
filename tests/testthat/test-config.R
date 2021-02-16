@@ -1,5 +1,3 @@
-context("config")
-
 test_that("batch_config returns matching files", {
   path <- withr::local_tempdir()
 

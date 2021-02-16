@@ -1,5 +1,3 @@
-context("process")
-
 test_that("batch_process", {
   path <- withr::local_tempdir()
 

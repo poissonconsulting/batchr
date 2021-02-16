@@ -1,5 +1,3 @@
-context("demo")
-
 test_that("demo", {
   path <- withr::local_tempdir()
 

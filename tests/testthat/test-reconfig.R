@@ -1,5 +1,3 @@
-context("reconfig")
-
 test_that("batch_reconfig_fun", {
   path <- withr::local_tempdir()
 

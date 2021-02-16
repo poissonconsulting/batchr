@@ -1,5 +1,3 @@
-context("is-clean")
-
 test_that("batch_is_clean()", {
   path <- withr::local_tempdir()
   

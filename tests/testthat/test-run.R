@@ -1,5 +1,3 @@
-context("run")
-
 test_that("batch_run", {
   path <- withr::local_tempdir()
   

@@ -1,5 +1,3 @@
-context("files")
-
 test_that("batch_files_remaining errors if no configuration file", {
   path <- withr::local_tempdir()
 
