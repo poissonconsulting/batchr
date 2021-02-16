@@ -1,6 +1,6 @@
 # batchr 0.0.1.9000
 
-- Switched from furrr::future_options() to furrr::furrr_options().
+- Internal changes only.
 
 
 # batchr 0.0.1
