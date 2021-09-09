@@ -8,6 +8,13 @@
 
 <title>Batch Report — batch_report • batchr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -41,6 +48,7 @@
 
 <meta property="og:title" content="Batch Report — batch_report" />
 <meta property="og:description" content="Outputs a report of the status of individual files to the console." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -125,7 +133,7 @@
     <p>Outputs a report of the status of individual files to the console.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>batch_report</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>batch_report</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,15 +153,25 @@ outputting a report of the status of individual files to the console.</p>
     <div class='dont-index'><p><code><a href='batch_file_status.html'>batch_file_status()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"file1.csv"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='batch_config.html'>batch_config</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='cn'>TRUE</span>, <span class='va'>path</span>, regexp <span class='op'>=</span> <span class='st'>"[.]csv$"</span>,<span class='op'>)</span>
-<span class='fu'>batch_report</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>!</span><span> </span><span style='color: #BBBBBB;'>file1.csv</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBBBB;'>Success: </span><span style='color: #00BB00;'>0</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBBBB;'>Failure: </span><span style='color: #00BB00;'>0</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBBBB;'>Remaining: </span><span style='color: #BB0000;'>1</span><span></span></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'><a href='batch_run.html'>batch_run</a></span><span class='op'>(</span><span class='va'>path</span>, ask <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='fu'>batch_report</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #BBBBBB;'>file1.csv</span><span style='color: #0000BB;'> [00:00:00.000]</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBBBB;'>Success: </span><span style='color: #00BB00;'>1</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBBBB;'>Failure: </span><span style='color: #00BB00;'>0</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBBBB;'>Remaining: </span><span style='color: #00BB00;'>0</span><span></span></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'><a href='batch_cleanup.html'>batch_cleanup</a></span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"file1.csv"</span><span class='op'>)</span><span class='op'>)</span>
-</div></span></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"file1.csv"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='batch_config.html'>batch_config</a></span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='cn'>TRUE</span>, <span class='va'>path</span>, regexp <span class='op'>=</span> <span class='st'>"[.]csv$"</span>,<span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>batch_report</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBB00;'>!</span> <span style='color: #BBBBBB;'>file1.csv</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBBBB;'>Success: </span><span style='color: #00BB00;'>0</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBBBB;'>Failure: </span><span style='color: #00BB00;'>0</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBBBB;'>Remaining: </span><span style='color: #BB0000;'>1</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='batch_run.html'>batch_run</a></span><span class='op'>(</span><span class='va'>path</span>, ask <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>batch_report</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> <span style='color: #BBBBBB;'>file1.csv</span><span style='color: #0000BB;'> [00:00:00.000]</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBBBB;'>Success: </span><span style='color: #00BB00;'>1</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBBBB;'>Failure: </span><span style='color: #00BB00;'>0</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBBBB;'>Remaining: </span><span style='color: #00BB00;'>0</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'><a href='batch_cleanup.html'>batch_cleanup</a></span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"file1.csv"</span><span class='op'>)</span><span class='op'>)</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -165,11 +183,11 @@ outputting a report of the status of individual files to the console.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Joe Thorley, Poisson Consulting.</p>
+  <p><p>Developed by Joe Thorley, Poisson Consulting.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
