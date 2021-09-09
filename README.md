@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# batchr
+# batchr <img src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
 
@@ -78,8 +78,8 @@ files.
 ``` r
 library(batchr)
 batch_process(fun, path, ask = FALSE)
-#> ✓ file1.csv [00:00:00.004]
-#> ✓ file2.csv [00:00:00.009]
+#> ✓ file1.csv [00:00:00.002]
+#> ✓ file2.csv [00:00:00.003]
 #> Success: 2
 #> Failure: 0
 #> Remaining: 0

@@ -6,6 +6,8 @@
 \alias{batchr-package}
 \title{batchr: Batch Process Files}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Processes multiple files with a user-supplied
     function. The key design principle is that only files which were 
     last modified before the directory was configured are processed.
