@@ -8,14 +8,14 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Processes multiple files with a user-supplied
-    function. The key design principle is that only files which were 
-    last modified before the directory was configured are processed.
-    A hidden file stores the configuration time and function etc while 
-    successfully processed files are automatically touched to update 
-    their modification date. As a result batch processing can be 
-    stopped and restarted and any files created (or modified or deleted) 
-    during processing are ignored.
+Processes multiple files with a user-supplied function. The
+    key design principle is that only files which were last modified
+    before the directory was configured are processed.  A hidden file
+    stores the configuration time and function etc while successfully
+    processed files are automatically touched to update their modification
+    date. As a result batch processing can be stopped and restarted and
+    any files created (or modified or deleted) during processing are
+    ignored.
 }
 \seealso{
 Useful links:

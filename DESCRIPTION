@@ -13,14 +13,14 @@ Authors@R:
              email = "audrey.beliveau@uwaterloo.ca"),
       person(given = "Poisson Consulting",
              role = c("cph", "fnd")))
-Description: Processes multiple files with a user-supplied
-    function. The key design principle is that only files which were 
-    last modified before the directory was configured are processed.
-    A hidden file stores the configuration time and function etc while 
-    successfully processed files are automatically touched to update 
-    their modification date. As a result batch processing can be 
-    stopped and restarted and any files created (or modified or deleted) 
-    during processing are ignored.
+Description: Processes multiple files with a user-supplied function. The
+    key design principle is that only files which were last modified
+    before the directory was configured are processed.  A hidden file
+    stores the configuration time and function etc while successfully
+    processed files are automatically touched to update their modification
+    date. As a result batch processing can be stopped and restarted and
+    any files created (or modified or deleted) during processing are
+    ignored.
 License: MIT + file LICENSE
 URL: https://poissonconsulting.github.io/batchr/
 BugReports: https://github.com/poissonconsulting/batchr/issues
@@ -47,4 +47,4 @@ VignetteBuilder:
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
