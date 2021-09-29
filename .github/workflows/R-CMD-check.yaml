@@ -52,9 +52,6 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Test run
-        run: Rscript -e 'print("hello")'
-
       - name: Query dependencies
         run: |
           install.packages('remotes')
