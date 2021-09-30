@@ -14,6 +14,7 @@ coverage](https://codecov.io/gh/poissonconsulting/batchr/branch/master/graph/bad
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/batchr)](https://CRAN.R-project.org/package=batchr)
+![CRAN downloads](https://cranlogs.r-pkg.org/badges/batchr)
 <!-- badges: end -->
 
 `batchr` is an R package to batch process files using an R function.
@@ -79,7 +80,7 @@ files.
 library(batchr)
 batch_process(fun, path, ask = FALSE)
 #> ✓ file1.csv [00:00:00.002]
-#> ✓ file2.csv [00:00:00.003]
+#> ✓ file2.csv [00:00:00.005]
 #> Success: 2
 #> Failure: 0
 #> Remaining: 0
