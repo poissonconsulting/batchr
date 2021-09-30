@@ -29,6 +29,8 @@ Fixed LazyData note for all flavors.
 ERROR on CRAN Flavor r-release-macos-x86_64 and r-oldrel-macos-x86_64. 
 Unable to replicate error package was built and checked on:
 
+  - local
+    - macOS 11.5.2 | R 4.1.1 | MacBook Pro
   - https://mac.r-project.org/macbuilder/submit.html
     - r-release-macosx-arm64|4.1.1|macosx|macOS 11.5.2 (20G95)|Mac mini|Apple M1| 
   - [GitHub Actions](https://github.com/poissonconsulting/batchr/actions/runs/1288929072)
@@ -36,6 +38,11 @@ Unable to replicate error package was built and checked on:
     - macOS-latest (oldrel)
     - macOS-11 (release)
     - macOS-11 (oldrel)
+    - windows-latest (release)
+    - ubuntu-20.04 (devel)
+    - ubuntu-20.04 (release)
+    - ubuntu-20.04 (oldrel)
+    - ubuntu-20.04 (3.6)
   - [rhub](https://r-hub.github.io/rhub/articles/rhub.html)
     - macos-highsierra-release
     - macos-highsierra-release-cran
