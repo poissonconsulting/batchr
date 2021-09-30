@@ -117,7 +117,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; $time</span>
-<span class="co">#&gt; [1] "2021-09-30 01:04:24 UTC"</span>
+<span class="co">#&gt; [1] "2021-09-30 01:09:33 UTC"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $regexp</span>
 <span class="co">#&gt; [1] "file\\d[.]txt$"</span>
@@ -191,7 +191,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
-<span class="co">#&gt; ✔ file.txt [00:00:00.041]</span>
+<span class="co">#&gt; ✔ file.txt [00:00:00.042]</span>
 <span class="co">#&gt; ✔ file2.txt [00:00:00.041]</span>
 <span class="co">#&gt; ✖ file3.txt [00:00:00.008]</span>
 <span class="co">#&gt; ✖ file4.txt [00:00:00.000]</span>
@@ -204,9 +204,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, failed <span class="op">=</span> <span class="cn">TRUE</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
-<span class="co">#&gt; ✔ file.txt [00:00:00.041]</span>
+<span class="co">#&gt; ✔ file.txt [00:00:00.042]</span>
 <span class="co">#&gt; ✔ file2.txt [00:00:00.041]</span>
-<span class="co">#&gt; ✔ file3.txt [00:00:00.041]</span>
+<span class="co">#&gt; ✔ file3.txt [00:00:00.081]</span>
 <span class="co">#&gt; ✔ file4.txt [00:00:00.085]</span>
 <span class="co">#&gt; Success: 4</span>
 <span class="co">#&gt; Failure: 0</span>
