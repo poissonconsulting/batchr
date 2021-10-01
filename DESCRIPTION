@@ -11,6 +11,11 @@ Authors@R:
              family = "Beliveau",
              role = "ctb",
              email = "audrey.beliveau@uwaterloo.ca"),
+      person(given = "Ayla",
+             family = "Pearson",
+             role = "ctb",
+             email = "ayla@poissonconsulting.ca",
+             comment = c(ORCID = "https://orcid.org/0000-0001-7388-1222")),
       person(given = "Poisson Consulting",
              role = c("cph", "fnd")))
 Description: Processes multiple files with a user-supplied function. The
