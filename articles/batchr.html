@@ -117,7 +117,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; $time</span>
-<span class="co">#&gt; [1] "2021-09-30 01:09:33 UTC"</span>
+<span class="co">#&gt; [1] "2021-10-01 00:41:14 UTC"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $regexp</span>
 <span class="co">#&gt; [1] "file\\d[.]txt$"</span>
@@ -150,18 +150,18 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_log_read.html">batch_log_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt;      type         time      file                           message</span>
-<span class="co">#&gt; 1 SUCCESS 00:00:00.041 file2.txt                              &lt;NA&gt;</span>
+<span class="co">#&gt; 1 SUCCESS 00:00:00.001 file2.txt                              &lt;NA&gt;</span>
 <span class="co">#&gt; 2 FAILURE 00:00:00.008 file3.txt                              &lt;NA&gt;</span>
 <span class="co">#&gt; 3 FAILURE 00:00:00.000 file4.txt Uh, Houston, we've had a problem.</span></code></pre></div>
 <p>or summarised using</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
-<span class="co">#&gt; ✔ file2.txt [00:00:00.041]</span>
-<span class="co">#&gt; ✖ file3.txt [00:00:00.008]</span>
-<span class="co">#&gt; ✖ file4.txt [00:00:00.000]</span>
-<span class="co">#&gt; Success: 1</span>
-<span class="co">#&gt; Failure: 2</span>
-<span class="co">#&gt; Remaining: 0</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.008]</span></span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">1</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Failure: </span><span style="color: #BB0000;">2</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Remaining: </span><span style="color: #00BB00;">0</span></span>
 <span class="co">#&gt; </span></code></pre></div>
 <p>The contents of ‘file2.csv’ are now as follows</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -191,26 +191,26 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
-<span class="co">#&gt; ✔ file.txt [00:00:00.042]</span>
-<span class="co">#&gt; ✔ file2.txt [00:00:00.041]</span>
-<span class="co">#&gt; ✖ file3.txt [00:00:00.008]</span>
-<span class="co">#&gt; ✖ file4.txt [00:00:00.000]</span>
-<span class="co">#&gt; Success: 2</span>
-<span class="co">#&gt; Failure: 2</span>
-<span class="co">#&gt; Remaining: 0</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.008]</span></span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">2</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Failure: </span><span style="color: #BB0000;">2</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Remaining: </span><span style="color: #00BB00;">0</span></span>
 <span class="co">#&gt; </span></code></pre></div>
 <p>In order to reattempt processing of the ‘file3.txt’ and ‘file4.txt’ we need to set <code>failed = TRUE</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, failed <span class="op">=</span> <span class="cn">TRUE</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
-<span class="co">#&gt; ✔ file.txt [00:00:00.042]</span>
-<span class="co">#&gt; ✔ file2.txt [00:00:00.041]</span>
-<span class="co">#&gt; ✔ file3.txt [00:00:00.081]</span>
-<span class="co">#&gt; ✔ file4.txt [00:00:00.085]</span>
-<span class="co">#&gt; Success: 4</span>
-<span class="co">#&gt; Failure: 0</span>
-<span class="co">#&gt; Remaining: 0</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.003]</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">4</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Failure: </span><span style="color: #00BB00;">0</span></span>
+<span class="co">#&gt; <span style="color: #BBBBBB;">Remaining: </span><span style="color: #00BB00;">0</span></span>
 <span class="co">#&gt; </span></code></pre></div>
 </div>
 <div id="clean-up" class="section level2">
