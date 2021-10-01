@@ -1,30 +1,10 @@
-## Test environments
+## CRAN Fixes
 
-release 4.0.3
-
-* OSX (local) - release
-* OSX (actions) - release
-* Ubuntu (actions) - 3.6, oldrel, release and devel
-* Windows (actions) - release
-* Windows (winbuilder) - devel
-
-0 errors | 0 warnings | 1 note
-
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
-
-New submission
-
-### Resubmission
-
-> Please do not modify the .GlobalEnv. This is not allowed by the CRAN policies.
-e.g.: .Random.seed
-
-Done
-
-### Resubmission 
+### Fixed All Notes
 
 Fixed LazyData note for all flavors.
+
+### Unable to Replicate Error
 
 ERROR on CRAN Flavor r-release-macos-x86_64 and r-oldrel-macos-x86_64. 
 Unable to replicate error package was built and checked on:
@@ -43,6 +23,10 @@ Unable to replicate error package was built and checked on:
     - ubuntu-20.04 (release)
     - ubuntu-20.04 (oldrel)
     - ubuntu-20.04 (3.6)
+  - `devtools` check_win_*()
+    - devel
+    - release
+    - oldrelease
   - [rhub](https://r-hub.github.io/rhub/articles/rhub.html)
     - macos-highsierra-release
     - macos-highsierra-release-cran
@@ -51,7 +35,10 @@ Unable to replicate error package was built and checked on:
     - fedora-clang-devel
     - ubuntu-gcc-release
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
 
 Unable to reproduce errors identified in CRAN Package Check Results. 
 The rhub documentation says macos-highsierra-release-cran is the CRAN 
