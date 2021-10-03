@@ -1,6 +1,6 @@
 Package: batchr
 Title: Batch Process Files
-Version: 0.0.2
+Version: 0.0.2.9000
 Authors@R: 
     c(person(given = "Joe",
              family = "Thorley",
