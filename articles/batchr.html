@@ -79,7 +79,7 @@
       <h1 data-toc-skip>Get Started with batchr</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/poissonconsulting/batchr/blob/master/vignettes/batchr.Rmd" class="external-link"><code>vignettes/batchr.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/poissonconsulting/batchr/blob/HEAD/vignettes/batchr.Rmd" class="external-link"><code>vignettes/batchr.Rmd</code></a></small>
       <div class="hidden name"><code>batchr.Rmd</code></div>
 
     </div>
@@ -105,9 +105,9 @@
   <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"contents"</span>, <span class="st">"modified contents"</span>, <span class="va">txt</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="va">txt</span>, <span class="va">file</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<div id="configure" class="section level2">
-<h2 class="hasAnchor">
-<a href="#configure" class="anchor" aria-hidden="true"></a>Configure</h2>
+<div class="section level2">
+<h2 id="configure">Configure<a class="anchor" aria-label="anchor" href="#configure"></a>
+</h2>
 <p>Now let the user configure the directory to only process files names that include a digit before the file extension.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/batchr/" class="external-link">batchr</a></span><span class="op">)</span>
@@ -117,7 +117,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; $time</span>
-<span class="co">#&gt; [1] "2021-10-03 21:31:21 UTC"</span>
+<span class="co">#&gt; [1] "2022-06-17 22:15:29 UTC"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $regexp</span>
 <span class="co">#&gt; [1] "file\\d[.]txt$"</span>
@@ -138,9 +138,9 @@
 <span class="co">#&gt; list()</span></code></pre></div>
 <p>The <code>time</code> value specifies the system time (in UTC) that the project was configured. It is very important because only files that were last modified <em>before</em> the configuration time are considered to be unprocessed (when a file is successfully processed its modification time is automatically set to the current system time).</p>
 </div>
-<div id="run" class="section level2">
-<h2 class="hasAnchor">
-<a href="#run" class="anchor" aria-hidden="true"></a>Run</h2>
+<div class="section level2">
+<h2 id="run">Run<a class="anchor" aria-label="anchor" href="#run"></a>
+</h2>
 <p>With the directory configured the next task is to start processing the files</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
@@ -151,13 +151,13 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_log_read.html">batch_log_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt;      type         time      file                           message</span>
 <span class="co">#&gt; 1 SUCCESS 00:00:00.001 file2.txt                              &lt;NA&gt;</span>
-<span class="co">#&gt; 2 FAILURE 00:00:00.007 file3.txt                              &lt;NA&gt;</span>
+<span class="co">#&gt; 2 FAILURE 00:00:00.006 file3.txt                              &lt;NA&gt;</span>
 <span class="co">#&gt; 3 FAILURE 00:00:00.000 file4.txt Uh, Houston, we've had a problem.</span></code></pre></div>
 <p>or summarised using</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.007]</span></span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.006]</span></span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span>
 <span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">1</span></span>
 <span class="co">#&gt; <span style="color: #BBBBBB;">Failure: </span><span style="color: #BB0000;">2</span></span>
@@ -168,9 +168,9 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"file2.txt"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "the modified contents of file2.txt"</span></code></pre></div>
 </div>
-<div id="reconfigure" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reconfigure" class="anchor" aria-hidden="true"></a>Reconfigure</h2>
+<div class="section level2">
+<h2 id="reconfigure">Reconfigure<a class="anchor" aria-label="anchor" href="#reconfigure"></a>
+</h2>
 <p>At this point let us update the function and regular expression so that all files are included and successfully processed.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_reconfig_fileset.html">batch_reconfig_fileset</a></span><span class="op">(</span><span class="va">path</span>, regexp <span class="op">=</span> <span class="st">"[.]txt$"</span><span class="op">)</span>
@@ -183,9 +183,9 @@
 
 <span class="fu"><a href="../reference/batch_reconfig_fun.html">batch_reconfig_fun</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">fun</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="rerun" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rerun" class="anchor" aria-hidden="true"></a>Rerun</h2>
+<div class="section level2">
+<h2 id="rerun">Rerun<a class="anchor" aria-label="anchor" href="#rerun"></a>
+</h2>
 <p>Now when we call <code><a href="../reference/batch_run.html">batch_run()</a></code> the newly included ‘file.txt’ is successfully processed.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_run.html">batch_run</a></span><span class="op">(</span><span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
@@ -193,7 +193,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.007]</span></span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.006]</span></span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span>
 <span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">2</span></span>
 <span class="co">#&gt; <span style="color: #BBBBBB;">Failure: </span><span style="color: #BB0000;">2</span></span>
@@ -213,9 +213,9 @@
 <span class="co">#&gt; <span style="color: #BBBBBB;">Remaining: </span><span style="color: #00BB00;">0</span></span>
 <span class="co">#&gt; </span></code></pre></div>
 </div>
-<div id="clean-up" class="section level2">
-<h2 class="hasAnchor">
-<a href="#clean-up" class="anchor" aria-hidden="true"></a>Clean Up</h2>
+<div class="section level2">
+<h2 id="clean-up">Clean Up<a class="anchor" aria-label="anchor" href="#clean-up"></a>
+</h2>
 <p>With all the files successfully processed the only remaining task is to delete the hidden configuration and log files.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">path</span>, all.files <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -246,7 +246,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
       </footer>

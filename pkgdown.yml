@@ -1,7 +1,7 @@
 pandoc: 2.7.3
-pkgdown: 1.9000.9000.9000
-pkgdown_sha: 3593f80b9a782b9d9dae1d2bff2306d728158854
+pkgdown: 2.0.4.9000
+pkgdown_sha: 5203a63f002405e99b8510debe809ff3d9f18b02
 articles:
   batchr: batchr.html
-last_built: 2021-10-03T21:31Z
+last_built: 2022-06-17T22:15Z
 

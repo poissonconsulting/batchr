@@ -65,7 +65,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/poissonconsulting/batchr/">
+  <a href="https://github.com/poissonconsulting/batchr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -82,19 +82,17 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="batchr-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#batchr-" class="anchor" aria-hidden="true"></a>batchr <img src="reference/figures/logo.png" align="right">
+<div class="section level1">
+<div class="page-header"><h1 id="batchr-">batchr <img src="reference/figures/logo.png" align="right"><a class="anchor" aria-label="anchor" href="#batchr-"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p><code>batchr</code> is an R package to batch process files using an R function.</p>
 <p>The key design principle is that only files which were last modified <em>before</em> the directory was configured are processed. A hidden file stores the configuration time and function etc while successfully processed files are automatically touched to update their modification date.</p>
 <p>As a result batch processing can be stopped and restarted and any files created (or modified or deleted) during processing are ignored.</p>
 <p>To allow the user control over the reprocessing of problematic files, all processing attempts (SUCCESS or FAILURE) are recorded in a hidden log file.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install the released version of batchr from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"batchr"</span><span class="op">)</span></code></pre></div>
@@ -103,9 +101,9 @@
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"poissonconsulting/batchr"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="demonstration" class="section level2">
-<h2 class="hasAnchor">
-<a href="#demonstration" class="anchor" aria-hidden="true"></a>Demonstration</h2>
+<div class="section level2">
+<h2 id="demonstration">Demonstration<a class="anchor" aria-label="anchor" href="#demonstration"></a>
+</h2>
 <p>Consider a directory with two .csv files</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"example"</span><span class="op">)</span>
@@ -126,8 +124,8 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/batchr/" class="external-link">batchr</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/batch_process.html">batch_process</a></span><span class="op">(</span><span class="va">fun</span>, <span class="va">path</span>, ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; â file1.csv [00:00:00.002]</span>
-<span class="co">#&gt; â file2.csv [00:00:00.005]</span>
+<span class="co">#&gt; ✓ file1.csv [00:00:00.002]</span>
+<span class="co">#&gt; ✓ file2.csv [00:00:00.005]</span>
 <span class="co">#&gt; Success: 2</span>
 <span class="co">#&gt; Failure: 0</span>
 <span class="co">#&gt; Remaining: 0</span>
@@ -141,24 +139,24 @@
 <span class="co">#&gt;   x</span>
 <span class="co">#&gt; 1 6</span></code></pre></div>
 <p>For a more realistic demonstration with finer control over the batch processing see the <a href="https://poissonconsulting.github.io/batchr/articles/batchr.html" class="external-link">Batchr Demonstration</a> vignette.</p>
-<div id="parallel-chains" class="section level3">
-<h3 class="hasAnchor">
-<a href="#parallel-chains" class="anchor" aria-hidden="true"></a>Parallel Chains</h3>
+<div class="section level3">
+<h3 id="parallel-chains">Parallel Chains<a class="anchor" aria-label="anchor" href="#parallel-chains"></a>
+</h3>
 <p>To process the files in parallel simply set</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org" class="external-link">future</a></span><span class="op">)</span>
 <span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="contribution" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contribution" class="anchor" aria-hidden="true"></a>Contribution</h2>
+<div class="section level2">
+<h2 id="contribution">Contribution<a class="anchor" aria-label="anchor" href="#contribution"></a>
+</h2>
 <p>Please report any <a href="https://github.com/poissonconsulting/batchr/issues" class="external-link">issues</a>.</p>
 <p><a href="https://github.com/poissonconsulting/batchr/pulls" class="external-link">Pull requests</a> are always welcome.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the batchr project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
@@ -168,12 +166,9 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=batchr">https://​cloud.r-project.org/​package=batchr</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/poissonconsulting/batchr/">https://​github.com/​poissonconsulting/​batchr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/poissonconsulting/batchr/issues">https://​github.com/​poissonconsulting/​batchr/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=batchr" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/poissonconsulting/batchr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/poissonconsulting/batchr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -181,7 +176,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -190,15 +185,23 @@
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+<li><a href="SUPPORT.html">Getting help</a></li>
+</ul>
+</div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing batchr</a></li>
 </ul>
 </div>
 
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Joe Thorley <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Joe Thorley <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Poisson Consulting <br><small class="roles"> Copyright holder, funder </small>  </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -224,7 +227,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
       </footer>
