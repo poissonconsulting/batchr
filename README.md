@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # batchr <img src="man/figures/logo.png" align="right" />
@@ -37,66 +36,59 @@ log file.
 You can install the released version of batchr from
 [CRAN](https://CRAN.R-project.org) with:
 
-``` r
-install.packages("batchr")
-```
+    install.packages("batchr")
 
 And the development version from
 [GitHub](https://github.com/poissonconsulting/batchr) with:
 
-``` r
-# install.packages("remotes")
-remotes::install_github("poissonconsulting/batchr")
-```
+    # install.packages("remotes")
+    remotes::install_github("poissonconsulting/batchr")
 
 ## Demonstration
 
 Consider a directory with two .csv files
 
-``` r
-path <- file.path(tempdir(), "example")
-unlink(path, force = TRUE)
-dir.create(path)
+    path <- file.path(tempdir(), "example")
+    unlink(path, force = TRUE)
+    dir.create(path)
 
-write.csv(data.frame(x = 1), file.path(path, "file1.csv"), row.names = FALSE)
-write.csv(data.frame(x = 3), file.path(path, "file2.csv"), row.names = FALSE)
-```
+    write.csv(data.frame(x = 1), file.path(path, "file1.csv"), row.names = FALSE)
+    write.csv(data.frame(x = 3), file.path(path, "file2.csv"), row.names = FALSE)
 
 First define the function to process them.
 
-``` r
-fun <- function(file) {
-  data <- read.csv(file)
-  data$x <- data$x * 2
-  write.csv(data, file, row.names = FALSE)
-  TRUE
-}
-```
+    fun <- function(file) {
+      data <- read.csv(file)
+      data$x <- data$x * 2
+      write.csv(data, file, row.names = FALSE)
+      TRUE
+    }
 
 Then simply call `batch_process()` to apply the function to all the
 files.
 
-``` r
-library(batchr)
-batch_process(fun, path, ask = FALSE)
-#> ✔ file1.csv [00:00:00.001]
-#> ✔ file2.csv [00:00:00.002]
-#> Success: 2
-#> Failure: 0
-#> Remaining: 0
-#> 
-```
+    library(batchr)
+    batch_process(fun, path, ask = FALSE)
+    #> 
+    #> Attaching package: 'purrr'
+    #> The following object is masked from 'package:testthat':
+    #> 
+    #>     is_null
+    #> ✔ file1.csv [00:00:00.001]
+    #> ✔ file2.csv [00:00:00.008]
+    #> Success: 2
+    #> Failure: 0
+    #> Remaining: 0
+    #> 
 
 The files have been updated as follows.
 
-``` r
-read.csv(file.path(path, "file1.csv"))
-#>   x
-#> 1 2
-read.csv(file.path(path, "file2.csv"))
-#>   x
-#> 1 6
-```
+    read.csv(file.path(path, "file1.csv"))
+    #>   x
+    #> 1 2
+    read.csv(file.path(path, "file2.csv"))
+    #>   x
+    #> 1 6
 
 For a more realistic demonstration with finer control over the batch
 processing see the [Batchr
@@ -107,10 +99,8 @@ vignette.
 
 To process the files in parallel simply set
 
-``` r
-library(future)
-plan(multisession)
-```
+    library(future)
+    plan(multisession)
 
 ## Contribution
 
