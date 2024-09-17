@@ -8,7 +8,6 @@ on:
 
 name: R-CMD-check
 
-
 permissions: read-all
 
 jobs:
