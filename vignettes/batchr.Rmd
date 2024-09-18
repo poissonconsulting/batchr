@@ -33,8 +33,10 @@ but fail for the last two by returning FALSE and throwing an error, respectively
 
 ```{r}
 fun <- function(file) {
-  if(grepl("file3[.]txt$", file)) return(FALSE)
-  if(grepl("file4[.]txt$", file)) stop("Uh, Houston, we've had a problem.", call. = FALSE)
+  if (grepl("file3[.]txt$", file)) {
+    return(FALSE)
+  }
+  if (grepl("file4[.]txt$", file)) stop("Uh, Houston, we've had a problem.", call. = FALSE)
   txt <- readLines(file)
   txt <- gsub("contents", "modified contents", txt)
   writeLines(txt, file)

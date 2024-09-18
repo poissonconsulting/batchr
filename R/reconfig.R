@@ -55,7 +55,7 @@ batch_reconfig_fun <- function(path, fun, ...) {
 #' remaining to be processed.
 #' @seealso [batch_process()] and [batch_config()]
 #' @export
-#' @examples 
+#' @examples
 #' path <- tempdir()
 #' write.csv(mtcars, file.path(path, "file1.csv"))
 #' batch_config(function(x) TRUE, path, regexp = "[.]csv$")

@@ -56,7 +56,7 @@ batch_run <- function(path,
     chk_not_any_na(files)
     chk_unique(files)
   }
-  if(!is.null(seeds)) {
+  if (!is.null(seeds)) {
     chk_list(seeds)
     chk_named(seeds)
     chk_unique(names(seeds))
@@ -94,7 +94,7 @@ batch_run <- function(path,
     return(invisible(.named_logical0))
   }
 
-  if(is.null(seeds)) {
+  if (is.null(seeds)) {
     seeds <- batch_seeds(remaining)
   } else {
     chk_superset(names(seeds), remaining)

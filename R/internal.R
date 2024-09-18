@@ -1,7 +1,6 @@
 report_file <- function(x) {
-
   time <- x$time
-  if(!is.na(time)) {
+  if (!is.na(time)) {
     time <- time_to_character(time)
     time <- paste0(" [", time, "]")
   }
@@ -9,7 +8,8 @@ report_file <- function(x) {
   switch(x$type,
     SUCCESS = cli_alert_success(c(col_white(x$file), col_blue(time))),
     FAILURE = cli_alert_danger(c(col_white(x$file), col_blue(time))),
-    REMAING = cli_alert_warning(col_white(x$file)))
+    REMAING = cli_alert_warning(col_white(x$file))
+  )
 }
 
 report_files <- function(status) {
@@ -27,8 +27,8 @@ report_types <- function(status) {
 
   cli_par()
   cli_text(col_white("Success: "), col_green(freq[1]))
-  cli_text(col_white("Failure: "), if(freq[2] == 0) col_green(freq[2]) else col_red(freq[2]))
-  cli_text(col_white("Remaining: "), if(freq[3] == 0) col_green(freq[3]) else col_red(freq[3]))
+  cli_text(col_white("Failure: "), if (freq[2] == 0) col_green(freq[2]) else col_red(freq[2]))
+  cli_text(col_white("Remaining: "), if (freq[3] == 0) col_green(freq[3]) else col_red(freq[3]))
 }
 
 save_config <- function(path, regexp, recurse, fun, dots, time) {
@@ -50,8 +50,8 @@ read_lines_log <- function(path) {
 
 no_log_data <- function() {
   tibble(
-    type = character(0), 
-    time = hms::as_hms(integer(0)), 
+    type = character(0),
+    time = hms::as_hms(integer(0)),
     file = character(0),
     message = character(0)
   )
@@ -138,7 +138,6 @@ time_to_character <- function(time) {
 }
 
 process_file <- function(file, fun, dots, path, config_time) {
-
   validate_remaining_file(path, file, config_time)
 
   dots <- c(file.path(path, file), dots)
@@ -171,11 +170,11 @@ process_file <- function(file, fun, dots, path, config_time) {
 
 process_files <- function(remaining, fun, dots, path, config_time,
                           progress, options) {
-
   success <- future_map(remaining, process_file,
     fun = fun, dots = dots,
     path = path, config_time = config_time,
-    .progress = progress, .options = options)
+    .progress = progress, .options = options
+  )
 
   success <- unlist(success)
   invisible(set_names(success, remaining))
