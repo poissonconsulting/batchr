@@ -99,8 +99,10 @@ this case rewriting their contents) but fail for the last two by
 returning FALSE and throwing an error, respectively.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"file3[.]txt$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"file4[.]txt$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Uh, Houston, we've had a problem."</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"file3[.]txt$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"file4[.]txt$"</span>, <span class="va">file</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"Uh, Houston, we've had a problem."</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>  <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span>  <span class="va">txt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"contents"</span>, <span class="st">"modified contents"</span>, <span class="va">txt</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="va">txt</span>, <span class="va">file</span><span class="op">)</span></span>
@@ -118,7 +120,7 @@ that include a digit before the file extension.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $time</span></span>
-<span><span class="co">#&gt; [1] "2024-09-18 15:49:02 UTC"</span></span>
+<span><span class="co">#&gt; [1] "2024-09-18 16:10:36 UTC"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $regexp</span></span>
 <span><span class="co">#&gt; [1] "file\\d[.]txt$"</span></span>
@@ -129,8 +131,9 @@ that include a digit before the file extension.</p>
 <span><span class="co">#&gt; $fun</span></span>
 <span><span class="co">#&gt; function (file) </span></span>
 <span><span class="co">#&gt; {</span></span>
-<span><span class="co">#&gt;     if (grepl("file3[.]txt$", file)) </span></span>
+<span><span class="co">#&gt;     if (grepl("file3[.]txt$", file)) {</span></span>
 <span><span class="co">#&gt;         return(FALSE)</span></span>
+<span><span class="co">#&gt;     }</span></span>
 <span><span class="co">#&gt;     if (grepl("file4[.]txt$", file)) </span></span>
 <span><span class="co">#&gt;         stop("Uh, Houston, we've had a problem.", call. = FALSE)</span></span>
 <span><span class="co">#&gt;     txt &lt;- readLines(file)</span></span>
@@ -162,13 +165,13 @@ read using <code><a href="../reference/batch_log_read.html">batch_log_read()</a>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_log_read.html">batch_log_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      type         time      file                           message</span></span>
-<span><span class="co">#&gt; 1 SUCCESS 00:00:00.001 file2.txt                              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 1 SUCCESS 00:00:00.000 file2.txt                              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 2 FAILURE 00:00:00.003 file3.txt                              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 3 FAILURE 00:00:00.000 file4.txt Uh, Houston, we've had a problem.</span></span></code></pre></div>
 <p>or summarised using</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.003]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">1</span></span></span>
@@ -206,7 +209,7 @@ that all files are included and successfully processed.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.003]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">2</span></span></span>
@@ -220,7 +223,7 @@ we need to set <code>failed = TRUE</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.001]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.002]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">4</span></span></span>
