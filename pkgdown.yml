@@ -1,7 +1,6 @@
-pandoc: 2.7.3
-pkgdown: 2.0.4.9000
-pkgdown_sha: 5203a63f002405e99b8510debe809ff3d9f18b02
+pandoc: 3.1.11
+pkgdown: 2.1.1
+pkgdown_sha: ~
 articles:
   batchr: batchr.html
-last_built: 2022-06-18T00:15Z
-
+last_built: 2024-09-18T15:48Z
