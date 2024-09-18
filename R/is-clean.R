@@ -7,7 +7,7 @@
 #' @return A flag specifying whether the directory is clean.
 #' @seealso [batch_cleanup()]
 #' @export
-#' @examples 
+#' @examples
 #' path <- tempdir()
 #' batch_is_clean(path)
 #' write.csv(mtcars, file.path(path, "file1.csv"))

@@ -7,7 +7,7 @@
 #' @return A named list of the configuration values.
 #' @seealso [batch_process()] and [batch_log_read()]
 #' @export
-#' @examples 
+#' @examples
 #' path <- tempdir()
 #' write.csv(mtcars, file.path(path, "file1.csv"))
 #' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
@@ -37,7 +37,7 @@ batch_config_read <- function(path) {
 #' }
 #' @seealso [batch_process()] and [batch_config_read()]
 #' @export
-#' @examples 
+#' @examples
 #' path <- tempdir()
 #' write.csv(mtcars, file.path(path, "file1.csv"))
 #' batch_config(function(x) TRUE, path, regexp = "[.]csv$")

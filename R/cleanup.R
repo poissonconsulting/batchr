@@ -52,7 +52,7 @@ batch_cleanup <- function(path, force = FALSE,
   )
   names(clean) <- files
   nfailed <- sum(!clean)
-  if(nfailed > 0 && !silent) {
+  if (nfailed > 0 && !silent) {
     wrn("Clean up of %n file%s failed", n = nfailed)
   }
   invisible(clean)

@@ -51,7 +51,7 @@ test_that("batch_log_read not yet processed", {
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
-  
+
   log <- batch_log_read(path)
   expect_s3_class(log, "tbl_df")
   expect_identical(colnames(log), c("type", "time", "file", "message"))
@@ -91,7 +91,7 @@ test_that("batch_log_read all processed successfully", {
   expect_is(log$time, "hms")
   expect_is(log$file, "character")
   expect_is(log$message, "character")
-  
+
   expect_identical(log$type, "SUCCESS")
   expect_lt(log$time, 5)
   expect_identical(log$file, "file1.csv")
@@ -147,7 +147,9 @@ test_that("batch_log_read all error processing", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) { stop("a problem")  }, path = path, regexp = "^file\\d[.]csv$"),
+    batch_config(function(x) {
+      stop("a problem")
+    }, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
 
@@ -166,7 +168,10 @@ test_that("batch_log_read one success (string) and one failure (error)", {
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
 
   fun <- function(x) {
-    if (grepl("file1[.]csv$", x)) {Sys.sleep(1e-05); stop("an error")}
+    if (grepl("file1[.]csv$", x)) {
+      Sys.sleep(1e-05)
+      stop("an error")
+    }
     Sys.sleep(0.51)
     "a success"
   }
@@ -179,8 +184,8 @@ test_that("batch_log_read one success (string) and one failure (error)", {
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
 
   log <- batch_log_read(path)
-  log <- log[order(log$file),]
-  
+  log <- log[order(log$file), ]
+
   expect_identical(log$type, c("FAILURE", "SUCCESS"))
   expect_gt(log$time[2], log$time[1])
   expect_identical(log$message, c("an error", "a success"))
@@ -188,7 +193,7 @@ test_that("batch_log_read one success (string) and one failure (error)", {
 
 test_that("batch_log_read with no configuration", {
   path <- withr::local_tempdir()
-  
+
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_error(batch_log_read(path),
@@ -238,7 +243,10 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   write.csv(data.frame(x = 1), file.path(path, "file2.csv"))
 
   fun <- function(x) {
-    if (grepl("file1[.]csv$", x)) {Sys.sleep(1e-05); stop("an error") }
+    if (grepl("file1[.]csv$", x)) {
+      Sys.sleep(1e-05)
+      stop("an error")
+    }
     Sys.sleep(0.5)
     "a success"
   }
@@ -255,8 +263,8 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
 
   log <- batch_log_read(path)
-  log <- log[order(log$file),]
-  
+  log <- log[order(log$file), ]
+
   expect_identical(log$type, c("FAILURE", "SUCCESS"))
   expect_gt(log$time[2], log$time[1])
   expect_identical(log$message, c("an error", "a success"))

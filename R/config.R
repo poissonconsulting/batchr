@@ -34,7 +34,7 @@
 #' that will be processed when [batch_run()] is called.
 #' @seealso [batch_process()] and [batch_run()]
 #' @export
-#' @examples 
+#' @examples
 #' path <- tempdir()
 #' write.csv(mtcars, file.path(path, "file1.csv"))
 #' batch_config(function(x) TRUE, path, regexp = "[.]csv$")
@@ -65,7 +65,9 @@ batch_config <- function(fun, path, regexp = ".*", recurse = FALSE, ...) {
   }
   dots <- list(...)
   cleanup_log_file(path)
-  save_config(path, regexp, recurse, fun = fun, dots = dots, time = 
-                sys_time_utc() + 1e-05) # 1e-05 required to ensure time check
+  save_config(path, regexp, recurse,
+    fun = fun, dots = dots, time =
+      sys_time_utc() + 1e-05
+  ) # 1e-05 required to ensure time check
   invisible(files)
 }

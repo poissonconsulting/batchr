@@ -1,6 +1,6 @@
 test_that("batch_is_clean()", {
   path <- withr::local_tempdir()
-  
+
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_true(batch_is_clean(path))

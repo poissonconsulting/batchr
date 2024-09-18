@@ -7,7 +7,8 @@ test_that("batch_process", {
     batch_process(function(x) TRUE,
       path = path,
       regexp = "^file\\d[.]csv$", ask = FALSE
-  ))
+    )
+  )
 })
 
 test_that("batch_process with options(seed = TRUE)", {
@@ -76,7 +77,10 @@ test_that("batch_process with failure ERROR", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
   write.csv(data.frame(x = 3), file.path(path, "file2.csv"))
 
-  fun <- function(file) { Sys.sleep(1e-05); stop("a problem", call. = FALSE) }
+  fun <- function(file) {
+    Sys.sleep(1e-05)
+    stop("a problem", call. = FALSE)
+  }
 
   expect_error(batch_config_read(path),
     "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",

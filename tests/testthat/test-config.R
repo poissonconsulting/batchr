@@ -13,7 +13,7 @@ test_that("batch_config returns matching files", {
 
 test_that("batch_config with no files", {
   path <- withr::local_tempdir()
-  
+
   expect_error(
     batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
     "^Directory '.*' does not contain any files matching '.*'[.]$"

@@ -100,7 +100,7 @@ test_that("batch_files_remaining ignores non-matching ones", {
 
 test_that("batch_files_remaining gets failed ones", {
   path <- withr::local_tempdir()
-  
+
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
   expect_error(batch_files_remaining(path),

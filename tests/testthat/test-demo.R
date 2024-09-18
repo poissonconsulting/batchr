@@ -32,13 +32,13 @@ test_that("demo", {
     batch_run(path, ask = FALSE),
     c(file2.txt = TRUE, file3.txt = FALSE, file4.txt = FALSE)
   )
-  
+
   log <- batch_log_read(path)
-  log <- log[order(log$file),]
-  
+  log <- log[order(log$file), ]
+
   expect_identical(log$type, c("SUCCESS", "FAILURE", "FAILURE"))
   expect_identical(log$message, c(NA, NA, "Uh, Houston, we've had a problem."))
-  
+
   expect_identical(
     readLines(file.path(path, "file.txt")),
     "the contents of file.txt"
@@ -74,8 +74,10 @@ test_that("demo", {
   expect_identical(batch_run(path, ask = FALSE), c(file.txt = TRUE))
   expect_identical(batch_run(path, ask = FALSE), c(x = TRUE)[-1])
 
-  expect_warning(expect_identical(batch_cleanup(path), c(. = FALSE)),
-                 "^Clean up of 1 file failed[.]$")
+  expect_warning(
+    expect_identical(batch_cleanup(path), c(. = FALSE)),
+    "^Clean up of 1 file failed[.]$"
+  )
   expect_identical(batch_run(path, ask = FALSE, failed = NA), c(file3.txt = TRUE, file4.txt = TRUE))
   expect_identical(batch_cleanup(path), c("." = TRUE))
 })
