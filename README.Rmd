@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/poissonconsulting/batchr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/batchr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/poissonconsulting/batchr/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/batchr)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/)
 [![CRAN status](https://www.r-pkg.org/badges/version/batchr)](https://CRAN.R-project.org/package=batchr)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/batchr)
 <!-- badges: end -->
