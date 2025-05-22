@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   batchr: batchr.html
-last_built: 2025-01-14T21:15Z
+last_built: 2025-05-22T07:04Z
 urls:
   reference: https://poissonconsulting.github.io/batchr/reference
   article: https://poissonconsulting.github.io/batchr/articles
