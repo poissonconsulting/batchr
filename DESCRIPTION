@@ -1,23 +1,14 @@
 Package: batchr
 Title: Batch Process Files
 Version: 0.0.2.9000
-Authors@R: 
-    c(person(given = "Joe",
-             family = "Thorley",
-             role = c("cre", "aut"),
-             email = "joe@poissonconsulting.ca",
-             comment = c(ORCID = "0000-0002-7683-4592")),
-      person(given = "Audrey",
-             family = "Beliveau",
-             role = "ctb",
-             email = "audrey.beliveau@uwaterloo.ca"),
-      person(given = "Ayla",
-             family = "Pearson",
-             role = "ctb",
-             email = "ayla@poissonconsulting.ca",
-             comment = c(ORCID = "https://orcid.org/0000-0001-7388-1222")),
-      person(given = "Poisson Consulting",
-             role = c("cph", "fnd")))
+Authors@R: c(
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("cre", "aut"),
+           comment = c(ORCID = "0000-0002-7683-4592")),
+    person("Audrey", "Beliveau", , "audrey.beliveau@uwaterloo.ca", role = "ctb"),
+    person("Ayla", "Pearson", , "ayla@poissonconsulting.ca", role = "ctb",
+           comment = c(ORCID = "https://orcid.org/0000-0001-7388-1222")),
+    person("Poisson Consulting", role = c("cph", "fnd"))
+  )
 Description: Processes multiple files with a user-supplied function. The
     key design principle is that only files which were last modified
     before the directory was configured are processed.  A hidden file
@@ -50,8 +41,8 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
+Config/Needs/website: poissonconsulting/poissontemplate
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-Config/Needs/website: poissonconsulting/poissontemplate
+RoxygenNote: 7.3.2.9000
