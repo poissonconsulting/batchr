@@ -2,7 +2,7 @@ Package: batchr
 Title: Batch Process Files
 Version: 0.0.2.9000
 Authors@R: c(
-    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("cre", "aut"),
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7683-4592")),
     person("Audrey", "Beliveau", , "audrey.beliveau@uwaterloo.ca", role = "ctb"),
     person("Ayla", "Pearson", , "ayla@poissonconsulting.ca", role = "ctb",
