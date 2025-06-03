@@ -104,7 +104,7 @@ that include a digit before the file extension.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_config_read.html">batch_config_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $time</span></span>
-<span><span class="co">#&gt; [1] "2025-06-02 21:46:13 UTC"</span></span>
+<span><span class="co">#&gt; [1] "2025-06-03 21:55:21 UTC"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $regexp</span></span>
 <span><span class="co">#&gt; [1] "file\\d[.]txt$"</span></span>
@@ -150,13 +150,13 @@ read using <code><a href="../reference/batch_log_read.html">batch_log_read()</a>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_log_read.html">batch_log_read</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      type         time      file                           message</span></span>
 <span><span class="co">#&gt; 1 SUCCESS 00:00:00.000 file2.txt                              &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2 FAILURE 00:00:00.006 file3.txt                              &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2 FAILURE 00:00:00.007 file3.txt                              &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 3 FAILURE 00:00:00.000 file4.txt Uh, Houston, we've had a problem.</span></span></code></pre></div>
 <p>or summarised using</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.006]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.007]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">1</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBBBB;">Failure: </span><span style="color: #BB0000;">2</span></span></span>
@@ -194,7 +194,7 @@ that all files are included and successfully processed.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batch_report.html">batch_report</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #BBBBBB;">file2.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.006]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file3.txt</span><span style="color: #0000BB;"> [00:00:00.007]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #BBBBBB;">file4.txt</span><span style="color: #0000BB;"> [00:00:00.000]</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBBBB;">Success: </span><span style="color: #00BB00;">2</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBBBB;">Failure: </span><span style="color: #BB0000;">2</span></span></span>

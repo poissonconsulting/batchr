@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   batchr: batchr.html
-last_built: 2025-06-02T21:46Z
+last_built: 2025-06-03T21:55Z
 urls:
   reference: https://poissonconsulting.github.io/batchr/reference
   article: https://poissonconsulting.github.io/batchr/articles
