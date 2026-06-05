@@ -1,0 +1,157 @@
+# batchr
+
+`batchr` is an R package to batch process files using an R function.
+
+The key design principle is that only files which were last modified
+*before* the directory was configured are processed. A hidden file
+stores the configuration time and function etc while successfully
+processed files are automatically touched to update their modification
+date.
+
+As a result batch processing can be stopped and restarted and any files
+created (or modified or deleted) during processing are ignored.
+
+To allow the user control over the reprocessing of problematic files,
+all processing attempts (SUCCESS or FAILURE) are recorded in a hidden
+log file.
+
+## Installation
+
+You can install the released version of batchr from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` R
+install.packages("batchr")
+```
+
+And the development version from
+[GitHub](https://github.com/poissonconsulting/batchr) with:
+
+``` R
+# install.packages("remotes")
+remotes::install_github("poissonconsulting/batchr")
+```
+
+## Demonstration
+
+Consider a directory with two .csv files
+
+``` R
+path <- file.path(tempdir(), "example")
+unlink(path, force = TRUE)
+dir.create(path)
+
+write.csv(data.frame(x = 1), file.path(path, "file1.csv"), row.names = FALSE)
+write.csv(data.frame(x = 3), file.path(path, "file2.csv"), row.names = FALSE)
+```
+
+First define the function to process them.
+
+``` R
+fun <- function(file) {
+  data <- read.csv(file)
+  data$x <- data$x * 2
+  write.csv(data, file, row.names = FALSE)
+  TRUE
+}
+```
+
+Then simply call
+[`batch_process()`](https://poissonconsulting.github.io/batchr/reference/batch_process.md)
+to apply the function to all the files.
+
+``` R
+library(batchr)
+batch_process(fun, path, ask = FALSE)
+#> 
+#> Attaching package: 'purrr'
+#> The following object is masked from 'package:testthat':
+#> 
+#>     is_null
+#> ✔ file1.csv [00:00:00.001]
+#> ✔ file2.csv [00:00:00.008]
+#> Success: 2
+#> Failure: 0
+#> Remaining: 0
+#> 
+```
+
+The files have been updated as follows.
+
+``` R
+read.csv(file.path(path, "file1.csv"))
+#>   x
+#> 1 2
+read.csv(file.path(path, "file2.csv"))
+#>   x
+#> 1 6
+```
+
+For a more realistic demonstration with finer control over the batch
+processing see the [Batchr
+Demonstration](https://poissonconsulting.github.io/batchr/articles/batchr.html)
+vignette.
+
+### Parallel Chains
+
+To process the files in parallel simply set
+
+``` R
+library(future)
+plan(multisession)
+```
+
+## Contribution
+
+Please report any
+[issues](https://github.com/poissonconsulting/batchr/issues).
+
+[Pull requests](https://github.com/poissonconsulting/batchr/pulls) are
+always welcome.
+
+## Code of Conduct
+
+Please note that the batchr project is released with a [Contributor Code
+of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+# Package index
+
+## All functions
+
+- [`batch_cleanup()`](https://poissonconsulting.github.io/batchr/reference/batch_cleanup.md)
+  : Cleanup Batch Processing
+- [`batch_completed()`](https://poissonconsulting.github.io/batchr/reference/batch_completed.md)
+  : Batch Completed?
+- [`batch_config()`](https://poissonconsulting.github.io/batchr/reference/batch_config.md)
+  : Configure Batch Processing
+- [`batch_config_read()`](https://poissonconsulting.github.io/batchr/reference/batch_config_read.md)
+  : Read Configuration File
+- [`batch_file_status()`](https://poissonconsulting.github.io/batchr/reference/batch_file_status.md)
+  : Batch File Status
+- [`batch_files_remaining()`](https://poissonconsulting.github.io/batchr/reference/batch_files_remaining.md)
+  : Batch Files
+- [`batch_is_clean()`](https://poissonconsulting.github.io/batchr/reference/batch_is_clean.md)
+  : Is Clean
+- [`batch_log_read()`](https://poissonconsulting.github.io/batchr/reference/batch_log_read.md)
+  : Read Log File
+- [`batch_process()`](https://poissonconsulting.github.io/batchr/reference/batch_process.md)
+  : Batch File Processing
+- [`batch_reconfig_fileset()`](https://poissonconsulting.github.io/batchr/reference/batch_reconfig_fileset.md)
+  : Reconfigures Batch Processing File Set
+- [`batch_reconfig_fun()`](https://poissonconsulting.github.io/batchr/reference/batch_reconfig_fun.md)
+  : Reconfigures Batch Processing Function
+- [`batch_report()`](https://poissonconsulting.github.io/batchr/reference/batch_report.md)
+  : Batch Report
+- [`batch_run()`](https://poissonconsulting.github.io/batchr/reference/batch_run.md)
+  : Runs Batch Processing
+- [`batch_seeds()`](https://poissonconsulting.github.io/batchr/reference/batch_seeds.md)
+  : L'Ecuyer-CMRG Seeds
+
+# Articles
+
+### All vignettes
+
+- [Get Started with
+  batchr](https://poissonconsulting.github.io/batchr/articles/batchr.md):

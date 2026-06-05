@@ -1,0 +1,209 @@
+# Get Started with batchr
+
+Consider a temporary directory with four txt files
+
+``` r
+
+path <- file.path(tempdir(), "demo")
+unlink(path)
+dir.create(path)
+
+writeLines("the contents of file.txt", file.path(path, "file.txt"))
+writeLines("the contents of file2.txt", file.path(path, "file2.txt"))
+writeLines("the contents of file3.txt", file.path(path, "file3.txt"))
+writeLines("the contents of file4.txt", file.path(path, "file4.txt"))
+```
+
+and a function that will successfully process the first two files (in
+this case rewriting their contents) but fail for the last two by
+returning FALSE and throwing an error, respectively.
+
+``` r
+
+fun <- function(file) {
+  if (grepl("file3[.]txt$", file)) {
+    return(FALSE)
+  }
+  if (grepl("file4[.]txt$", file)) stop("Uh, Houston, we've had a problem.", call. = FALSE)
+  txt <- readLines(file)
+  txt <- gsub("contents", "modified contents", txt)
+  writeLines(txt, file)
+}
+```
+
+## Configure
+
+Now let the user configure the directory to only process files names
+that include a digit before the file extension.
+
+``` r
+
+library(batchr)
+print(batch_config(fun, path = path, regexp = "file\\d[.]txt$"))
+#> [1] "file2.txt" "file3.txt" "file4.txt"
+```
+
+The contents of the hidden figuration file are as follows
+
+``` r
+
+batch_config_read(path)
+#> $time
+#> [1] "2026-06-05 18:30:11 UTC"
+#> 
+#> $regexp
+#> [1] "file\\d[.]txt$"
+#> 
+#> $recurse
+#> [1] FALSE
+#> 
+#> $fun
+#> function (file) 
+#> {
+#>     if (grepl("file3[.]txt$", file)) {
+#>         return(FALSE)
+#>     }
+#>     if (grepl("file4[.]txt$", file)) 
+#>         stop("Uh, Houston, we've had a problem.", call. = FALSE)
+#>     txt <- readLines(file)
+#>     txt <- gsub("contents", "modified contents", txt)
+#>     writeLines(txt, file)
+#> }
+#> 
+#> $dots
+#> list()
+```
+
+The `time` value specifies the system time (in UTC) that the project was
+configured. It is very important because only files that were last
+modified *before* the configuration time are considered to be
+unprocessed (when a file is successfully processed its modification time
+is automatically set to the current system time).
+
+## Run
+
+With the directory configured the next task is to start processing the
+files
+
+``` r
+
+print(batch_run(path, ask = FALSE))
+#> file2.txt file3.txt file4.txt 
+#>      TRUE     FALSE     FALSE
+```
+
+From the output we can see that ‘file2.csv’ was processed successfully
+but processing of the other two files that matched regexp failed. The
+output is also recorded in a hidden log file that can be read using
+[`batch_log_read()`](https://poissonconsulting.github.io/batchr/reference/batch_log_read.md).
+
+``` r
+
+batch_log_read(path)
+#>      type         time      file                           message
+#> 1 SUCCESS 00:00:00.000 file2.txt                              <NA>
+#> 2 FAILURE 00:00:00.004 file3.txt                              <NA>
+#> 3 FAILURE 00:00:00.000 file4.txt Uh, Houston, we've had a problem.
+```
+
+or summarised using
+
+``` r
+
+batch_report(path)
+#> ✔ file2.txt [00:00:00.000]
+#> ✖ file3.txt [00:00:00.004]
+#> ✖ file4.txt [00:00:00.000]
+#> Success: 1
+#> Failure: 2
+#> Remaining: 0
+#> 
+```
+
+The contents of ‘file2.csv’ are now as follows
+
+``` r
+
+readLines(file.path(path, "file2.txt"))
+#> [1] "the modified contents of file2.txt"
+```
+
+## Reconfigure
+
+At this point let us update the function and regular expression so that
+all files are included and successfully processed.
+
+``` r
+
+batch_reconfig_fileset(path, regexp = "[.]txt$")
+
+fun <- function(file) {
+  txt <- readLines(file)
+  txt <- gsub("contents", "modified contents", txt)
+  writeLines(txt, file)
+}
+
+batch_reconfig_fun(path, fun)
+```
+
+## Rerun
+
+Now when we call
+[`batch_run()`](https://poissonconsulting.github.io/batchr/reference/batch_run.md)
+the newly included ‘file.txt’ is successfully processed.
+
+``` r
+
+batch_run(path, ask = FALSE)
+```
+
+``` r
+
+batch_report(path)
+#> ✔ file.txt [00:00:00.000]
+#> ✔ file2.txt [00:00:00.000]
+#> ✖ file3.txt [00:00:00.004]
+#> ✖ file4.txt [00:00:00.000]
+#> Success: 2
+#> Failure: 2
+#> Remaining: 0
+#> 
+```
+
+In order to reattempt processing of the ‘file3.txt’ and ‘file4.txt’ we
+need to set `failed = TRUE`.
+
+``` r
+
+batch_run(path, failed = TRUE, ask = FALSE)
+```
+
+``` r
+
+batch_report(path)
+#> ✔ file.txt [00:00:00.000]
+#> ✔ file2.txt [00:00:00.000]
+#> ✔ file3.txt [00:00:00.000]
+#> ✔ file4.txt [00:00:00.002]
+#> Success: 4
+#> Failure: 0
+#> Remaining: 0
+#> 
+```
+
+## Clean Up
+
+With all the files successfully processed the only remaining task is to
+delete the hidden configuration and log files.
+
+``` r
+
+list.files(path, all.files = TRUE)
+#> [1] "."           ".."          ".batchr.log" ".batchr.rds" "file.txt"   
+#> [6] "file2.txt"   "file3.txt"   "file4.txt"
+print(batch_cleanup(path))
+#>    . 
+#> TRUE
+list.files(path, all.files = TRUE)
+#> [1] "."         ".."        "file.txt"  "file2.txt" "file3.txt" "file4.txt"
+```
