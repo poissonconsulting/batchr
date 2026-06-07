@@ -6,7 +6,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-7683-4592")),
     person("Audrey", "Beliveau", , "audrey.beliveau@uwaterloo.ca", role = "ctb"),
     person("Ayla", "Pearson", , "ayla@poissonconsulting.ca", role = "ctb",
-           comment = c(ORCID = "https://orcid.org/0000-0001-7388-1222")),
+           comment = c(ORCID = "0000-0001-7388-1222")),
     person("Poisson Consulting", role = c("cph", "fnd"))
   )
 Description: Processes multiple files with a user-supplied function. The
