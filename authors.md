@@ -10,8 +10,7 @@
 
 - **[Ayla
   Pearson](https://www.poissonconsulting.ca/author/ayla-pearson/)**.
-  Contributor.
-  [](https://orcid.org/https://orcid.org/0000-0001-7388-1222)
+  Contributor. [](https://orcid.org/0000-0001-7388-1222)
 
 - **[![](https://github.com/poissonconsulting.png)](https://www.poissonconsulting.ca/)**.
   Copyright holder, funder.
