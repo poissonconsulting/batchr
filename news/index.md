@@ -1,5 +1,10 @@
 # Changelog
 
+## batchr 0.0.2.9001
+
+- Add fledge-bump workflow
+- Add fledge-tag-on-merge workflow
+
 ## batchr 0.0.2.9000
 
 - Same as previous version.
