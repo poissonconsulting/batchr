@@ -27,7 +27,10 @@ test_that("batch_file_status all processed successfully", {
 
   expect_identical(
     status[c("type", "file", "message")],
-    tibble::tibble(type = "SUCCESS", file = "file1.csv", message = NA_character_)
+    structure(list(type = "SUCCESS", file = "file1.csv", message = NA_character_), row.names = c(
+      NA,
+      -1L
+    ), class = c("tbl_df", "tbl", "data.frame"))
   )
 
   expect_identical(round(as.numeric(status$time)), 0)
