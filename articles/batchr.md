@@ -49,7 +49,7 @@ The contents of the hidden figuration file are as follows
 
 batch_config_read(path)
 #> $time
-#> [1] "2026-06-26 02:53:31 UTC"
+#> [1] "2026-06-26 08:19:00 UTC"
 #> 
 #> $regexp
 #> [1] "file\\d[.]txt$"

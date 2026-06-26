@@ -21,12 +21,12 @@ Source:
 [`DESCRIPTION`](https://github.com/poissonconsulting/batchr/blob/main/DESCRIPTION)
 
 Thorley J (2026). *batchr: Batch Process Files*. R package version
-0.0.2.9002, <https://poissonconsulting.github.io/batchr/>.
+0.0.2.9003, <https://poissonconsulting.github.io/batchr/>.
 
     @Manual{,
       title = {batchr: Batch Process Files},
       author = {Joe Thorley},
       year = {2026},
-      note = {R package version 0.0.2.9002},
+      note = {R package version 0.0.2.9003},
       url = {https://poissonconsulting.github.io/batchr/},
     }

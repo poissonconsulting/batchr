@@ -1,5 +1,9 @@
 # Changelog
 
+## batchr 0.0.2.9003
+
+- Same as previous version.
+
 ## batchr 0.0.2.9002
 
 - Standardize CI via reusable workflows (tier: cran)
