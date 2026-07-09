@@ -66,16 +66,24 @@ batch_reconfig_fun <- function(path, fun, ...) {
 #' unlink(file.path(path, "file1.csv"))
 batch_reconfig_fileset <- function(path, regexp = NULL, recurse = NULL) {
   chk_dir(path)
-  if (!is.null(regexp)) chk_string(regexp)
-  if (!is.null(recurse)) chk_flag(recurse)
+  if (!is.null(regexp)) {
+    chk_string(regexp)
+  }
+  if (!is.null(recurse)) {
+    chk_flag(recurse)
+  }
 
   if (is.null(regexp) && is.null(recurse)) {
     err("`regexp` and `recurse` must not both be NULL.")
   }
 
   config <- batch_config_read(path)
-  if (is.null(regexp)) regexp <- config$regexp
-  if (is.null(recurse)) recurse <- config$recurse
+  if (is.null(regexp)) {
+    regexp <- config$regexp
+  }
+  if (is.null(recurse)) {
+    recurse <- config$recurse
+  }
   fun <- config$fun
   dots <- config$dots
   time <- config$time

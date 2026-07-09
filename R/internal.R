@@ -5,7 +5,8 @@ report_file <- function(x) {
     time <- paste0(" [", time, "]")
   }
 
-  switch(x$type,
+  switch(
+    x$type,
     SUCCESS = cli_alert_success(c(col_white(x$file), col_blue(time))),
     FAILURE = cli_alert_danger(c(col_white(x$file), col_blue(time))),
     REMAING = cli_alert_warning(col_white(x$file))
@@ -18,7 +19,10 @@ report_files <- function(status) {
 }
 
 report_types <- function(status) {
-  status$type <- factor(status$type, levels = c("SUCCESS", "FAILURE", "REMAING"))
+  status$type <- factor(
+    status$type,
+    levels = c("SUCCESS", "FAILURE", "REMAING")
+  )
 
   table <- table(status$type)
   table <- as.data.frame(table)
@@ -27,14 +31,22 @@ report_types <- function(status) {
 
   cli_par()
   cli_text(col_white("Success: "), col_green(freq[1]))
-  cli_text(col_white("Failure: "), if (freq[2] == 0) col_green(freq[2]) else col_red(freq[2]))
-  cli_text(col_white("Remaining: "), if (freq[3] == 0) col_green(freq[3]) else col_red(freq[3]))
+  cli_text(
+    col_white("Failure: "),
+    if (freq[2] == 0) col_green(freq[2]) else col_red(freq[2])
+  )
+  cli_text(
+    col_white("Remaining: "),
+    if (freq[3] == 0) col_green(freq[3]) else col_red(freq[3])
+  )
 }
 
 save_config <- function(path, regexp, recurse, fun, dots, time) {
   args <- list(
-    time = time, regexp = regexp,
-    recurse = recurse, fun = fun,
+    time = time,
+    regexp = regexp,
+    recurse = recurse,
+    fun = fun,
     dots = dots
   )
   saveRDS(args, file = file.path(path, ".batchr.rds"))
@@ -113,13 +125,15 @@ log_msg <- function(path, msg) {
 validate_remaining_file <- function(path, file, config_time) {
   if (!file.exists(file.path(path, file))) {
     err(
-      "File '", normalizePath(file.path(path, file)),
+      "File '",
+      normalizePath(file.path(path, file)),
       "' has been deleted by a different process!"
     )
   }
   if (file_time(path, file) > config_time) {
     err(
-      "File '", normalizePath(file.path(path, file)),
+      "File '",
+      normalizePath(file.path(path, file)),
       "' has been modified by a different process!"
     )
   }
@@ -163,17 +177,31 @@ process_file <- function(file, fun, dots, path, config_time) {
   }
   touch_file(path, file)
   msg <- p("SUCCESS", msg)
-  if (vld_string(output)) msg <- p(msg, output)
+  if (vld_string(output)) {
+    msg <- p(msg, output)
+  }
   log_msg(path, msg)
   TRUE
 }
 
-process_files <- function(remaining, fun, dots, path, config_time,
-                          progress, options) {
-  success <- future_map(remaining, process_file,
-    fun = fun, dots = dots,
-    path = path, config_time = config_time,
-    .progress = progress, .options = options
+process_files <- function(
+  remaining,
+  fun,
+  dots,
+  path,
+  config_time,
+  progress,
+  options
+) {
+  success <- future_map(
+    remaining,
+    process_file,
+    fun = fun,
+    dots = dots,
+    path = path,
+    config_time = config_time,
+    .progress = progress,
+    .options = options
   )
 
   success <- unlist(success)
@@ -199,8 +227,10 @@ cleanup_config <- function(path, force, remaining, failed) {
 }
 
 config_files <- function(path, recursive) {
-  list.files(path,
-    pattern = "^[.]batchr[.]rds$", recursive = recursive,
+  list.files(
+    path,
+    pattern = "^[.]batchr[.]rds$",
+    recursive = recursive,
     all.files = TRUE
   )
 }

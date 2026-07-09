@@ -59,15 +59,22 @@ batch_config <- function(fun, path, regexp = ".*", recurse = FALSE, ...) {
 
   if (!length(files)) {
     err(
-      "Directory '", path, "' does not contain any files matching '",
-      regexp, "'."
+      "Directory '",
+      path,
+      "' does not contain any files matching '",
+      regexp,
+      "'."
     )
   }
   dots <- list(...)
   cleanup_log_file(path)
-  save_config(path, regexp, recurse,
-    fun = fun, dots = dots, time =
-      sys_time_utc() + 1e-05
+  save_config(
+    path,
+    regexp,
+    recurse,
+    fun = fun,
+    dots = dots,
+    time = sys_time_utc() + 1e-05
   ) # 1e-05 required to ensure time check
   invisible(files)
 }

@@ -4,10 +4,7 @@ test_that("batch_completed", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = path,
-      regexp = "^file\\d[.]csv$"
-    ),
+    batch_config(function(x) TRUE, path = path, regexp = "^file\\d[.]csv$"),
     "file1.csv"
   )
   expect_false(batch_completed(path))

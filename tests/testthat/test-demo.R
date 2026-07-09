@@ -10,7 +10,9 @@ test_that("demo", {
     if (grepl("file3[.]txt$", file)) {
       return(FALSE)
     }
-    if (grepl("file4[.]txt$", file)) stop("Uh, Houston, we've had a problem.", call. = FALSE)
+    if (grepl("file4[.]txt$", file)) {
+      stop("Uh, Houston, we've had a problem.", call. = FALSE)
+    }
     txt <- readLines(file)
     txt <- gsub("contents", "modified contents", txt)
     writeLines(txt, file)
@@ -78,6 +80,9 @@ test_that("demo", {
     expect_identical(batch_cleanup(path), c(. = FALSE)),
     "^Clean up of 1 file failed[.]$"
   )
-  expect_identical(batch_run(path, ask = FALSE, failed = NA), c(file3.txt = TRUE, file4.txt = TRUE))
+  expect_identical(
+    batch_run(path, ask = FALSE, failed = NA),
+    c(file3.txt = TRUE, file4.txt = TRUE)
+  )
   expect_identical(batch_cleanup(path), c("." = TRUE))
 })

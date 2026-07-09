@@ -30,10 +30,14 @@
 #' batch_run(path, ask = FALSE)
 #' batch_cleanup(path)
 #' unlink(file.path(path, "file1.csv"))
-batch_cleanup <- function(path, force = FALSE,
-                          remaining = FALSE, failed = NA,
-                          recursive = FALSE,
-                          silent = FALSE) {
+batch_cleanup <- function(
+  path,
+  force = FALSE,
+  remaining = FALSE,
+  failed = NA,
+  recursive = FALSE,
+  silent = FALSE
+) {
   chk_dir(path)
   chk_flag(force)
   chk_flag(remaining)
@@ -46,9 +50,13 @@ batch_cleanup <- function(path, force = FALSE,
   }
   files <- dirname(files)
   paths <- file.path(path, files)
-  clean <- vapply(paths, cleanup_config, TRUE,
+  clean <- vapply(
+    paths,
+    cleanup_config,
+    TRUE,
     force = force,
-    remaining = remaining, failed = failed
+    remaining = remaining,
+    failed = failed
   )
   names(clean) <- files
   nfailed <- sum(!clean)
