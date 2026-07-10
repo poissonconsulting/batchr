@@ -21,8 +21,10 @@ test_that("batch_config update with existing recursive .batchr.rds files", {
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = path, recurse = TRUE,
+    batch_config(
+      function(x) TRUE,
+      path = path,
+      recurse = TRUE,
       regexp = "^file\\d[.]csv$"
     ),
     "file2.csv"
@@ -31,10 +33,7 @@ test_that("batch_config update with existing recursive .batchr.rds files", {
   write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = sub,
-      regexp = "^file\\d[.]csv$"
-    ),
+    batch_config(function(x) TRUE, path = sub, regexp = "^file\\d[.]csv$"),
     "file3.csv"
   )
 
@@ -51,10 +50,7 @@ test_that("batch_reconfig_fileset update recurse with existing recursive .batchr
   write.csv(data.frame(x = 3), file.path(sub, "file3.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = sub,
-      regexp = "^file\\d[.]csv$"
-    ),
+    batch_config(function(x) TRUE, path = sub, regexp = "^file\\d[.]csv$"),
     "file3.csv"
   )
 
@@ -62,8 +58,10 @@ test_that("batch_reconfig_fileset update recurse with existing recursive .batchr
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = path, recurse = FALSE,
+    batch_config(
+      function(x) TRUE,
+      path = path,
+      recurse = FALSE,
       regexp = "^file\\d[.]csv$"
     ),
     "file2.csv"
@@ -84,8 +82,10 @@ test_that("batch_reconfig_fileset update regexp", {
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = path, recurse = FALSE,
+    batch_config(
+      function(x) TRUE,
+      path = path,
+      recurse = FALSE,
       regexp = "^file\\d[.]csv$"
     ),
     "file2.csv"
@@ -113,8 +113,10 @@ test_that("batch_reconfig_fileset update neither", {
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = path, recurse = FALSE,
+    batch_config(
+      function(x) TRUE,
+      path = path,
+      recurse = FALSE,
       regexp = "^file\\d[.]csv$"
     ),
     "file2.csv"
@@ -136,8 +138,10 @@ test_that("batch_reconfig_fileset update recurse", {
   write.csv(data.frame(x = 2), file.path(path, "file2.csv"))
 
   expect_identical(
-    batch_config(function(x) TRUE,
-      path = path, recurse = FALSE,
+    batch_config(
+      function(x) TRUE,
+      path = path,
+      recurse = FALSE,
       regexp = "file\\d[.]csv$"
     ),
     "file2.csv"

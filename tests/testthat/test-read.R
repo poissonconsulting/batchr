@@ -26,7 +26,8 @@ test_that("batch_config_read with no configuration", {
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
-  expect_error(batch_config_read(path),
+  expect_error(
+    batch_config_read(path),
     "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
@@ -36,7 +37,8 @@ test_that("batch_config_read with no directory", {
   path <- withr::local_tempdir()
   unlink(path, recursive = TRUE)
 
-  expect_error(batch_config_read(path),
+  expect_error(
+    batch_config_read(path),
     "^`path` must specify an existing directory [(]'.*' can't be found[)][.]$",
     class = "chk_error"
   )
@@ -104,10 +106,14 @@ test_that("batch_log_read 0.1 second", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) {
-      Sys.sleep(0.101)
-      TRUE
-    }, path = path, regexp = "^file\\d[.]csv$"),
+    batch_config(
+      function(x) {
+        Sys.sleep(0.101)
+        TRUE
+      },
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
     "file1.csv"
   )
 
@@ -147,9 +153,13 @@ test_that("batch_log_read all error processing", {
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
   expect_identical(
-    batch_config(function(x) {
-      stop("a problem")
-    }, path = path, regexp = "^file\\d[.]csv$"),
+    batch_config(
+      function(x) {
+        stop("a problem")
+      },
+      path = path,
+      regexp = "^file\\d[.]csv$"
+    ),
     "file1.csv"
   )
 
@@ -181,7 +191,10 @@ test_that("batch_log_read one success (string) and one failure (error)", {
     c("file1.csv", "file2.csv")
   )
 
-  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
+  expect_identical(
+    batch_run(path, ask = FALSE),
+    c(file1.csv = FALSE, file2.csv = TRUE)
+  )
 
   log <- batch_log_read(path)
   log <- log[order(log$file), ]
@@ -196,7 +209,8 @@ test_that("batch_log_read with no configuration", {
 
   write.csv(data.frame(x = 1), file.path(path, "file1.csv"))
 
-  expect_error(batch_log_read(path),
+  expect_error(
+    batch_log_read(path),
     "^Directory path [(]'.*'[)] must contain file '.batch.rds'[.]$",
     class = "chk_error"
   )
@@ -206,7 +220,8 @@ test_that("batch_log_read with no directory", {
   path <- withr::local_tempdir()
   unlink(path, recursive = TRUE)
 
-  expect_error(batch_log_read(path),
+  expect_error(
+    batch_log_read(path),
     "^`path` must specify an existing directory [(]'.*' can't be found[)][.]$",
     class = "chk_error"
   )
@@ -260,7 +275,10 @@ test_that("batch_log_read parallel one success (string) and one failure (error)"
   future::plan(future::multisession)
   teardown(future::plan(future::sequential))
 
-  expect_identical(batch_run(path, ask = FALSE), c(file1.csv = FALSE, file2.csv = TRUE))
+  expect_identical(
+    batch_run(path, ask = FALSE),
+    c(file1.csv = FALSE, file2.csv = TRUE)
+  )
 
   log <- batch_log_read(path)
   log <- log[order(log$file), ]

@@ -1,7 +1,9 @@
 rinteger <- function(n = 1L) {
   chk_whole_number(n)
   chk_gte(n, 0L)
-  if (n == 0) integer(0)
+  if (n == 0) {
+    integer(0)
+  }
   mx <- 2147483647L
   as.integer(runif(n, -mx, mx))
 }

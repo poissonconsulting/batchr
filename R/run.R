@@ -41,12 +41,15 @@
 #' batch_run(path, ask = FALSE)
 #' batch_cleanup(path)
 #' unlink(file.path(path, "file1.csv"))
-batch_run <- function(path,
-                      failed = FALSE, progress = FALSE,
-                      files = NULL,
-                      seeds = NULL,
-                      options = furrr::furrr_options(),
-                      ask = getOption("batchr.ask", TRUE)) {
+batch_run <- function(
+  path,
+  failed = FALSE,
+  progress = FALSE,
+  files = NULL,
+  seeds = NULL,
+  options = furrr::furrr_options(),
+  ask = getOption("batchr.ask", TRUE)
+) {
   chk_dir(path)
   chk_lgl(failed)
   chk_flag(progress)
@@ -84,7 +87,8 @@ batch_run <- function(path,
     if (length(unknown)) {
       err(
         "The following files are not remaining: ",
-        cc(unknown, " and "), "."
+        cc(unknown, " and "),
+        "."
       )
     }
     remaining <- files
@@ -103,16 +107,22 @@ batch_run <- function(path,
   options$seed <- unname(seeds)
 
   question <- p0(
-    "Batch process ", length(remaining), " files in '",
-    normalizePath(path), "'?"
+    "Batch process ",
+    length(remaining),
+    " files in '",
+    normalizePath(path),
+    "'?"
   )
   if (ask && !yesno(question)) {
     return(invisible(set_names(rep(FALSE, length(remaining)), remaining)))
   }
 
-  success <- process_files(remaining,
-    fun = fun, dots = dots,
-    path = path, config_time = config$time,
+  success <- process_files(
+    remaining,
+    fun = fun,
+    dots = dots,
+    path = path,
+    config_time = config$time,
     progress = progress,
     options = options
   )
