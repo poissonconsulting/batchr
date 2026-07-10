@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# batchr 0.0.2.9005
+
+- Same as previous version.
+
+
 # batchr 0.0.2.9004
 
 - Same as previous version.
