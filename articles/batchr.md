@@ -49,7 +49,7 @@ The contents of the hidden figuration file are as follows
 
 batch_config_read(path)
 #> $time
-#> [1] "2026-07-14 18:35:51 UTC"
+#> [1] "2026-07-15 07:41:17 UTC"
 #> 
 #> $regexp
 #> [1] "file\\d[.]txt$"
@@ -102,7 +102,7 @@ output is also recorded in a hidden log file that can be read using
 batch_log_read(path)
 #>      type         time      file                           message
 #> 1 SUCCESS 00:00:00.000 file2.txt                              <NA>
-#> 2 FAILURE 00:00:00.003 file3.txt                              <NA>
+#> 2 FAILURE 00:00:00.004 file3.txt                              <NA>
 #> 3 FAILURE 00:00:00.000 file4.txt Uh, Houston, we've had a problem.
 ```
 
@@ -112,7 +112,7 @@ or summarised using
 
 batch_report(path)
 #> ✔ file2.txt [00:00:00.000]
-#> ✖ file3.txt [00:00:00.003]
+#> ✖ file3.txt [00:00:00.004]
 #> ✖ file4.txt [00:00:00.000]
 #> Success: 1
 #> Failure: 2
@@ -162,7 +162,7 @@ batch_run(path, ask = FALSE)
 batch_report(path)
 #> ✔ file.txt [00:00:00.000]
 #> ✔ file2.txt [00:00:00.000]
-#> ✖ file3.txt [00:00:00.003]
+#> ✖ file3.txt [00:00:00.004]
 #> ✖ file4.txt [00:00:00.000]
 #> Success: 2
 #> Failure: 2
