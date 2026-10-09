@@ -33,7 +33,7 @@ write.csv(mtcars, file.path(path, "file1.csv"))
 batch_config(function(x) TRUE, path, regexp = "[.]csv$")
 batch_config_read(path)
 #> $time
-#> [1] "2026-07-15 07:41:11 UTC"
+#> [1] "2026-10-09 23:21:54 UTC"
 #> 
 #> $regexp
 #> [1] "[.]csv$"
@@ -44,7 +44,7 @@ batch_config_read(path)
 #> $fun
 #> function (x) 
 #> TRUE
-#> <environment: 0x55e93d8b13e8>
+#> <environment: 0x55b13b8c15f8>
 #> 
 #> $dots
 #> list()
