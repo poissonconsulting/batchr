@@ -1,5 +1,9 @@
 # Changelog
 
+## batchr 0.0.2.9007
+
+- Same as previous version.
+
 ## batchr 0.0.2.9006
 
 - Same as previous version.
